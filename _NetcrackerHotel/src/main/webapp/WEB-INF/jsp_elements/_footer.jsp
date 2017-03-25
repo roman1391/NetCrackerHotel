@@ -7,4 +7,5 @@
 	<div class="in-footer">
 		Footer
 	</div>
+<hr/>
 </div>
