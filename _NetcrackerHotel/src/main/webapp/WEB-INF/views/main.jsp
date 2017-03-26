@@ -10,5 +10,6 @@
 
 	<p>Hello ${user.login}!</p>
 	<p>Your password is ${user.password}!</p>
+	
 </body>
 </html>
