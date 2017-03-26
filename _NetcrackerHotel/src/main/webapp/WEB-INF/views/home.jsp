@@ -33,9 +33,9 @@
 
 					<div class="registration">
 						<form name="RegForm" action="controller" method="POST">
-							<input type="hidden" name="command" value="send" /> <input
-								type="hidden" name="ref" value="path.page.reg" /> <input
-								type="submit" name="button" value="Registration" />
+							<input type="hidden" name="command" value="send" /> 
+							<input type="hidden" name="ref" value="path.page.reg" /> 
+								<input type="submit" name="button" value="Registration" />
 						</form>
 					</div>
 				</div>
