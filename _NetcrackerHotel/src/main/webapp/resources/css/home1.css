@@ -127,3 +127,27 @@ body {
 	cursor: pointer;
 	background-color: #818181;
 }
+.box {
+	background: #fefefe;
+	border: 1px solid #C3D4DB;
+	border-top: 1px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.15) 0 0 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 1px;
+	box-shadow: rgba(0, 0, 0, 0.15) 0 0 1px;
+	color: #444;
+	font: normal 12px/14px Arial, Helvetica, Sans-serif;
+	margin: 0 auto 30px;
+	overflow: hidden;
+}
+
+.box.registration {
+	height: 350px;
+	width: 332px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -130px 0 0 -166px;
+}

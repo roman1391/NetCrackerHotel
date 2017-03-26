@@ -20,24 +20,22 @@
 					<form:form method="POST" modelAttribute="user" action="check-user"
 						class="box login">
 						<fieldset class="boxBody">
-							<form:label path="login">Login:</form:label>
+							<form:label path="login">Login:</form:label><br>
 							<form:input path="login" />
 							<form:errors path="login" cssClass="error" />
 
-							<form:label path="password">Password:</form:label>
+							<form:label path="password">Password:</form:label><br>
 							<form:password path="password" />
 							<form:errors path="password" cssClass="error" />
 						</fieldset>
 						<input type="submit" class="btnLogin" value="Login" tabindex="4"> 
 					</form:form>
+					
+					<form:form method="POST" modelAttribute="user" action="reg-user"
+						class="registration">
+						<input type="submit" class="reg" value="Registration" tabindex="4"> 
+					</form:form>
 
-					<div class="registration">
-						<form name="RegForm" action="controller" method="POST">
-							<input type="hidden" name="command" value="send" /> 
-							<input type="hidden" name="ref" value="path.page.reg" /> 
-								<input type="submit" name="button" value="Registration" />
-						</form>
-					</div>
 				</div>
 			</div>
 			<div class="content">
