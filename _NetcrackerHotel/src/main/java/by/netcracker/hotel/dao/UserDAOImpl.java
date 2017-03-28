@@ -5,13 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import by.netcracker.hotel.connector.ConnectorDB;
 import by.netcracker.hotel.entities.User;
 
 public class UserDAOImpl implements UserDAO {
 
-	public static final String SQL_QUERY_GET_CLIENTS = "INSERT INTO `netcracker_hotel`.`users` (`first_name`, `last_name`, `login`, `password`) VALUES (?, ?, ?, ?);";
-	Connection connection;
-	PreparedStatement preparedStatement = null;
+	private static final String SQL_QUERY_GET_CLIENTS = "INSERT INTO `netcracker_hotel`.`users` (`first_name`, `last_name`, `login`, `password`) VALUES (?, ?, ?, ?);";
+	private Connection connection;
 
 	@Override
 	public void regUser(User user) {
@@ -22,9 +22,8 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		try {
-			Connection connection = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/netcracker_hotel?autoReconnect=true&useSSL=false", "root", "1234");
-			preparedStatement = connection.prepareStatement(SQL_QUERY_GET_CLIENTS);
+			Connection connection = ConnectorDB.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQL_QUERY_GET_CLIENTS);
 			preparedStatement.setString(1, user.getFirstName());
 			preparedStatement.setString(2, user.getLastName());
 			preparedStatement.setString(3, user.getLogin());
