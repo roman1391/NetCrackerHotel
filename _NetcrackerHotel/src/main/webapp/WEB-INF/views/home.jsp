@@ -7,8 +7,9 @@
 <html>
 <head>
 <title>Home</title>
-<link href="<c:url value="/resources/css/home1.css" />" rel="stylesheet">
-
+    <link href="<c:url value="/resources/css/home1.css" />" rel="stylesheet">
+	<spring:url value="resources/css/bootstrap.css" var="bootstrap"/>
+	<link href="${bootstrap}" rel="stylesheet" />
 </head>
 
 <body>
@@ -18,22 +19,22 @@
 			<div class="sidebar">
 				<div class="in-sidebar">
 					<form:form method="POST" modelAttribute="user" action="check-user"
-						class="box login">
+						class="form-signin">
 						<fieldset class="boxBody">
-							<form:label path="login">Login:</form:label><br>
-							<form:input path="login" />
+							<form:label class="sr-only" path="login">Login:</form:label><br>
+							<form:input class="form-control" path="login" />
 							<form:errors path="login" cssClass="error" />
 
-							<form:label path="password">Password:</form:label><br>
-							<form:password path="password" />
+							<form:label class="sr-only" path="password">Password:</form:label><br>
+							<form:password  class="form-control" path="password" />
 							<form:errors path="password" cssClass="error" />
 						</fieldset>
-						<input type="submit" class="btnLogin" value="Login" tabindex="4"> 
+						<input type="submit" class="btnLogin" value="Login" tabindex="4">
 					</form:form>
-					
+
 					<form:form method="POST" modelAttribute="user" action="reg-user"
 						class="registration">
-						<input type="submit" class="reg" value="Registration" tabindex="4"> 
+						<input type="submit" class="reg" value="Registration" tabindex="4">
 					</form:form>
 
 				</div>
