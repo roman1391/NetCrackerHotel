@@ -39,6 +39,27 @@
 
 				</div>
 			</div>
+			<div class="search">
+				<div class="in-search">
+					<form action="" method="POST" class="input">
+						<fieldset class="boxBody">
+							<p>
+								<input type="search" name="" placeholder="city" class="city" />
+							</p>
+							<script src="/resources/js/calendar_ru.js" type="text/javascript"></script>
+							<form action="">
+								<p>
+									<input type="search" value="check-in" onfocus="this.select();lcs(this)"
+										   onclick="event.cancelBubble=true;this.select();lcs(this)">
+									<input type="search" value="check-out" onfocus="this.select();lcs(this)"
+										   onclick="event.cancelBubble=true;this.select();lcs(this)">
+								</p>
+							</form>
+							<input type="submit" name="" value="Find" class="submit" />
+						</fieldset>
+					</form>
+				</div>
+			</div>
 			<div class="content">
 				<div class="in-content">
 					<h1>Hi netcracker!</h1>
