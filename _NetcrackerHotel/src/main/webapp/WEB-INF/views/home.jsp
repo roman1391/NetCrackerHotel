@@ -10,6 +10,7 @@
     <link href="<c:url value="/resources/css/home1.css" />" rel="stylesheet">
 	<spring:url value="resources/css/bootstrap.css" var="bootstrap"/>
 	<link href="${bootstrap}" rel="stylesheet" />
+    <link href="<c:url value ="/resources/jquery-ui-1.12.1.custom/jquery-ui.css" />" rel="stylesheet">
 </head>
 
 <body>
@@ -46,13 +47,10 @@
 							<p>
 								<input type="search" name="" placeholder="city" class="city" />
 							</p>
-							<script src="/resources/js/calendar_ru.js" type="text/javascript"></script>
 							<form action="">
 								<p>
-									<input type="search" value="check-in" onfocus="this.select();lcs(this)"
-										   onclick="event.cancelBubble=true;this.select();lcs(this)">
-									<input type="search" value="check-out" onfocus="this.select();lcs(this)"
-										   onclick="event.cancelBubble=true;this.select();lcs(this)">
+									<input type="search" value="check-in" id="datepicker" type="text" />
+									<input type="search" value="check-out" id="datepicker1" type="text" />
 								</p>
 							</form>
 							<input type="submit" name="" value="Find" class="submit" />
@@ -70,5 +68,9 @@
 		</div>
 		<%@include file="../jsp_elements/_footer.jsp"%>
 	</div>
+    <script src="/resources/jquery-ui-1.12.1.custom/jquery.js" type="text/javascript"></script>
+    <script src="/resources/jquery-ui-1.12.1.custom/jquery-ui.js" type="text/javascript"></script>
+    <script src="/resources/js/home.js" type="text/javascript"></script>
+
 </body>
 </html>
