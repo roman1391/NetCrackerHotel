@@ -15,7 +15,7 @@
 <body>
 	<div id="wrapper">
 		<%@include file="../jsp_elements/_header.jsp"%>
-		<a href="/search">Search</a>
+		<a href="search">Search</a>
 		<div class="container row">
 			<div class="sidebar">
 				<div class="in-sidebar">
