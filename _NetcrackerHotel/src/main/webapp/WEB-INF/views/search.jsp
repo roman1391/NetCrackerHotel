@@ -36,8 +36,8 @@
         </form>
     </div>
 </div>
-<script src="/resources/jquery-ui-1.12.1.custom/jquery.js" type="text/javascript"></script>
-<script src="/resources/jquery-ui-1.12.1.custom/jquery-ui.js" type="text/javascript"></script>
-<script src="/resources/js/search.js" type="text/javascript"></script>
+<script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>" type="text/javascript"></script>
+<script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
+<script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
 </body>
 </html>
