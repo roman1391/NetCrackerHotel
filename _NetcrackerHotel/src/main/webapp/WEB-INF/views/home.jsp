@@ -10,12 +10,12 @@
     <link href="<c:url value="/resources/css/home1.css" />" rel="stylesheet">
 	<spring:url value="resources/css/bootstrap.css" var="bootstrap"/>
 	<link href="${bootstrap}" rel="stylesheet" />
-    <link href="<c:url value ="/resources/jquery-ui-1.12.1.custom/jquery-ui.css" />" rel="stylesheet">
 </head>
 
 <body>
 	<div id="wrapper">
 		<%@include file="../jsp_elements/_header.jsp"%>
+		<a href="/search">Search</a>
 		<div class="container row">
 			<div class="sidebar">
 				<div class="in-sidebar">
@@ -40,24 +40,6 @@
 
 				</div>
 			</div>
-			<div class="search">
-				<div class="in-search">
-					<form action="" method="POST" class="input">
-						<fieldset class="boxBody">
-							<p>
-								<input type="search" name="" placeholder="city" class="city" />
-							</p>
-							<form action="">
-								<p>
-									<input type="search" value="check-in" id="datepicker" type="text" />
-									<input type="search" value="check-out" id="datepicker1" type="text" />
-								</p>
-							</form>
-							<input type="submit" name="" value="Find" class="submit" />
-						</fieldset>
-					</form>
-				</div>
-			</div>
 			<div class="content">
 				<div class="in-content">
 					<h1>Hi netcracker!</h1>
@@ -68,9 +50,5 @@
 		</div>
 		<%@include file="../jsp_elements/_footer.jsp"%>
 	</div>
-    <script src="/resources/jquery-ui-1.12.1.custom/jquery.js" type="text/javascript"></script>
-    <script src="/resources/jquery-ui-1.12.1.custom/jquery-ui.js" type="text/javascript"></script>
-    <script src="/resources/js/home.js" type="text/javascript"></script>
-
 </body>
 </html>
