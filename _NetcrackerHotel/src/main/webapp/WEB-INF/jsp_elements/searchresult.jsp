@@ -6,7 +6,7 @@
         <c:forEach var="listValue" items="${hotels}">
             <div class="row list-group-item">
                 <div class="col-4">
-                    <img src="<c:url value="/resources/pictures/${listValue.imagePath}"/>" class="rounded"
+                    <img src="<c:url value="/resources/img/${listValue.imagePath}"/>" class="rounded"
                          alt="${listValue.name}"
                          width="200">
                 </div>
