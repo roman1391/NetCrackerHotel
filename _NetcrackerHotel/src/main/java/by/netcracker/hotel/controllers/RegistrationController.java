@@ -31,7 +31,6 @@ public class RegistrationController {
 		if (bindingResult.hasErrors()) {
 			return "registration";
 		}
-		System.out.println("in controller");
 
 		// UserDAO userDao = new UserDAOImpl();
 
