@@ -12,7 +12,14 @@ import by.netcracker.hotel.entities.User;
 public class UserDAOJdbcTemplateImpl implements UserDAO {
 
 	private JdbcTemplate jdbcTemplate;
-	private static final String SQL_QUERY_GET_CLIENTS = "INSERT INTO `netcracker_hotel`.`users` (`first_name`, `last_name`, `login`, `password`, `email`) VALUES (?, ?, ?, ?, ?);";
+	private static final String SQL_QUERY_ADD_USER = "insert into entity(type_id) values ((select type_id from type where name = 'user')); ";
+	private static final String SQL_QUERY_REG_USER = "  "
+			+ " insert into value(entity_id, attribute_id, attribute_value) values"
+			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'first_name'), ?),"
+			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'last_name'), ?),"
+			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'login'), ?),"
+			+ "  ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'password'), ?),"
+			+ "((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'email'), ?);";
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -21,8 +28,10 @@ public class UserDAOJdbcTemplateImpl implements UserDAO {
 
 	@Override
 	public void regUser(User user) {
-		jdbcTemplate.update(SQL_QUERY_GET_CLIENTS, new Object[] { user.getFirstName(), user.getLastName(),
-				user.getLogin(), user.getPassword(), user.getEmail() });
+
+		jdbcTemplate.update(SQL_QUERY_ADD_USER);
+		jdbcTemplate.update(SQL_QUERY_REG_USER, new Object[] { user.getFirstName(), user.getLastName(), user.getLogin(),
+				user.getPassword(), user.getEmail() });
 
 	}
 

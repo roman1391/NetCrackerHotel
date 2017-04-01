@@ -1,6 +1,5 @@
 package by.netcracker.hotel.controllers;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class RegistrationController {
 
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration(Model model) {
-        model.addAttribute("user",new User());
+		model.addAttribute("user", new User());
 		return "registration";
 	}
 
@@ -32,6 +31,7 @@ public class RegistrationController {
 		if (bindingResult.hasErrors()) {
 			return "registration";
 		}
+		System.out.println("in controller");
 
 		// UserDAO userDao = new UserDAOImpl();
 
