@@ -14,13 +14,17 @@
     <title>About</title>
     <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
           rel="stylesheet">
+    <link href="<c:url value="/resources/css/main.css" />"
+          rel="stylesheet" />
 </head>
 <body>
    <%@include file="../jsp_elements/_header.jsp"%>
-     <h1 style="margin-left: auto">About project</h1>
-     <div>
+   <div id="wrapper">
+      <div class="credits text-center" >
+         <h1 style="margin-left: auto">About project</h1>
          <p style="font-size: large">Netcracker project</p>
-     </div>
+      </div>
+   </div>
    <%@include file="../jsp_elements/_footer.jsp"%>
 </body>
 </html>
