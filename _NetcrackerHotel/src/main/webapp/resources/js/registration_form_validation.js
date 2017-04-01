@@ -3,5 +3,5 @@
  */
 
 $.validate({
-    modules: 'date'
+    modules: 'date toggleDisabled'
 });
