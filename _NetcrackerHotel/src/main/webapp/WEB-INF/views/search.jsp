@@ -25,11 +25,10 @@
 <body>
 <%@include file="../jsp_elements/_header.jsp"%>
 <div id="wrapper">
-    <mytags:searchform/>
+    <%@include file="../jsp_elements/searchform.jsp"%>
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
-   </div>
 </div>
 <%@include file="../jsp_elements/_footer.jsp"%>
 </body>
