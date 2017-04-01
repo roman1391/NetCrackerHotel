@@ -27,7 +27,6 @@ public class HomeController {
 	@RequestMapping(value = "/check-user", method = RequestMethod.POST)
 	public String checkUser(@ModelAttribute("user") User user, Model model) {
 
-		model.addAttribute("user", user);
 		return "successregistration";
 	}
 
