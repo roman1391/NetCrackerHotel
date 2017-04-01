@@ -1,20 +1,17 @@
-<form style="margin: 50px" class="input">
-    <div class="form-group">
-            <label >Enter country, city or hotel name:</label>
-            <input type="search" placeholder="Enter country, city or hotel name" class="form-control" />
-    </div>
-    <div class="form-group">
-        <form action="">
-            <p>
-                <label for="startDate"> Start date:</label>
-                <input class="form-control" type="search" placeholder="check-in" id="startDate"  readonly />
-                <label for="endDate">End date:</label>
-                <input class="form-control" type="search" placeholder="check-out" id="endDate"  readonly />
-            </p>
-        </form>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-    </div>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-</form>
+<form:form style="margin: 50px" method="post" action="" modelAttribute="searchFilter">
+    <div class="form-group">
+            <form:label path="place">Enter country, city or hotel name:</form:label>
+            <form:input path="place" placeholder="Enter country, city or hotel name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <form:label path="startDate">Start date</form:label>
+        <form:input class="form-control" path="startDate" placeholder="check-in" id="startDate" readonly="true" value="${searchFilter.startDate}" />
+        <form:label path="endDate">End date </form:label>
+        <form:input  class="form-control" path="endDate" placeholder="check-out" id="endDate" readonly="true" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form:form>
