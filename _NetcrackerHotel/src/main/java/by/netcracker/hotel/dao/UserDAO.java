@@ -6,7 +6,7 @@ public interface UserDAO {
 
 	public void regUser(User user);
 
-	public void loginUser();
+	public User loginUser(User user);
 
 	public void blockUser(User user);
 
