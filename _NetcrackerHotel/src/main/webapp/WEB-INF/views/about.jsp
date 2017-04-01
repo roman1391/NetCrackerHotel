@@ -20,7 +20,7 @@
 <body>
    <%@include file="../jsp_elements/_header.jsp"%>
    <div id="wrapper">
-      <div class="credits text-center" >
+      <div >
          <h1 style="margin-left: auto">About project</h1>
          <p style="font-size: large">Netcracker project</p>
       </div>
