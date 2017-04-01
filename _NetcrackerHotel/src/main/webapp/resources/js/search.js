@@ -1,5 +1,6 @@
 $( "#startDate" ).datepicker({
     inline: true,
+    dateFormat: 'mm/dd/yy',
     minDate: new Date (),
     maxDate: '+2y',
     onSelect: function(date){
@@ -16,9 +17,9 @@ $( "#startDate" ).datepicker({
 
 $( "#endDate" ).datepicker({
     inline: true,
+    dateFormat: 'mm/dd/yy',
     minDate: new Date (),
     onSelect: function(date){
-
         var selectedDate = new Date(date);
         var msecsInADay = 86400000;
         var endDate = new Date(selectedDate.getTime() - msecsInADay);

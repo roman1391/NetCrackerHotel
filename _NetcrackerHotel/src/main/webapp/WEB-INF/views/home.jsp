@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <title>Home</title>
@@ -15,7 +16,7 @@
 <body>
 	<div id="wrapper">
 		<%@include file="../jsp_elements/_header.jsp"%>
-		<a href="search">Search</a>
+		<a href="<spring:url value="/search/"/>">Search</a>
 		<div class="container row">
 			<div class="sidebar">
 				<div class="in-sidebar">
