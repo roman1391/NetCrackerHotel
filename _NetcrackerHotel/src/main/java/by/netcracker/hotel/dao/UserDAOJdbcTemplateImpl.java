@@ -20,7 +20,7 @@ public class UserDAOJdbcTemplateImpl implements UserDAO {
 			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'last_name'), ?),"
 			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'login'), ?),"
 			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'password'), ?),"
-			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'password'), ?),"
+			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'email'), ?),"
 			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'accesslevel'), 2);";
 	private static final String SQL_QUERY_LOGIN_USER = "select attribute_name, datatype, attribute_value from value inner join attribute on value.attribute_id=attribute.attribute_id "
 			+ "where entity_id=(select entity_id from " + "(select v.entity_id from value v "
