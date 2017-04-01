@@ -1,11 +1,10 @@
 package by.netcracker.hotel.dao;
 
-import java.util.List;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import by.netcracker.hotel.entities.User;
@@ -23,7 +22,7 @@ public class UserDAOJdbcTemplateImpl implements UserDAO {
 			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'password'), ?),"
 			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'password'), ?),"
 			+ " ((select max(entity_id) from entity), (select attribute_id from attribute where attribute_name = 'accesslevel'), 2);";
-	private static final String SQL_QUERY_LOGIN_USER = "select attribute_value from value inner join attribute on value.attribute_id=attribute.attribute_id "
+	private static final String SQL_QUERY_LOGIN_USER = "select attribute_name, datatype, attribute_value from value inner join attribute on value.attribute_id=attribute.attribute_id "
 			+ "where entity_id=(select entity_id from " + "(select v.entity_id from value v "
 			+ "inner join attribute attr on v.attribute_id = attr.attribute_id "
 			+ "where attr.attribute_name = 'login' and v.attribute_value= ? ) aaa " + "where entity_id in "
@@ -46,14 +45,20 @@ public class UserDAOJdbcTemplateImpl implements UserDAO {
 
 	@Override
 	public User loginUser(User user) {
-		System.out.println(user.getLogin() + "" + user.getPassword());
-		List<String> list = jdbcTemplate.queryForList(SQL_QUERY_LOGIN_USER,
-				new Object[] { user.getLogin(), user.getPassword() }, String.class);
-		user.setFirstName(list.get(0));
-		user.setLastName(list.get(1));
-		user.setAccessLevel(Integer.parseInt(list.get(4)));
-		user.setEmail(list.get(5));
+		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(SQL_QUERY_LOGIN_USER,
+				new Object[] { user.getLogin(), user.getPassword() });
 
+		while (rowSet.next()) {
+			if (rowSet.getString(1).equals("first_name")) {
+				user.setFirstName(rowSet.getString(3));
+			} else if (rowSet.getString(1).equals("last_name")) {
+				user.setLastName(rowSet.getString(3));
+			} else if (rowSet.getString(1).equals("email")) {
+				user.setEmail(rowSet.getString(3));
+			} else if (rowSet.getString(1).equals("accesslevel")) {
+				user.setAccessLevel(Integer.parseInt(rowSet.getString(3)));
+			}
+		}
 		return user;
 
 	}
