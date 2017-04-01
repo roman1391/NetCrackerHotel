@@ -19,15 +19,14 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale, Model model) {
-
-		return new ModelAndView("home", "user", new User());
+	public String home(Model model) {
+        model.addAttribute("user", new User());
+		return "home";
 	}
 
 	@RequestMapping(value = "/check-user", method = RequestMethod.POST)
 	public String checkUser(@ModelAttribute("user") User user, Model model) {
 
-		model.addAttribute("user", user);
 		return "successregistration";
 	}
 
