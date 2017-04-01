@@ -10,7 +10,7 @@
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
     <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
           rel="stylesheet">
-    <link href="<c:url value="/resources/jQuery-Form-Validator/theme-default.min.css"/>"
+    <link href="<c:url value="/resources/jQuery-Form-Validator/form-validator/theme-default.min.css"/>"
           rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -23,7 +23,7 @@
 	</div>
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>"
             type="text/javascript"></script>
-    <script src="<c:url value="/resources/jQuery-Form-Validator/jquery.form-validator.min.js"/>"
+    <script src="<c:url value="/resources/jQuery-Form-Validator/form-validator/jquery.form-validator.min.js"/>"
             type="text/javascript"></script>
     <script src="<c:url value="/resources/js/registration_form_validation.js"/>"
             type="text/javascript"></script>

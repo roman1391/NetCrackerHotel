@@ -1,5 +1,4 @@
 <%@ taglib  uri="http://www.springframework.org/tags/form" prefix="form"%>
-
 <form:form id="registrationForm" style="margin: 20px" action="registered-user" method="post" modelAttribute="user">
     <div class="form-group">
         <form:label path="firstName">First name</form:label>
@@ -33,8 +32,8 @@
         <form:label path="login">Login</form:label>
         <form:input path="login" type="text" class="form-control"
                     placeholder="Login" required="required"
-                    data-validation="length alphanumeric"
-                    data-validation-length="4"
+                    data-validation="length"
+                    data-validation-length="min4"
                     data-validation-error-msg="Login has to be min 4 chars"
         />
         <form:errors path="login" cssClass="ui-state-error-text"/>
