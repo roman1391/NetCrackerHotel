@@ -7,47 +7,24 @@
 <html>
 <head>
 <title>Home</title>
-    <link href="<c:url value="/resources/css/home1.css" />" rel="stylesheet">
-	<spring:url value="resources/css/bootstrap.css" var="bootstrap"/>
-	<link href="${bootstrap}" rel="stylesheet" />
+    <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet">
+    <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />" rel="stylesheet">
 </head>
 
 <body>
+    <%@include file="../jsp_elements/_header.jsp"%>
 	<div id="wrapper">
-		<%@include file="../jsp_elements/_header.jsp"%>
-		<a href="search">Search</a>
-		<div class="container row">
-			<div class="sidebar">
-				<div class="in-sidebar">
-					<form:form method="POST" modelAttribute="user" action="check-user"
-						class="form-signin">
-						<fieldset class="boxBody">
-							<form:label class="sr-only" path="login">Login:</form:label><br>
-							<form:input class="form-control" path="login" />
-							<form:errors path="login" cssClass="error" />
 
-							<form:label class="sr-only" path="password">Password:</form:label><br>
-							<form:password  class="form-control" path="password" />
-							<form:errors path="password" cssClass="error" />
-						</fieldset>
-						<input type="submit" class="btnLogin" value="Login" tabindex="4">
-					</form:form>
-
-					<form:form method="POST" modelAttribute="user" action="reg-user"
-						class="registration">
-						<input type="submit" class="reg" value="Registration" tabindex="4">
-					</form:form>
-
-				</div>
-			</div>
-			<div class="content">
-				<div class="in-content">
-					<h1>Hi netcracker!</h1>
-					... some information <br />
-
-				</div>
-			</div>
-		</div>
+            <div class="container">
+                <div class="row row-offcanvas row-offcanvas-left">
+                    <%@include file="../jsp_elements/_sidebar.jsp"%>
+                    <div class="col-xs-12 col-sm-9">
+                        <div class="jumbotron">
+                            <h1>Hello Netcrackers</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		<%@include file="../jsp_elements/_footer.jsp"%>
 	</div>
 </body>

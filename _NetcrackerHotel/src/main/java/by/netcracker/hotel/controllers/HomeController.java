@@ -28,7 +28,7 @@ public class HomeController {
 	public String checkUser(@ModelAttribute("user") User user, Model model) {
 
 		model.addAttribute("user", user);
-		return "main";
+		return "successregistration";
 	}
 
 }
