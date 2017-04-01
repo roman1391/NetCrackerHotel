@@ -18,114 +18,103 @@ USE `netcracker_hotel`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `orders`
+-- Table structure for table `attribute`
 --
 
-DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `attribute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `price` int(11) NOT NULL,
-  `is_paid` tinyint(1) NOT NULL DEFAULT '0',
-  `users_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`users_id`),
-  KEY `fk_orders_users1_idx` (`users_id`),
-  CONSTRAINT `fk_orders_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE `attribute` (
+  `attribute_id` int(11) NOT NULL,
+  `type_id` int(11) NOT NULL,
+  `attribute_name` varchar(25) NOT NULL,
+  `datatype` varchar(20) NOT NULL,
+  PRIMARY KEY (`attribute_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `orders`
+-- Dumping data for table `attribute`
 --
 
-LOCK TABLES `orders` WRITE;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+LOCK TABLES `attribute` WRITE;
+/*!40000 ALTER TABLE `attribute` DISABLE KEYS */;
+INSERT INTO `attribute` (`attribute_id`, `type_id`, `attribute_name`, `datatype`) VALUES (1,1,'first_name','varchar'),(2,1,'last_name','varchar'),(3,1,'login','varchar'),(4,1,'password','varchar'),(5,1,'accesslevel','int'),(6,2,'country','varchar'),(7,2,'city','varchar'),(8,2,'address','varchar'),(9,2,'class','int'),(10,3,'cost','int'),(11,3,'capacity','int'),(12,3,'hotel_id','int'),(13,4,'user_id','int'),(14,4,'pay_value','int'),(15,4,'is_paid','int'),(16,5,'room_id','int'),(17,5,'user_id','int'),(18,5,'arrival_date','date'),(19,5,'leave_date','date'),(20,6,'idhotel','int'),(21,6,'photo','varchar');
+/*!40000 ALTER TABLE `attribute` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `rooms`
+-- Table structure for table `entity`
 --
 
-DROP TABLE IF EXISTS `rooms`;
+DROP TABLE IF EXISTS `entity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rooms` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cost` int(11) NOT NULL,
-  `capacity` int(11) NOT NULL,
-  `class` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `entity` (
+  `entity_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_id` int(11) NOT NULL,
+  PRIMARY KEY (`entity_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entity`
+--
+
+LOCK TABLES `entity` WRITE;
+/*!40000 ALTER TABLE `entity` DISABLE KEYS */;
+INSERT INTO `entity` (`entity_id`, `type_id`) VALUES (1,1),(5,1),(6,2),(7,3);
+/*!40000 ALTER TABLE `entity` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `type`
+--
+
+DROP TABLE IF EXISTS `type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `type` (
+  `type_id` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `rooms`
+-- Dumping data for table `type`
 --
 
-LOCK TABLES `rooms` WRITE;
-/*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
+LOCK TABLES `type` WRITE;
+/*!40000 ALTER TABLE `type` DISABLE KEYS */;
+INSERT INTO `type` (`type_id`, `name`) VALUES (1,'user'),(2,'hotel'),(3,'room'),(4,'order'),(5,'time_table'),(6,'photos');
+/*!40000 ALTER TABLE `type` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `time_table`
+-- Table structure for table `value`
 --
 
-DROP TABLE IF EXISTS `time_table`;
+DROP TABLE IF EXISTS `value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `time_table` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` varchar(45) NOT NULL,
-  `status` varchar(45) NOT NULL,
-  `rooms_id` int(11) NOT NULL,
-  `users_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`rooms_id`,`users_id`),
-  KEY `fk_time_table_rooms_idx` (`rooms_id`),
-  KEY `fk_time_table_users1_idx` (`users_id`),
-  CONSTRAINT `fk_time_table_rooms` FOREIGN KEY (`rooms_id`) REFERENCES `rooms` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_time_table_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `value` (
+  `value_id` int(11) NOT NULL AUTO_INCREMENT,
+  `entity_id` int(11) NOT NULL,
+  `attribute_id` int(11) NOT NULL,
+  `attribute_value` varchar(45) NOT NULL,
+  PRIMARY KEY (`value_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `time_table`
+-- Dumping data for table `value`
 --
 
-LOCK TABLES `time_table` WRITE;
-/*!40000 ALTER TABLE `time_table` DISABLE KEYS */;
-/*!40000 ALTER TABLE `time_table` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(45) NOT NULL,
-  `last_name` varchar(45) NOT NULL,
-  `login` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `accesslevel` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'1','1','admin','admin',NULL,2),(4,'2','2','user','user',NULL,1);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `value` WRITE;
+/*!40000 ALTER TABLE `value` DISABLE KEYS */;
+INSERT INTO `value` (`value_id`, `entity_id`, `attribute_id`, `attribute_value`) VALUES (1,1,1,'roma'),(2,1,2,'rodevich'),(3,1,3,'roma1391'),(4,1,4,'dfgrbvwe445g'),(5,1,5,'1'),(6,5,1,'vasia'),(7,5,2,'pupkin'),(8,5,3,'vasa213435'),(9,5,4,'qwerty'),(10,5,5,'2'),(11,6,6,'belarus'),(12,6,7,'minsk'),(13,6,8,'prospekt10'),(14,6,9,'5'),(21,7,10,'1000'),(22,7,11,'2'),(23,7,12,'3');
+/*!40000 ALTER TABLE `value` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -137,4 +126,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-26 23:25:13
+-- Dump completed on 2017-04-01  2:14:11
