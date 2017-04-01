@@ -113,7 +113,7 @@ CREATE TABLE `value` (
 
 LOCK TABLES `value` WRITE;
 /*!40000 ALTER TABLE `value` DISABLE KEYS */;
-INSERT INTO `value` VALUES (1,1,1,'roma'),(2,1,2,'rodevich'),(3,1,3,'roma1391'),(4,1,4,'pass'),(5,1,5,'1'),(6,5,1,'vasia'),(7,5,2,'pupkin'),(8,5,3,'vasa213435'),(9,5,4,'qwerty'),(10,5,5,'2'),(11,6,6,'belarus'),(12,6,7,'minsk'),(13,6,8,'prospekt10'),(14,6,9,'5'),(21,7,10,'1000'),(22,7,11,'2'),(23,7,12,'6');
+INSERT INTO `value` VALUES (1,1,1,'roma'),(2,1,2,'rodevich'),(3,1,3,'admin'),(4,1,4,'123'),(5,1,5,'1'),(6,5,1,'vasia'),(7,5,2,'pupkin'),(8,5,3,'vasa213435'),(9,5,4,'qwerty'),(10,5,5,'2'),(11,6,6,'belarus'),(12,6,7,'minsk'),(13,6,8,'prospekt10'),(14,6,9,'5'),(21,7,10,'1000'),(22,7,11,'2'),(23,7,12,'6'),(24,1,22,'romano-hi@mail.ru');
 /*!40000 ALTER TABLE `value` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -126,4 +126,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-01 20:15:41
+-- Dump completed on 2017-04-01 22:12:34

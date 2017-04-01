@@ -29,15 +29,15 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
+		} finally {
 			try {
 				if (preparedStatement != null) {
 					preparedStatement.close();
 				}
-				if (connection != null){
+				if (connection != null) {
 					connection.close();
 				}
-			} catch (SQLException e){
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
@@ -45,8 +45,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public void loginUser() {
-		// TODO Auto-generated method stub
+	public User loginUser(User user) {
+		return user;
 
 	}
 
