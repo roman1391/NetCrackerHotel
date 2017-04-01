@@ -1,7 +1,5 @@
 package by.netcracker.hotel.controllers;
 
-import java.util.Locale;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.ModelAndView;
 
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.entities.User;
@@ -21,11 +18,12 @@ import by.netcracker.hotel.entities.User;
 public class RegistrationController {
 
 	@Autowired
-	WebApplicationContext context;
+	private WebApplicationContext context;
 
-	@RequestMapping(value = "/reg-user", method = RequestMethod.POST)
-	public ModelAndView checkUser(Locale locale, Model model) {
-		return new ModelAndView("registration", "user", new User());
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	public String registration(Model model) {
+		model.addAttribute("user", new User());
+		return "registration";
 	}
 
 	@RequestMapping(value = "/registered-user", method = RequestMethod.POST)
@@ -33,12 +31,13 @@ public class RegistrationController {
 		if (bindingResult.hasErrors()) {
 			return "registration";
 		}
+		System.out.println("in controller");
 
 		// UserDAO userDao = new UserDAOImpl();
 
 		// using spring jdbc
 		UserDAO userDao = (UserDAO) context.getBean("UserDAOJdbcTemplateImpl");
 		userDao.regUser(user);
-		return "main";
+		return "successregistration";
 	}
 }

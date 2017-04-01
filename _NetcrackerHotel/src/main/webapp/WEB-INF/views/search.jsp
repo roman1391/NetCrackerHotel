@@ -13,9 +13,14 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
+
     <title>Search</title>
-    <link href="<c:url value="/resources/css/search.css" />" rel="stylesheet">
+    <!--<link href="<c:url value="/resources/css/search.css" />" rel="stylesheet">-->
+    <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
     <link href="<c:url value ="/resources/jquery-ui-1.12.1.custom/jquery-ui.css" />" rel="stylesheet">
+    <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
+          rel="stylesheet">
+
 </head>
 <body>
 <div class="search">
@@ -29,9 +34,10 @@
             </form:form>
         </fieldset>
     </div>
+    <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
 </div>
-<script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>" type="text/javascript"></script>
-<script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
-<script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
+<%@include file="../jsp_elements/_footer.jsp"%>
 </body>
 </html>
