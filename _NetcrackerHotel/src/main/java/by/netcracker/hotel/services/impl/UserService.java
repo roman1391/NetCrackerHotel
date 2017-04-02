@@ -17,25 +17,28 @@ import java.util.List;
 public class UserService implements AbstractService<User,Integer> {
 
     private WebApplicationContext context;
-    private final UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
 
     @Override
     public void add(User user) {
+        UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
         userDAO.add(user);
     }
 
     @Override
     public void delete(Integer id) {
+        UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
         userDAO.delete(id);
     }
 
     @Override
     public void edit(User user) {
+        UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
         userDAO.update(user);
     }
 
     @Override
     public List<User> getAll() {
+        UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
         return userDAO.getAll();
     }
 }
