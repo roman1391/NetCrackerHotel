@@ -21,16 +21,17 @@ public class UserDAOJdbcImpl implements UserDAO1 {
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
-
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
     public void add(User user) {
-        jdbcTemplate.update(SqlQuery.ADD.getQuery());
-        jdbcTemplate.update(SqlQuery.REGISTRATION.getQuery(), new Object[] {user.getFirstName(),
-                user.getLastName(), user.getUsername(),
-                user.getPassword(), user.getEmail() });
+
+    }
+
+    @Override
+    public void delete(Integer id){
+
     }
 
     @Override

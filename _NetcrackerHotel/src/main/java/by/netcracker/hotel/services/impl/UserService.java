@@ -5,6 +5,7 @@ import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.services.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
@@ -12,32 +13,32 @@ import java.util.List;
  * Created by slava on 02.04.17.
  */
 
-@Service
+@Service("UserService")
 public class UserService implements AbstractService<User,Integer> {
 
-    private UserDAO1 userDAO;
-
-    public UserService(UserDAO1 userDAO) {
-        this.userDAO = userDAO;
-    }
+    private WebApplicationContext context;
 
     @Override
-    public void addUser(User user) {
+    public void add(User user) {
+        UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
         userDAO.add(user);
     }
 
     @Override
-    public void delete(Integer integer) {
-
+    public void delete(Integer id) {
+        UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
+        userDAO.delete(id);
     }
 
     @Override
-    public User editUser(User user) {
-        return null;
+    public void edit(User user) {
+        UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
+        userDAO.update(user);
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
+        return userDAO.getAll();
     }
 }
