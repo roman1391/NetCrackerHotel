@@ -11,6 +11,6 @@ import java.util.List;
 public interface AbstractService<E,ID> {
     void add(E entity);
     void delete(ID id);
-    E edit(E entity);
+    void edit(E entity);
     List<E> getAll();
 }

@@ -7,6 +7,7 @@ import java.util.List;
  */
 public interface AbstractDAO<E, ID> {
     void add(E entity);
+    void delete(ID id);
     E update(E entity);
     E getByID(ID id);
     List<E> getAll();
