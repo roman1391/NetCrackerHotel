@@ -12,7 +12,7 @@ public class UserDAOImpl implements UserDAO {
 	private static final String SQL_QUERY_GET_CLIENTS = "INSERT INTO `netcracker_hotel`.`users` (`first_name`, `last_name`, `username`, `password`) VALUES (?, ?, ?, ?);";
 
 	@Override
-	public void regUser(User user) {
+	public void createUser(User user) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
@@ -45,13 +45,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User loginUser(User user) {
+	public User readUser(User user) {
 		return user;
 
 	}
 
 	@Override
-	public void blockUser(User user) {
+	public void updateUser(User user) {
 		// TODO Auto-generated method stub
 
 	}

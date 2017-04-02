@@ -2,13 +2,13 @@ package by.netcracker.hotel.dao;
 
 import javax.sql.DataSource;
 
-import by.netcracker.hotel.enums.SqlQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.enums.SqlQuery;
 
 @Component("UserDAOJdbcTemplateImpl")
 public class UserDAOJdbcTemplateImpl implements UserDAO {
@@ -22,17 +22,18 @@ public class UserDAOJdbcTemplateImpl implements UserDAO {
 	}
 
 	@Override
-	public void regUser(User user) {
+	public void createUser(User user) {
 
+		// add entity user
 		jdbcTemplate.update(SqlQuery.ADD.getQuery());
-		jdbcTemplate.update(SqlQuery.REGISTRATION.getQuery(), new Object[] { user.getFirstName(),
-				user.getLastName(), user.getUsername(),
-				user.getPassword(), user.getEmail() });
+		// add users attributes
+		jdbcTemplate.update(SqlQuery.REGISTRATION.getQuery(), new Object[] { user.getFirstName(), user.getLastName(),
+				user.getUsername(), user.getPassword(), user.getEmail() });
 
 	}
 
 	@Override
-	public User loginUser(User user) {
+	public User readUser(User user) {
 		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(SqlQuery.LOGIN.getQuery(),
 				new Object[] { user.getUsername(), user.getPassword() });
 
@@ -52,7 +53,7 @@ public class UserDAOJdbcTemplateImpl implements UserDAO {
 	}
 
 	@Override
-	public void blockUser(User user) {
+	public void updateUser(User user) {
 		// TODO Auto-generated method stub
 
 	}
