@@ -30,5 +30,6 @@
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
 </div>
+<%@include file="../jsp_elements/_footer.jsp" %>
 </body>
 </html>

@@ -30,14 +30,14 @@
         <form:errors path="email" cssClass="ui-state-error-text"/>
     </div>
     <div class="form-group">
-        <form:label path="login">Login</form:label>
-        <form:input path="login" type="text" class="form-control"
-                    placeholder="Login" required="required"
+        <form:label path="username">Login</form:label>
+        <form:input path="username" type="text" class="form-control"
+                    placeholder="Username" required="required"
                     data-validation="length"
                     data-validation-length="min4"
                     data-validation-error-msg="Login has to be min 4 chars"
         />
-        <form:errors path="login" cssClass="ui-state-error-text"/>
+        <form:errors path="username" cssClass="ui-state-error-text"/>
     </div>
     <div class="form-group">
         <form:label path="password">Password</form:label>

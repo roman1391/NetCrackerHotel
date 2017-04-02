@@ -3,6 +3,7 @@ package by.netcracker.hotel.entities;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+
 public class User {
 
 	private int id;
@@ -15,9 +16,9 @@ public class User {
 	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Last name must be alphanumeric with no spaces")
 	private String lastName;
 
-	@Size(min = 4, message = "Login size is min 4 symbols")
+	@Size(min = 4, message = "Username size is min 4 symbols")
 	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Login must be alphanumeric with no spaces")
-	private String login;
+	private String username;
 
 	@Size(min = 6, message = "Password is min 6 and max 15 symbols ")
 	private String password;
@@ -52,12 +53,12 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

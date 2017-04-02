@@ -15,7 +15,7 @@
 	<div id="wrapper">
 		<div class="container">
 			<div class="jumbotron">
-					<p>Hello ${user.login}</p>
+					<p>Hello ${user.username}</p>
 					<p>Password is ${user.password}</p>
 					<p>First name is ${user.firstName}</p>
 					<p>Last name is ${user.lastName}</p>

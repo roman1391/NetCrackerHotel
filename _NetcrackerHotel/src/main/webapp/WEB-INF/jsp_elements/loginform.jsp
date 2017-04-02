@@ -2,8 +2,8 @@
 
 <form:form  action="check-user" style="margin-top: 20px" method="post" modelAttribute="user">
     <div class="form-group">
-        <form:input path="login" type="text" name="login" class="form-control" placeholder="Login"
-                    required="required" />
+        <form:input path="username" type="text" name="username" class="form-control"
+                    placeholder="Username" required="required" />
     </div>
     <div class="form-group">
         <form:input path="password" type="password" name="password" id="password" class="form-control"

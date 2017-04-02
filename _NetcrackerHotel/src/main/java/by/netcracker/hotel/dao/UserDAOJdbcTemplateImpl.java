@@ -17,6 +17,7 @@ public class UserDAOJdbcTemplateImpl implements UserDAO {
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
+
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
@@ -24,7 +25,8 @@ public class UserDAOJdbcTemplateImpl implements UserDAO {
 	public void regUser(User user) {
 
 		jdbcTemplate.update(SqlQuery.ADD.getQuery());
-		jdbcTemplate.update(SqlQuery.REGISTRATION.getQuery(), new Object[] { user.getFirstName(), user.getLastName(), user.getLogin(),
+		jdbcTemplate.update(SqlQuery.REGISTRATION.getQuery(), new Object[] { user.getFirstName(),
+				user.getLastName(), user.getUsername(),
 				user.getPassword(), user.getEmail() });
 
 	}
@@ -32,7 +34,7 @@ public class UserDAOJdbcTemplateImpl implements UserDAO {
 	@Override
 	public User loginUser(User user) {
 		SqlRowSet rowSet = jdbcTemplate.queryForRowSet(SqlQuery.LOGIN.getQuery(),
-				new Object[] { user.getLogin(), user.getPassword() });
+				new Object[] { user.getUsername(), user.getPassword() });
 
 		while (rowSet.next()) {
 			if (rowSet.getString(1).equals("first_name")) {

@@ -9,7 +9,7 @@ import by.netcracker.hotel.entities.User;
 
 public class UserDAOImpl implements UserDAO {
 
-	private static final String SQL_QUERY_GET_CLIENTS = "INSERT INTO `netcracker_hotel`.`users` (`first_name`, `last_name`, `login`, `password`) VALUES (?, ?, ?, ?);";
+	private static final String SQL_QUERY_GET_CLIENTS = "INSERT INTO `netcracker_hotel`.`users` (`first_name`, `last_name`, `username`, `password`) VALUES (?, ?, ?, ?);";
 
 	@Override
 	public void regUser(User user) {
@@ -21,7 +21,7 @@ public class UserDAOImpl implements UserDAO {
 			preparedStatement = connection.prepareStatement(SQL_QUERY_GET_CLIENTS);
 			preparedStatement.setString(1, user.getFirstName());
 			preparedStatement.setString(2, user.getLastName());
-			preparedStatement.setString(3, user.getLogin());
+			preparedStatement.setString(3, user.getUsername());
 			preparedStatement.setString(4, user.getPassword());
 			preparedStatement.executeUpdate();
 		} catch (ClassNotFoundException e) {

@@ -2,6 +2,9 @@ package by.netcracker.hotel.controllers;
 
 import javax.validation.Valid;
 
+import by.netcracker.hotel.dao.UserDAO1;
+import by.netcracker.hotel.dao.impl.UserDAOJdbcImpl;
+import by.netcracker.hotel.services.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +38,8 @@ public class RegistrationController {
 		// UserDAO userDao = new UserDAOImpl();
 
 		// using spring jdbc
-		UserDAO userDao = (UserDAO) context.getBean("UserDAOJdbcTemplateImpl");
-		userDao.regUser(user);
+		UserDAO userDAO =  (UserDAO) context.getBean("UserDAOJdbcTemplateImpl");
+		userDAO.regUser(user);
 		return "successregistration";
 	}
 }
