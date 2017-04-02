@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 
-import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.services.impl.UserServiceImpl;
 
 @Controller
 public class LoginController {
@@ -20,8 +20,9 @@ public class LoginController {
 	@RequestMapping(value = "/check-user", method = RequestMethod.POST)
 	public String checkUser(@ModelAttribute("user") User user, Model model) {
 
-		UserDAO userDao = (UserDAO) context.getBean("UserDAOJdbcTemplateImpl");
-		userDao.loginUser(user);
+		UserServiceImpl userService = (UserServiceImpl) context.getBean("UserServiceImpl");
+		userService.loginUser(user);
+
 		return "successregistration";
 	}
 

@@ -4,10 +4,10 @@ import by.netcracker.hotel.entities.User;
 
 public interface UserDAO {
 
-	public void regUser(User user);
+	public void createUser(User user);
 
-	public User loginUser(User user);
+	public User readUser(User user);
 
-	public void blockUser(User user);
+	public void updateUser(User user);
 
 }
