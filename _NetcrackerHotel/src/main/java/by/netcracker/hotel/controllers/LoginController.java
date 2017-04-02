@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.exceptions.UserNotFoundException;
 import by.netcracker.hotel.services.impl.UserServiceImpl;
 
 @Controller
@@ -21,7 +22,11 @@ public class LoginController {
 	public String checkUser(@ModelAttribute("user") User user, Model model) {
 
 		UserServiceImpl userService = (UserServiceImpl) context.getBean("UserServiceImpl");
-		userService.loginUser(user);
+		try {
+			userService.loginUser(user);
+		} catch (UserNotFoundException e) {
+			return "error";
+		}
 
 		return "successregistration";
 	}

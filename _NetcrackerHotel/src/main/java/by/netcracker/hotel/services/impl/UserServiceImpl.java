@@ -6,6 +6,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.exceptions.UserNotFoundException;
 
 @Service("UserServiceImpl")
 public class UserServiceImpl {
@@ -18,8 +19,11 @@ public class UserServiceImpl {
 		userDAO.createUser(user);
 	}
 
-	public void loginUser(User user) {
+	public void loginUser(User user) throws UserNotFoundException {
 		UserDAO userDAO = (UserDAO) context.getBean("UserDAOJdbcTemplateImpl");
 		userDAO.readUser(user);
+		if (user.getAccessLevel() == 0) {
+			throw new UserNotFoundException();
+		}
 	}
 }
