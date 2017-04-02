@@ -9,8 +9,8 @@ import java.util.List;
  */
 @Service
 public interface AbstractService<E,ID> {
-    void addUser(E entity);
+    void add(E entity);
     void delete(ID id);
-    E editUser(E entity);
+    E edit(E entity);
     List<E> getAll();
 }

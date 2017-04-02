@@ -22,7 +22,7 @@ public class UserService implements AbstractService<User,Integer> {
     }
 
     @Override
-    public void addUser(User user) {
+    public void add(User user) {
         userDAO.add(user);
     }
 
@@ -32,7 +32,7 @@ public class UserService implements AbstractService<User,Integer> {
     }
 
     @Override
-    public User editUser(User user) {
+    public User edit(User user) {
         return null;
     }
 
