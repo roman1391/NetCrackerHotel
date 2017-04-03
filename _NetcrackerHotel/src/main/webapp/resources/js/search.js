@@ -30,6 +30,8 @@ $("#endDate").datepicker({
 $(document).ready(function () {
     $("#selectPlace").select2({
         placeholder: 'Enter country, city or hotel name',
-        minimumInputLength: 1
+        minimumInputLength: 1,
+        maximumSelectionLength: 5,
+        tags: true
     });
 });

@@ -21,9 +21,11 @@ public class SampleDataGenerator {
     public static List<String> createPlaces() {
         List<String> places = new ArrayList<>();
         places.add("Italy");
-        places.add("Italy Rome");
+        places.add("Rome");
         places.add("France");
-        places.add("France Paris");
+        places.add("Paris");
+        places.add("Paris Hotel");
+        places.add("Rome Hotel");
         return places;
     }
 }
