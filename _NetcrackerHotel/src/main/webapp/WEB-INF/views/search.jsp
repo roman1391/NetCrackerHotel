@@ -20,6 +20,7 @@
     <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
           rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css" />" rel="stylesheet">
+    <link href="<c:url value="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>" rel="stylesheet"/>
 </head>
 <body>
 <%@include file="../jsp_elements/_header.jsp" %>
@@ -29,6 +30,7 @@
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 </div>
 <%@include file="../jsp_elements/_footer.jsp" %>
 </body>
