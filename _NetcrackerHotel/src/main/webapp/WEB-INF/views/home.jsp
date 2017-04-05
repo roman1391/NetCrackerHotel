@@ -21,6 +21,8 @@
                     <div class="col-xs-12 col-sm-9">
                         <div class="jumbotron">
                             <h1>Hello Netcrackers</h1>
+                            login user <br>
+                            password user
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <%@ taglib  uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<form:form  action="check-user" style="margin-top: 20px" method="post" modelAttribute="user">
+<%-- <form:form  action="check-user" style="margin-top: 20px" method="post" modelAttribute="user">
     <div class="form-group">
         <form:input path="username" type="text" name="username" class="form-control"
                     placeholder="Username" required="required" />
@@ -13,4 +13,24 @@
         <button type="submit" class="btn btn-primary">Login</button>
         <a href="registration" class="btn btn-link">Register</a>
     </div>
-</form:form>
+</form:form> --%>
+
+Spring-security form: <br>
+	<c:if test="${not empty error}">
+		${error}
+	</c:if>
+	<form name='form_login' action="j_spring_security_check" method='POST'>
+		<table>
+			<tr>
+				<td>User:</td>
+				<td><input type='text' name='user_login' value=''></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type='password' name='password_login' /></td>
+			</tr>
+			<tr>
+				<td><input name="submit" type="submit" value="submit" /></td>
+			</tr>
+		</table>
+	</form>
