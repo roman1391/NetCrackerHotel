@@ -13,10 +13,4 @@
 	
 	<context:component-scan base-package="by.netcracker.hotel"></context:component-scan>
 	
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-	      p:driverClassName="com.mysql.jdbc.Driver"
-	      p:url="jdbc:mysql://localhost:3306/netcracker_hotel"
-	      p:username="root"
-	      p:password="1234">
-	</bean>
 </beans>
