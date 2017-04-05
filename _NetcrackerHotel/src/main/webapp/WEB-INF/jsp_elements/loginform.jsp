@@ -1,25 +1,7 @@
-<%@ taglib  uri="http://www.springframework.org/tags/form" prefix="form"%>
-
-<%-- <form:form  action="check-user" style="margin-top: 20px" method="post" modelAttribute="user">
-    <div class="form-group">
-        <form:input path="username" type="text" name="username" class="form-control"
-                    placeholder="Username" required="required" />
-    </div>
-    <div class="form-group">
-        <form:input path="password" type="password" name="password" id="password" class="form-control"
-                    placeholder="Password" required="required" />
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Login</button>
-        <a href="registration" class="btn btn-link">Register</a>
-    </div>
-</form:form> --%>
-
-Spring-security form: <br>
-	<c:if test="${not empty error}">
+<c:if test="${not empty error}">
 		${error}
 	</c:if>
-	<form name='form_login' action="j_spring_security_check" method='POST'>
+	<form style="margin-top: 20px" name='form_login' action="j_spring_security_check" method='POST'>
 		<table>
 			<tr>
 				<td>User:</td>
@@ -33,4 +15,19 @@ Spring-security form: <br>
 				<td><input name="submit" type="submit" value="submit" /></td>
 			</tr>
 		</table>
+		<!--<div class="form-group">
+			<input type="text"  name='user_login' value='' class="form-control"
+				   placeholder="Username" required="required" />
+		</div>
+		<div class="form-group">
+			<input type="password" name="password_login" id="password" class="form-control"
+				   placeholder="Password" required="required" />
+		</div>
+		<div class="form-group">
+			<button name="submit" value="submit" type="submit" class="btn btn-primary">Login</button>
+			<a href="registration" class="btn btn-link">Register</a>
+		</div>
+		-->
 	</form>
+
+
