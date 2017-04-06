@@ -1,9 +1,9 @@
 *.class
 
 *.iml
-.idea/*
 out/*
-target/*
+.idea/
+_NetcrackerHotel/target/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

@@ -1,5 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<form:form style="margin: 50px" method="post" action="" modelAttribute="searchFilter">
+<form:form style="margin: 50px" method="post" action="find-hotels" modelAttribute="searchFilter">
     <div class="form-group">
         <form:label path="place">Enter country, city or hotel name:</form:label>
         <form:select path="place" class="form-control" id="selectPlace" multiple="multiple">

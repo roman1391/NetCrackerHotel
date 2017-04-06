@@ -2,7 +2,6 @@ package by.netcracker.hotel.dao.impl;
 
 import by.netcracker.hotel.dao.UserDAO1;
 import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.enums.SqlQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -26,12 +25,10 @@ public class UserDAOJdbcImpl implements UserDAO1 {
 
     @Override
     public void add(User user) {
-
     }
 
     @Override
-    public void delete(Integer id){
-
+    public void delete(Integer id) {
     }
 
     @Override
