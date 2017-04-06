@@ -6,16 +6,22 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Profile</title>
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>" type="text/javascript"></script>
+    <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
+    <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />" rel="stylesheet">
     <style>
-        input, .save {
+        input, .save-btn, .cancel-btn, .edit-btn {
             float: left;
             clear: left;
             margin: 20px;
+        }
+
+        input:not([type]):disabled {
+            background: transparent;
+            border: none;
         }
     </style>
 </head>
@@ -25,41 +31,62 @@
 <%
     User user = User.getUser();
 %>
-<button onclick="onEditClick()">Edit</button>
-<div class="form-group">
-    <input id="email" value="<%=user.getEmail()%>"
-           class="editable form-control">
-    <input id="accessLevel" value="<%=user.getAccessLevel()%>"
-           class="editable form-control">
-    <input id="firstName" value="<%=user.getFirstName()%>"
-           class="editable form-control">
-    <input id="lastName" value="<%=user.getLastName()%>"
-           class="editable form-control">
-</div>
-<button onclick="onSave()" class="save">Save</button>
 
+<%@include file="../jsp_elements/_header.jsp" %>
+<div id="wrapper">
+    <button onclick="onEditClick()" class="edit-btn">Edit</button>
+    <div>
+        <input id="email" value="<%=user.getEmail()%>"
+               class="editable">
+        <input id="accessLevel" value="<%=user.getAccessLevel()%>"
+               class="editable">
+        <input id="firstName" value="<%=user.getFirstName()%>"
+               class="editable">
+        <input id="lastName" value="<%=user.getLastName()%>"
+               class="editable">
+    </div>
+    <button onclick="onSave()" class="save-btn">Save</button>
+    <button onclick="onCancel()" class="cancel-btn">Cancel</button>
+    <%@include file="../jsp_elements/_footer.jsp" %>
+</div>
 </body>
 <script>
     var isEditable = true;
+    var oldValues = {};
     function onEditClick() {
         isEditable = !isEditable;
+        if (isEditable) {
+            $('input.editable').each(function (index, data) {
+                oldValues[index] = data.value;
+            });
+        }
         $('.editable').attr("disabled", !isEditable);
-        $('.save').css('display', isEditable ? 'block' : 'none');
+        $('.save-btn').css('display', isEditable ? 'block' : 'none');
+        $('.cancel-btn').css('display', isEditable ? 'block' : 'none');
+        $('.edit-btn').css('display', !isEditable ? 'block' : 'none');
     }
 
     function onSave() {
         var userDTO = {};
         userDTO.id = <%=user.getId()%>
-        $('input.editable').each(function (index, data) {
-            userDTO[data.id] = data.value;
-        });
+            $('input.editable').each(function (index, data) {
+                userDTO[data.id] = data.value;
+            });
         $.ajax({
-            url: "save",
+            url: "update",
             method: "POST",
             data: userDTO
         }).done(function (msg) {
-            alert("Data Saved: " + msg);
+            console.log(msg);
+            onEditClick();
         });
+    }
+
+    function onCancel() {
+        $('input.editable').each(function (index, data) {
+            $(data).val(oldValues[index]);
+        });
+        onEditClick();
     }
     onEditClick();
 </script>

@@ -11,7 +11,7 @@ public class CheckAccessInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		if (request.getRequestURI().contains("registered-user")) {
+		if (request.getRequestURI().contains("register-user")) {
 
 		}
 	}
