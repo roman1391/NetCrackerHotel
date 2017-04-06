@@ -2,7 +2,9 @@ package by.netcracker.hotel.controllers;
 
 import by.netcracker.hotel.dto.UserDTO;
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UserNotFoundException;
+import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,7 +53,15 @@ public class UserController {
             return "registration";
         }
         UserServiceImpl userService = (UserServiceImpl) context.getBean("UserServiceImpl");
-        userService.registerUser(user);
+        try {
+            userService.registerUser(user);
+        } catch (UsernameExistException e){
+            model.addAttribute("error","Account with username - "+user.getUsername()+" are exist");
+            return "registration";
+        } catch (EmailExistException e){
+            model.addAttribute("error","Account with email - "+user.getEmail()+" are exist");
+            return "registration";
+        }
 
         return "successregistration";
     }

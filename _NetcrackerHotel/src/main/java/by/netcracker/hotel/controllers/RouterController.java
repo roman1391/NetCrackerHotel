@@ -1,5 +1,6 @@
 package by.netcracker.hotel.controllers;
 
+import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.util.SampleDataGenerator;
 import org.springframework.stereotype.Controller;
@@ -49,5 +50,11 @@ public class RouterController {
         model.addAttribute("searchFilter", new SearchFilter());
         model.addAttribute("places", SampleDataGenerator.createPlaces());//TODO: add getting places from database (Varvara)
         return "search_page";
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String registration(Model model) {
+        model.addAttribute("user", new User());
+        return "registration";
     }
 }

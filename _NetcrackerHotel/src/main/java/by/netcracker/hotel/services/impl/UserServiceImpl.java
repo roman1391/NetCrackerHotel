@@ -1,12 +1,13 @@
 package by.netcracker.hotel.services.impl;
 
-import by.netcracker.hotel.dao.UserDAO1;
+import by.netcracker.hotel.dao.UserDAO;
+import by.netcracker.hotel.exceptions.EmailExistException;
+import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
-import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.exceptions.UserNotFoundException;
 
@@ -17,41 +18,42 @@ public class UserServiceImpl implements UserService<User, Integer> {
 
 	@Autowired
 	private WebApplicationContext context;
+    @Autowired
+	private UserDAO userDAO;
 
-	public void registerUser(User user) {
-		UserDAO userDAO = (UserDAO) context.getBean("UserDAOJdbcTemplateImpl");
-		userDAO.createUser(user);
-	}
-
-	public void loginUser(User user) throws UserNotFoundException {
-		UserDAO userDAO = (UserDAO) context.getBean("UserDAOJdbcTemplateImpl");
-		userDAO.readUser(user);
-		if (user.getAccessLevel() == 0) {
-			throw new UserNotFoundException();
+	public void registerUser (User user) throws UsernameExistException, EmailExistException {
+        if(usernameExist(user.getUsername())){
+        	throw new UsernameExistException("Account with username - "+user.getUsername()+
+			          " are exist");
+		} else if(emailExist(user.getEmail())) {
+			throw new EmailExistException("Account with email - " + user.getEmail() + " are exist");
+		} else {
+           userDAO.add(user);
 		}
 	}
 
-	@Override
-	public void add(User user) {
-		UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
-		userDAO.add(user);
+
+	public User loginUser(User user) throws UserNotFoundException {
+		userDAO.getByUsername(user.getUsername());
+		if (user.getAccessLevel() == 0) {
+			throw new UserNotFoundException();
+		}
+		return null;
 	}
 
-	@Override
-	public void delete(Integer id) {
-		UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
-		userDAO.delete(id);
+	private boolean usernameExist(String username){
+		User user = userDAO.getByUsername(username);
+		if(user!=null){
+			return true;
+		}
+		return false;
 	}
 
-	@Override
-	public void edit(User user) {
-		UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
-		userDAO.update(user);
-	}
-
-	@Override
-	public List<User> getAll() {
-		UserDAO1 userDAO = (UserDAO1) context.getBean("UserDAOJdbcImpl");
-		return userDAO.getAll();
+	private boolean emailExist(String email){
+		User user = userDAO.getByEmail(email);
+		if(user!=null){
+			return true;
+		}
+		return false;
 	}
 }

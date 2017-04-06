@@ -16,6 +16,11 @@
 <body>
     <%@include file="../jsp_elements/_header.jsp"%>
 	<div id="wrapper">
+        <c:if test="${error!=null}">
+            <div style="margin: 50px" class="alert alert-danger" >
+                 ${error}
+            </div>
+        </c:if>
 			<div class="content">
 				<%@include file="../jsp_elements/registrationform.jsp"%>
 			</div>

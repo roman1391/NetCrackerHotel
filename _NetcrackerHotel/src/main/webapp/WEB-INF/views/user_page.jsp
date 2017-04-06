@@ -14,7 +14,6 @@
 <body>
     <%@include file="../jsp_elements/_header.jsp"%>
 	<div id="wrapper">
-
             <div class="container">
                 <div class="row row-offcanvas row-offcanvas-left">
                     User page! <br>
