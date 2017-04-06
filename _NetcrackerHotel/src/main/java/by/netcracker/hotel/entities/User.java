@@ -6,6 +6,16 @@ import javax.validation.constraints.Size;
 
 public class User {
 
+	public static User getUser(){
+		User user = new User();
+		user.setId(1);
+		user.setEmail("sdfsdf@df.ru");
+		user.setFirstName("FirstName");
+		user.setLastName("dsfsdf");
+		user.setAccessLevel(1);
+		return user;
+	}
+
 	private int id;
 
 	@Size(min = 3, max = 20, message = "First name must be between 3 and 20 characters long")
