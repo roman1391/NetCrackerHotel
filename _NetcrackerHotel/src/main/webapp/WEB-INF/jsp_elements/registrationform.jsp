@@ -1,5 +1,5 @@
 <%@ taglib  uri="http://www.springframework.org/tags/form" prefix="form"%>
-<form:form id="registrationForm" style="margin: 20px" action="registered-user"
+<form:form id="registrationForm" style="margin: 20px" action="register-user"
            method="post" modelAttribute="user">
     <div class="form-group">
         <form:label path="firstName">First name</form:label>

@@ -10,13 +10,13 @@
                 <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Profile</a>
+                <a class="nav-link" href="profile">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="#">Hotels</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="search">Search hotels</a>
+                <a class="nav-link" href="search-page">Search hotels</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Reviews</a>
