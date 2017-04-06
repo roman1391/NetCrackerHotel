@@ -1,5 +1,6 @@
 package by.netcracker.hotel.controllers;
 
+import by.netcracker.hotel.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.netcracker.hotel.entities.User;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import by.netcracker.hotel.exceptions.UserNotFoundException;
 import by.netcracker.hotel.services.impl.UserServiceImpl;
 
@@ -57,6 +60,18 @@ public class HomeController {
 	public String adminPage() {
 
 		return "admin_page";
+	}
+
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public String profile() {
+		return "profile";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String save(UserDTO dto) {
+		System.out.println(dto);
+		return "true";
 	}
 
 }
