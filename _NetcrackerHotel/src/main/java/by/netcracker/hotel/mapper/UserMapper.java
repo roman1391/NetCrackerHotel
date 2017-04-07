@@ -1,5 +1,6 @@
 package by.netcracker.hotel.mapper;
 
+import by.netcracker.hotel.dao.constant.ColumnName;
 import by.netcracker.hotel.entities.User;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -15,27 +16,27 @@ public class UserMapper implements RowMapper {
         User user = new User();
         do {
             switch (resultSet.getString(1)){
-                case "first_name" :{
+                case ColumnName.USER_FIRST_NAME :{
                     user.setFirstName(resultSet.getString(2));
                     break;
                 }
-                case "last_name" :{
+                case ColumnName.USER_LAST_NAME :{
                     user.setLastName(resultSet.getString(2));
                     break;
                 }
-                case "username" :{
+                case ColumnName.USER_USERNAME :{
                     user.setUsername(resultSet.getString(2));
                     break;
                 }
-                case "email" :{
+                case ColumnName.USER_EMAIL :{
                      user.setEmail(resultSet.getString(2));
                      break;
                 }
-                case "password" :{
+                case ColumnName.USER_PASSWORD :{
                      user.setPassword(resultSet.getString(2));
                      break;
                 }
-                case "accesslevel" :{
+                case ColumnName.USER_ACCESS_LEVEL :{
                     user.setAccessLevel(Integer.parseInt(resultSet.getString(2)));
                     break;
                 }

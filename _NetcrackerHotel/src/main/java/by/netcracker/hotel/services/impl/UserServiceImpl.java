@@ -37,20 +37,6 @@ public class UserServiceImpl implements UserService<User, Integer> {
 		}
 	}
 
-
-	public User loginUser(User user) throws UserNotFoundException {
-		try {
-			userDAO.getByUsername(user.getUsername());
-		}
-		catch (SQLException e){
-			e.printStackTrace();
-		}
-		if (user.getAccessLevel() == 0) {
-			throw new UserNotFoundException();
-		}
-		return null;
-	}
-
 	private boolean usernameExist(String username){
 		User user = null;
 		try {

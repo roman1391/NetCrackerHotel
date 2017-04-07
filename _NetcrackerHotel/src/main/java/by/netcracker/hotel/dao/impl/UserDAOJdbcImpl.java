@@ -1,6 +1,7 @@
 package by.netcracker.hotel.dao.impl;
 
 import by.netcracker.hotel.dao.UserDAO;
+import by.netcracker.hotel.dao.constant.ColumnName;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.exceptions.UserNotFoundException;
@@ -57,15 +58,19 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 
     @Override
     public User getByID(Integer ID) throws SQLException {
-
-        return null;
+        try {
+            return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
+                    new Object[]{ColumnName.USER_ID, ID.intValue()}, new UserMapper());
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     @Override
     public User getByUsername(String username) throws SQLException{
         try {
             return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
-                    new Object[]{"username",username}, new UserMapper());
+                    new Object[]{ColumnName.USER_USERNAME, username}, new UserMapper());
         } catch (EmptyResultDataAccessException e){
             return null;
         }
@@ -75,7 +80,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     public User getByEmail(String email) throws SQLException {
         try {
             return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
-                    new Object[]{"email",email}, new UserMapper());
+                    new Object[]{ColumnName.USER_EMAIL, email}, new UserMapper());
         } catch (EmptyResultDataAccessException e){
             return null;
         }

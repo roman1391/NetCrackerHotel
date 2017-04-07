@@ -12,5 +12,4 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService<User, Integer> extends AbstractService<User, Integer> {
     void registerUser (User user) throws UsernameExistException, EmailExistException;
-    User loginUser(User user) throws UserNotFoundException;
 }
