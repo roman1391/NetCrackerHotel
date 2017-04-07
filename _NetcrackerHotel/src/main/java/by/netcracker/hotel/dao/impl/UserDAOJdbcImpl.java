@@ -40,13 +40,12 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     }
 
     @Override
-    public void delete(Integer id) throws SQLException{
+    public void deleteByID(Integer id) throws SQLException{
 
     }
 
     @Override
     public List<User> getAll() {
-
         return null;
     }
 
@@ -59,8 +58,8 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     @Override
     public User getByID(Integer ID) throws SQLException {
         try {
-            return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
-                    new Object[]{ColumnName.USER_ID, ID.intValue()}, new UserMapper());
+            return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBYID.getQuery(),
+                    new Object[]{ID.intValue()}, new UserMapper());
         } catch (EmptyResultDataAccessException e){
             return null;
         }
@@ -74,6 +73,11 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
         } catch (EmptyResultDataAccessException e){
             return null;
         }
+    }
+
+    @Override
+    public void deleteByUsername(String username) throws SQLException {
+
     }
 
     @Override

@@ -12,4 +12,6 @@ public interface UserDAO extends AbstractDAO<User, Integer> {
     User getByEmail(String email) throws SQLException;
 
     User getByUsername(String username) throws SQLException;
+
+    void deleteByUsername(String username) throws SQLException;
 }
