@@ -38,5 +38,8 @@ Spring-security form:
 		<tr>
 			<td><input name="submit" type="submit" value="submit" /></td>
 		</tr>
+		<tr>
+			<td><a href="registration" class="btn btn-link">Register</a></td>
+		</tr>
 	</table>
 </form>

@@ -11,10 +11,10 @@
 
 	<http use-expressions="true">
 
-		<intercept-url pattern="/user_page" access="isAuthenticated()" />
-		<intercept-url pattern="/admin_page" access="isAuthenticated()" />
+		<intercept-url pattern="/user_page" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/admin_page" access="hasRole('ROLE_ADMIN')" />
 
-		<form-login login-page='/home' default-target-url="/user_page"
+		<form-login login-page='/home'  authentication-success-handler-ref="SuccessLoginHandler"
 			authentication-failure-url="/home?error=true" username-parameter="user_login"
 			password-parameter="password_login" />
 
@@ -27,10 +27,33 @@
 	<!-- <http auto-config="true"> <intercept-url pattern="/**" access="ROLE_USER" 
 		/> </http> -->
 
-	<authentication-manager>
-		<authentication-provider>
- 		<user-service><user name="user" password="user" authorities="ROLE_USER" /></user-service> 
-			<jdbc-user-service data-source-ref="dataSource1" />
+	<authentication-manager > 
+		<authentication-provider > 
+			<jdbc-user-service data-source-ref="dataSource"  
+			users-by-username-query="select (
+select v.attribute_value from value v 
+    inner join attribute attr on v.attribute_id = attr.attribute_id 
+        where attr.attribute_name = 'username' and v.entity_id = aaa.entity_id) as 'username',
+(select v.attribute_value from value v 
+    inner join attribute attr on v.attribute_id = attr.attribute_id 
+        where attr.attribute_name = 'password' and v.entity_id = aaa.entity_id) as 'password',
+(select if((select v.attribute_value from value v 
+    inner join attribute attr on v.attribute_id = attr.attribute_id 
+        where attr.attribute_name = 'enabled' and v.entity_id = aaa.entity_id)='1', true,false)) as 'enabled'
+        from (select v.entity_id from value v 
+            inner join attribute attr on v.attribute_id = attr.attribute_id 
+                where attr.attribute_name = 'username' and v.attribute_value=?) aaa;"
+                
+                authorities-by-username-query="select (
+select v.attribute_value from value v 
+    inner join attribute attr on v.attribute_id = attr.attribute_id 
+        where attr.attribute_name = 'username' and v.entity_id = aaa.entity_id) as 'username',
+(select v.attribute_value from value v 
+    inner join attribute attr on v.attribute_id = attr.attribute_id 
+        where attr.attribute_name = 'authority' and v.entity_id = aaa.entity_id) as 'authority'
+        from (select v.entity_id from value v 
+            inner join attribute attr on v.attribute_id = attr.attribute_id 
+                where attr.attribute_name = 'username' and v.attribute_value=?) aaa;" />
 		</authentication-provider>
 
 	</authentication-manager>

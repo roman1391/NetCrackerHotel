@@ -20,8 +20,10 @@
                     <div class="col-xs-12 col-sm-9">
                         <div class="jumbotron">
                             <h1>Hello Netcrackers</h1>
+                            login admin <br>
+                            password 123  <br>
                             login user <br>
-                            password user
+                            password 1234 <br>
                         </div>
                     </div>
                 </div>
