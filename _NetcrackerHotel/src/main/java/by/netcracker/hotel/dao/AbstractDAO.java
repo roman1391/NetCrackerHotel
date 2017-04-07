@@ -1,14 +1,17 @@
 package by.netcracker.hotel.dao;
 
+import by.netcracker.hotel.exceptions.UserNotFoundException;
+
+import java.sql.SQLException;
 import java.util.List;
 
 /**
  * Created by slava on 02.04.17.
  */
 public interface AbstractDAO<E, ID> {
-    void add(E entity);
-    void delete(ID id);
-    E update(E entity);
-    E getByID(ID id);
-    List<E> getAll();
+    void add(E entity) throws SQLException;
+    void delete(ID id) throws SQLException;
+    E update(E entity) throws SQLException;
+    E getByID(ID id) throws SQLException;
+    List<E> getAll() throws SQLException;
 }

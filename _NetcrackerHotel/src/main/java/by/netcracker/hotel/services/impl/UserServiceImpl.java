@@ -11,6 +11,7 @@ import org.springframework.web.context.WebApplicationContext;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.exceptions.UserNotFoundException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service("UserServiceImpl")
@@ -28,13 +29,22 @@ public class UserServiceImpl implements UserService<User, Integer> {
 		} else if(emailExist(user.getEmail())) {
 			throw new EmailExistException("Account with email - " + user.getEmail() + " are exist");
 		} else {
-           userDAO.add(user);
+        	try {
+				userDAO.add(user);
+			} catch (SQLException e){
+        		e.printStackTrace();
+			}
 		}
 	}
 
 
 	public User loginUser(User user) throws UserNotFoundException {
-		userDAO.getByUsername(user.getUsername());
+		try {
+			userDAO.getByUsername(user.getUsername());
+		}
+		catch (SQLException e){
+			e.printStackTrace();
+		}
 		if (user.getAccessLevel() == 0) {
 			throw new UserNotFoundException();
 		}
@@ -42,7 +52,12 @@ public class UserServiceImpl implements UserService<User, Integer> {
 	}
 
 	private boolean usernameExist(String username){
-		User user = userDAO.getByUsername(username);
+		User user = null;
+		try {
+			user = userDAO.getByUsername(username);
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
 		if(user!=null){
 			return true;
 		}
@@ -50,7 +65,12 @@ public class UserServiceImpl implements UserService<User, Integer> {
 	}
 
 	private boolean emailExist(String email){
-		User user = userDAO.getByEmail(email);
+		User user = null;
+		try {
+			user = userDAO.getByEmail(email);
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
 		if(user!=null){
 			return true;
 		}

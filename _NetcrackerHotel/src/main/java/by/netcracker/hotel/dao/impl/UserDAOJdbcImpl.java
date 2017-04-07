@@ -3,6 +3,8 @@ package by.netcracker.hotel.dao.impl;
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.SqlQuery;
+import by.netcracker.hotel.exceptions.UserNotFoundException;
+import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -28,7 +31,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 
 
     @Override
-    public void add(User user) {
+    public void add(User user) throws SQLException {
        getJdbcTemplate().update(SqlQuery.ADD.getQuery());
        getJdbcTemplate().update(SqlQuery.REGISTRATION.getQuery(),
                    new Object[]{user.getFirstName(), user.getLastName(),
@@ -36,7 +39,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     }
 
     @Override
-    public void delete(Integer id){
+    public void delete(Integer id) throws SQLException{
 
     }
 
@@ -47,19 +50,19 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     }
 
     @Override
-    public User update(User type) {
+    public User update(User type) throws SQLException {
 
         return null;
     }
 
     @Override
-    public User getByID(Integer ID) {
+    public User getByID(Integer ID) throws SQLException {
 
         return null;
     }
 
     @Override
-    public User getByUsername(String username) {
+    public User getByUsername(String username) throws SQLException{
         try {
             return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
                     new Object[]{"username",username}, new UserMapper());
@@ -69,7 +72,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     }
 
     @Override
-    public User getByEmail(String email) {
+    public User getByEmail(String email) throws SQLException {
         try {
             return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
                     new Object[]{"email",email}, new UserMapper());
