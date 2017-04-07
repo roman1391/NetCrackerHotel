@@ -61,8 +61,8 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     @Override
     public User getByUsername(String username) {
         try {
-            return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBYUSERNAME.getQuery(),
-                    new Object[]{username}, new UserMapper());
+            return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
+                    new Object[]{"username",username}, new UserMapper());
         } catch (EmptyResultDataAccessException e){
             return null;
         }
@@ -71,8 +71,8 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     @Override
     public User getByEmail(String email) {
         try {
-            return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBYEMAIL.getQuery(),
-                    new Object[]{email}, new UserMapper());
+            return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
+                    new Object[]{"email",email}, new UserMapper());
         } catch (EmptyResultDataAccessException e){
             return null;
         }
