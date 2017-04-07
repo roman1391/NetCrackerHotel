@@ -20,12 +20,8 @@
 
 		<logout logout-success-url="/home" />
 
-		<remember-me />
+		<remember-me data-source-ref="dataSource" />
 	</http>
-
-
-	<!-- <http auto-config="true"> <intercept-url pattern="/**" access="ROLE_USER" 
-		/> </http> -->
 
 	<authentication-manager > 
 		<authentication-provider > 
