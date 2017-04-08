@@ -14,7 +14,8 @@
 		<intercept-url pattern="/user_page" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/admin_page" access="hasRole('ROLE_ADMIN')" />
 
-		<form-login login-page='/home'  authentication-success-handler-ref="SuccessLoginHandler"
+		<form-login login-page='/home'
+			authentication-success-handler-ref="SuccessLoginHandler"
 			authentication-failure-url="/home?error=true" username-parameter="user_login"
 			password-parameter="password_login" />
 
@@ -23,10 +24,11 @@
 		<remember-me data-source-ref="dataSource" />
 	</http>
 
-	<authentication-manager > 
-		<authentication-provider > 
-			<jdbc-user-service data-source-ref="dataSource"  
-			users-by-username-query="select (
+	<authentication-manager>
+		<authentication-provider>
+			<password-encoder ref="bcrypt" />
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select (
 select v.attribute_value from value v 
     inner join attribute attr on v.attribute_id = attr.attribute_id 
         where attr.attribute_name = 'username' and v.entity_id = aaa.entity_id) as 'username',
@@ -39,8 +41,8 @@ select v.attribute_value from value v
         from (select v.entity_id from value v 
             inner join attribute attr on v.attribute_id = attr.attribute_id 
                 where attr.attribute_name = 'username' and v.attribute_value=?) aaa;"
-                
-                authorities-by-username-query="select (
+
+				authorities-by-username-query="select (
 select v.attribute_value from value v 
     inner join attribute attr on v.attribute_id = attr.attribute_id 
         where attr.attribute_name = 'username' and v.entity_id = aaa.entity_id) as 'username',
@@ -53,6 +55,10 @@ select v.attribute_value from value v
 		</authentication-provider>
 
 	</authentication-manager>
+	<beans:bean id='bcrypt'
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<beans:constructor-arg name="strength" value='11' />
+	</beans:bean>
 
 
 </beans:beans>
