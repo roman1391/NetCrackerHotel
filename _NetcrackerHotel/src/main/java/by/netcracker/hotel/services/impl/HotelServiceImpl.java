@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Varvara on 4/8/2017.
  */
 
-@Service
+@Service("HotelServiceImpl")
 public class HotelServiceImpl implements HotelService {
     private final WebApplicationContext context;
     private final HotelDAO hotelDAO;

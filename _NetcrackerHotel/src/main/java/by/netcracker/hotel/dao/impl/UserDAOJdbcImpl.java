@@ -38,6 +38,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	public UserDAOJdbcImpl(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
+
 	@Override
 	public void add(User user) throws SQLException {
 		getJdbcTemplate().update(SqlQuery.ADD.getQuery());
@@ -47,14 +48,14 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 
 	@Override
 	public void deleteByID(Integer id) throws SQLException {
-        getJdbcTemplate().update(SqlQuery.DELETEBYID.getQuery());
+        getJdbcTemplate().update(SqlQuery.DELETEBYID.getQuery(),
+				                new Object[]{ColumnName.USER_ID});
 	}
 
 	@Override
 	public List<User> getAll() {
 		List<User> list = getJdbcTemplate().query(SqlQuery.GETALL.getQuery(),
 				     new Object[]{TypeName.UserType},new UserMapper());
-		System.out.println(list.toArray().toString());
 		return null;
 	}
 
@@ -86,7 +87,8 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 
 	@Override
 	public void deleteByUsername(String username) throws SQLException {
-
+		getJdbcTemplate().update(SqlQuery.DELETEBY.getQuery(),
+				new Object[]{ColumnName.USER_USERNAME,username});
 	}
 
 	@Override
