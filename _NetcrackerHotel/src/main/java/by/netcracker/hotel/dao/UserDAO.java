@@ -1,6 +1,7 @@
 package by.netcracker.hotel.dao;
 
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.exceptions.UserNotFoundException;
 
 import java.sql.SQLException;
@@ -14,4 +15,6 @@ public interface UserDAO extends AbstractDAO<User, Integer> {
     User getByUsername(String username) throws SQLException;
 
     void deleteByUsername(String username) throws SQLException;
+
+    void deleteByEmail(String email) throws SQLException;
 }

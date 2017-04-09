@@ -92,6 +92,12 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	}
 
 	@Override
+	public void deleteByEmail(String email) throws SQLException {
+		getJdbcTemplate().update(SqlQuery.DELETEBY.getQuery(),
+				new Object[]{ColumnName.USER_EMAIL,email});
+	}
+
+	@Override
 	public User getByEmail(String email) throws SQLException {
 		try {
 			return getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),

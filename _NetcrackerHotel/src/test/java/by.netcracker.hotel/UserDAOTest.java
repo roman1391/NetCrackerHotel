@@ -1,5 +1,6 @@
 package by.netcracker.hotel;
 
+import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.dao.impl.UserDAOJdbcImpl;
 import by.netcracker.hotel.entities.EntityBuilder.EntityBuilder;
 import by.netcracker.hotel.entities.User;
@@ -25,7 +26,7 @@ public class UserDAOTest {
 
     @Autowired
     private WebApplicationContext context;
-    private UserDAOJdbcImpl userDAO;
+    private UserDAO userDAO;
     private User expected;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -46,5 +47,10 @@ public class UserDAOTest {
         userDAO.deleteByUsername(actual.getUsername());
         expected.setId(actual.getId());
         Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testDeleteBY() throws Exception{
+
     }
 }
