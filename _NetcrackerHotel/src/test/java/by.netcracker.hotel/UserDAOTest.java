@@ -14,10 +14,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 /**
  * Created by slava on 09.04.17.
@@ -37,12 +36,12 @@ public class UserDAOTest {
     @Before
     public void setUp(){
         userDAO = (UserDAOJdbcImpl) context.getBean("UserDAOJdbcImpl");
+        expected = EntityBuilder.buildUser("Test","Test","test",
+                "12345","test@gmail.com");
     }
 
     @Test
     public void testAdd() throws Exception{
-        expected = EntityBuilder.buildUser("Test","Test","test",
-                "12345","test@gmail.com");
         userDAO.add(expected);
         User actual = userDAO.getByUsername(expected.getUsername());
         if(passwordEncoder.matches(expected.getPassword(),actual.getPassword())){
@@ -54,8 +53,6 @@ public class UserDAOTest {
 
     @Test
     public void testDeleteByUsername() throws Exception{
-        expected = EntityBuilder.buildUser("Test","Test","test",
-                "12345","test@gmail.com");
         userDAO.add(expected);
         userDAO.deleteByUsername(expected.getUsername());
         User actual = userDAO.getByUsername(expected.getUsername());
