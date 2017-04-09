@@ -43,7 +43,12 @@ public class UserServiceImpl implements UserService<User, Integer> {
 
     @Override
     public List<User> getAll() {
-        return null;
+        try {
+            return (List<User>) userDAO.getAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private boolean usernameExist(String username) {
