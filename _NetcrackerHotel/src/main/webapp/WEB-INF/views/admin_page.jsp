@@ -16,11 +16,12 @@
 	<div id="wrapper">
             <div class="container">
                 <div class="row row-offcanvas row-offcanvas-left">
-                    Admin page! <br>
+                    Admin page! <br/>
 					<a href="j_spring_security_logout">Logout</a>
                     <div class="col-xs-12 col-sm-9">
                         <div class="jumbotron">
                             <h1>Hello Netcrackers</h1>
+                            <a href="list_of_users">Get list of users</a>
                         </div>
                     </div>
                 </div>
