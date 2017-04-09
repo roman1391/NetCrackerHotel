@@ -18,7 +18,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService<User, Integer> {
 
     private WebApplicationContext context;
-
     private UserDAO userDAO;
 
     @Autowired
@@ -40,6 +39,11 @@ public class UserServiceImpl implements UserService<User, Integer> {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public List<User> getAll() {
+        return null;
     }
 
     private boolean usernameExist(String username) {

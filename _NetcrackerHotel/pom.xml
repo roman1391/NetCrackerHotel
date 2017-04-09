@@ -196,7 +196,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -205,7 +205,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>6.0.6</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.7.RELEASE</version>
+        </dependency>
+    </dependencies>
 
 
 	<build>

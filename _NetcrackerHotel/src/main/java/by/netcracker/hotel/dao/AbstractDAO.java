@@ -12,6 +12,6 @@ public interface AbstractDAO<E, ID> {
     void add(E entity) throws SQLException;
     void deleteByID(ID id) throws SQLException;
     E update(E entity) throws SQLException;
-    E getByID(ID id);
+    E getByID(ID id) throws  SQLException;
     List<E> getAll() throws SQLException;
 }

@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
 
+import by.netcracker.hotel.dao.constant.TypeName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -46,11 +47,14 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 
 	@Override
 	public void deleteByID(Integer id) throws SQLException {
-
+        getJdbcTemplate().update(SqlQuery.DELETEBYID.getQuery());
 	}
 
 	@Override
 	public List<User> getAll() {
+		List<User> list = getJdbcTemplate().query(SqlQuery.GETALL.getQuery(),
+				     new Object[]{TypeName.UserType},new UserMapper());
+		System.out.println(list.toArray().toString());
 		return null;
 	}
 

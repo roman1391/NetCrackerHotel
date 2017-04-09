@@ -2,6 +2,7 @@ package by.netcracker.hotel.entities;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 
 public class User {
@@ -93,6 +94,25 @@ public class User {
 
 	public void setAccessLevel(int accessLevel) {
 		this.accessLevel = accessLevel;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		User user = (User) o;
+		return getId() == user.getId() &&
+				getAccessLevel() == user.getAccessLevel() &&
+				Objects.equals(getFirstName(), user.getFirstName()) &&
+				Objects.equals(getLastName(), user.getLastName()) &&
+				Objects.equals(getUsername(), user.getUsername()) &&
+				Objects.equals(getPassword(), user.getPassword()) &&
+				Objects.equals(getEmail(), user.getEmail());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getId(), getFirstName(), getLastName(), getUsername(), getPassword(), getEmail(), getAccessLevel());
 	}
 
 }

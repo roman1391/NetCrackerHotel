@@ -36,7 +36,11 @@ public class HotelServiceImpl implements HotelService {
                 ids.retainAll(hotelDAO.findIDsBySearchString(searchString));
             }
             for (Integer id : ids) {
-                hotels.add(hotelDAO.getByID(id));
+                try {
+                    hotels.add(hotelDAO.getByID(id));
+                } catch (SQLException e){
+                    e.printStackTrace();
+                }
             }
         }
         return hotels;
