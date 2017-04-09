@@ -71,6 +71,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
     @Override
     public List<String> getPlaces() {
-        return getJdbcTemplate().query(SqlQuery.GET_PLACES.getQuery(), (resultSet, i) -> resultSet.getString(1));
+        return getJdbcTemplate().query(SqlQuery.GET_PLACES.getQuery(),
+                (resultSet, i) -> resultSet.getString(1));
     }
 }

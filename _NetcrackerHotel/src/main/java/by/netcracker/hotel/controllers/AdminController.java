@@ -19,7 +19,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/list_of_users", method = RequestMethod.GET)
 	public String getAllUsers(Model model) {
-		model.addAttribute("users", userService.getAllUsers());
+		model.addAttribute("users", userService.getAll());
 		return "list_of_users";
 
 	}
