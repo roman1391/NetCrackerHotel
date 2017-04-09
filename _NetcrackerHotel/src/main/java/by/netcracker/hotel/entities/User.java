@@ -3,10 +3,9 @@ package by.netcracker.hotel.entities;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
 public class User {
 
-	public static User getUser(){
+	public static User getUser() {
 		User user = new User();
 		user.setId(1);
 		user.setEmail("sdfsdf@df.ru");
@@ -38,6 +37,8 @@ public class User {
 	private String email;
 
 	private int accessLevel;
+	private boolean enabled;
+	private String authority;
 
 	public int getId() {
 		return id;
@@ -93,6 +94,29 @@ public class User {
 
 	public void setAccessLevel(int accessLevel) {
 		this.accessLevel = accessLevel;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + ", email=" + email + ", accessLevel=" + accessLevel + ", enabled="
+				+ enabled + ", authority=" + authority + "]";
 	}
 
 }

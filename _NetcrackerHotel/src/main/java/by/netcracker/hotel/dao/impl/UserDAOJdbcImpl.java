@@ -1,11 +1,12 @@
 package by.netcracker.hotel.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,6 +18,7 @@ import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.dao.constant.ColumnName;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.SqlQuery;
+import by.netcracker.hotel.mapper.UserListMapper;
 import by.netcracker.hotel.mapper.UserMapper;
 
 /**
@@ -37,11 +39,12 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	public UserDAOJdbcImpl(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
+
 	@Override
 	public void add(User user) throws SQLException {
 		getJdbcTemplate().update(SqlQuery.ADD.getQuery());
-		getJdbcTemplate().update(SqlQuery.REGISTRATION.getQuery(), user.getFirstName(),
-				user.getLastName(), user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
+		getJdbcTemplate().update(SqlQuery.REGISTRATION.getQuery(), user.getFirstName(), user.getLastName(),
+				user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
 	}
 
 	@Override
@@ -51,7 +54,14 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 
 	@Override
 	public List<User> getAll() {
-		return null;
+		List<User> users = new ArrayList<>();
+		Map<String, User> map = getJdbcTemplate().queryForObject(SqlQuery.GET_ALL_ENTITIES_BY_TYPE.getQuery(),
+				new Object[] { "user" }, new UserListMapper());
+		for (Map.Entry<String, User> entry : map.entrySet()) {
+			System.out.println(entry.getKey() + "---" + entry.getValue().toString());
+			users.add(entry.getValue());
+		}
+		return users;
 	}
 
 	@Override
@@ -61,10 +71,9 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public User getByID(Integer id){
+	public User getByID(Integer id) {
 		try {
-			return getJdbcTemplate().queryForObject(SqlQuery.GETBYID.getQuery(), new Object[] { id },
-					new UserMapper());
+			return getJdbcTemplate().queryForObject(SqlQuery.GETBYID.getQuery(), new Object[] { id }, new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
