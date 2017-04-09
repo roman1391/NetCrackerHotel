@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface HotelService extends AbstractService <Hotel, Integer> {
     List<Hotel> findHotels(List<String> searchStrings);
+    List<String> getPlaces();
 }

@@ -45,13 +45,6 @@ public class RouterController {
         return "about";
     }
 
-    @RequestMapping(value = "search-page", method = RequestMethod.GET)
-    public String getSearchPage(Model model) {
-        model.addAttribute("searchFilter", new SearchFilter());
-        model.addAttribute("places", SampleDataGenerator.createPlaces());//TODO: add getting places from database (Varvara)
-        return "search_page";
-    }
-
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("user", new User());

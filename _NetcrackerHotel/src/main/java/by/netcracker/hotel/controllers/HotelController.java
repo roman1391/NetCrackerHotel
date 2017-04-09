@@ -25,14 +25,21 @@ public class HotelController {
         this.hotelService = hotelService;
     }
 
+    @RequestMapping(value = "search-page", method = RequestMethod.GET)
+    public String getSearchPage(Model model) {
+        model.addAttribute("searchFilter", new SearchFilter());
+        model.addAttribute("places", hotelService.getPlaces());
+        return "search_page";
+    }
+
     @RequestMapping(value = "find-hotels", method = RequestMethod.POST)
     public String findHotels(@ModelAttribute("searchFilter") SearchFilter searchFilter, BindingResult bindingResult,
                              Model model) {
         String place = searchFilter.getPlace();
-        List<String> places = new ArrayList<>(Arrays.asList(place.split(" ")));
+        List<String> places = new ArrayList<>(Arrays.asList(place.split("[, ]")));
         List<Hotel> hotels = hotelService.findHotels(places);
         model.addAttribute("hotels", hotels);
-        model.addAttribute("places", SampleDataGenerator.createPlaces());
+        model.addAttribute("places", hotelService.getPlaces());
         return "search_page";
     }
 
