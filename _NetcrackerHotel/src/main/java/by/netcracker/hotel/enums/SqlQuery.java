@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
  * Created by slava on 02.04.17.
  */
 public enum SqlQuery {
-    ADD, LOGIN, REGISTRATION, GETBY,GETBYID,GETALL;
+    ADD, LOGIN, REGISTRATION, GETBY,GETBYID,GETALL, SEARCH_HOTEL;
 
     @NotNull
     public final String getQuery(){

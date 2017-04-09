@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -24,7 +25,6 @@ import by.netcracker.hotel.mapper.UserMapper;
 
 @Component("UserDAOJdbcImpl")
 public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
-	@Autowired
 	private DataSource dataSource;
 	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -33,11 +33,15 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 		setDataSource(dataSource);
 	}
 
+	@Autowired
+	public UserDAOJdbcImpl(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
 	@Override
 	public void add(User user) throws SQLException {
 		getJdbcTemplate().update(SqlQuery.ADD.getQuery());
-		getJdbcTemplate().update(SqlQuery.REGISTRATION.getQuery(), new Object[] { user.getFirstName(),
-				user.getLastName(), user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail() });
+		getJdbcTemplate().update(SqlQuery.REGISTRATION.getQuery(), user.getFirstName(),
+				user.getLastName(), user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
 	}
 
 	@Override
@@ -57,9 +61,9 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public User getByID(Integer ID) throws SQLException {
+	public User getByID(Integer id){
 		try {
-			return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBYID.getQuery(), new Object[] { ID.intValue() },
+			return getJdbcTemplate().queryForObject(SqlQuery.GETBYID.getQuery(), new Object[] { id },
 					new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
@@ -69,7 +73,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	@Override
 	public User getByUsername(String username) throws SQLException {
 		try {
-			return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
+			return getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
 					new Object[] { ColumnName.USER_USERNAME, username }, new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
@@ -84,7 +88,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	@Override
 	public User getByEmail(String email) throws SQLException {
 		try {
-			return (User) getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
+			return getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
 					new Object[] { ColumnName.USER_EMAIL, email }, new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;

@@ -12,4 +12,10 @@ public class ColumnName {
     public static final String USER_ACCESS_LEVEL = "accesslevel";
     public static final String USER_PASSWORD = "password";
     public static final String USER_ENABLED = "enabled";
+    public static final String COUNTRY = "country";
+    public static final String CITY = "city";
+    public static final String ADDRESS = "address";
+    public static final String CLASS = "class";
+    public static final String HOTEL_NAME = "hotel_name";
+    public static final String HOTEL_DESCRIPTION = "hotel_description";
 }
