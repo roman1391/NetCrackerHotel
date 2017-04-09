@@ -17,49 +17,48 @@ import java.util.List;
 @Service("UserServiceImpl")
 public class UserServiceImpl implements UserService<User, Integer> {
 
-	@Autowired
-	private WebApplicationContext context;
+    private WebApplicationContext context;
+
+    private UserDAO userDAO;
+
     @Autowired
-	private UserDAO userDAO;
+    public UserServiceImpl(WebApplicationContext context, UserDAO userDAO) {
+        this.context = context;
+        this.userDAO = userDAO;
+    }
 
-	public void registerUser (User user) throws UsernameExistException, EmailExistException {
-        if(usernameExist(user.getUsername())){
-        	throw new UsernameExistException("Account with username - "+user.getUsername()+
-			          " are exist");
-		} else if(emailExist(user.getEmail())) {
-			throw new EmailExistException("Account with email - " + user.getEmail() + " are exist");
-		} else {
-        	try {
-				userDAO.add(user);
-			} catch (SQLException e){
-        		e.printStackTrace();
-			}
-		}
-	}
+    public void registerUser(User user) throws UsernameExistException, EmailExistException {
+        if (usernameExist(user.getUsername())) {
+            throw new UsernameExistException("Account with username - " + user.getUsername() +
+                    " are exist");
+        } else if (emailExist(user.getEmail())) {
+            throw new EmailExistException("Account with email - " + user.getEmail() + " are exist");
+        } else {
+            try {
+                userDAO.add(user);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-	private boolean usernameExist(String username){
-		User user = null;
-		try {
-			user = userDAO.getByUsername(username);
-		} catch (SQLException e){
-			e.printStackTrace();
-		}
-		if(user!=null){
-			return true;
-		}
-		return false;
-	}
+    private boolean usernameExist(String username) {
+        User user = null;
+        try {
+            user = userDAO.getByUsername(username);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user != null;
+    }
 
-	private boolean emailExist(String email){
-		User user = null;
-		try {
-			user = userDAO.getByEmail(email);
-		} catch (SQLException e){
-			e.printStackTrace();
-		}
-		if(user!=null){
-			return true;
-		}
-		return false;
-	}
+    private boolean emailExist(String email) {
+        User user = null;
+        try {
+            user = userDAO.getByEmail(email);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user != null;
+    }
 }

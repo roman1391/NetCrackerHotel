@@ -21,8 +21,13 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
-    @Autowired
+
     private WebApplicationContext context;
+
+    @Autowired
+    public RegistrationController(WebApplicationContext context) {
+        this.context = context;
+    }
 
     @RequestMapping(value = "/register-user", method = RequestMethod.POST)
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
