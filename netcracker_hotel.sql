@@ -39,7 +39,7 @@ CREATE TABLE `attribute` (
 
 LOCK TABLES `attribute` WRITE;
 /*!40000 ALTER TABLE `attribute` DISABLE KEYS */;
-INSERT INTO `attribute` VALUES (1,1,'first_name','varchar'),(2,1,'last_name','varchar'),(3,1,'username','varchar'),(4,1,'password','varchar'),(5,1,'accesslevel','varchar'),(6,2,'country','varchar'),(7,2,'city','varchar'),(8,2,'address','varchar'),(9,2,'class','int'),(10,3,'cost','int'),(11,3,'capacity','int'),(12,3,'hotel_id','int'),(13,4,'user_id','int'),(14,4,'pay_value','int'),(15,4,'is_paid','int'),(16,5,'room_id','int'),(17,5,'user_id','int'),(18,5,'arrival_date','date'),(19,5,'leave_date','date'),(20,6,'idhotel','int'),(21,6,'photo','varchar'),(22,1,'email','varchar'),(23,1,'enabled','boolean'),(24,1,'authority','varchar');
+INSERT INTO `attribute` VALUES (1,1,'first_name','varchar'),(2,1,'last_name','varchar'),(3,1,'username','varchar'),(4,1,'password','varchar'),(5,1,'accesslevel','varchar'),(6,2,'country','varchar'),(7,2,'city','varchar'),(8,2,'address','varchar'),(9,2,'class','int'),(10,3,'cost','int'),(11,3,'capacity','int'),(12,3,'hotel_id','int'),(13,4,'user_id','int'),(14,4,'pay_value','int'),(15,4,'is_paid','int'),(16,5,'room_id','int'),(17,5,'user_id','int'),(18,5,'arrival_date','date'),(19,5,'leave_date','date'),(20,6,'idhotel','int'),(21,6,'photo','varchar'),(22,1,'email','varchar'),(23,1,'enabled','boolean'),(24,1,'authority','varchar'),(25,2,'hotel_name','varchar'),(26,2,'hotel_description','varchar');
 /*!40000 ALTER TABLE `attribute` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `value` (
 
 LOCK TABLES `value` WRITE;
 /*!40000 ALTER TABLE `value` DISABLE KEYS */;
-INSERT INTO `value` VALUES (11,6,6,'belarus'),(12,6,7,'minsk'),(13,6,8,'prospekt10'),(14,6,9,'5'),(21,7,10,'1000'),(22,7,11,'2'),(23,7,12,'6'),(254,50,1,'roma'),(255,50,2,'rodevich'),(256,50,3,'admin'),(257,50,4,'$2a$11$Z30CWyK5OxD9VqknNWaSfu79V/K.7AJTEhOkJOGoyEnUfZHQH8GK2'),(258,50,22,'admin@gmail.com'),(259,50,5,'1'),(260,50,24,'ROLE_ADMIN'),(261,50,23,'1'),(262,51,1,'firstnameless'),(263,51,2,'lastnameless'),(264,51,3,'user'),(265,51,4,'$2a$11$6nPdjxJjLxJRZnlHkPaCcOwpVxVYy4RdjfJ2SA.dRWAHJdV6AIwYy'),(266,51,22,'user@gmail.com'),(267,51,5,'1'),(268,51,24,'ROLE_USER'),(269,51,23,'1');
+INSERT INTO `value` VALUES (11,6,6,'belarus'),(12,6,7,'minsk'),(13,6,8,'prospekt10'),(14,6,9,'5'),(21,7,10,'1000'),(22,7,11,'2'),(23,7,12,'6'),(254,50,1,'roma'),(255,50,2,'rodevich'),(256,50,3,'admin'),(257,50,4,'$2a$11$Z30CWyK5OxD9VqknNWaSfu79V/K.7AJTEhOkJOGoyEnUfZHQH8GK2'),(258,50,22,'admin@gmail.com'),(259,50,5,'1'),(260,50,24,'ROLE_ADMIN'),(261,50,23,'1'),(262,51,1,'firstnameless'),(263,51,2,'lastnameless'),(264,51,3,'user'),(265,51,4,'$2a$11$6nPdjxJjLxJRZnlHkPaCcOwpVxVYy4RdjfJ2SA.dRWAHJdV6AIwYy'),(266,51,22,'user@gmail.com'),(267,51,5,'1'),(268,51,24,'ROLE_USER'),(269,51,23,'1'),(270,6,25,'Hotel1'),(271,6,26,'Some info about hotel');
 /*!40000 ALTER TABLE `value` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
