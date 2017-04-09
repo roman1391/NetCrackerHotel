@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 
 import by.netcracker.hotel.dao.constant.TypeName;
+import by.netcracker.hotel.mapper.UserListExtractor;
+import by.netcracker.hotel.mapper.UserListMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -41,22 +43,26 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 
 	@Override
 	public void add(User user) throws SQLException {
-		getJdbcTemplate().update(SqlQuery.ADD.getQuery());
-		getJdbcTemplate().update(SqlQuery.REGISTRATION.getQuery(), user.getFirstName(),
-				user.getLastName(), user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
+		getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(),
+				new Object[]{TypeName.USER.name().toLowerCase()});
+		getJdbcTemplate().update(SqlQuery.ADD_USER.getQuery(),
+				new Object[]{user.getFirstName(), user.getLastName(),
+				user.getUsername(), passwordEncoder.encode(user.getPassword()),
+				user.getEmail()});
 	}
 
 	@Override
 	public void deleteByID(Integer id) throws SQLException {
-        getJdbcTemplate().update(SqlQuery.DELETEBYID.getQuery(),
+        getJdbcTemplate().update(SqlQuery.DELETE_BY_ID.getQuery(),
 				                new Object[]{ColumnName.USER_ID});
 	}
 
 	@Override
-	public List<User> getAll() {
-		List<User> list = getJdbcTemplate().query(SqlQuery.GETALL.getQuery(),
-				     new Object[]{TypeName.UserType},new UserMapper());
-		return null;
+	public List<User> getAll() throws SQLException{
+		return (List<User>) getJdbcTemplate().query(SqlQuery.GET_ALL.getQuery(),
+				new Object[]{TypeName.USER.getType()},
+				new UserListExtractor(new UserListMapper()) {
+				});
 	}
 
 	@Override
@@ -68,7 +74,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	@Override
 	public User getByID(Integer id){
 		try {
-			return getJdbcTemplate().queryForObject(SqlQuery.GETBYID.getQuery(), new Object[] { id },
+			return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
 					new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
@@ -78,8 +84,9 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	@Override
 	public User getByUsername(String username) throws SQLException {
 		try {
-			return getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
+			User user = getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),
 					new Object[] { ColumnName.USER_USERNAME, username }, new UserMapper());
+			return user;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -87,20 +94,20 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 
 	@Override
 	public void deleteByUsername(String username) throws SQLException {
-		getJdbcTemplate().update(SqlQuery.DELETEBY.getQuery(),
+		getJdbcTemplate().update(SqlQuery.DELETE_BY.getQuery(),
 				new Object[]{ColumnName.USER_USERNAME,username});
 	}
 
 	@Override
 	public void deleteByEmail(String email) throws SQLException {
-		getJdbcTemplate().update(SqlQuery.DELETEBY.getQuery(),
+		getJdbcTemplate().update(SqlQuery.DELETE_BY.getQuery(),
 				new Object[]{ColumnName.USER_EMAIL,email});
 	}
 
 	@Override
 	public User getByEmail(String email) throws SQLException {
 		try {
-			return getJdbcTemplate().queryForObject(SqlQuery.GETBY.getQuery(),
+			return getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),
 					new Object[] { ColumnName.USER_EMAIL, email }, new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;

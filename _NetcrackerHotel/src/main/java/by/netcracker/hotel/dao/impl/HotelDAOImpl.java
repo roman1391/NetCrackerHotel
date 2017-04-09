@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -51,7 +50,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     @Override
     public Hotel getByID(Integer id) {
         try {
-            return getJdbcTemplate().queryForObject(SqlQuery.GETBYID.getQuery(),
+            return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(),
                     new Object[]{id}, new HotelMapper());
         } catch (EmptyResultDataAccessException e) {
             return null;

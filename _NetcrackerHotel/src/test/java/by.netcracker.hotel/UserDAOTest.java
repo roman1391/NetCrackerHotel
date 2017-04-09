@@ -15,6 +15,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  * Created by slava on 09.04.17.
  */
@@ -45,12 +49,41 @@ public class UserDAOTest {
             actual.setPassword(expected.getPassword());
         }
         userDAO.deleteByUsername(actual.getUsername());
-        expected.setId(actual.getId());
         Assert.assertEquals(expected,actual);
     }
 
     @Test
-    public void testDeleteBY() throws Exception{
+    public void testDeleteByUsername() throws Exception{
+        expected = EntityBuilder.buildUser("Test","Test","test",
+                "12345","test@gmail.com");
+        userDAO.add(expected);
+        userDAO.deleteByUsername(expected.getUsername());
+        User actual = userDAO.getByUsername(expected.getUsername());
+        Assert.assertNull(actual);
+    }
 
+    @Test
+    public void testGetAll() throws Exception{
+        List<User> expected = new ArrayList<>();
+        int size = 10;
+        for(int i = 0; i<size; i++){
+            User user = EntityBuilder.buildUser("Test","Test","test"+i,
+                    "12345","test@gmail.com");
+            expected.add(user);
+            userDAO.add(user);
+        }
+        List<User> actual = userDAO.getAll();
+        int i=0;
+        for (User user: actual) {
+            if(passwordEncoder.matches(expected.get(i).getPassword(),user.getPassword())){
+                user.setPassword(expected.get(i).getPassword());
+                actual.set(i,user);
+            }
+            i++;
+        }
+        Assert.assertArrayEquals(expected.toArray(),actual.toArray());
+        for (User user: actual) {
+            userDAO.deleteByUsername(user.getUsername());
+        }
     }
 }

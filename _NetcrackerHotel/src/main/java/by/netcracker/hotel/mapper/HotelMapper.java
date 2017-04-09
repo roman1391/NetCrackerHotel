@@ -36,6 +36,8 @@ public class HotelMapper implements RowMapper<Hotel> {
                     hotel.setTypeOfService(resultSet.getInt(2));
                     break;
                 }
+                default:
+                    return null;
             }
         } while (resultSet.next());
         return hotel;

@@ -8,42 +8,42 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by slava on 02.04.17.
+ * Created by slava on 10.04.17.
  */
-public class UserMapper implements RowMapper<User> {
+public class UserListMapper implements RowMapper {
     @Override
     public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         User user = new User();
         do {
-            switch (resultSet.getString(1)){
-                case ColumnName.USER_FIRST_NAME :{
+            switch (resultSet.getString(1)) {
+                case ColumnName.USER_FIRST_NAME: {
                     user.setFirstName(resultSet.getString(2));
                     break;
                 }
-                case ColumnName.USER_LAST_NAME :{
+                case ColumnName.USER_LAST_NAME: {
                     user.setLastName(resultSet.getString(2));
                     break;
                 }
-                case ColumnName.USER_USERNAME :{
+                case ColumnName.USER_USERNAME: {
                     user.setUsername(resultSet.getString(2));
                     break;
                 }
-                case ColumnName.USER_EMAIL :{
-                     user.setEmail(resultSet.getString(2));
-                     break;
+                case ColumnName.USER_EMAIL: {
+                    user.setEmail(resultSet.getString(2));
+                    break;
                 }
-                case ColumnName.USER_PASSWORD :{
-                     user.setPassword(resultSet.getString(2));
-                     break;
+                case ColumnName.USER_PASSWORD: {
+                    user.setPassword(resultSet.getString(2));
+                    break;
                 }
-                case ColumnName.USER_ACCESS_LEVEL :{
+                case ColumnName.USER_ACCESS_LEVEL: {
                     user.setAccessLevel(Integer.parseInt(resultSet.getString(2)));
                     break;
                 }
                 default:
-                    break;
+                    return null;
             }
-        } while (resultSet.next());
+        } while (resultSet.next() && user.getAccessLevel() == 0);
         return user;
     }
 }
