@@ -5,7 +5,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Home</title>
+    <title>Log in</title>
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
     <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />" rel="stylesheet">
 </head>
@@ -15,18 +15,9 @@
 
     <div class="container">
         <div class="row row-offcanvas row-offcanvas-left">
-            <div class="col-xs-12 col-sm-9">
-                <div class="jumbotron">
-                    <h1>Hello Netcrackers</h1>
-                    login admin <br>
-                    password 123 <br>
-                    login user <br>
-                    password 1234 <br>
-                </div>
-            </div>
+            <%@include file="../jsp_elements/_sidebar.jsp" %>
         </div>
     </div>
-    <%@include file="../jsp_elements/_footer.jsp" %>
 </div>
 </body>
 </html>

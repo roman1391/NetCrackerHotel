@@ -1,15 +1,14 @@
 package by.netcracker.hotel.services.impl;
 
 import by.netcracker.hotel.dao.UserDAO;
+import by.netcracker.hotel.dto.UserDTO;
+import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
-
-import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.exceptions.UserNotFoundException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -69,5 +68,48 @@ public class UserServiceImpl implements UserService<User, Integer> {
             e.printStackTrace();
         }
         return user != null;
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        try {
+            return userDAO.getByUsername(username);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public UserDTO convert(User user) {
+        UserDTO dto = new UserDTO();
+        dto.setId(user.getId());
+        dto.setUsername(user.getUsername());
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setEmail(user.getEmail());
+        dto.setAccessLevel(user.getAccessLevel());
+        return dto;
+    }
+
+    @Override
+    public User convert(UserDTO dto) {
+        User user = new User();
+        user.setId(dto.getId());
+        user.setUsername(dto.getUsername());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setEmail(dto.getEmail());
+        user.setAccessLevel(dto.getAccessLevel());
+        return user;
+    }
+
+    @Override
+    public boolean update(UserDTO entity) {
+        try {
+            userDAO.update(convert(entity));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

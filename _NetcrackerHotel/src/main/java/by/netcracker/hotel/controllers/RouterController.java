@@ -1,8 +1,9 @@
 package by.netcracker.hotel.controllers;
 
 import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.filter.SearchFilter;
-import by.netcracker.hotel.util.SampleDataGenerator;
+import by.netcracker.hotel.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,44 +11,56 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import static by.netcracker.hotel.util.ModelUtil.createModel;
+
 @Controller
 public class RouterController {
 
-    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
-    public ModelAndView login(@RequestParam(value = "error", required = false) String error) {
+    @Autowired
+    private UserService userService;
 
-        ModelAndView model = new ModelAndView();
+    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
+    public ModelAndView home(@RequestParam(value = "error", required = false) String error, Authentication authentication) {
+        ModelAndView model = createModel("home", authentication);
         if (error != null) {
             model.addObject("error", "Invalid username or password!");
         }
-
-        model.setViewName("home");
         return model;
     }
 
     @RequestMapping(value = "/user_page", method = RequestMethod.GET)
-    public String mainPage() {
-        return "user_page";
+    public ModelAndView mainPage(Authentication authentication) {
+        return createModel("user_page", authentication);
     }
 
     @RequestMapping(value = "/admin_page", method = RequestMethod.GET)
-    public String adminPage() {
-        return "admin_page";
+    public ModelAndView adminPage(Authentication authentication) {
+        return createModel("admin_page", authentication);
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile() {
-        return "profile";
+    public ModelAndView profile(Authentication authentication) {
+        ModelAndView model = createModel("profile", authentication);
+        String username = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
+        //TODO CONVERT ALL ENTITIES TO DTO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        model.addObject("user", userService.getUserByUsername(username));
+        return model;
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String about() {
-        return "about";
+    public ModelAndView about(Authentication authentication) {
+        return createModel("about", authentication);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login(Authentication authentication) {
+        return createModel("login_page", authentication);
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
+    public ModelAndView registration(Model model, Authentication authentication) {
         model.addAttribute("user", new User());
-        return "registration";
+        return createModel("registration", authentication);
     }
+
 }
