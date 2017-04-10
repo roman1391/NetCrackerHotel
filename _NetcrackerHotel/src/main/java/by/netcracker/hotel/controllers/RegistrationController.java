@@ -17,7 +17,7 @@ import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.impl.UserServiceImpl;
 
 /**
- * Created by slava on 07.04.17.
+ * Created by slava КПСС on 07.04.17.
  */
 
 @Controller

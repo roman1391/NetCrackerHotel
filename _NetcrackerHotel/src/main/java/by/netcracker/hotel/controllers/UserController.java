@@ -1,35 +1,35 @@
 package by.netcracker.hotel.controllers;
 
 import by.netcracker.hotel.dto.UserDTO;
-import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.exceptions.EmailExistException;
-import by.netcracker.hotel.exceptions.UserNotFoundException;
-import by.netcracker.hotel.exceptions.UsernameExistException;
-import by.netcracker.hotel.services.impl.UserServiceImpl;
+import by.netcracker.hotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
+import static by.netcracker.hotel.util.SecurityUtil.getRole;
 
-/**
- * @author Yauheni Shopik
- * @since 4/7/2017
- */
 @Controller
 public class UserController {
 
+    @Autowired
+    private UserService userService;
+
     @ResponseBody
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String save(UserDTO dto) {
-        System.out.println(dto);
-        return "true";
+    public Boolean save(UserDTO dto) {
+        return userService.update(dto);
+    }
+
+    @RequestMapping(value = "/log-out", method = RequestMethod.POST)
+    public ModelAndView logOut(Authentication authentication) {
+        ModelAndView model = new ModelAndView();
+        model.addObject("role", getRole(authentication));
+        model.setViewName("about");
+        return model;
     }
 
 }
