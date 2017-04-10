@@ -50,4 +50,9 @@ public class RouterController {
         model.addAttribute("user", new User());
         return "registration";
     }
+
+    @RequestMapping(value = "/leave_review", method = RequestMethod.GET)
+    public String leaveReview() {
+        return "leave_review";
+    }
 }
