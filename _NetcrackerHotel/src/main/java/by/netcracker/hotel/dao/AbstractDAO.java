@@ -9,9 +9,9 @@ import java.util.List;
  * Created by slava on 02.04.17.
  */
 public interface AbstractDAO<E, ID> {
-    void add(E entity) throws SQLException;
-    void deleteByID(ID id) throws SQLException;
-    E update(E entity) throws SQLException;
-    E getByID(ID id) throws  SQLException;
-    List<E> getAll() throws SQLException;
+    void add(E entity);
+    void deleteByID(ID id);
+    E update(E entity);
+    E getByID(ID id);
+    List<E> getAll();
 }

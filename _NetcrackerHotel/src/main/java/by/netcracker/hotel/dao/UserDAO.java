@@ -10,11 +10,11 @@ import java.sql.SQLException;
  * Created by slava on 02.04.17.
  */
 public interface UserDAO extends AbstractDAO<User, Integer> {
-    User getByEmail(String email) throws SQLException;
+    User getByEmail(String email);
 
-    User getByUsername(String username) throws SQLException;
+    User getByUsername(String username);
 
-    void deleteByUsername(String username) throws SQLException;
+    void deleteByUsername(String username);
 
-    void deleteByEmail(String email) throws SQLException;
+    void deleteByEmail(String email);
 }
