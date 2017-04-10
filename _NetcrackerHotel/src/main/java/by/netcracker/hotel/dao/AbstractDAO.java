@@ -11,7 +11,7 @@ import java.util.List;
 public interface AbstractDAO<E, ID> {
     void add(E entity);
     void deleteByID(ID id);
-    E update(E entity);
+    void update(E entity);
     E getByID(ID id);
     List<E> getAll();
 }
