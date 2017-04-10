@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by Varvara on 4/4/2017.
  */
-@Component("HotelDAOImpl")
+@Repository
 public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
     private DataSource dataSource;

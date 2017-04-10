@@ -32,12 +32,10 @@ public class HotelMapper implements RowMapper<Hotel> {
                     hotel.setName(resultSet.getString(2));
                     break;
                 }
-                case ColumnName.CLASS :{
+                case ColumnName.CLASS : {
                     hotel.setTypeOfService(resultSet.getInt(2));
                     break;
                 }
-                default:
-                    return null;
             }
         } while (resultSet.next());
         return hotel;

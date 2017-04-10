@@ -27,4 +27,11 @@
         </c:forEach>
 
     </c:if>
+    <c:if test="${empty hotels}">
+    <div class="form-group">
+        <p>
+            ${message}
+        </p>
+    </div>
+    </c:if>
 </form>

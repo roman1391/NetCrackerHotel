@@ -21,7 +21,7 @@ public class HotelController {
     private final HotelService hotelService;
 
     @Autowired
-    public HotelController(HotelService hotelService){
+    public HotelController(HotelService hotelService) {
         this.hotelService = hotelService;
     }
 
@@ -36,10 +36,18 @@ public class HotelController {
     public String findHotels(@ModelAttribute("searchFilter") SearchFilter searchFilter, BindingResult bindingResult,
                              Model model) {
         String place = searchFilter.getPlace();
-        List<String> places = new ArrayList<>(Arrays.asList(place.split("[, ]")));
-        List<Hotel> hotels = hotelService.findHotels(places);
-        model.addAttribute("hotels", hotels);
         model.addAttribute("places", hotelService.getPlaces());
+        if (place != null) {
+            List<String> places = new ArrayList<>(Arrays.asList(place.split("[, ]")));
+            List<Hotel> hotels = hotelService.findHotels(places);
+            if (hotels.isEmpty()){
+                model.addAttribute("message", "Nothing has been found. Please, try again!");
+                hotels = null;
+            }
+            model.addAttribute("hotels", hotels);
+        } else {
+            model.addAttribute("message", "Please, enter place for search!");
+        }
         return "search_page";
     }
 
