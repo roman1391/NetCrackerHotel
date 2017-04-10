@@ -19,7 +19,7 @@
                 <a class="nav-link" href="search-page">Search hotels</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Reviews</a>
+                <a class="nav-link" href="leave_review">Reviews</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="about">About</a>
