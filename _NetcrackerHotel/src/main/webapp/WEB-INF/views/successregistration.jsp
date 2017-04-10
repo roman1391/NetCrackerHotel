@@ -18,7 +18,7 @@
 		<div class="container">
 			<div class="jumbotron">
 				<c:if test="${success!=null}">
-					<div style="margin: 50px" class="alert alert-danger">
+					<div style="margin: 50px" class="alert alert-success">
 						${success}</div>
 				</c:if>
 			</div>

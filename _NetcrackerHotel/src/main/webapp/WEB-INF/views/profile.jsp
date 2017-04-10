@@ -29,23 +29,25 @@
 <%
     User user = User.getUser();
 %>
-<button onclick="onEditClick()">Edit</button>
-<div class="form-group">
-    <input id="email" value="<%=user.getEmail()%>"
+<div id ="wrapper">
+  <button onclick="onEditClick()">Edit</button>
+    <div class="form-group">
+       <input id="email" value="<%=user.getEmail()%>"
            class="editable form-control">
-    <input id="accessLevel" value="<%=user.getAccessLevel()%>"
+       <input id="accessLevel" value="<%=user.getAccessLevel()%>"
            class="editable form-control">
-    <input id="firstName" value="<%=user.getFirstName()%>"
+       <input id="firstName" value="<%=user.getFirstName()%>"
            class="editable form-control">
-    <input id="lastName" value="<%=user.getLastName()%>"
+       <input id="lastName" value="<%=user.getLastName()%>"
            class="editable form-control">
-</div>
-<button onclick="onSave()" class="save">Save</button>
+    </div>
+    <button onclick="onSave()" class="save">Save</button>
 
 
-<%@include file="../jsp_elements/_footer.jsp"%>
 
+    </div>
 </body>
+<%@include file="../jsp_elements/_footer.jsp"%>
 <script>
     var isEditable = true;
     function onEditClick() {
