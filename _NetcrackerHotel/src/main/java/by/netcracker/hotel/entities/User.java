@@ -40,6 +40,26 @@ public class User {
 
 	private int accessLevel;
 
+	private boolean enabled;
+
+	private String authority;
+
+	public boolean isEnabled(){
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
 	public int getId() {
 		return id;
 	}
