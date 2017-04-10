@@ -63,4 +63,8 @@ public class RouterController {
         return createModel("registration", authentication);
     }
 
+    @RequestMapping(value = "/leave_review", method = RequestMethod.GET)
+    public String leaveReview() {
+        return "leave_review";
+    }
 }

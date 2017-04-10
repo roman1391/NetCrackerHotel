@@ -34,17 +34,17 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     }
 
     @Override
-    public void add(Hotel entity) throws SQLException {
+    public void add(Hotel entity) {
 
     }
 
     @Override
-    public void deleteByID(Integer integer) throws SQLException {
+    public void deleteByID(Integer integer) {
 
     }
 
     @Override
-    public Hotel update(Hotel entity) throws SQLException {
+    public Hotel update(Hotel entity) {
         return null;
     }
 
@@ -59,7 +59,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     }
 
     @Override
-    public List<Hotel> getAll() throws SQLException {
+    public List<Hotel> getAll() {
         return null;
     }
 

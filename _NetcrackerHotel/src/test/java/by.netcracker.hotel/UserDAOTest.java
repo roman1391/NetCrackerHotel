@@ -23,7 +23,9 @@ import java.util.List;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/spring-test/root-context.xml", "/spring-test/mysql-datasource.xml", "/spring-test/servlet-context.xml"})
+@ContextConfiguration(locations = {"/spring-test/root-context.xml",
+                                   "/spring-test/mysql-datasource.xml",
+                                   "/spring-test/servlet-context.xml"})
 @WebAppConfiguration
 public class UserDAOTest {
 
@@ -47,7 +49,8 @@ public class UserDAOTest {
         if(passwordEncoder.matches(expected.getPassword(),actual.getPassword())){
             actual.setPassword(expected.getPassword());
         }
-        userDAO.deleteByUsername(actual.getUsername());
+        expected.setId(actual.getId());
+        userDAO.deleteByID(actual.getId());
         Assert.assertEquals(expected,actual);
     }
 
@@ -61,7 +64,7 @@ public class UserDAOTest {
 
     @Test
     public void testGetAll() throws Exception{
-        List<User> expected = new ArrayList<>();
+        List<User> expected = userDAO.getAll();
         int size = 10;
         for(int i = 0; i<size; i++){
             User user = EntityBuilder.buildUser("Test","Test","test"+i,
@@ -74,13 +77,14 @@ public class UserDAOTest {
         for (User user: actual) {
             if(passwordEncoder.matches(expected.get(i).getPassword(),user.getPassword())){
                 user.setPassword(expected.get(i).getPassword());
+                expected.set(i,user);
                 actual.set(i,user);
             }
             i++;
         }
         Assert.assertArrayEquals(expected.toArray(),actual.toArray());
         for (User user: actual) {
-            userDAO.deleteByUsername(user.getUsername());
+            userDAO.deleteByID(user.getId());
         }
     }
 }
