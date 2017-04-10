@@ -10,11 +10,12 @@ import java.sql.SQLException;
 /**
  * Created by slava on 10.04.17.
  */
-public class UserMapper implements RowMapper {
+public class UserMapper implements RowMapper<User> {
     @Override
     public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         User user = new User();
         int currentID  = resultSet.getInt(1);
+        user.setId(currentID);
         do {
             if(currentID != resultSet.getInt(1)){
                 resultSet.previous();

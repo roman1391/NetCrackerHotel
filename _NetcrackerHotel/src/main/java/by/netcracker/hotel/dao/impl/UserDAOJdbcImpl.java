@@ -40,31 +40,30 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public void add(User user) throws SQLException {
-		getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(),
-				new Object[]{TypeName.USER.name().toLowerCase()});
-		getJdbcTemplate().update(SqlQuery.ADD_USER.getQuery(),
-				new Object[]{user.getFirstName(), user.getLastName(),
-				user.getUsername(), passwordEncoder.encode(user.getPassword()),
-				user.getEmail()});
+	public void add(User user) {
+        getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(),
+                    TypeName.USER.name().toLowerCase());
+        getJdbcTemplate().update(SqlQuery.ADD_USER.getQuery(),user.getFirstName(), user.getLastName(),
+                            user.getUsername(), passwordEncoder.encode(user.getPassword()),
+                            user.getEmail());
+
 	}
 
 	@Override
-	public void deleteByID(Integer id) throws SQLException {
-        getJdbcTemplate().update(SqlQuery.DELETE_BY_ID.getQuery(),
-				                new Object[]{ColumnName.USER_ID});
+	public void deleteByID(Integer id) {
+        getJdbcTemplate().update(SqlQuery.DELETE_BY_ID.getQuery(), id);
 	}
 
 	@Override
-	public List<User> getAll() throws SQLException{
-		return (List<User>) getJdbcTemplate().query(SqlQuery.GET_ALL.getQuery(),
+	public List<User> getAll() {
+		return  getJdbcTemplate().query(SqlQuery.GET_ALL.getQuery(),
 				new Object[]{TypeName.USER.getType()},
-				new RowMapperResultSetExtractor(new UserMapper()) {
+				new RowMapperResultSetExtractor<User>(new UserMapper()) {
 				});
 	}
 
 	@Override
-	public User update(User type) throws SQLException {
+	public User update(User type) {
 
 		return null;
 	}
@@ -80,10 +79,10 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public User getByUsername(String username) throws SQLException {
+	public User getByUsername(String username) {
 		try {
 			User user = (User) getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),
-					new Object[] { ColumnName.USER_USERNAME, username }, new UserMapper());
+					          new Object[]{ColumnName.USER_USERNAME, username}, new UserMapper());
 			return user;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
@@ -91,19 +90,17 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public void deleteByUsername(String username) throws SQLException {
-		getJdbcTemplate().update(SqlQuery.DELETE_BY.getQuery(),
-				new Object[]{ColumnName.USER_USERNAME,username});
+	public void deleteByUsername(String username) {
+		getJdbcTemplate().update(SqlQuery.DELETE_BY.getQuery(), ColumnName.USER_USERNAME,username);
 	}
 
 	@Override
-	public void deleteByEmail(String email) throws SQLException {
-		getJdbcTemplate().update(SqlQuery.DELETE_BY.getQuery(),
-				new Object[]{ColumnName.USER_EMAIL,email});
+	public void deleteByEmail(String email) {
+		getJdbcTemplate().update(SqlQuery.DELETE_BY.getQuery(), ColumnName.USER_EMAIL,email);
 	}
 
 	@Override
-	public User getByEmail(String email) throws SQLException {
+	public User getByEmail(String email) {
 		try {
 			return (User) getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),
 					new Object[] { ColumnName.USER_EMAIL, email }, new UserMapper());

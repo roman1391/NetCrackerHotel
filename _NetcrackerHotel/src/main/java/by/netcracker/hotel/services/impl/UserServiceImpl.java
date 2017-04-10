@@ -33,41 +33,24 @@ public class UserServiceImpl implements UserService<User, Integer> {
         } else if (emailExist(user.getEmail())) {
             throw new EmailExistException("Account with email - " + user.getEmail() + " are exist");
         } else {
-            try {
-                userDAO.add(user);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            userDAO.add(user);
         }
     }
 
     @Override
     public List<User> getAll() {
-        try {
-            return (List<User>) userDAO.getAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return (List<User>) userDAO.getAll();
     }
 
     private boolean usernameExist(String username) {
         User user = null;
-        try {
-            user = userDAO.getByUsername(username);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        user = userDAO.getByUsername(username);
         return user != null;
     }
 
     private boolean emailExist(String email) {
         User user = null;
-        try {
-            user = userDAO.getByEmail(email);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        user = userDAO.getByEmail(email);
         return user != null;
     }
 }
