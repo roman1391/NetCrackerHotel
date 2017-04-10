@@ -86,8 +86,8 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	@Override
 	public User getByID(Integer id){
 		try {
-			return (User) getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
-					new UserMapper());
+			return  getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(),
+                    new Object[] { id }, new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}

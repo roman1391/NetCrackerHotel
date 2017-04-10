@@ -44,8 +44,8 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     }
 
     @Override
-    public Hotel update(Hotel entity) {
-        return null;
+    public void update(Hotel entity) {
+
     }
 
     @Override

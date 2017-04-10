@@ -47,7 +47,11 @@ public class UserMapper implements RowMapper<User> {
                     break;
                 }
                 case ColumnName.USER_ENABLED :{
-                    user.setEnabled(Boolean.parseBoolean(resultSet.getString(3)));
+                    if(Integer.parseInt(resultSet.getString(3))== 1){
+                        user.setEnabled(true);
+                    } else {
+                        user.setEnabled(false);
+                    }
                     break;
                 }
                 case ColumnName.USER_AUTHORITY :{

@@ -1,6 +1,7 @@
 package by.netcracker.hotel;
 
 import by.netcracker.hotel.dao.UserDAO;
+import by.netcracker.hotel.dao.constant.UserRole;
 import by.netcracker.hotel.dao.impl.UserDAOJdbcImpl;
 import by.netcracker.hotel.entities.EntityBuilder.EntityBuilder;
 import by.netcracker.hotel.entities.User;
@@ -39,7 +40,7 @@ public class UserDAOTest {
     public void setUp(){
         userDAO = (UserDAOJdbcImpl) context.getBean("UserDAOJdbcImpl");
         expected = EntityBuilder.buildUser("Test","Test","test",
-                "12345","test@gmail.com");
+                "12345","test@gmail.com",true, UserRole.ROLE_USER.getRole());
     }
 
     @Test
@@ -68,7 +69,7 @@ public class UserDAOTest {
         int size = 10;
         for(int i = 0; i<size; i++){
             User user = EntityBuilder.buildUser("Test","Test","test"+i,
-                    "12345","test@gmail.com");
+                    "12345","test@gmail.com",true, UserRole.ROLE_USER.getRole());
             expected.add(user);
             userDAO.add(user);
         }
@@ -82,9 +83,25 @@ public class UserDAOTest {
             }
             i++;
         }
-        Assert.assertArrayEquals(expected.toArray(),actual.toArray());
+          Assert.assertArrayEquals(expected.toArray(),actual.toArray());
         for (User user: actual) {
             userDAO.deleteByID(user.getId());
         }
+    }
+
+    @Test
+    public void testUpdate() throws Exception{
+        userDAO.add(expected);
+        expected = userDAO.getByUsername(expected.getUsername());
+        User changes = EntityBuilder.buildUser("update","update","update",
+                "123456","update@gmail.com",false, UserRole.ROLE_ADMIN.getRole());
+        changes.setId(expected.getId());
+        userDAO.update(changes);
+        User actual = userDAO.getByID(changes.getId());
+        if(passwordEncoder.matches(changes.getPassword(),actual.getPassword())){
+            actual.setPassword(changes.getPassword());
+        }
+        userDAO.deleteByID(actual.getId());
+        Assert.assertEquals(changes,actual);
     }
 }
