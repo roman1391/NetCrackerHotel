@@ -138,7 +138,7 @@ CREATE TABLE `value` (
 
 LOCK TABLES `value` WRITE;
 /*!40000 ALTER TABLE `value` DISABLE KEYS */;
-INSERT INTO `value` VALUES (11,6,6,'belarus'),(12,6,7,'minsk'),(13,6,8,'prospekt10'),(14,6,9,'5'),(21,7,10,'1000'),(22,7,11,'2'),(23,7,12,'6'),(254,50,1,'roma'),(255,50,2,'rodevich'),(256,50,3,'admin'),(257,50,4,'$2a$11$Z30CWyK5OxD9VqknNWaSfu79V/K.7AJTEhOkJOGoyEnUfZHQH8GK2'),(258,50,22,'admin@gmail.com'),(259,50,5,'1'),(260,50,24,'ROLE_ADMIN'),(261,50,23,'1'),(262,51,1,'firstnameless'),(263,51,2,'lastnameless'),(264,51,3,'user'),(265,51,4,'$2a$11$6nPdjxJjLxJRZnlHkPaCcOwpVxVYy4RdjfJ2SA.dRWAHJdV6AIwYy'),(266,51,22,'user@gmail.com'),(267,51,5,'1'),(268,51,24,'ROLE_USER'),(269,51,23,'1'),(270,6,25,'Hotel1'),(271,6,26,'Some info about hotel');
+INSERT INTO `value` VALUES (11,6,6,'belarus'),(12,6,7,'minsk'),(13,6,8,'prospekt10'),(14,6,9,'5'),(21,7,10,'1000'),(22,7,11,'2'),(23,7,12,'6'),(254,50,1,'roma'),(255,50,2,'rodevich'),(256,50,3,'admin'),(257,50,4,'$2a$11$Z30CWyK5OxD9VqknNWaSfu79V/K.7AJTEhOkJOGoyEnUfZHQH8GK2'),(258,50,22,'admin@gmail.com'),(259,50,5,'1'),(260,50,24,'ADMIN'),(261,50,23,'1'),(262,51,1,'firstnameless'),(263,51,2,'lastnameless'),(264,51,3,'user'),(265,51,4,'$2a$11$6nPdjxJjLxJRZnlHkPaCcOwpVxVYy4RdjfJ2SA.dRWAHJdV6AIwYy'),(266,51,22,'user@gmail.com'),(267,51,5,'1'),(268,51,24,'USER'),(269,51,23,'1'),(270,6,25,'Hotel1'),(271,6,26,'Some info about hotel');
 /*!40000 ALTER TABLE `value` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
