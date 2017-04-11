@@ -40,7 +40,7 @@ public class UserDAOTest {
     public void setUp(){
         userDAO = (UserDAOJdbcImpl) context.getBean("UserDAOJdbcImpl");
         expected = EntityBuilder.buildUser("Test","Test","test",
-                "12345","test@gmail.com",true, UserRole.ROLE_USER.getRole());
+                "12345","test@gmail.com",true, UserRole.USER.getRole());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class UserDAOTest {
         int size = 10;
         for(int i = 0; i<size; i++){
             User user = EntityBuilder.buildUser("Test","Test","test"+i,
-                    "12345","test@gmail.com",true, UserRole.ROLE_USER.getRole());
+                    "12345","test@gmail.com",true, UserRole.USER.getRole());
             expected.add(user);
             userDAO.add(user);
         }
@@ -94,7 +94,7 @@ public class UserDAOTest {
         userDAO.add(expected);
         expected = userDAO.getByUsername(expected.getUsername());
         User changes = EntityBuilder.buildUser("update","update","update",
-                "123456","update@gmail.com",false, UserRole.ROLE_ADMIN.getRole());
+                "123456","update@gmail.com",false, UserRole.ADMIN.getRole());
         changes.setId(expected.getId());
         userDAO.update(changes);
         User actual = userDAO.getByID(changes.getId());
