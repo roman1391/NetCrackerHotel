@@ -19,13 +19,16 @@
         </port-mappings> -->
 
         <intercept-url pattern="/user_page" access="hasRole('USER')"/>
+        <intercept-url pattern="/profile" access="isAuthenticated()"/>
         <intercept-url pattern="/admin_page" access="hasRole('ADMIN')"/>
+        <intercept-url pattern="/list_of_users" access="hasRole('ADMIN')"/>
+        <intercept-url pattern="/add_hotel" access="hasRole('ADMIN')"/>
 
-        <form-login login-page='/home'
+        <form-login login-page='/login_page'
                     authentication-success-handler-ref="SuccessLoginHandler"
-                    authentication-failure-url="/home?error=true"
+                    authentication-failure-url="/login?error=true"
                     username-parameter="user_login"
-                    password-parameter="password_login"/>
+                    password-parameter="user_password"/>
 
 
         <logout logout-success-url="/home"/>
