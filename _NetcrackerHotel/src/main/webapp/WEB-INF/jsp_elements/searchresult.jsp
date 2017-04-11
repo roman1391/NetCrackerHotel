@@ -4,7 +4,7 @@
     <c:if test="${not empty hotels}">
 
         <c:forEach var="listValue" items="${hotels}">
-            <a class="row list-group-item" href = "hotel/${listValue.hotelID}">
+            <div class="row list-group-item">
                 <div class="col-4">
                     <img src="<c:url value="/resources/img/${listValue.imagePath}"/>" class="rounded"
                          alt="${listValue.name}"
@@ -23,7 +23,7 @@
                             ${listValue.typeOfService}
                     </p>
                 </div>
-            </a>
+            </div>
         </c:forEach>
 
     </c:if>
