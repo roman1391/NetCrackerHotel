@@ -20,11 +20,11 @@ import java.util.List;
 import static by.netcracker.hotel.util.ModelUtil.createModel;
 
 @Controller
-public class HotelController {
+public class SearchHotelController {
     private final HotelService hotelService;
 
     @Autowired
-    public HotelController(HotelService hotelService) {
+    public SearchHotelController(HotelService hotelService) {
         this.hotelService = hotelService;
     }
 

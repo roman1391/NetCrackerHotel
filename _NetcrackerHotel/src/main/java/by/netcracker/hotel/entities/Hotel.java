@@ -10,6 +10,7 @@ public class Hotel {
     private String name;
     private int typeOfService;
     private String imagePath;
+    private String description;
 
     public Hotel(){}
 
@@ -20,6 +21,14 @@ public class Hotel {
         this.name = name;
         this.typeOfService = typeOfService;
         this.imagePath = imagePath;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCountry() {
