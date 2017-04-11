@@ -17,4 +17,6 @@ public interface UserDAO extends AbstractDAO<User, Integer> {
     void deleteByUsername(String username);
 
     void deleteByEmail(String email);
+
+    void updateByFields(String field, String value);
 }

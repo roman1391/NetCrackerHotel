@@ -10,6 +10,7 @@ import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -63,16 +64,30 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public User update(User type) {
-
-		return null;
+	public void update(User user) {
+        getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(),
+                          user.getFirstName(),ColumnName.USER_FIRST_NAME,user.getId());
+        getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(),
+                user.getLastName(),ColumnName.USER_LAST_NAME,user.getId());
+        getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(),
+                user.getUsername(),ColumnName.USER_USERNAME,user.getId());
+        getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(),
+                user.getEmail(),ColumnName.USER_EMAIL,user.getId());
+        getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(),
+                passwordEncoder.encode(user.getPassword()),ColumnName.USER_PASSWORD,user.getId());
+        getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(),
+                user.getAccessLevel(),ColumnName.USER_ACCESS_LEVEL,user.getId());
+        getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(),
+                user.getAuthority(),ColumnName.USER_AUTHORITY,user.getId());
+        getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(),
+                user.isEnabled(),ColumnName.USER_ENABLED,user.getId());
 	}
 
 	@Override
 	public User getByID(Integer id){
 		try {
-			return (User) getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
-					new UserMapper());
+			return  getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(),
+                    new Object[] { id }, new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -99,7 +114,12 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
 		getJdbcTemplate().update(SqlQuery.DELETE_BY.getQuery(), ColumnName.USER_EMAIL,email);
 	}
 
-	@Override
+    @Override
+    public void updateByFields(String field, String value) {
+
+    }
+
+    @Override
 	public User getByEmail(String email) {
 		try {
 			return (User) getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),

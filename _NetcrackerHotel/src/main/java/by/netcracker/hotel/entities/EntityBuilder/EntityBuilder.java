@@ -8,7 +8,8 @@ import by.netcracker.hotel.entities.User;
 public class EntityBuilder {
 
     public static User buildUser(String firstName, String lastName,
-                                 String username,String password, String email){
+                                 String username,String password, String email,
+                                 boolean enabled,String authority){
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -16,6 +17,8 @@ public class EntityBuilder {
         user.setEmail(email);
         user.setPassword(password);
         user.setAccessLevel(1);
+        user.setEnabled(enabled);
+        user.setAuthority(authority);
         return user;
     }
 }

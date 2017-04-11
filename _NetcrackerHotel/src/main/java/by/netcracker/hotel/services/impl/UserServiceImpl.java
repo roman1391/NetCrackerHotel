@@ -55,11 +55,7 @@ public class UserServiceImpl implements UserService<User, Integer> {
 
     @Override
     public User getUserByUsername(String username) {
-        try {
-            return userDAO.getByUsername(username);
-        } catch (SQLException e) {
-            return null;
-        }
+        return userDAO.getByUsername(username);
     }
 
     @Override

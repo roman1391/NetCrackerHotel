@@ -16,7 +16,6 @@
     <div class="content">
         <%@include file="../jsp_elements/reviewform.jsp"%>
     </div>
-    <%@include file="../jsp_elements/_footer.jsp"%>
 </div>
 <%@include file="../jsp_elements/_footer.jsp"%>
 </body>

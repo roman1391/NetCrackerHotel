@@ -18,7 +18,7 @@
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
     <link href="<c:url value ="/resources/jquery-ui-1.12.1.custom/jquery-ui.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css" />" rel="stylesheet">
-    <link href="<c:url value="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>" rel="stylesheet"/>
+    <link href="<c:url value="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>" rel="stylesheet"/>
 </head>
 <body>
 <%@include file="../jsp_elements/_header.jsp" %>
@@ -27,7 +27,7 @@
     <%@include file="../jsp_elements/searchresult.jsp"%>
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 </div>
 <%@include file="../jsp_elements/_footer.jsp" %>
 </body>
