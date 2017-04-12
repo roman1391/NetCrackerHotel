@@ -31,6 +31,9 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
 		Object info = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (info instanceof String) {
 			System.out.println("userInfo: " + info);
+			user = new User();
+			user.setUsername("GUEST");
+			user.setAuthority("GUEST");
 		} else if (info instanceof UserDetails) {
 			UserDetails userDetails = (UserDetails) info;
 			user = (User) userService.getUserByUsername(userDetails.getUsername());
@@ -39,12 +42,12 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
 			System.out.println("userInfo:");
 			System.out.println("Username - " + userDetails.getUsername());
 			System.out.println("Authority - " + auth);
-			modelAndView.addObject("currentUser", user);
 			if (auth.equals("BLOCKED")) {
 				isBlocked = true;
 				modelAndView.addObject("blocked_user", isBlocked);
 				modelAndView.setViewName("home");
 			}
 		}
+		modelAndView.addObject("currentUser", user);
 	}
 }
