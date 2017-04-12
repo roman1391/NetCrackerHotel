@@ -2,6 +2,7 @@ package by.netcracker.hotel.mapper;
 
 import by.netcracker.hotel.dao.constant.ColumnName;
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.enums.ROLE;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -14,10 +15,10 @@ public class UserMapper implements RowMapper<User> {
     @Override
     public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         User user = new User();
-        int currentID  = resultSet.getInt(1);
+        int currentID = resultSet.getInt(1);
         user.setId(currentID);
         do {
-            if(currentID != resultSet.getInt(1)){
+            if (currentID != resultSet.getInt(1)) {
                 resultSet.previous();
                 break;
             }
@@ -46,16 +47,16 @@ public class UserMapper implements RowMapper<User> {
                     user.setAccessLevel(Integer.parseInt(resultSet.getString(3)));
                     break;
                 }
-                case ColumnName.USER_ENABLED :{
-                    if(Integer.parseInt(resultSet.getString(3))== 1){
+                case ColumnName.USER_ENABLED: {
+                    if (Integer.parseInt(resultSet.getString(3)) == 1) {
                         user.setEnabled(true);
                     } else {
                         user.setEnabled(false);
                     }
                     break;
                 }
-                case ColumnName.USER_AUTHORITY :{
-                    user.setAuthority(resultSet.getString(3));
+                case ColumnName.USER_AUTHORITY: {
+                    user.setAuthority(ROLE.valueOf(resultSet.getString(3)));
                     break;
                 }
             }

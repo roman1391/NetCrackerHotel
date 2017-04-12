@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <nav class="navbar navbar-fixed-top navbar-toggleable-md navbar-light bg-faded">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -13,15 +13,15 @@
             <li class="nav-item active">
                 <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
             </li>
-             <c:if test="${currentUser.authority eq 'ADMIN'}">
-            <li class="nav-item">
-                <a class="nav-link" href="admin_page">Admin page</a>
-            </li>
+            <c:if test="${currentUser.authority.toString() eq 'ADMIN'}">
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_page">Admin page</a>
+                </li>
             </c:if>
-            <c:if test="${currentUser.authority ne 'GUEST'}">
-            <li class="nav-item">
-                <a class="nav-link" href="profile">Profile</a>
-            </li>
+            <c:if test="${currentUser.authority.toString() ne 'GUEST'}">
+                <li class="nav-item">
+                    <a class="nav-link" href="profile">Profile</a>
+                </li>
             </c:if>
             <li class="nav-item">
                 <a class="nav-link " href="#">Hotels</a>
@@ -36,19 +36,19 @@
                 <a class="nav-link" href="about">About</a>
             </li>
             <c:choose>
-            <c:when test="${currentUser.authority eq 'GUEST'}">
-            <li class="nav-item">
-                <a class="nav-link" href="login">Log in</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="registration">Sign up</a>
-            </li>
-            </c:when>
-            <c:when test="${currentUser.authority ne 'GUEST'}">
-            <li class="nav-item">
-                <a class="nav-link" href="j_spring_security_logout">Log out</a>
-            </li>
-            </c:when>
+                <c:when test="${currentUser.authority.toString() eq 'GUEST'}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registration">Sign up</a>
+                    </li>
+                </c:when>
+                <c:when test="${currentUser.authority.toString() ne 'GUEST'}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="j_spring_security_logout">Log out</a>
+                    </li>
+                </c:when>
             </c:choose>
         </ul>
         <form class="form-inline my-2 my-lg-0">

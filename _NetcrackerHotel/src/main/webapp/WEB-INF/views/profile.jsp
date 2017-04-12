@@ -1,4 +1,5 @@
-<%@ page import="by.netcracker.hotel.entities.User" %><%--
+<%@ page import="org.codehaus.jackson.map.ObjectMapper" %>
+<%--
   Created by IntelliJ IDEA.
   User: Alexander
   Date: 05.04.2017
@@ -25,22 +26,22 @@
 </head>
 
 <body>
-
 <%
-    User user = (User) request.getAttribute("user");
+    ObjectMapper mapper = new ObjectMapper();
+    Object user = request.getAttribute("user");
 %>
 
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <button onclick="onEditClick()" class="edit-btn">Edit</button>
     <div>
-        <input id="email" value="<%=user.getEmail()%>"
+        <input id="email" value="${user.email}"
                class="editable">
-        <input id="accessLevel" value="<%=user.getAccessLevel()%>"
+        <input id="accessLevel" value="${user.accessLevel}"
                class="editable">
-        <input id="firstName" value="<%=user.getFirstName()%>"
+        <input id="firstName" value="${user.firstName}"
                class="editable">
-        <input id="lastName" value="<%=user.getLastName()%>"
+        <input id="lastName" value="${user.lastName}"
                class="editable">
     </div>
     <button onclick="onSave()" class="save-btn">Save</button>
@@ -66,7 +67,7 @@
 
     function onSave() {
         var userDTO = {};
-        userDTO.id = <%=user.getId()%>
+        userDTO = <%=mapper.writeValueAsString(user)%>
             $('input.editable').each(function (index, data) {
                 userDTO[data.id] = data.value;
             });

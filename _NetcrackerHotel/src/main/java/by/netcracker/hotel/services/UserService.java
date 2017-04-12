@@ -19,10 +19,6 @@ public interface UserService<User, Integer> extends AbstractService<User, Intege
 
 	User getUserByUsername(String username);
 
-	UserDTO convert(User user);
-
-	User convert(UserDTO user);
-
 	boolean update(UserDTO dto);
 
 	void blockUser(User user);

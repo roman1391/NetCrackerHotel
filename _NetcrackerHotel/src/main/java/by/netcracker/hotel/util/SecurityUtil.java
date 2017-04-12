@@ -12,14 +12,12 @@ import java.util.Set;
 public class SecurityUtil {
 
     public static ROLE getRole(Authentication authentication) {
-        ROLE role;
-        if (authentication == null) {
-            role = ROLE.GUEST;
-        } else {
+        try {
             Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-            role = ROLE.valueOf(roles.iterator().next());
+            return ROLE.valueOf(roles.iterator().next());
+        } catch (Exception e) {
+            return ROLE.GUEST;
         }
-        return role;
     }
 
 }

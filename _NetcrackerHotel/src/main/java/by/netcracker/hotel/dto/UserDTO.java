@@ -1,9 +1,12 @@
 package by.netcracker.hotel.dto;
 
+import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.enums.ROLE;
+
 /**
  * Created by Alexander on 06.04.2017.
  */
-public class UserDTO {
+public class UserDTO implements DTO{
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -11,7 +14,7 @@ public class UserDTO {
 	private String password;
 	private String email;
 	private boolean enabled;
-	private String authority;
+	private ROLE authority;
 	private int accessLevel;
 
 	public int getId() {
@@ -78,12 +81,29 @@ public class UserDTO {
 		this.enabled = enabled;
 	}
 
-	public String getAuthority() {
+	public ROLE getAuthority() {
 		return authority;
 	}
 
-	public void setAuthority(String authority) {
+	public void setAuthority(ROLE authority) {
 		this.authority = authority;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public User toObject() {
+		User user = new User();
+		user.setId(getId());
+		user.setUsername(getUsername());
+		user.setFirstName(getFirstName());
+		user.setLastName(getLastName());
+		user.setEmail(getEmail());
+		user.setAccessLevel(getAccessLevel());
+		user.setEnabled(getEnabled());
+		user.setAuthority(getAuthority());
+		return user;
+	}
 }

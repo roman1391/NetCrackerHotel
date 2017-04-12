@@ -5,6 +5,7 @@ import by.netcracker.hotel.dao.constant.UserRole;
 import by.netcracker.hotel.dao.impl.UserDAOJdbcImpl;
 import by.netcracker.hotel.entities.EntityBuilder.EntityBuilder;
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.enums.ROLE;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +41,7 @@ public class UserDAOTest {
     public void setUp(){
         userDAO = (UserDAOJdbcImpl) context.getBean("UserDAOJdbcImpl");
         expected = EntityBuilder.buildUser("Test","Test","test",
-                "12345","test@gmail.com",true, UserRole.USER.getRole());
+                "12345","test@gmail.com",true, ROLE.USER);
     }
 
     @Test
@@ -69,7 +70,7 @@ public class UserDAOTest {
         int size = 10;
         for(int i = 0; i<size; i++){
             User user = EntityBuilder.buildUser("Test","Test","test"+i,
-                    "12345","test@gmail.com",true, UserRole.USER.getRole());
+                    "12345","test@gmail.com",true, ROLE.USER);
             expected.add(user);
             userDAO.add(user);
         }
@@ -94,7 +95,7 @@ public class UserDAOTest {
         userDAO.add(expected);
         expected = userDAO.getByUsername(expected.getUsername());
         User changes = EntityBuilder.buildUser("update","update","update",
-                "123456","update@gmail.com",false, UserRole.ADMIN.getRole());
+                "123456","update@gmail.com",false, ROLE.ADMIN);
         changes.setId(expected.getId());
         userDAO.update(changes);
         User actual = userDAO.getByID(changes.getId());

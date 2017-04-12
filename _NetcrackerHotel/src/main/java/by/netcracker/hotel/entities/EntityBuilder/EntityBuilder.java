@@ -1,6 +1,7 @@
 package by.netcracker.hotel.entities.EntityBuilder;
 
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.enums.ROLE;
 
 /**
  * Created by slava on 09.04.17.
@@ -8,8 +9,8 @@ import by.netcracker.hotel.entities.User;
 public class EntityBuilder {
 
     public static User buildUser(String firstName, String lastName,
-                                 String username,String password, String email,
-                                 boolean enabled,String authority){
+                                 String username, String password, String email,
+                                 boolean enabled, ROLE authority) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);

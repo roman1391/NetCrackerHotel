@@ -1,5 +1,6 @@
+<%@ page import="org.codehaus.jackson.map.ObjectMapper" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="false"%>
@@ -13,7 +14,10 @@
 	rel="stylesheet">
 
 </head>
-
+<%
+	ObjectMapper mapper = new ObjectMapper();
+	Object user = request.getAttribute("user");
+%>
 <body>
 	<%@include file="../jsp_elements/_header.jsp"%>
 	<div id="wrapper">
@@ -83,7 +87,7 @@
 
 	function onSave() {
 		var userDTO = {};
-		userDTO.id = ${user.id};
+		userDTO = <%=mapper.writeValueAsString(user)%>;
 		$('input.editable').each(function(index, data) {
 			userDTO[data.id] = data.value;
 		});
