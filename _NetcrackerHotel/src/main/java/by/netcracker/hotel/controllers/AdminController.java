@@ -6,8 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,12 +30,6 @@ public class AdminController {
 	public String getAllUsers(Model model) {
 		model.addAttribute("users", userService.getAll());
 		model.addAttribute("user", new User());
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		// System.out.println(userDetails.getUsername());
-		// System.out.println(userDetails.getPassword());
-		// String auth =
-		// Arrays.asList(userDetails.getAuthorities().toArray()).get(0).toString();
-		// System.out.println(auth);
 		return "list_of_users";
 	}
 
