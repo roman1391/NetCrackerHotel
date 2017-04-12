@@ -1,7 +1,4 @@
-<%@ page import="by.netcracker.hotel.enums.ROLE" %>
-<%
-    ROLE role = (ROLE) request.getAttribute("role");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <nav class="navbar navbar-fixed-top navbar-toggleable-md navbar-light bg-faded">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -16,11 +13,16 @@
             <li class="nav-item active">
                 <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
             </li>
-            <% if (role != ROLE.GUEST) {%>
+             <c:if test="${currentUser.authority eq 'ADMIN'}">
+            <li class="nav-item">
+                <a class="nav-link" href="admin_page">Admin page</a>
+            </li>
+            </c:if>
+            <c:if test="${currentUser.authority ne 'GUEST'}">
             <li class="nav-item">
                 <a class="nav-link" href="profile">Profile</a>
             </li>
-            <%}%>
+            </c:if>
             <li class="nav-item">
                 <a class="nav-link " href="#">Hotels</a>
             </li>
@@ -33,18 +35,21 @@
             <li class="nav-item">
                 <a class="nav-link" href="about">About</a>
             </li>
-            <% if (role == ROLE.GUEST) {%>
+            <c:choose>
+            <c:when test="${currentUser.authority eq 'GUEST'}">
             <li class="nav-item">
                 <a class="nav-link" href="login">Log in</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="registration">Sign up</a>
             </li>
-            <%} else {%>
+            </c:when>
+            <c:when test="${currentUser.authority ne 'GUEST'}">
             <li class="nav-item">
                 <a class="nav-link" href="j_spring_security_logout">Log out</a>
             </li>
-            <%}%>
+            </c:when>
+            </c:choose>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
