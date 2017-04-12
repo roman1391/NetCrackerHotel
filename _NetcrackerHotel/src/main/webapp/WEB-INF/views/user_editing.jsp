@@ -50,10 +50,10 @@
 									</tr>
 								</table>
 								<button onclick="onEditClick()" class="edit-btn">Edit</button>
-								<button onclick="onSave(1)" class="save-btn">Save</button>
+								<button onclick="onSave()" class="save-btn">Save</button>
 								<button onclick="onCancel()" class="cancel-btn">Cancel</button>
 							</div>
-
+							<a href="admin_page">Back to admin page</a>
 						</div>
 					</div>
 				</div>

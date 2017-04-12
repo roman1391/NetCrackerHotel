@@ -1,13 +1,13 @@
 package by.netcracker.hotel.entities;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.Objects;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class User {
 
-	public static User getUser(){
+	public static User getUser() {
 		User user = new User();
 		user.setId(1);
 		user.setEmail("sdfsdf@df.ru");
@@ -44,7 +44,7 @@ public class User {
 
 	private String authority;
 
-	public boolean isEnabled(){
+	public boolean getEnabled() {
 		return enabled;
 	}
 
@@ -118,21 +118,22 @@ public class User {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		User user = (User) o;
-		return getId() == user.getId() &&
-				getAccessLevel() == user.getAccessLevel() &&
-				Objects.equals(getFirstName(), user.getFirstName()) &&
-				Objects.equals(getLastName(), user.getLastName()) &&
-				Objects.equals(getUsername(), user.getUsername()) &&
-				Objects.equals(getPassword(), user.getPassword()) &&
-				Objects.equals(getEmail(), user.getEmail());
+		return getId() == user.getId() && getAccessLevel() == user.getAccessLevel()
+				&& Objects.equals(getFirstName(), user.getFirstName())
+				&& Objects.equals(getLastName(), user.getLastName())
+				&& Objects.equals(getUsername(), user.getUsername())
+				&& Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getEmail(), user.getEmail());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getId(), getFirstName(), getLastName(), getUsername(), getPassword(), getEmail(), getAccessLevel());
+		return Objects.hash(getId(), getFirstName(), getLastName(), getUsername(), getPassword(), getEmail(),
+				getAccessLevel());
 	}
 
 }
