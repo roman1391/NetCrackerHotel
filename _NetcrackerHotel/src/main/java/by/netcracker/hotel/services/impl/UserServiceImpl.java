@@ -103,4 +103,11 @@ public class UserServiceImpl implements UserService<User, Integer> {
 		update(convert(user));
 	}
 
+	@Override
+	public void unblockUser(User user) {
+		user = getUserByUsername(user.getUsername());
+		user.setAuthority("USER");
+		update(convert(user));
+	}
+
 }

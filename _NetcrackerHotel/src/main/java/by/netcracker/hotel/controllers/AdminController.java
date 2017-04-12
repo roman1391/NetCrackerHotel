@@ -48,6 +48,14 @@ public class AdminController {
 		return "list_of_users";
 	}
 
+	@RequestMapping(value = "/unblock_user", method = RequestMethod.POST)
+	public String unblockUser(@Valid @ModelAttribute("user") User user, Model model) {
+		userService.unblockUser(user);
+		model.addAttribute("users", userService.getAll());
+		model.addAttribute("user", new User());
+		return "list_of_users";
+	}
+
 	@RequestMapping(value = "/add_hotel", method = RequestMethod.GET)
 	public ModelAndView about(Model model, Authentication authentication) {
 		model.addAttribute("hotel", new Hotel());

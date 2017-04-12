@@ -26,4 +26,6 @@ public interface UserService<User, Integer> extends AbstractService<User, Intege
 	boolean update(UserDTO dto);
 
 	void blockUser(User user);
+
+	void unblockUser(User user);
 }
