@@ -15,25 +15,25 @@ public class HotelMapper implements RowMapper<Hotel> {
     public Hotel mapRow(ResultSet resultSet, int i) throws SQLException {
         Hotel hotel = new Hotel();
         do {
-            switch (resultSet.getString(1)){
-                case ColumnName.COUNTRY :{
-                    hotel.setCountry(resultSet.getString(2));
+            switch (resultSet.getString(2)) {
+                case ColumnName.COUNTRY: {
+                    hotel.setCountry(resultSet.getString(3));
                     break;
                 }
-                case ColumnName.CITY :{
-                    hotel.setCity(resultSet.getString(2));
+                case ColumnName.CITY: {
+                    hotel.setCity(resultSet.getString(3));
                     break;
                 }
-                case ColumnName.ADDRESS :{
-                    hotel.setAddress(resultSet.getString(2));
+                case ColumnName.ADDRESS: {
+                    hotel.setAddress(resultSet.getString(3));
                     break;
                 }
-                case ColumnName.HOTEL_NAME :{
-                    hotel.setName(resultSet.getString(2));
+                case ColumnName.HOTEL_NAME: {
+                    hotel.setName(resultSet.getString(3));
                     break;
                 }
-                case ColumnName.CLASS : {
-                    hotel.setTypeOfService(resultSet.getInt(2));
+                case ColumnName.CLASS: {
+                    hotel.setTypeOfService(resultSet.getInt(3));
                     break;
                 }
             }

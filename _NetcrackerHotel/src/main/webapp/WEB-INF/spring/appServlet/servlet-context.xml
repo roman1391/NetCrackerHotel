@@ -29,7 +29,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/*" />
-			<beans:bean class="by.netcracker.hotel.interceptors.CheckAccessInterceptor" />
+			<beans:bean class="by.netcracker.hotel.interceptors.CheckAuthorityInterceptor" />
 		</interceptor>
 	</interceptors>
 

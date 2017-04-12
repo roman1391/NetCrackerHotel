@@ -46,7 +46,6 @@ public class RegistrationController {
 			return "registration";
 		}
 		model.addAttribute("success", "You have successfully registered in system");
-
 		return "successregistration";
 	}
 }

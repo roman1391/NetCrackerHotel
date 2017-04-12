@@ -1,4 +1,5 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:if test="${not empty error}">
 	${error}
@@ -9,7 +10,7 @@
                     placeholder="Username" required="required" />
     </div>
     <div class="form-group">
-        <input  type="password" name="password_login" id="password" class="form-control"
+        <input  type="password" name="user_password" id="password" class="form-control"
                     placeholder="Password" required="required" />
     </div>
     <div class="form-group">
