@@ -23,6 +23,7 @@
 								Profile was blocked!</div>
 						</c:if>
 						<h1>Hello Netcrackers</h1>
+						<h3>Current user - ${currentUser.username } </h3><br>
 						login admin <br> password 123 <br> login user <br>
 						password 1234 <br>
 					</div>
