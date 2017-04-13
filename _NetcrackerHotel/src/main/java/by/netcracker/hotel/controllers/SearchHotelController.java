@@ -1,23 +1,19 @@
 package by.netcracker.hotel.controllers;
 
-import by.netcracker.hotel.entities.Hotel;
-import by.netcracker.hotel.filter.SearchFilter;
-import by.netcracker.hotel.services.HotelService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static by.netcracker.hotel.util.ModelUtil.createModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import by.netcracker.hotel.entities.Hotel;
+import by.netcracker.hotel.filter.SearchFilter;
+import by.netcracker.hotel.services.HotelService;
 
 @Controller
 public class SearchHotelController {
@@ -29,15 +25,14 @@ public class SearchHotelController {
     }
 
     @RequestMapping(value = "search-page", method = RequestMethod.GET)
-    public ModelAndView getSearchPage(Model model, Authentication authentication) {
+    public String getSearchPage(Model model) {
         model.addAttribute("searchFilter", new SearchFilter());
         model.addAttribute("places", hotelService.getPlaces());
-        return createModel("search_page", authentication);
+        return "search_page";
     }
 
     @RequestMapping(value = "find-hotels", method = RequestMethod.POST)
-    public ModelAndView findHotels(@ModelAttribute("searchFilter") SearchFilter searchFilter, BindingResult bindingResult,
-                                   Model model, Authentication authentication) {
+    public String findHotels(@ModelAttribute("searchFilter") SearchFilter searchFilter, Model model) {
         String place = searchFilter.getPlace();
         model.addAttribute("places", hotelService.getPlaces());
         if (place != null) {
@@ -51,7 +46,7 @@ public class SearchHotelController {
         } else {
             model.addAttribute("message", "Please, enter place for search!");
         }
-        return createModel("search_page", authentication);
+        return "search_page";
     }
 
 }
