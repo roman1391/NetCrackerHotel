@@ -2,6 +2,8 @@ package by.netcracker.hotel.controllers;
 
 import static by.netcracker.hotel.util.ModelUtil.createModel;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +42,12 @@ public class AdminController {
 		return "user_editing";
 	}
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/block_user", method = RequestMethod.POST)
 	public String blockUser(@Valid @ModelAttribute("user") User user, Model model) {
 		userService.blockUser(user);
 		model.addAttribute("users", userService.getAll());
+		List<User> l = userService.getAll();
 		model.addAttribute("user", new User());
 		return "list_of_users";
 	}

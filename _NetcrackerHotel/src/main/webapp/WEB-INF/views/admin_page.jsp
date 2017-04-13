@@ -20,7 +20,7 @@
             <a href="j_spring_security_logout">Logout</a>
             <div class="col-xs-12 col-sm-9">
                 <div class="jumbotron">
-                    <h1>Hello Netcrackers</h1>
+                    <h2>Admin page</h2>
                     <p>
                         <a href="list_of_users">Get list of users</a>
                     </p>

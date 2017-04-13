@@ -28,20 +28,19 @@
 <body>
 <%
     ObjectMapper mapper = new ObjectMapper();
-    Object user = request.getAttribute("user");
 %>
 
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <button onclick="onEditClick()" class="edit-btn">Edit</button>
     <div>
-        <input id="email" value="${user.email}"
+        <input id="email" value="${currentUser.email}"
                class="editable">
-        <input id="accessLevel" value="${user.accessLevel}"
+        <input id="accessLevel" value="${currentUser.accessLevel}"
                class="editable">
-        <input id="firstName" value="${user.firstName}"
+        <input id="firstName" value="${currentUser.firstName}"
                class="editable">
-        <input id="lastName" value="${user.lastName}"
+        <input id="lastName" value="${currentUser.lastName}"
                class="editable">
     </div>
     <button onclick="onSave()" class="save-btn">Save</button>
@@ -67,7 +66,7 @@
 
     function onSave() {
         var userDTO = {};
-        userDTO = <%=mapper.writeValueAsString(user)%>
+        userDTO.id = ${currentUser.id};
             $('input.editable').each(function (index, data) {
                 userDTO[data.id] = data.value;
             });

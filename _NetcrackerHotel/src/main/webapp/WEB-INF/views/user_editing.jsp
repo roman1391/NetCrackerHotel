@@ -14,10 +14,7 @@
 	rel="stylesheet">
 
 </head>
-<%
-	ObjectMapper mapper = new ObjectMapper();
-	Object user = request.getAttribute("user");
-%>
+
 <body>
 	<%@include file="../jsp_elements/_header.jsp"%>
 	<div id="wrapper">
@@ -87,7 +84,7 @@
 
 	function onSave() {
 		var userDTO = {};
-		userDTO = <%=mapper.writeValueAsString(user)%>;
+		userDTO.id = ${user.id};
 		$('input.editable').each(function(index, data) {
 			userDTO[data.id] = data.value;
 		});
