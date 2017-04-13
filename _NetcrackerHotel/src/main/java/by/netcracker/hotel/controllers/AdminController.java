@@ -40,7 +40,6 @@ public class AdminController {
 		return "user_editing";
 	}
 
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/block_user", method = RequestMethod.POST)
 	public String blockUser(@Valid @ModelAttribute("user") User user, Model model) {
 		userService.blockUser(user);
