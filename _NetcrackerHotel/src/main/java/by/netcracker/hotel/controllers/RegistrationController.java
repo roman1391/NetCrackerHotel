@@ -75,15 +75,15 @@ public class RegistrationController {
         if (verificationToken == null) {
             String message = messages.getMessage("auth.message.invalidToken", null, locale);
             model.addAttribute("message", message);
-            return new ModelAndView();
+            return new ModelAndView("badUser?lang="+ locale.getLanguage());
         }
 
-        User user = verificationToken.getUser();
+        User user = (User) userService.getByID(verificationToken.getUserID());
         Calendar cal = Calendar.getInstance();
         if ((verificationToken.getDate().getTime() - cal.getTime().getTime()) <= 0) {
             String messageValue = messages.getMessage("auth.message.expired", null, locale);
             model.addAttribute("message", messageValue);
-            return new ModelAndView();
+            return new ModelAndView("badUser?lang="+ locale.getLanguage());
         }
 
         user.setEnabled(true);

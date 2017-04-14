@@ -20,6 +20,11 @@ public class HotelServiceImpl implements HotelService {
     private final WebApplicationContext context;
     private final HotelDAO hotelDAO;
 
+    @Override
+    public Hotel getByID(Integer id) {
+        return hotelDAO.getByID(id);
+    }
+
     @Autowired
     public HotelServiceImpl(WebApplicationContext context, HotelDAO hotelDAO) {
         this.context = context;

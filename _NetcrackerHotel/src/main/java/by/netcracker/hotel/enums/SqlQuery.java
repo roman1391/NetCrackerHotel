@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
  */
 public enum SqlQuery {
     ADD_ENTITY_ID,ADD_USER, GET_BY, GET_BY_ID,
-    GET_ALL, SEARCH_HOTEL, GET_PLACES, DELETE_BY_ID, DELETE_BY,UPDATE;
+    GET_ALL, SEARCH_HOTEL, GET_PLACES, DELETE_BY_ID, DELETE_BY,UPDATE,ADD_TOKEN;
 
     @NotNull
     public final String getQuery(){

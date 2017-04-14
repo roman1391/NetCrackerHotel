@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface AbstractService<E, ID> {
-    //TODO
+    E getByID(ID id);
 }

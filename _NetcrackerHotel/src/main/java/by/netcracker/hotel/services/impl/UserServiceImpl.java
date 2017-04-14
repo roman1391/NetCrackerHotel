@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService<User, Integer> {
 	}
 
 	@Override
+	public User getByID(Integer id) {
+		return userDAO.getByID(id);
+	}
+
+	@Override
 	public boolean update(UserDTO entity) {
 		try {
 			userDAO.update(entity.toObject());

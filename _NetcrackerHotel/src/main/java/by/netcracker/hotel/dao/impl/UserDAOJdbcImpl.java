@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
+import by.netcracker.hotel.dao.AbstractDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -113,11 +114,6 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     @Override
     public void deleteByEmail(String email) {
         getJdbcTemplate().update(SqlQuery.DELETE_BY.getQuery(), ColumnName.USER_EMAIL, email);
-    }
-
-    @Override
-    public void updateByFields(String field, String value) {
-
     }
 
     @Override

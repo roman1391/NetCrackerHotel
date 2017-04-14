@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * Created by slava on 02.04.17.
  */
-public interface UserDAO extends AbstractDAO<User, Integer> {
+public interface UserDAO extends AbstractDAO<User,Integer> {
     User getByEmail(String email);
 
     User getByUsername(String username);
@@ -18,5 +18,4 @@ public interface UserDAO extends AbstractDAO<User, Integer> {
 
     void deleteByEmail(String email);
 
-    void updateByFields(String field, String value);
 }
