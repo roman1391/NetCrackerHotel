@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
 	  rel="stylesheet">
+<link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 
 <header>
 	<%@include file="navbar.jsp"%>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
 	http://www.springframework.org/schema/security 
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd
 		
@@ -9,62 +10,67 @@
 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
 
-	<http use-expressions="true">
+    <http use-expressions="true">
 
-		<!-- Uncomment after configuring tomcat for ssl -->
-		<!-- <intercept-url pattern="/**" requires-channel="https" />
-		<port-mappings>
-			<port-mapping http="8081" https="8443" />
-		</port-mappings> -->
+        <!-- Uncomment after configuring tomcat for ssl -->
+        <!-- <intercept-url pattern="/**" requires-channel="https" />
+        <port-mappings>
+            <port-mapping http="8081" https="8443" />
+        </port-mappings> -->
 
-		<intercept-url pattern="/user_page" access="hasRole('USER')" />
-		<intercept-url pattern="/admin_page" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/user_page" access="hasRole('USER')"/>
+        <intercept-url pattern="/profile" access="isAuthenticated()"/>
+        <intercept-url pattern="/admin_page" access="hasRole('ADMIN')"/>
+        <intercept-url pattern="/list_of_users" access="hasRole('ADMIN')"/>
+        <intercept-url pattern="/add_hotel" access="hasRole('ADMIN')"/>
 
-		<form-login login-page='/home'
-			authentication-success-handler-ref="SuccessLoginHandler"
-			authentication-failure-url="/home?error=true" username-parameter="user_login"
-			password-parameter="password_login" />
+        <form-login login-page='/login_page'
+                    authentication-success-handler-ref="SuccessLoginHandler"
+                    authentication-failure-url="/login?error=true"
+                    username-parameter="user_login"
+                    password-parameter="user_password"/>
 
-		<logout logout-success-url="/home" />
 
-		<remember-me data-source-ref="dataSource" />
-	</http>
+        <logout logout-success-url="/home"/>
 
-	<authentication-manager>
-		<authentication-provider>
-			<password-encoder ref="bcrypt" />
-			<jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="select (
-select v.attribute_value from value v 
-    inner join attribute attr on v.attribute_id = attr.attribute_id 
-        where attr.attribute_name = 'username' and v.entity_id = aaa.entity_id) as 'username',
-(select v.attribute_value from value v 
-    inner join attribute attr on v.attribute_id = attr.attribute_id 
-        where attr.attribute_name = 'password' and v.entity_id = aaa.entity_id) as 'password',
-(select if((select v.attribute_value from value v 
-    inner join attribute attr on v.attribute_id = attr.attribute_id 
-        where attr.attribute_name = 'enabled' and v.entity_id = aaa.entity_id)='1', true,false)) as 'enabled'
-        from (select v.entity_id from value v 
-            inner join attribute attr on v.attribute_id = attr.attribute_id 
-                where attr.attribute_name = 'username' and v.attribute_value=?) aaa;"
+        <remember-me data-source-ref="dataSource"/>
+    </http>
 
-				authorities-by-username-query="select (
-select v.attribute_value from value v 
-    inner join attribute attr on v.attribute_id = attr.attribute_id 
-        where attr.attribute_name = 'username' and v.entity_id = aaa.entity_id) as 'username',
-(select v.attribute_value from value v 
-    inner join attribute attr on v.attribute_id = attr.attribute_id 
-        where attr.attribute_name = 'authority' and v.entity_id = aaa.entity_id) as 'authority'
-        from (select v.entity_id from value v 
-            inner join attribute attr on v.attribute_id = attr.attribute_id 
-                where attr.attribute_name = 'username' and v.attribute_value=?) aaa;" />
-		</authentication-provider>
+    <authentication-manager>
+        <authentication-provider>
+            <password-encoder ref="bcrypt"/>
+            <jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query="SELECT (
+SELECT v.attribute_value FROM value v
+    INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
+        WHERE attr.attribute_name = 'username' AND v.entity_id = aaa.entity_id) AS 'username',
+(SELECT v.attribute_value FROM value v
+    INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
+        WHERE attr.attribute_name = 'password' AND v.entity_id = aaa.entity_id) AS 'password',
+(SELECT if((SELECT v.attribute_value FROM value v
+    INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
+        WHERE attr.attribute_name = 'enabled' AND v.entity_id = aaa.entity_id)='1', TRUE,FALSE)) AS 'enabled'
+        FROM (SELECT v.entity_id FROM value v
+            INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
+                WHERE attr.attribute_name = 'username' AND v.attribute_value=?) aaa;"
 
-	</authentication-manager>
-	<beans:bean id='bcrypt'
-		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-		<beans:constructor-arg name="strength" value='11' />
-	</beans:bean>
+                               authorities-by-username-query="SELECT (
+SELECT v.attribute_value FROM value v
+    INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
+        WHERE attr.attribute_name = 'username' AND v.entity_id = aaa.entity_id) AS 'username',
+(SELECT v.attribute_value FROM value v
+    INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
+        WHERE attr.attribute_name = 'authority' AND v.entity_id = aaa.entity_id) AS 'authority'
+        FROM (SELECT v.entity_id FROM value v
+            INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
+                WHERE attr.attribute_name = 'username' AND v.attribute_value=?) aaa;"/>
+        </authentication-provider>
+
+    </authentication-manager>
+    <beans:bean id='bcrypt'
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value='11'/>
+    </beans:bean>
 
 
 </beans:beans>

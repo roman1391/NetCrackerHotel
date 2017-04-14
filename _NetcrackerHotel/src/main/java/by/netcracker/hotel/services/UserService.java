@@ -2,6 +2,8 @@ package by.netcracker.hotel.services;
 
 import java.util.List;
 
+import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.entities.VerificationToken;
 import org.springframework.stereotype.Service;
 
 import by.netcracker.hotel.dto.UserDTO;
@@ -13,7 +15,7 @@ import by.netcracker.hotel.exceptions.UsernameExistException;
  */
 @Service
 public interface UserService<User, Integer> extends AbstractService<User, Integer> {
-	void registerUser(User user) throws UsernameExistException, EmailExistException;
+	User registerUser(User user) throws UsernameExistException, EmailExistException;
 
 	List<User> getAll();
 
@@ -24,4 +26,10 @@ public interface UserService<User, Integer> extends AbstractService<User, Intege
 	void blockUser(User user);
 
 	void unblockUser(User user);
+
+	void createVerificationToken(int id, String token);
+
+	VerificationToken getVerificationToken(String token);
+
+	void saveRegisteredUser(User user);
 }
