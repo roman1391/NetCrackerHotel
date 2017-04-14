@@ -19,7 +19,7 @@ public class ColumnName {
 	public static final String CLASS = "class";
 	public static final String HOTEL_NAME = "hotel_name";
 	public static final String HOTEL_DESCRIPTION = "hotel_description";
-	public static final String VERIFICATION_TOKEN_USER_ID = "user_id";
+	public static final String VERIFICATION_TOKEN_USER_ID = "token_user_id";
 	public static final String VERIFICATION_TOKEN_TOKEN = "token";
 	public static final String VERIFICATION_TOKEN_DATE = "token_date";
 }
