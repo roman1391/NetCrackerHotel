@@ -6,8 +6,10 @@ import by.netcracker.hotel.entities.VerificationToken;
 import by.netcracker.hotel.enums.ROLE;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 /**
  * Created by slava on 15.04.17.
@@ -33,7 +35,7 @@ public class VerificationTokenMapper implements RowMapper<VerificationToken> {
                     break;
                 }
                 case ColumnName.VERIFICATION_TOKEN_DATE: {
-                    token.setDate(resultSet.getDate(3));
+                    token.setDate(new Date(resultSet.getTimestamp(3).getTime()));
                 }
             }
         } while (resultSet.next());

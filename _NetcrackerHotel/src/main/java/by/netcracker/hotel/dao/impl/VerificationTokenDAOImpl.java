@@ -7,6 +7,7 @@ import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.VerificationToken;
 import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.mapper.VerificationTokenMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -28,10 +30,16 @@ public class VerificationTokenDAOImpl extends JdbcDaoSupport implements Verifica
         setDataSource(dataSource);
     }
 
+    @Autowired
+    public VerificationTokenDAOImpl(DataSource dataSource){
+        this.dataSource = dataSource;
+    }
+
+
     @Override
     public void add(VerificationToken token) {
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.VERIFICATION_TOKEN.name().toLowerCase());
-        getJdbcTemplate().update(SqlQuery.ADD_USER.getQuery(), token.getUserID(),token.getToken(),token.getDate());
+        getJdbcTemplate().update(SqlQuery.ADD_TOKEN.getQuery(), token.getUserID(),token.getToken(),new Timestamp(token.getDate().getTime()));
     }
 
     @Override

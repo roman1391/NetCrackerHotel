@@ -26,8 +26,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/spring-test/root-context.xml",
         "/spring-test/mysql-datasource.xml",
-        "/spring-test/servlet-context.xml",
-        "/spring-test/application-security.xml"})
+        "/spring-test/servlet-context.xml"})
 @WebAppConfiguration
 public class UserDAOTest {
 

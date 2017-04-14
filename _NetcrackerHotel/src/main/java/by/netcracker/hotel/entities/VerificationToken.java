@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by slava on 15.04.17.
@@ -65,5 +66,21 @@ public class VerificationToken {
         cal.setTime(new Timestamp(cal.getTime().getTime()));
         cal.add(Calendar.MINUTE, expiryTimeInMinutes);
         return new Date(cal.getTime().getTime());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VerificationToken that = (VerificationToken) o;
+        return getId() == that.getId() &&
+                getUserID() == that.getUserID() &&
+                Objects.equals(getToken(), that.getToken()) &&
+                Objects.equals(getDate(), that.getDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getToken(), getUserID(), getDate());
     }
 }
