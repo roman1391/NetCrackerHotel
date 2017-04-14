@@ -1,7 +1,9 @@
 package by.netcracker.hotel.services.impl;
 
+import java.util.Date;
 import java.util.List;
 
+import by.netcracker.hotel.dao.VerificationTokenDAO;
 import by.netcracker.hotel.entities.VerificationToken;
 import by.netcracker.hotel.enums.ROLE;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,12 @@ import by.netcracker.hotel.services.UserService;
 public class UserServiceImpl implements UserService<User, Integer> {
 
 	private UserDAO userDAO;
+	private VerificationTokenDAO tokenDAO;
 
 	@Autowired
-	public UserServiceImpl(UserDAO userDAO) {
+	public UserServiceImpl(UserDAO userDAO,VerificationTokenDAO tokenDAO) {
 		this.userDAO = userDAO;
+		this.tokenDAO = tokenDAO;
 	}
 
 	public User registerUser(User user) throws UsernameExistException, EmailExistException {
@@ -84,16 +88,22 @@ public class UserServiceImpl implements UserService<User, Integer> {
 
 	@Override
 	public void createVerificationToken(int id, String token) {
-
+		VerificationToken verificationToken = new VerificationToken(token,id,new Date());
+		tokenDAO.add(verificationToken);
 	}
 
 	@Override
 	public VerificationToken getVerificationToken(String token) {
-		return null;
+         return tokenDAO.getByToken(token);
 	}
 
 	@Override
 	public void saveRegisteredUser(User user) {
+		userDAO.update(user);
+	}
 
+	@Override
+	public User getByVerificationToken(String token) {
+		return userDAO.getByID(tokenDAO.getByToken(token).getUserID());
 	}
 }

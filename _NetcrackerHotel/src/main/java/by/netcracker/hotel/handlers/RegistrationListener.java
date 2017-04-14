@@ -8,24 +8,22 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 /**
  * Created by slava on 15.04.17.
  */
+@Component("RegistrationListener")
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
 
     private UserService service;
-    private MessageSource messages;
     private JavaMailSender mailSender;
 
     @Autowired
-    public RegistrationListener(UserService service,MessageSource messages,
-                                JavaMailSender mailSender){
+    public RegistrationListener(UserService service){
         this.service = service;
-        this.messages = messages;
-        this.mailSender = mailSender;
     }
 
     @Override
@@ -42,7 +40,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         String subject = "Registration Confirmation";
         String confirmationUrl
                 = event.getAppUrl() + "/regitrationConfirm?token=" + token;
-        String message = messages.getMessage("message.regSucc", null, event.getLocale());
+        String message = "Confirm";
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);

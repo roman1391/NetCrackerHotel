@@ -29,6 +29,11 @@ public class VerificationToken {
         this.date = date;
     }
 
+    public VerificationToken(String token, int userID) {
+        this.token = token;
+        this.userID = userID;
+    }
+
     public int getId() {
         return id;
     }
