@@ -53,7 +53,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public void addHotel(Hotel hotel) {
-        hotelDAO.add(hotel);
+    public int addHotel(Hotel hotel) {
+        return hotelDAO.addHotelWithReturningID(hotel);
     }
 }
