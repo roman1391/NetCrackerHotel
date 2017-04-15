@@ -1,7 +1,9 @@
 package by.netcracker.hotel.events;
 
 import by.netcracker.hotel.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
+import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
@@ -10,23 +12,13 @@ import java.util.Locale;
  */
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
     private String appUrl;
-    private Locale locale;
     private User user;
 
     public OnRegistrationCompleteEvent(
-            User user,Locale locale,String appUrl) {
+            User user,String appUrl) {
         super(user);
         this.user = user;
         this.appUrl = appUrl;
-        this.locale = locale;
-    }
-
-    public Locale getLocale() {
-        return locale;
-    }
-
-    public void setLocale(Locale locale) {
-        this.locale = locale;
     }
 
     public String getAppUrl() {

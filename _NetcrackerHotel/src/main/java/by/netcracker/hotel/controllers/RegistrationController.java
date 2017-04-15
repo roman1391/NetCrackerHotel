@@ -24,6 +24,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -53,8 +54,7 @@ public class RegistrationController {
         try {
             User registered = (User) userService.registerUser(user);
             String appUrl = request.getContextPath();
-            eventPublisher.publishEvent(new OnRegistrationCompleteEvent
-                    (registered, request.getLocale(), appUrl));
+            eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
         } catch (UsernameExistException e) {
             model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
             return "registration";
@@ -69,26 +69,22 @@ public class RegistrationController {
     public ModelAndView confirmRegistration
             (WebRequest request, Model model, @RequestParam("token") String token) {
 
-        Locale locale = request.getLocale();
-
         VerificationToken verificationToken = userService.getVerificationToken(token);
         if (verificationToken == null) {
-            String message = messages.getMessage("auth.message.invalidToken", null, locale);
-            model.addAttribute("message", message);
-            return new ModelAndView("badUser?lang="+ locale.getLanguage());
+            return new ModelAndView("badUser","message", "Token not found");
         }
 
         User user = (User) userService.getByID(verificationToken.getUserID());
         Calendar cal = Calendar.getInstance();
-        if ((verificationToken.getDate().getTime() - cal.getTime().getTime()) <= 0) {
-            String messageValue = messages.getMessage("auth.message.expired", null, locale);
-            model.addAttribute("message", messageValue);
-            return new ModelAndView("badUser?lang="+ locale.getLanguage());
-        }
+
+        /*
+        if ((verificationToken.getDate().getTime() - new Date().getTime()) <= 0) {
+            return new ModelAndView("badUser","message", "Invalid time");
+        }*/
 
         user.setEnabled(true);
         userService.saveRegisteredUser(user);
-        return new ModelAndView("successregitration","success",
+        return new ModelAndView("successregistration","success",
                 "You are registration successfully.");
     }
 }

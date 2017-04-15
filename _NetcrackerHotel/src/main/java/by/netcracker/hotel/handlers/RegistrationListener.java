@@ -4,10 +4,13 @@ import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.events.OnRegistrationCompleteEvent;
 import by.netcracker.hotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -22,8 +25,9 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     private JavaMailSender mailSender;
 
     @Autowired
-    public RegistrationListener(UserService service){
+    public RegistrationListener(UserService service,JavaMailSender mailSender){
         this.service = service;
+        this.mailSender = mailSender;
     }
 
     @Override
@@ -45,7 +49,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);
         email.setSubject(subject);
-        email.setText(message + " rn" + "http://localhost:8080" + confirmationUrl);
+        email.setText(message + " rn " + "http://localhost:8080" + confirmationUrl);
         mailSender.send(email);
     }
 }

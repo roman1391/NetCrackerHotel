@@ -9,8 +9,10 @@
 <head>
     <title>Bad user</title>
 </head>
+<%@include file="../jsp_elements/_header.jsp"%>
 <body>
-    <h1 text="${param.message[0]}">Error Message</h1>
-    <a href="registration.">Sign up</a>
+    <h1 text="${message}">Error Message</h1>
+    <a href="registration">Sign up</a>
 </body>
+<%@include file="../jsp_elements/_footer.jsp"%>
 </html>
