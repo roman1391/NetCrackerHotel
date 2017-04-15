@@ -9,18 +9,16 @@ public class Hotel {
     private String address;
     private String name;
     private int typeOfService;
-    private String imagePath;
     private String description;
 
     public Hotel(){}
 
-    public Hotel(String country, String city, String address, String name, int typeOfService, String imagePath){
+    public Hotel(String country, String city, String address, String name, int typeOfService){
         this.country = country;
         this.city = city;
         this.address = address;
         this.name = name;
         this.typeOfService = typeOfService;
-        this.imagePath = imagePath;
     }
 
     public String getDescription() {
@@ -71,11 +69,4 @@ public class Hotel {
         this.typeOfService = typeOfService;
     }
 
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
 }

@@ -51,4 +51,9 @@ public class HotelServiceImpl implements HotelService {
     public List<String> getPlaces() {
         return hotelDAO.getPlaces();
     }
+
+    @Override
+    public void addHotel(Hotel hotel) {
+        hotelDAO.add(hotel);
+    }
 }

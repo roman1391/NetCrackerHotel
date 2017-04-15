@@ -24,6 +24,10 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10000000"/>
+	</beans:bean>
+
 	<context:component-scan base-package="by.netcracker.hotel" use-default-filters="false">
 		    <context:include-filter expression="org.springframework.stereotype.Controller"
 								type="annotation"/>

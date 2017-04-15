@@ -1,6 +1,7 @@
 package by.netcracker.hotel.dao.impl;
 
 import by.netcracker.hotel.dao.HotelDAO;
+import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.mapper.HotelMapper;
@@ -34,8 +35,10 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     }
 
     @Override
-    public void add(Hotel entity) {
-
+    public void add(Hotel hotel) {
+        getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.HOTEL.name().toLowerCase());
+        getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(),
+                hotel.getAddress(), hotel.getTypeOfService(), hotel.getName(), hotel.getDescription());
     }
 
     @Override
