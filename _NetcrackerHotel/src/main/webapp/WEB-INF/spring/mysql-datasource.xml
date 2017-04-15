@@ -9,7 +9,7 @@
 	      p:driverClassName="com.mysql.jdbc.Driver"
 	      p:url="jdbc:mysql://localhost:3306/netcracker_hotel?serverTimezone=UTC"
 	      p:username="root"
-	      p:password="21212646">
+	      p:password="1234">
 	</bean>
     
 

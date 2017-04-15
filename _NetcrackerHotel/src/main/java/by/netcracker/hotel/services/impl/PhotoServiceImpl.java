@@ -28,6 +28,7 @@ public class PhotoServiceImpl implements PhotoService {
         this.photoDAO = photoDAO;
     }
 
+
     @Override
     public void addPhoto(Photo photo, File file) {
         photoDAO.add(photo);
