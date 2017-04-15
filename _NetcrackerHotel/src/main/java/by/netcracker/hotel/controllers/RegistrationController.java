@@ -81,7 +81,7 @@ public class RegistrationController {
 
         user.setEnabled(true);
         userService.saveRegisteredUser(user);
-
+        userService.deleteVerificationToken(verificationToken.getId());
         return new ModelAndView("successregistration","success",
                 "You are registration successfully.");
     }
