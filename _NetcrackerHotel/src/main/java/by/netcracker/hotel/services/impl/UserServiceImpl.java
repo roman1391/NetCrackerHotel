@@ -17,7 +17,7 @@ import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.UserService;
 
 @Service("UserServiceImpl")
-public class UserServiceImpl implements UserService<User, Integer> {
+public class UserServiceImpl implements UserService {
 
 	private UserDAO userDAO;
 	private VerificationTokenDAO tokenDAO;
@@ -100,6 +100,11 @@ public class UserServiceImpl implements UserService<User, Integer> {
 	@Override
 	public void saveRegisteredUser(User user) {
 		userDAO.update(user);
+	}
+
+	@Override
+	public void deleteVerificationToken(Integer id) {
+		tokenDAO.deleteByID(id);
 	}
 
 	@Override

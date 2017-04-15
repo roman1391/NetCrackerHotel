@@ -35,14 +35,11 @@ import java.util.Locale;
 public class RegistrationController {
     private UserService userService;
     private ApplicationEventPublisher eventPublisher;
-    private MessageSource messages;
 
     @Autowired
-    public RegistrationController(UserService userService,ApplicationEventPublisher eventPublisher,
-                                  MessageSource messages) {
+    public RegistrationController(UserService userService,ApplicationEventPublisher eventPublisher) {
         this.userService = userService;
         this.eventPublisher = eventPublisher;
-        this.messages = messages;
     }
 
     @RequestMapping(value = "/register-user", method = RequestMethod.POST)
@@ -74,7 +71,7 @@ public class RegistrationController {
             return new ModelAndView("badUser","message", "Token not found");
         }
 
-        User user = (User) userService.getByID(verificationToken.getUserID());
+        User user = (User) userService.getByVerificationToken(verificationToken.getToken());
         Calendar cal = Calendar.getInstance();
 
         /*
@@ -84,6 +81,7 @@ public class RegistrationController {
 
         user.setEnabled(true);
         userService.saveRegisteredUser(user);
+
         return new ModelAndView("successregistration","success",
                 "You are registration successfully.");
     }

@@ -13,7 +13,7 @@ import by.netcracker.hotel.exceptions.UsernameExistException;
 /**
  * Created by Alexander on 06.04.2017.
  */
-public interface UserService<User, Integer> extends AbstractService<User, Integer> {
+public interface UserService extends AbstractService<User, Integer> {
 	User registerUser(User user) throws UsernameExistException, EmailExistException;
 
 	List<User> getAll();
@@ -31,6 +31,8 @@ public interface UserService<User, Integer> extends AbstractService<User, Intege
 	VerificationToken getVerificationToken(String token);
 
 	User getByVerificationToken(String token);
+
+    void deleteVerificationToken(Integer id);
 
 	void saveRegisteredUser(User user);
 }

@@ -94,7 +94,7 @@ public class UserDAOTest {
         userDAO.add(expected);
         expected = userDAO.getByUsername(expected.getUsername());
         User changes = EntityBuilder.buildUser("update", "update", "update",
-                "123456", "update@gmail.com", false, ROLE.ADMIN);
+                expected.getPassword(),"update@gmail.com", false, ROLE.ADMIN);
         changes.setId(expected.getId());
         userDAO.update(changes);
         User actual = userDAO.getByID(changes.getId());
