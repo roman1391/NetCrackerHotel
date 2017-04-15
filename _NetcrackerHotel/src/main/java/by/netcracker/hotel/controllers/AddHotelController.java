@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Created by Varvara on 4/11/2017.
@@ -44,15 +42,14 @@ public class AddHotelController {
                            Model model) {
         int hotelID = hotelService.addHotel(hotel);
         if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-                Files.write(path, bytes);
-                photoService.addPhoto(new Photo(hotelID, file.getOriginalFilename()));
+            try{
+                String fileName = file.getOriginalFilename();
+                File convFile = new File( UPLOADED_FOLDER + "img");
+                file.transferTo(convFile);
+                photoService.addPhoto(new Photo(hotelID, fileName), convFile);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        }
+            }        }
         return "success_adding_hotel";
     }
 
