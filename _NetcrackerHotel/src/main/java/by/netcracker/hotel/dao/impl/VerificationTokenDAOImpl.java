@@ -3,7 +3,6 @@ package by.netcracker.hotel.dao.impl;
 import by.netcracker.hotel.dao.VerificationTokenDAO;
 import by.netcracker.hotel.dao.constant.ColumnName;
 import by.netcracker.hotel.dao.constant.TypeName;
-import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.VerificationToken;
 import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.mapper.VerificationTokenMapper;

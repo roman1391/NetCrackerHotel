@@ -2,12 +2,12 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="
-	http://www.springframework.org/schema/security 
+             xmlns:facebook="http://www.springframework.org/schema/aop"
+             xsi:schemaLocation="http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd
-		
-	http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
     <http use-expressions="true">
@@ -35,6 +35,9 @@
 
         <remember-me data-source-ref="dataSource"/>
     </http>
+
+
+
 
     <authentication-manager>
         <authentication-provider>
@@ -71,6 +74,7 @@ SELECT v.attribute_value FROM value v
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <beans:constructor-arg name="strength" value='11'/>
     </beans:bean>
+
 
 
 </beans:beans>

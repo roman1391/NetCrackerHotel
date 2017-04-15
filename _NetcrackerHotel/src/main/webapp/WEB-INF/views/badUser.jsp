@@ -11,8 +11,12 @@
 </head>
 <%@include file="../jsp_elements/_header.jsp"%>
 <body>
-    <div class="alert alert-danger">${message}</div>
-    <a href="registration">Sign up</a>
+ <div id="wrapper" >
+     <div class="jumbotron">
+         <div class="alert alert-danger">${message}</div>
+         <a href="registration" class="btn btn-link">Register</a>
+     </div>
+ </div>
 </body>
 <%@include file="../jsp_elements/_footer.jsp"%>
 </html>
