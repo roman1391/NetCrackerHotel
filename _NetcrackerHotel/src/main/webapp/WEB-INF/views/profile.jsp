@@ -32,22 +32,41 @@
 
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
-    <button onclick="onEditClick()" class="edit-btn">Edit</button>
-    <div>
-        <input id="email" value="${currentUser.email}"
-               class="editable">
-        <input id="accessLevel" value="${currentUser.accessLevel}"
-               class="editable">
-        <input id="firstName" value="${currentUser.firstName}"
-               class="editable">
-        <input id="lastName" value="${currentUser.lastName}"
-               class="editable">
+    <div id="content">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input  id="email" value="${currentUser.email}"
+                    class="editable form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="accessLevel">Access level:</label>
+            <input id="accessLevel" value="${currentUser.accessLevel}"
+                   class="editable form-control">
+        </div>
+        <div class="form-group">
+            <label for="firstName">First name:</label>
+            <input id="firstName" value="${currentUser.firstName}"
+                   class="editable form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last name:</label>
+            <input id="lastName" value="${currentUser.lastName}"
+                   class="editable form-control" required>
+        </div>
+
+        <div class="btn-group">
+            <button onclick="onEditClick()" class="edit-btn btn btn-primary">Edit</button>
+        </div>
+
+        <div class="btn-group inline pull-left">
+            <button onclick="onSave()" class="save-btn btn btn-primary">Save</button>
+            <button onclick="onCancel()" class="cancel-btn btn btn-danger">Cancel</button>
+        </div>
     </div>
-    <button onclick="onSave()" class="save-btn">Save</button>
-    <button onclick="onCancel()" class="cancel-btn">Cancel</button>
-    <%@include file="../jsp_elements/_footer.jsp" %>
+
 </div>
 </body>
+<%@include file="../jsp_elements/_footer.jsp" %>
 <script>
     var isEditable = true;
     var oldValues = {};

@@ -35,6 +35,7 @@ import java.util.Locale;
 public class RegistrationController {
     private UserService userService;
     private ApplicationEventPublisher eventPublisher;
+    private final long TOKEN_LIFE_TIME = 86400000;
 
     @Autowired
     public RegistrationController(UserService userService,ApplicationEventPublisher eventPublisher) {
@@ -74,10 +75,11 @@ public class RegistrationController {
         User user = (User) userService.getByVerificationToken(verificationToken.getToken());
         Calendar cal = Calendar.getInstance();
 
-        /*
-        if ((verificationToken.getDate().getTime() - new Date().getTime()) <= 0) {
+
+        if ((cal.getTime().getTime() - verificationToken.getDate().getTime()) >= TOKEN_LIFE_TIME) {
+            userService.deleteVerificationToken(verificationToken.getId());
             return new ModelAndView("badUser","message", "Invalid time");
-        }*/
+        }
 
         user.setEnabled(true);
         userService.saveRegisteredUser(user);
