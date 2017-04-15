@@ -20,6 +20,9 @@
 				<prop key="mail.smtp.port">587</prop>
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.socketFactory.port">465</prop>
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.
+					SSLSocketFactory</prop>
 			</props>
 		</property>
 	</bean>
