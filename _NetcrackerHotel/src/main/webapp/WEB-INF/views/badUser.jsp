@@ -11,7 +11,7 @@
 </head>
 <%@include file="../jsp_elements/_header.jsp"%>
 <body>
-    <h1 text="${message}">Error Message</h1>
+    <div class="alert alert-danger">${message}</div>
     <a href="registration">Sign up</a>
 </body>
 <%@include file="../jsp_elements/_footer.jsp"%>

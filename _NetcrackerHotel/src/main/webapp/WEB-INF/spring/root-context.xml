@@ -25,6 +25,9 @@
 		</property>
 	</bean>
 
-	<context:component-scan base-package="by.netcracker.hotel" />
+	<context:component-scan base-package="by.netcracker.hotel" >
+	    <context:exclude-filter expression="org.springframework.stereotype.Controller"
+							type="annotation"/>
+	</context:component-scan>
 
 </beans>

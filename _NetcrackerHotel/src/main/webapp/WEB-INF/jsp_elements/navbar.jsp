@@ -46,7 +46,7 @@
                 </c:when>
                 <c:when test="${currentUser.authority.toString() ne 'GUEST'}">
                     <li class="nav-item">
-                        <a class="nav-link" href="j_spring_security_logout">Log out</a>
+                        <a class="nav-link" href="j_spring_security_logout">Logout</a>
                     </li>
                 </c:when>
             </c:choose>
