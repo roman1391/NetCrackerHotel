@@ -14,6 +14,7 @@ public class HotelMapper implements RowMapper<Hotel> {
     @Override
     public Hotel mapRow(ResultSet resultSet, int i) throws SQLException {
         Hotel hotel = new Hotel();
+        hotel.setId(resultSet.getInt(1));
         do {
             switch (resultSet.getString(2)) {
                 case ColumnName.COUNTRY: {

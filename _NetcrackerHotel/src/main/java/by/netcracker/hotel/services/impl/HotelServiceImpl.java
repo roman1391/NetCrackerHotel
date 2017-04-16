@@ -3,11 +3,11 @@ package by.netcracker.hotel.services.impl;
 import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.services.HotelService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,8 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Hotel getByID(Integer id) {
-        return hotelDAO.getByID(id);
+        Hotel hotel = hotelDAO.getByID(id);
+        return hotel;
     }
 
     @Autowired
@@ -53,7 +54,8 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public int addHotel(Hotel hotel) {
-        return hotelDAO.addHotelWithReturningID(hotel);
+    public void addHotel(Hotel hotel) {
+        hotelDAO.add(hotel);
     }
+
 }

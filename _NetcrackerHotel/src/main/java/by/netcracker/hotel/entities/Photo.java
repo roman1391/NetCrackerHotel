@@ -6,6 +6,7 @@ package by.netcracker.hotel.entities;
 public class Photo {
     private int idHotel;
     private String photoName;
+    private int idPhoto;
 
     public int getIdHotel() {
         return idHotel;
@@ -21,6 +22,14 @@ public class Photo {
 
     public void setPhotoName(String photoName) {
         this.photoName = photoName;
+    }
+
+    public int getIdPhoto() {
+        return idPhoto;
+    }
+
+    public void setIdPhoto(int idPhoto) {
+        this.idPhoto = idPhoto;
     }
 
     public Photo(int idHotel, String photoName) {

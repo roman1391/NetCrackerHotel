@@ -41,15 +41,16 @@ public class AddHotelController {
     @RequestMapping(value = "add-hotel", method = RequestMethod.POST)
     public String addHotel(@ModelAttribute("hotel") Hotel hotel, @RequestParam("file") MultipartFile file,
                            Model model) {
-        int hotelID = hotelService.addHotel(hotel);
+        hotelService.addHotel(hotel);
         if (!file.isEmpty()) {
             try {
                 String fileName = file.getOriginalFilename();
                 File convFile = new File(UPLOADED_FOLDER + "img");
                 file.transferTo(convFile);
-                photoService.addPhoto(new Photo(hotelID, fileName), convFile);
-                String photoUrl = CloudinaryConnector.getCloudinary().url().format("jpg").generate(fileName);
-                model.addAttribute("photo",photoUrl);
+                Photo photo = new Photo(hotel.getId(), fileName);
+                photoService.addPhoto(photo, convFile);
+                String photoUrl = CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo.getPhotoName());
+                hotel.setPhotoURL(photoUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }

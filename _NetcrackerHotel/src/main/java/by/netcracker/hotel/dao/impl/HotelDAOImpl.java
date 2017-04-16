@@ -1,10 +1,13 @@
 package by.netcracker.hotel.dao.impl;
 
+import by.netcracker.hotel.cloud.CloudinaryConnector;
 import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.Hotel;
+import by.netcracker.hotel.entities.Photo;
 import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.mapper.HotelMapper;
+import by.netcracker.hotel.mapper.PhotoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -41,6 +44,19 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
     @Override
     public void add(Hotel hotel) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        getJdbcTemplate().update(new PreparedStatementCreator() {
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = connection.prepareStatement(SqlQuery.ADD_ENTITY_ID.getQuery(),
+                        new String[]{"id"});
+                ps.setString(1, TypeName.HOTEL.name().toLowerCase());
+                return ps;
+            }
+        }, keyHolder);
+
+        getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(),
+                hotel.getAddress(), hotel.getTypeOfService(), hotel.getName(), hotel.getDescription());
+        hotel.setId(keyHolder.getKey().intValue());
     }
 
     @Override
@@ -56,8 +72,12 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     @Override
     public Hotel getByID(Integer id) {
         try {
-            return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(),
+            Hotel hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(),
                     new Object[]{id}, new HotelMapper());
+            Photo photo = getJdbcTemplate().queryForObject(SqlQuery.GET_MAIN_PHOTO_FOR_HOTEL.getQuery(),
+                    new Object[]{id}, new PhotoMapper());
+            hotel.setPhotoURL(CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo.getPhotoName()));
+            return hotel;
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
@@ -79,24 +99,6 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     public List<String> getPlaces() {
         return getJdbcTemplate().query(SqlQuery.GET_PLACES.getQuery(),
                 (resultSet, i) -> resultSet.getString(1));
-    }
-
-    @Override
-    public int addHotelWithReturningID(Hotel hotel) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        //getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.HOTEL.name().toLowerCase(), keyHolder);
-        getJdbcTemplate().update(new PreparedStatementCreator() {
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(SqlQuery.ADD_ENTITY_ID.getQuery(),
-                        new String[]{"id"});
-                ps.setString(1, TypeName.HOTEL.name().toLowerCase());
-                return ps;
-            }
-        }, keyHolder);
-
-        getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(),
-                hotel.getAddress(), hotel.getTypeOfService(), hotel.getName(), hotel.getDescription());
-        return keyHolder.getKey().intValue();
     }
 
 }

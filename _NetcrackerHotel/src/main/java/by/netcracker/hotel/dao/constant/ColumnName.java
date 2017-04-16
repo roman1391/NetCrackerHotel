@@ -22,4 +22,6 @@ public class ColumnName {
 	public static final String VERIFICATION_TOKEN_USER_ID = "token_user_id";
 	public static final String VERIFICATION_TOKEN_TOKEN = "token";
 	public static final String VERIFICATION_TOKEN_DATE = "token_date";
+	public static final String IDHOTEL = "idhotel";
+	public static final String PHOTO = "photo";
 }

@@ -10,5 +10,4 @@ import java.util.List;
 public interface HotelDAO extends AbstractDAO<Hotel, Integer>{
     List<Integer> findIDsBySearchString(String searchString);
     List<String> getPlaces();
-    int addHotelWithReturningID (Hotel hotel);
 }

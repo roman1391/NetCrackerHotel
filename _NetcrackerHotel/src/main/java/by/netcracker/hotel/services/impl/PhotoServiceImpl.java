@@ -10,6 +10,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,5 +38,10 @@ public class PhotoServiceImpl implements PhotoService {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public List<Photo> getPhotosForHotel(int id) {
+        return photoDAO.getPhotosForHotel(id);
     }
 }
