@@ -1,5 +1,6 @@
 package by.netcracker.hotel.controllers;
 
+import by.netcracker.hotel.cloud.CloudinaryConnector;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Photo;
 import by.netcracker.hotel.services.HotelService;
@@ -42,14 +43,17 @@ public class AddHotelController {
                            Model model) {
         int hotelID = hotelService.addHotel(hotel);
         if (!file.isEmpty()) {
-            try{
+            try {
                 String fileName = file.getOriginalFilename();
-                File convFile = new File( UPLOADED_FOLDER + "img");
+                File convFile = new File(UPLOADED_FOLDER + "img");
                 file.transferTo(convFile);
                 photoService.addPhoto(new Photo(hotelID, fileName), convFile);
+                String photoUrl = CloudinaryConnector.getCloudinary().url().format("jpg").generate(fileName);
+                model.addAttribute("photo",photoUrl);
             } catch (IOException e) {
                 e.printStackTrace();
-            }        }
+            }
+        }
         return "success_adding_hotel";
     }
 

@@ -1,6 +1,7 @@
 package by.netcracker.hotel.cloud;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 
 import java.util.Map;
@@ -16,5 +17,10 @@ public class CloudinaryConnector {
 
     public static Cloudinary getCloudinary() {
         return cloudinary;
+    }
+
+    public static Map picureTransform(String name){
+        return ObjectUtils.asMap("public_id", name,
+                "transformation", new Transformation().crop("limit").width(400).height(400));
     }
 }

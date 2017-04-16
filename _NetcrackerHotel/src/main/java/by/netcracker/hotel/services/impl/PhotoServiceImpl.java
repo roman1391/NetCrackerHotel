@@ -4,8 +4,6 @@ import by.netcracker.hotel.cloud.CloudinaryConnector;
 import by.netcracker.hotel.dao.PhotoDAO;
 import by.netcracker.hotel.entities.Photo;
 import by.netcracker.hotel.services.PhotoService;
-import com.cloudinary.Transformation;
-import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
@@ -34,8 +32,7 @@ public class PhotoServiceImpl implements PhotoService {
         photoDAO.add(photo);
         try {
             Map uploadResult = CloudinaryConnector.getCloudinary().uploader().upload(file,
-                    ObjectUtils.asMap("public_id", photo.getPhotoName(),
-                            "transformation", new Transformation().crop("limit").width(400).height(400)));
+                    CloudinaryConnector.picureTransform(photo.getPhotoName()));
         } catch (IOException e) {
             e.printStackTrace();
         }
