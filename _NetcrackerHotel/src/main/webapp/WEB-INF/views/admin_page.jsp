@@ -30,7 +30,7 @@
 							<a href="list_of_users">User managment</a>
 						</p>
 						<p>
-							<a href="add_hotel">Hotel management</a>
+							<a href="list_of_hotels">Hotel management</a>
 						</p>
 						<p>
 							<a href="add_hotel">Add hotel</a>
