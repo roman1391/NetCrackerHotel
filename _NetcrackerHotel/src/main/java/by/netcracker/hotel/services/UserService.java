@@ -35,4 +35,6 @@ public interface UserService extends AbstractService<User, Integer> {
     void deleteVerificationToken(Integer id);
 
     void saveRegisteredUser(User user);
+
+    void deleteUserByUsername(User user);
 }

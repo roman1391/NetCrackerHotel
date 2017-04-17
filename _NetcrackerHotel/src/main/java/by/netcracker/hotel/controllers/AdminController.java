@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import by.netcracker.hotel.entities.Hotel;
@@ -44,8 +43,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/add-user", method = RequestMethod.POST)
-    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
-        WebRequest request, Model model) {
+    public String addUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "add_user";
         }
@@ -87,6 +85,13 @@ public class AdminController {
     public ModelAndView about(Model model, Authentication authentication) {
         model.addAttribute("hotel", new Hotel());
         return createModel("add_hotel", authentication);
+    }
+
+    @RequestMapping(value = "/delete_user", method = RequestMethod.POST)
+    public String deleteUser(@Valid @ModelAttribute("user") User user, Model model) {
+        userService.deleteUserByUsername(user);
+        model.addAttribute("success", "User - " + user.getUsername() + " was successfully deleted.");
+        return "admin_page";
     }
 
 }

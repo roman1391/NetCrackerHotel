@@ -1,6 +1,6 @@
-<%@ page import="org.codehaus.jackson.map.ObjectMapper" %>
+<%@ page import="org.codehaus.jackson.map.ObjectMapper"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="false"%>
@@ -54,7 +54,15 @@
 								<button onclick="onSave()" class="save-btn">Save</button>
 								<button onclick="onCancel()" class="cancel-btn">Cancel</button>
 							</div>
-							<a href="admin_page">Back to admin page</a>
+							<form:form id="deleteUser" action="delete_user"
+								modelAttribute="user" method="post">
+								<form:input path="username" type="hidden" name="username"
+									value="${user.username}"></form:input>
+								<form:button type="submit">Delete user</form:button>
+							</form:form>
+
+							<a href="list_of_users">Back to list of users</a> <br> <a
+								href="admin_page">To admin page</a>
 						</div>
 					</div>
 				</div>
@@ -84,7 +92,11 @@
 
 	function onSave() {
 		var userDTO = {};
-		userDTO.id = ${user.id};
+		userDTO.id = $
+		{
+			user.id
+		}
+		;
 		$('input.editable').each(function(index, data) {
 			userDTO[data.id] = data.value;
 		});

@@ -128,4 +128,10 @@ public class UserServiceImpl implements UserService {
     public User getByVerificationToken(String token) {
         return userDAO.getByID(tokenDAO.getByToken(token).getUserID());
     }
+
+    @Override
+    public void deleteUserByUsername(User user) {
+        userDAO.deleteByUsername(user.getUsername());
+    }
+
 }
