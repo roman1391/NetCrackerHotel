@@ -26,40 +26,49 @@
 						<h1>User editing:</h1>
 						<div>
 							<div>
-								<table border="1">
-									<tr>
-										<th>First name</th>
-										<th>Last name</th>
-										<th>Username</th>
-										<th>Email</th>
-										<th>Enabled</th>
-										<th>Authority</th>
-									</tr>
-									<tr>
-										<td><input id="firstName" value="${user.firstName}"
-											class="editable" size="10"></td>
-										<td><input id="lastName" value="${user.lastName}"
-											class="editable" size="10"></td>
-										<td><input id="username" value="${user.username}"
-											class="editable" size="10"></td>
-										<td><input id="email" value="${user.email}"
-											class="editable" size="10"></td>
-										<td><input id="enabled" value="${user.enabled}"
-											class="editable" size="10"></td>
-										<td><input id="authority" value="${user.authority}"
-											class="editable" size="10"></td>
-									</tr>
-								</table>
+
+								<div class="form-group">
+									<label for="firstName">First name:</label> <input id="firstName"
+										value="${user.firstName}" class="editable form-control"
+										required>
+								</div>
+								<div class="form-group">
+									<label for="lastName">Last name:</label> <input id="lastName"
+										value="${user.lastName}" class="editable form-control"
+										required>
+								</div>
+								<div class="form-group">
+									<label for="username">Username:</label> <input id="username"
+										value="${user.username}" class="editable form-control"
+										required>
+								</div>
+								<div class="form-group">
+									<label for="email">Email:</label> <input id="email"
+										value="${user.email}" class="editable form-control"
+										required>
+								</div>
+								<div class="form-group">
+									<label for="enabled">Enabled:</label> <input id="enabled"
+										value="${user.enabled}" class="editable form-control"
+										required>
+								</div>
+								<div class="form-group">
+									<label for="authority">Authority:</label> <input id="authority"
+										value="${user.authority}" class="editable form-control"
+										required>
+								</div>
 								<button onclick="onEditClick()" class="edit-btn">Edit</button>
 								<button onclick="onSave()" class="save-btn">Save</button>
 								<button onclick="onCancel()" class="cancel-btn">Cancel</button>
 							</div>
-							<form:form id="deleteUser" action="delete_user"
-								modelAttribute="user" method="post">
-								<form:input path="username" type="hidden" name="username"
-									value="${user.username}"></form:input>
-								<form:button type="submit">Delete user</form:button>
-							</form:form>
+							<c:if test="${user.authority ne 'ADMIN'}">
+								<form:form id="deleteUser" action="delete_user"
+									modelAttribute="user" method="post">
+									<form:input path="username" type="hidden" name="username"
+										value="${user.username}"></form:input>
+									<form:button type="submit">Delete user</form:button>
+								</form:form>
+							</c:if>
 
 							<a href="list_of_users">Back to list of users</a> <br> <a
 								href="admin_page">To admin page</a>
@@ -75,48 +84,44 @@
 
 
 <script>
-	var isEditable = true;
-	var oldValues = {};
-	function onEditClick() {
-		isEditable = !isEditable;
-		if (isEditable) {
-			$('input.editable').each(function(index, data) {
-				oldValues[index] = data.value;
-			});
-		}
-		$('.editable').attr("disabled", !isEditable);
-		$('.save-btn').css('display', isEditable ? 'block' : 'none');
-		$('.cancel-btn').css('display', isEditable ? 'block' : 'none');
-		$('.edit-btn').css('display', !isEditable ? 'block' : 'none');
-	}
+    var isEditable = true;
+    var oldValues = {};
+    function onEditClick() {
+        isEditable = !isEditable;
+        if (isEditable) {
+            $('input.editable').each(function (index, data) {
+                oldValues[index] = data.value;
+            });
+        }
+        $('.editable').attr("disabled", !isEditable);
+        $('.save-btn').css('display', isEditable ? 'block' : 'none');
+        $('.cancel-btn').css('display', isEditable ? 'block' : 'none');
+        $('.edit-btn').css('display', !isEditable ? 'block' : 'none');
+    }
 
-	function onSave() {
-		var userDTO = {};
-		userDTO.id = $
-		{
-			user.id
-		}
-		;
-		$('input.editable').each(function(index, data) {
-			userDTO[data.id] = data.value;
-		});
-		$.ajax({
-			url : "update",
-			method : "POST",
-			data : userDTO
-		}).done(function(msg) {
-			console.log(msg);
-			onEditClick();
-		});
-	}
+    function onSave() {
+        var userDTO = {};
+        userDTO.id = ${user.id};
+            $('input.editable').each(function (index, data) {
+                userDTO[data.id] = data.value;
+            });
+        $.ajax({
+            url: "update",
+            method: "POST",
+            data: userDTO
+        }).done(function (msg) {
+            console.log(msg);
+            onEditClick();
+        });
+    }
 
-	function onCancel() {
-		$('input.editable').each(function(index, data) {
-			$(data).val(oldValues[index]);
-		});
-		onEditClick();
-	}
-	onEditClick();
+    function onCancel() {
+        $('input.editable').each(function (index, data) {
+            $(data).val(oldValues[index]);
+        });
+        onEditClick();
+    }
+    onEditClick();
 </script>
 
 
