@@ -1,18 +1,14 @@
 package by.netcracker.hotel.controllers;
 
-import static by.netcracker.hotel.util.ModelUtil.createModel;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.User;
@@ -82,9 +78,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/add_hotel", method = RequestMethod.GET)
-    public ModelAndView about(Model model, Authentication authentication) {
+    public String about(Model model) {
         model.addAttribute("hotel", new Hotel());
-        return createModel("add_hotel", authentication);
+        return "add_hotel";
     }
 
     @RequestMapping(value = "/delete_user", method = RequestMethod.POST)
@@ -94,11 +90,10 @@ public class AdminController {
         return "admin_page";
     }
 
-    @RequestMapping(value = "/change_pass", method = RequestMethod.POST)
-    public String changePassUser(@Valid @ModelAttribute("user") User user, Model model) {
-        userService.deleteUserByUsername(user);
-        model.addAttribute("success", "User - " + user.getUsername() + " was successfully deleted.");
-        return "admin_page";
+    @RequestMapping(value = "/list_of_hotels", method = RequestMethod.GET)
+    public String getAllHotels(Model model) {
+        model.addAttribute("hotel", new Hotel());
+        return "list_of_hotels";
     }
 
 }

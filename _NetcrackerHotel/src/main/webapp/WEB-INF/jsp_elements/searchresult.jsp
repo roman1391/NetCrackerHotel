@@ -4,7 +4,8 @@
     <c:if test="${not empty hotels}">
 
         <c:forEach var="hotel" items="${hotels}">
-            <%@include file="../jsp_elements/hotelMin.jsp"%>
+        <a href="hotel_page">
+            <%@include file="../jsp_elements/hotelMin.jsp"%></a>
         </c:forEach>
 
     </c:if>
