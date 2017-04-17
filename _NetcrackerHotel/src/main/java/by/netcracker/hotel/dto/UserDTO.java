@@ -102,6 +102,9 @@ public class UserDTO implements DTO{
 		user.setLastName(getLastName());
 		user.setEmail(getEmail());
 		user.setAccessLevel(getAccessLevel());
+		if (getPassword() !=null && !getPassword().equals("0")){
+		  user.setPassword(getPassword());  
+		}
 		user.setEnabled(getEnabled());
 		user.setAuthority(getAuthority());
 		return user;

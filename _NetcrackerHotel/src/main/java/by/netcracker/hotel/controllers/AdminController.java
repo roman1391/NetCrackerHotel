@@ -94,4 +94,11 @@ public class AdminController {
         return "admin_page";
     }
 
+    @RequestMapping(value = "/change_pass", method = RequestMethod.POST)
+    public String changePassUser(@Valid @ModelAttribute("user") User user, Model model) {
+        userService.deleteUserByUsername(user);
+        model.addAttribute("success", "User - " + user.getUsername() + " was successfully deleted.");
+        return "admin_page";
+    }
+
 }

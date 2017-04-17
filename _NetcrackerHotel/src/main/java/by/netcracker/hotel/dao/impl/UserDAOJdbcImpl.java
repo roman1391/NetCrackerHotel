@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
-import by.netcracker.hotel.dao.AbstractDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -43,7 +42,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     public void add(User user) {
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.USER.name().toLowerCase());
         getJdbcTemplate().update(SqlQuery.ADD_USER.getQuery(), user.getFirstName(), user.getLastName(),
-                    user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
+            user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
     }
 
     @Override
@@ -65,6 +64,9 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
         update(user.getUsername(), ColumnName.USER_USERNAME, user.getId());
         update(user.getEmail(), ColumnName.USER_EMAIL, user.getId());
         update(user.getAccessLevel(), ColumnName.USER_ACCESS_LEVEL, user.getId());
+        if (user.getPassword() != null && !user.getPassword().equals("0")) {
+            update(passwordEncoder.encode(user.getPassword()), ColumnName.USER_PASSWORD, user.getId());
+        }
         update(user.getAuthority().toString(), ColumnName.USER_AUTHORITY, user.getId());
         update(user.getEnabled(), ColumnName.USER_ENABLED, user.getId());
     }
