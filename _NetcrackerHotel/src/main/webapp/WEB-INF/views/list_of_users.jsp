@@ -22,6 +22,8 @@
 				Admin page! <br> <a href="j_spring_security_logout">Logout</a>
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
+						
+
 						<h3>List of administrators:</h3>
 						<div>
 							<table border="1">
@@ -87,8 +89,9 @@
 									</c:if>
 								</c:forEach>
 							</table>
-							<a href="admin_page">Back to admin page</a>
+							<a href="add_user_ref">Add new user</a>
 						</div>
+						<a href="admin_page">Back to admin page</a>
 					</div>
 				</div>
 			</div>

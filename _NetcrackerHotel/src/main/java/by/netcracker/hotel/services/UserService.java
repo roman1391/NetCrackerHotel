@@ -2,11 +2,9 @@ package by.netcracker.hotel.services;
 
 import java.util.List;
 
+import by.netcracker.hotel.dto.UserDTO;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.VerificationToken;
-import org.springframework.stereotype.Service;
-
-import by.netcracker.hotel.dto.UserDTO;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 
@@ -14,25 +12,27 @@ import by.netcracker.hotel.exceptions.UsernameExistException;
  * Created by Alexander on 06.04.2017.
  */
 public interface UserService extends AbstractService<User, Integer> {
-	User registerUser(User user) throws UsernameExistException, EmailExistException;
+    User registerUser(User user) throws UsernameExistException, EmailExistException;
 
-	List<User> getAll();
+    User addUserByAdmin(User user) throws UsernameExistException, EmailExistException;
 
-	User getUserByUsername(String username);
+    List<User> getAll();
 
-	boolean update(UserDTO dto);
+    User getUserByUsername(String username);
 
-	void blockUser(User user);
+    boolean update(UserDTO dto);
 
-	void unblockUser(User user);
+    void blockUser(User user);
 
-	void createVerificationToken(int id, String token);
+    void unblockUser(User user);
 
-	VerificationToken getVerificationToken(String token);
+    void createVerificationToken(int id, String token);
 
-	User getByVerificationToken(String token);
+    VerificationToken getVerificationToken(String token);
+
+    User getByVerificationToken(String token);
 
     void deleteVerificationToken(Integer id);
 
-	void saveRegisteredUser(User user);
+    void saveRegisteredUser(User user);
 }
