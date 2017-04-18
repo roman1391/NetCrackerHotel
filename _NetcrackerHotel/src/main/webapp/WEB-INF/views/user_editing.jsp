@@ -90,54 +90,7 @@
 	</div>
 </body>
 
-
-
-<script>
-	var isEditable = true;
-	var oldValues = {};
-	function onEditClick() {
-		isEditable = !isEditable;
-		if (isEditable) {
-			$('input.editable').each(function(index, data) {
-				oldValues[index] = data.value;
-			});
-		}
-		$('.editable').attr("disabled", !isEditable);
-		$('.save-btn').css('display', isEditable ? 'block' : 'none');
-		$('.cancel-btn').css('display', isEditable ? 'block' : 'none');
-		$('.edit-btn').css('display', !isEditable ? 'block' : 'none');
-	}
-
-	function onSave() {
-		var userDTO = {};
-		userDTO.id = $
-		{
-			user.id
-		}
-		;
-		$('input.editable').each(function(index, data) {
-			userDTO[data.id] = data.value;
-		});
-		$.ajax({
-			url : "update",
-			method : "POST",
-			data : userDTO
-		}).done(function(msg) {
-			console.log(msg);
-			onEditClick();
-		});
-	}
-
-	function onCancel() {
-		$('input.editable').each(function(index, data) {
-			$(data).val(oldValues[index]);
-		});
-		onEditClick();
-	}
-	onEditClick();
-</script>
-
-<script>
+<!-- <script>
 	var isEditable = true;
 	var oldValues = {};
 	function onEditClickp() {
@@ -180,7 +133,92 @@
 		onEditClickp();
 	}
 	onEditClickp();
+</script> -->
+
+
+<script>
+    var isEditable = true;
+    var oldValues = {};
+    function onEditClick() {
+        isEditable = !isEditable;
+        if (isEditable) {
+            $('input.editable').each(function (index, data) {
+                oldValues[index] = data.value;
+            });
+        }
+        $('.editable').attr("disabled", !isEditable);
+        $('.save-btn').css('display', isEditable ? 'block' : 'none');
+        $('.cancel-btn').css('display', isEditable ? 'block' : 'none');
+        $('.edit-btn').css('display', !isEditable ? 'block' : 'none');
+    }
+
+    function onSave() {
+        var userDTO = {};
+        userDTO.id = ${user.id};
+            $('input.editable').each(function (index, data) {
+                userDTO[data.id] = data.value;
+            });
+        $.ajax({
+            url: "update",
+            method: "POST",
+            data: userDTO
+        }).done(function (msg) {
+            console.log(msg);
+            onEditClick();
+        });
+    }
+
+    function onCancel() {
+        $('input.editable').each(function (index, data) {
+            $(data).val(oldValues[index]);
+        });
+        onEditClick();
+    }
+    onEditClick();
 </script>
+
+<script>
+    var isEditable = true;
+    var oldValues = {};
+    function onEditClickp() {
+        isEditable = !isEditable;
+        if (isEditable) {
+            $('input.editablep').each(function (index, data) {
+                oldValues[index] = data.value;
+            });
+        }
+        $('.editablep').attr("disabled", !isEditable);
+        $('.save-btnp').css('display', isEditable ? 'block' : 'none');
+        $('.cancel-btnp').css('display', isEditable ? 'block' : 'none');
+        $('.edit-btnp').css('display', !isEditable ? 'block' : 'none');
+    }
+
+    function onSavep() {
+        var userDTO = {};
+        userDTO.id = ${user.id};
+            $('input.editablep').each(function (index, data) {
+                userDTO[data.id] = data.value;
+            });
+        $.ajax({
+            url: "update",
+            method: "POST",
+            data: userDTO
+        }).done(function (msg) {
+            console.log(msg);
+            onEditClickp();
+        });
+    }
+
+    function onCancelp() {
+        $('input.editablep').each(function (index, data) {
+            $(data).val(oldValues[index]);
+        });
+        onEditClickp();
+    }
+    onEditClickp();
+</script>
+
+
 
 
 </html>
