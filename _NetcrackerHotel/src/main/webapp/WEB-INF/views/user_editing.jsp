@@ -28,9 +28,9 @@
 							<div>
 
 								<div class="form-group">
-									<label for="firstName">First name:</label> <input id="firstName"
-										value="${user.firstName}" class="editable form-control"
-										required>
+									<label for="firstName">First name:</label> <input
+										id="firstName" value="${user.firstName}"
+										class="editable form-control" required>
 								</div>
 								<div class="form-group">
 									<label for="lastName">Last name:</label> <input id="lastName"
@@ -44,33 +44,39 @@
 								</div>
 								<div class="form-group">
 									<label for="email">Email:</label> <input id="email"
-										value="${user.email}" class="editable form-control"
-										required>
+										value="${user.email}" class="editable form-control" required>
 								</div>
 								<div class="form-group">
 									<label for="enabled">Enabled:</label> <input id="enabled"
-										value="${user.enabled}" class="editable form-control"
-										required>
+										value="${user.enabled}" class="editable form-control" required>
 								</div>
 								<div class="form-group">
 									<label for="authority">Authority:</label> <input id="authority"
 										value="${user.authority}" class="editable form-control"
 										required>
 								</div>
-								
+
 								<button onclick="onEditClick()" class="edit-btn">Edit</button>
 								<button onclick="onSave()" class="save-btn">Save</button>
 								<button onclick="onCancel()" class="cancel-btn">Cancel</button>
-								
-								
-								 <div class="form-group">
-									<label for="password">Change password:</label> <input id="password"
-										  type="password"  class="editablep form-control"
+
+
+								<div class="form-group">
+									<label for="password">Change password:</label> <input
+										id="password" type="password" class="editablep form-control"
 										required>
 								</div>
 								<button onclick="onEditClickp()" class="edit-btnp">Change</button>
 								<button onclick="onSavep()" class="save-btnp">Save</button>
-								<button onclick="onCancelp()" class="cancel-btnp">Cancel</button> 
+								<button onclick="onCancelp()" class="cancel-btnp">Cancel</button>
+
+								<form:form id="deleteUser" action="delete_user"
+									modelAttribute="user" method="post">
+									<form:input path="username" type="hidden" name="username"
+										value="${user.username}"></form:input>
+									<form:button type="submit">Delete user</form:button>
+								</form:form>
+
 							</div>
 
 							<a href="list_of_users">Back to list of users</a> <br> <a
@@ -87,86 +93,94 @@
 
 
 <script>
-    var isEditable = true;
-    var oldValues = {};
-    function onEditClick() {
-        isEditable = !isEditable;
-        if (isEditable) {
-            $('input.editable').each(function (index, data) {
-                oldValues[index] = data.value;
-            });
-        }
-        $('.editable').attr("disabled", !isEditable);
-        $('.save-btn').css('display', isEditable ? 'block' : 'none');
-        $('.cancel-btn').css('display', isEditable ? 'block' : 'none');
-        $('.edit-btn').css('display', !isEditable ? 'block' : 'none');
-    }
+	var isEditable = true;
+	var oldValues = {};
+	function onEditClick() {
+		isEditable = !isEditable;
+		if (isEditable) {
+			$('input.editable').each(function(index, data) {
+				oldValues[index] = data.value;
+			});
+		}
+		$('.editable').attr("disabled", !isEditable);
+		$('.save-btn').css('display', isEditable ? 'block' : 'none');
+		$('.cancel-btn').css('display', isEditable ? 'block' : 'none');
+		$('.edit-btn').css('display', !isEditable ? 'block' : 'none');
+	}
 
-    function onSave() {
-        var userDTO = {};
-        userDTO.id = ${user.id};
-            $('input.editable').each(function (index, data) {
-                userDTO[data.id] = data.value;
-            });
-        $.ajax({
-            url: "update",
-            method: "POST",
-            data: userDTO
-        }).done(function (msg) {
-            console.log(msg);
-            onEditClick();
-        });
-    }
+	function onSave() {
+		var userDTO = {};
+		userDTO.id = $
+		{
+			user.id
+		}
+		;
+		$('input.editable').each(function(index, data) {
+			userDTO[data.id] = data.value;
+		});
+		$.ajax({
+			url : "update",
+			method : "POST",
+			data : userDTO
+		}).done(function(msg) {
+			console.log(msg);
+			onEditClick();
+		});
+	}
 
-    function onCancel() {
-        $('input.editable').each(function (index, data) {
-            $(data).val(oldValues[index]);
-        });
-        onEditClick();
-    }
-    onEditClick();
+	function onCancel() {
+		$('input.editable').each(function(index, data) {
+			$(data).val(oldValues[index]);
+		});
+		onEditClick();
+	}
+	onEditClick();
 </script>
 
 <script>
-    var isEditable = true;
-    var oldValues = {};
-    function onEditClickp() {
-        isEditable = !isEditable;
-        if (isEditable) {
-            $('input.editablep').each(function (index, data) {
-                oldValues[index] = data.value;
-            });
-        }
-        $('.editablep').attr("disabled", !isEditable);
-        $('.save-btnp').css('display', isEditable ? 'block' : 'none');
-        $('.cancel-btnp').css('display', isEditable ? 'block' : 'none');
-        $('.edit-btnp').css('display', !isEditable ? 'block' : 'none');
-    }
+	var isEditable = true;
+	var oldValues = {};
+	function onEditClickp() {
+		isEditable = !isEditable;
+		if (isEditable) {
+			$('input.editablep').each(function(index, data) {
+				oldValues[index] = data.value;
+			});
+		}
+		$('.editablep').attr("disabled", !isEditable);
+		$('.save-btnp').css('display', isEditable ? 'block' : 'none');
+		$('.cancel-btnp').css('display', isEditable ? 'block' : 'none');
+		$('.edit-btnp').css('display', !isEditable ? 'block' : 'none');
+	}
 
-    function onSavep() {
-        var userDTO = {};
-        userDTO.id = ${user.id};
-            $('input.editablep').each(function (index, data) {
-                userDTO[data.id] = data.value;
-            });
-        $.ajax({
-            url: "update",
-            method: "POST",
-            data: userDTO
-        }).done(function (msg) {
-            console.log(msg);
-            onEditClickp();
-        });
-    }
+	function onSavep() {
+		var userDTO = {};
+		userDTO.id = $
+		{
+			user.id
+		}
+		;
+		$('input.editablep').each(function(index, data) {
+			userDTO[data.id] = data.value;
+		});
+		$.ajax({
+			url : "update",
+			method : "POST",
+			data : userDTO
+		}).done(function(msg) {
+			console.log(msg);
+			onEditClickp();
+		});
+	}
 
-    function onCancelp() {
-        $('input.editablep').each(function (index, data) {
-            $(data).val(oldValues[index]);
-        });
-        onEditClickp();
-    }
-    onEditClickp();
-</script> 
+	function onCancelp() {
+		$('input.editablep').each(function(index, data) {
+			$(data).val(oldValues[index]);
+		});
+		onEditClickp();
+	}
+	onEditClickp();
+</script>
 
 
 </html>
