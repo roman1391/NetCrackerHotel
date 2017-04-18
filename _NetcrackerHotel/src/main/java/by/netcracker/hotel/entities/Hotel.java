@@ -9,7 +9,7 @@ public class Hotel {
     private String address;
     private String name;
     private int typeOfService;
-    private String description;;
+    private String description;
     private int id;
     private String photoURL;
 

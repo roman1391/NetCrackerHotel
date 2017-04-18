@@ -1,19 +1,17 @@
 package by.netcracker.hotel.interceptors;
 
-import java.util.Arrays;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.enums.ROLE;
+import by.netcracker.hotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.enums.ROLE;
-import by.netcracker.hotel.services.UserService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
 
@@ -27,7 +25,7 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-        ModelAndView modelAndView) throws Exception {
+                           ModelAndView modelAndView) throws Exception {
         if (modelAndView == null)
             return;
         boolean isBlocked;
@@ -45,6 +43,7 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
             System.out.println("userInfo:");
             System.out.println("Username - " + userDetails.getUsername());
             System.out.println("Authority - " + auth);
+            modelAndView.addObject("role", ROLE.valueOf(auth));
             if (auth.equals("BLOCKED")) {
                 isBlocked = true;
                 modelAndView.addObject("blocked_user", isBlocked);

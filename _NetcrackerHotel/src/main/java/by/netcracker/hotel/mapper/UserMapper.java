@@ -59,6 +59,10 @@ public class UserMapper implements RowMapper<User> {
                     user.setAuthority(ROLE.valueOf(resultSet.getString(3)));
                     break;
                 }
+                case ColumnName.USER_AVATAR: {
+                    user.setAvatar(resultSet.getString(3));
+                    break;
+                }
             }
         } while (resultSet.next());
         return user;

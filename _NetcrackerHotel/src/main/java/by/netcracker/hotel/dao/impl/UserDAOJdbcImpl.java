@@ -42,7 +42,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     public void add(User user) {
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.USER.name().toLowerCase());
         getJdbcTemplate().update(SqlQuery.ADD_USER.getQuery(), user.getFirstName(), user.getLastName(),
-            user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
+                    user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
     }
 
     @Override
@@ -64,6 +64,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
         update(user.getUsername(), ColumnName.USER_USERNAME, user.getId());
         update(user.getEmail(), ColumnName.USER_EMAIL, user.getId());
         update(user.getAccessLevel(), ColumnName.USER_ACCESS_LEVEL, user.getId());
+        update(user.getAvatar(), ColumnName.USER_AVATAR, user.getId());
         if (user.getPassword() != null && !user.getPassword().equals("0")) {
             update(passwordEncoder.encode(user.getPassword()), ColumnName.USER_PASSWORD, user.getId());
         }
@@ -77,7 +78,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
                 return false;
             } else {
                 getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(), value, column, id);
-                return false;
+                return true;
             }
         } catch (Exception e) {
             return false;

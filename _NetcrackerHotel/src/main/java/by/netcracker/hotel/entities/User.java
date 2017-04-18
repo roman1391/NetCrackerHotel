@@ -46,6 +46,8 @@ public class User implements BusinessObject {
 
     private ROLE authority;
 
+    private String avatar;
+
     public boolean getEnabled() {
         return enabled;
     }
@@ -138,6 +140,14 @@ public class User implements BusinessObject {
                 getAccessLevel());
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public UserDTO toDTO() {
         UserDTO dto = new UserDTO();
@@ -149,6 +159,7 @@ public class User implements BusinessObject {
         dto.setAuthority(getAuthority());
         dto.setEnabled(getEnabled());
         dto.setAccessLevel(getAccessLevel());
+        dto.setAvatar(getAvatar());
         return dto;
     }
 
