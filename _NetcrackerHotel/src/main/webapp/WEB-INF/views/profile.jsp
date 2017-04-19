@@ -1,4 +1,4 @@
-<%@ page import="org.codehaus.jackson.map.ObjectMapper" %>
+<%@ page import="by.netcracker.hotel.entities.User" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alexander
@@ -7,11 +7,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Profile</title>
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
     <style>
+        img {
+            width: 100px;
+
+        }
+
         input, .save-btn, .cancel-btn, .edit-btn {
             float: left;
             clear: left;
@@ -27,49 +33,39 @@
 
 <body>
 <%
-    ObjectMapper mapper = new ObjectMapper();
+    User curUser = (User) request.getAttribute("currentUser");
 %>
 
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
-    <div id="content">
+    <button onclick="onEditClick()" class="edit-btn">Edit</button>
+    <img src="" id="avatar">
+    <form:form id="updateForm" action="/update" method="post" modelAttribute="activeUser"
+               enctype="multipart/form-data">
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input  id="email" value="${currentUser.email}"
-                    class="editable form-control" required>
+            <input type="file" name="file" id="loadAvatar" onclick="onFileSelected(event)">
+            <form:input path="avatar"/>
+            <form:input path="email" id="email" value="${currentUser.email}"
+                        class="editable"/>
+            <form:input path="accessLevel" id="accessLevel" value="${currentUser.accessLevel}"
+                        class="editable"/>
+            <form:input path="firstName" id="firstName" value="${currentUser.firstName}"
+                        class="editable"/>
+            <form:input path="lastName" id="lastName" value="${currentUser.lastName}"
+                        class="editable"/>
         </div>
-        <div class="form-group">
-            <label for="accessLevel">Access level:</label>
-            <input id="accessLevel" value="${currentUser.accessLevel}"
-                   class="editable form-control">
-        </div>
-        <div class="form-group">
-            <label for="firstName">First name:</label>
-            <input id="firstName" value="${currentUser.firstName}"
-                   class="editable form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last name:</label>
-            <input id="lastName" value="${currentUser.lastName}"
-                   class="editable form-control" required>
-        </div>
-
-        <div class="btn-group">
-            <button onclick="onEditClick()" class="edit-btn btn btn-primary">Edit</button>
-        </div>
-
-        <div class="btn-group inline pull-left">
-            <button onclick="onSave()" class="save-btn btn btn-primary">Save</button>
-            <button onclick="onCancel()" class="cancel-btn btn btn-danger">Cancel</button>
-        </div>
-    </div>
-
+        <form:button type="submit" class="save-btn">Save</form:button>
+        <button onclick="onCancel()" class="cancel-btn">Cancel</button>
+    </form:form>
+    <%@include file="../jsp_elements/_footer.jsp" %>
 </div>
 </body>
-<%@include file="../jsp_elements/_footer.jsp" %>
 <script>
     var isEditable = true;
     var oldValues = {};
+
+    $('#avatar').attr('src', '<%=curUser.getAvatar() != null ? curUser.getAvatar() : 13%>');
+
     function onEditClick() {
         isEditable = !isEditable;
         if (isEditable) {
@@ -83,20 +79,34 @@
         $('.edit-btn').css('display', !isEditable ? 'block' : 'none');
     }
 
-    function onSave() {
-        var userDTO = {};
-        userDTO.id = ${currentUser.id};
-            $('input.editable').each(function (index, data) {
-                userDTO[data.id] = data.value;
-            });
-        $.ajax({
-            url: "update",
-            method: "POST",
-            data: userDTO
-        }).done(function (msg) {
-            console.log(msg);
-            onEditClick();
-        });
+    $("#updateForm").submit(function (eventObj) {
+        var userId = <%=curUser.getId()%>;
+        $('<input />').attr('type', 'hidden')
+            .attr('name', "id")
+            .attr('value', userId)
+            .appendTo('#updateForm');
+        $('<input />').attr('type', 'hidden')
+            .attr('name', "authority")
+            .attr('value', '<%=curUser.getAuthority()%>')
+            .appendTo('#updateForm');
+        $('<input />').attr('type', 'hidden')
+            .attr('name', "enabled")
+            .attr('value', 'true')
+            .appendTo('#updateForm');
+        return true;
+    });
+
+    function onFileSelected(event) {
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+
+        var imgtag = document.getElementById("avatar");
+        imgtag.title = selectedFile.name;
+
+        reader.onload = function (event) {
+            imgtag.src = event.target.result;
+            reader.readAsDataURL(selectedFile);
+        };
     }
 
     function onCancel() {

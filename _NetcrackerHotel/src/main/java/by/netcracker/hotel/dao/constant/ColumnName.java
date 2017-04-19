@@ -10,6 +10,7 @@ public class ColumnName {
 	public static final String USER_FIRST_NAME = "first_name";
 	public static final String USER_LAST_NAME = "last_name";
 	public static final String USER_ACCESS_LEVEL = "accesslevel";
+	public static final String USER_AVATAR = "avatar";
 	public static final String USER_PASSWORD = "password";
 	public static final String USER_ENABLED = "enabled";
 	public static final String USER_AUTHORITY = "authority";

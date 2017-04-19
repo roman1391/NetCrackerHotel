@@ -2,6 +2,7 @@ package by.netcracker.hotel.dto;
 
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by Alexander on 06.04.2017.
@@ -16,6 +17,7 @@ public class UserDTO implements DTO{
 	private boolean enabled;
 	private ROLE authority;
 	private int accessLevel;
+	private String avatar;
 
 	public int getId() {
 		return id;
@@ -107,6 +109,15 @@ public class UserDTO implements DTO{
 		}
 		user.setEnabled(getEnabled());
 		user.setAuthority(getAuthority());
+		user.setAvatar(getAvatar());
 		return user;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatarFile) {
+		this.avatar = avatarFile;
 	}
 }
