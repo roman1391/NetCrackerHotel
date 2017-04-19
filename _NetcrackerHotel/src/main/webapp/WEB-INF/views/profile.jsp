@@ -40,7 +40,7 @@
 <div id="wrapper">
     <button onclick="onEditClick()" class="edit-btn">Edit</button>
     <img src="" id="avatar">
-    <form:form id="updateForm" action="/update" method="post" modelAttribute="activeUser"
+    <form:form id="updateForm" action="update" method="post" modelAttribute="activeUser"
                enctype="multipart/form-data">
         <div class="form-group">
             <input type="file" name="file" id="loadAvatar" onclick="onFileSelected(event)">

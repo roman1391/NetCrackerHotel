@@ -65,7 +65,8 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
         update(user.getEmail(), ColumnName.USER_EMAIL, user.getId());
         update(user.getAccessLevel(), ColumnName.USER_ACCESS_LEVEL, user.getId());
         update(user.getAvatar(), ColumnName.USER_AVATAR, user.getId());
-        if (user.getPassword() != null && !user.getPassword().equals("0")) {
+        // этот апдейт пароля откровенный костыль, но мы разберемся с ним позже...
+        if (user.getPassword() != null && !user.getPassword().equals("0") && user.getPassword().length() < 50) {
             update(passwordEncoder.encode(user.getPassword()), ColumnName.USER_PASSWORD, user.getId());
         }
         update(user.getAuthority().toString(), ColumnName.USER_AUTHORITY, user.getId());
