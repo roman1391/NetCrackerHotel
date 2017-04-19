@@ -56,7 +56,15 @@ public class SearchHotelController {
     public String hotelPage(@Valid @ModelAttribute("choosenHotel") Hotel hotel, Model model) {
         hotel = hotelService.getByID(hotel.getId());
         model.addAttribute("hotel", hotel);
+        // model.addAttribute("feedback", new Feedback());
         return "hotel_page";
+    }
+
+    @RequestMapping(value = "/feedback_page", method = RequestMethod.POST)
+    public String feedbackPage(@Valid @ModelAttribute("choosenHotel") Hotel hotel, Model model) {
+        hotel = hotelService.getByID(hotel.getId());
+        model.addAttribute("hotel", hotel);
+        return "feedback_page";
     }
 
 }

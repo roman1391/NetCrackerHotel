@@ -18,17 +18,12 @@
         <div class="row row-offcanvas row-offcanvas-left">
             <div class="col-xs-12 col-sm-9">
                 <div class="jumbotron">
-                    <h3>Hotel page</h3>
-                    Name: ${hotel.name }<br>
-                    Country: ${hotel.country }<br>
-                    City: ${hotel.city}<br>
-                    Address: ${hotel.address }<br>
-                    typeOfService: ${hotel.typeOfService }<br>
-                    Description: ${hotel.description }<br>
-                    photoURL: ${hotel.photoURL }<br>
-                    <form:form method="post" id="feedback" action="feedback_page" modelAttribute="choosenHotel" >
+                    <h3>Feedback page</h3>
+
+                    <form:form method="post" id="feedback" action="send_feedback" modelAttribute="choosenHotel" >
+	<%-- 					<form:input path="text" type="text" name="text" ></form:input> --%>
 						<form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
-						<form:button type="submit">Leave feedback</form:button>
+						<form:button type="submit">Send feedback</form:button>
 					</form:form>
                 </div>
             </div>
