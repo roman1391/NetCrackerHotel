@@ -47,8 +47,6 @@
             <form:input path="avatar"/>
             <form:input path="email" id="email" value="${currentUser.email}"
                         class="editable"/>
-            <form:input path="accessLevel" id="accessLevel" value="${currentUser.accessLevel}"
-                        class="editable"/>
             <form:input path="firstName" id="firstName" value="${currentUser.firstName}"
                         class="editable"/>
             <form:input path="lastName" id="lastName" value="${currentUser.lastName}"

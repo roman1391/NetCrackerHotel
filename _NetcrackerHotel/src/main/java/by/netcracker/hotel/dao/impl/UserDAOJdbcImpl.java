@@ -42,7 +42,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     public void add(User user) {
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.USER.name().toLowerCase());
         getJdbcTemplate().update(SqlQuery.ADD_USER.getQuery(), user.getFirstName(), user.getLastName(),
-                    user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
+            user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
     }
 
     @Override
@@ -63,9 +63,9 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
         update(user.getLastName(), ColumnName.USER_LAST_NAME, user.getId());
         update(user.getUsername(), ColumnName.USER_USERNAME, user.getId());
         update(user.getEmail(), ColumnName.USER_EMAIL, user.getId());
-        update(user.getAccessLevel(), ColumnName.USER_ACCESS_LEVEL, user.getId());
         update(user.getAvatar(), ColumnName.USER_AVATAR, user.getId());
-        // этот апдейт пароля откровенный костыль, но мы разберемся с ним позже...
+        // этот апдейт пароля откровенный костыль, но мы разберемся с ним
+        // позже...
         if (user.getPassword() != null && !user.getPassword().equals("0") && user.getPassword().length() < 50) {
             update(passwordEncoder.encode(user.getPassword()), ColumnName.USER_PASSWORD, user.getId());
         }

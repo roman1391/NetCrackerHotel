@@ -43,10 +43,6 @@ public class UserMapper implements RowMapper<User> {
                     user.setPassword(resultSet.getString(3));
                     break;
                 }
-                case ColumnName.USER_ACCESS_LEVEL: {
-                    user.setAccessLevel(Integer.parseInt(resultSet.getString(3)));
-                    break;
-                }
                 case ColumnName.USER_ENABLED: {
                     if (Integer.parseInt(resultSet.getString(3)) == 1) {
                         user.setEnabled(true);
