@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import by.netcracker.hotel.entities.Feedback;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.HotelService;
@@ -55,16 +56,9 @@ public class SearchHotelController {
     @RequestMapping(value = "/hotel_page", method = RequestMethod.POST)
     public String hotelPage(@Valid @ModelAttribute("choosenHotel") Hotel hotel, Model model) {
         hotel = hotelService.getByID(hotel.getId());
-        model.addAttribute("hotel", hotel);
-        // model.addAttribute("feedback", new Feedback());
+        model.addAttribute("choosenHotel", hotel);
+        model.addAttribute("feedback", new Feedback());
         return "hotel_page";
-    }
-
-    @RequestMapping(value = "/feedback_page", method = RequestMethod.POST)
-    public String feedbackPage(@Valid @ModelAttribute("choosenHotel") Hotel hotel, Model model) {
-        hotel = hotelService.getByID(hotel.getId());
-        model.addAttribute("hotel", hotel);
-        return "feedback_page";
     }
 
 }

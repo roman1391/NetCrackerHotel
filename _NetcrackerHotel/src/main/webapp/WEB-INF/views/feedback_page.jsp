@@ -20,9 +20,10 @@
                 <div class="jumbotron">
                     <h3>Feedback page</h3>
 
-                    <form:form method="post" id="feedback" action="send_feedback" modelAttribute="choosenHotel" >
-	<%-- 					<form:input path="text" type="text" name="text" ></form:input> --%>
-						<form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
+                    <form:form method="post" id="feedback" action="send_feedback" modelAttribute="feedback" >
+	 					<form:input path="text" type="text" name="text" ></form:input> 
+	 					<form:input path="userId" type="hidden" name="userId" value="${currentUser.id}"></form:input>
+						<form:input path="hotelId" type="hidden" name="hotelId" value="${choosenHotel.id}"></form:input>
 						<form:button type="submit">Send feedback</form:button>
 					</form:form>
                 </div>
