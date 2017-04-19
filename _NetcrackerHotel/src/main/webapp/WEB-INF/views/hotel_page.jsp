@@ -19,6 +19,13 @@
             <div class="col-xs-12 col-sm-9">
                 <div class="jumbotron">
                     <h3>Hotel page</h3>
+                    Name: ${hotel.name }<br>
+                    Country: ${hotel.country }<br>
+                    City: ${hotel.city}<br>
+                    Address: ${hotel.address }<br>
+                    typeOfService: ${hotel.typeOfService }<br>
+                    Description: ${hotel.description }<br>
+                    photoURL: ${hotel.photoURL }<br>
                 </div>
             </div>
         </div>

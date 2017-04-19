@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +26,14 @@ public class SearchHotelController {
         this.hotelService = hotelService;
     }
 
-    @RequestMapping(value = "search-page", method = RequestMethod.GET)
+    @RequestMapping(value = "/search-page", method = RequestMethod.GET)
     public String getSearchPage(Model model) {
         model.addAttribute("searchFilter", new SearchFilter());
         model.addAttribute("places", hotelService.getPlaces());
         return "search_page";
     }
 
-    @RequestMapping(value = "find-hotels", method = RequestMethod.POST)
+    @RequestMapping(value = "/find-hotels", method = RequestMethod.POST)
     public String findHotels(@ModelAttribute("searchFilter") SearchFilter searchFilter, Model model) {
         String place = searchFilter.getPlace();
         model.addAttribute("places", hotelService.getPlaces());
@@ -43,14 +45,17 @@ public class SearchHotelController {
                 hotels = null;
             }
             model.addAttribute("hotels", hotels);
+            model.addAttribute("choosenHotel", new Hotel());
         } else {
             model.addAttribute("message", "Please, enter place for search!");
         }
         return "search_page";
     }
 
-    @RequestMapping(value = "hotel_page", method = RequestMethod.GET)
-    public String hotelPage(Model model) {
+    @RequestMapping(value = "/hotel_page", method = RequestMethod.POST)
+    public String hotelPage(@Valid @ModelAttribute("choosenHotel") Hotel hotel, Model model) {
+        hotel = hotelService.getByID(hotel.getId());
+        model.addAttribute("hotel", hotel);
         return "hotel_page";
     }
 

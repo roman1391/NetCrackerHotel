@@ -13,16 +13,15 @@ public class Hotel {
     private int id;
     private String photoURL;
 
-    public Hotel(){
+    public Hotel() {
     }
 
-    /*public Hotel(String country, String city, String address, String name, int typeOfService){
-        this.country = country;
-        this.city = city;
-        this.address = address;
-        this.name = name;
-        this.typeOfService = typeOfService;
-    }*/
+    /*
+     * public Hotel(String country, String city, String address, String name,
+     * int typeOfService){ this.country = country; this.city = city;
+     * this.address = address; this.name = name; this.typeOfService =
+     * typeOfService; }
+     */
 
     public String getDescription() {
         return description;
@@ -87,4 +86,5 @@ public class Hotel {
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
     }
+
 }
