@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:c="http://www.springframework.org/schema/c"
-       xmlns:facebook="http://www.springframework.org/schema/social/facebook"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:c="http://www.springframework.org/schema/c"
+	   xmlns:facebook="http://www.springframework.org/schema/social/facebook"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	
+
 	<!-- Root Context: defines shared resources visible to all other web components  -->
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="username" value="netcrackerhotel@gmail.com"/>
 		<property name="password" value="qwerty345"/>
-        <property name="host" value="smtp.gmail.com"/>
-        <property name="port" value="587"/>
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
@@ -24,9 +24,11 @@
 		</property>
 	</bean>
 
+	<import resource="social.xml"/>
+
 	<context:component-scan base-package="by.netcracker.hotel" >
-	    <context:exclude-filter expression="org.springframework.stereotype.Controller"
-							type="annotation"/>
+		<context:exclude-filter expression="org.springframework.stereotype.Controller"
+								type="annotation"/>
 	</context:component-scan>
 
 </beans>
