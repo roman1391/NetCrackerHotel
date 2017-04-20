@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -14,12 +15,21 @@ import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.services.HotelService;
 
 @Controller
-public class FeedbackController {
+@RequestMapping("/hotel_page")
+public class HotelController {
     private final HotelService hotelService;
 
     @Autowired
-    public FeedbackController(HotelService hotelService) {
+    public HotelController(HotelService hotelService) {
         this.hotelService = hotelService;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String hotelPage(@Valid @PathVariable("id") int hotelID, Model model) {
+        Hotel hotel = hotelService.getByID(hotelID);
+        model.addAttribute("choosenHotel", hotel);
+        model.addAttribute("feedback", new Feedback());
+        return "hotel_page";
     }
 
     @RequestMapping(value = "/feedback_page", method = RequestMethod.POST)
@@ -40,5 +50,4 @@ public class FeedbackController {
         model.addAttribute("success", "Thank you for feedback");
         return "hotel_page";
     }
-
 }
