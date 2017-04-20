@@ -1,6 +1,6 @@
 package by.netcracker.hotel.entities;
 
-public class Feedback {
+public class Review {
 
     private int id;
     private int userId;
@@ -10,10 +10,10 @@ public class Feedback {
     private String date;
     private int rating;
 
-    public Feedback() {
+    public Review() {
     }
 
-    public Feedback(int id, int userId, int hotelId, String text, String status, String date, int rating) {
+    public Review(int id, int userId, int hotelId, String text, String status, String date, int rating) {
         super();
         this.id = id;
         this.userId = userId;
@@ -108,7 +108,7 @@ public class Feedback {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Feedback other = (Feedback) obj;
+        Review other = (Review) obj;
         if (date == null) {
             if (other.date != null)
                 return false;

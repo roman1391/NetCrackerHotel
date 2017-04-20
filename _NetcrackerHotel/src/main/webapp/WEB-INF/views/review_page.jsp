@@ -18,13 +18,13 @@
         <div class="row row-offcanvas row-offcanvas-left">
             <div class="col-xs-12 col-sm-9">
                 <div class="jumbotron">
-                    <h3>Feedback page</h3>
+                    <h3>Review page</h3>
 
-                    <form:form method="post" id="feedback" action="send_feedback" modelAttribute="feedback" >
+                    <form:form method="post" id="review" action="send_review" modelAttribute="review" >
 	 					<form:input path="text" type="text" name="text" ></form:input> 
 	 					<form:input path="userId" type="hidden" name="userId" value="${currentUser.id}"></form:input>
 						<form:input path="hotelId" type="hidden" name="hotelId" value="${choosenHotel.id}"></form:input>
-						<form:button type="submit">Send feedback</form:button>
+						<form:button type="submit">Send review</form:button>
 					</form:form>
                 </div>
             </div>

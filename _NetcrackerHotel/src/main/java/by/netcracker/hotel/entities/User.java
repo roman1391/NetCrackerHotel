@@ -153,4 +153,11 @@ public class User implements BusinessObject {
         return dto;
     }
 
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+            + ", password=" + password + ", email=" + email + ", enabled=" + enabled + ", authority=" + authority
+            + ", avatar=" + avatar + "]";
+    }
+
 }

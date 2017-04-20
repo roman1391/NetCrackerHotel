@@ -13,7 +13,7 @@ public class Hotel {
     private int id;
     private String photoURL;
 
-    public Hotel(){
+    public Hotel() {
     }
 
     public String getDescription() {
@@ -79,4 +79,12 @@ public class Hotel {
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
     }
+
+    @Override
+    public String toString() {
+        return "Hotel [country=" + country + ", city=" + city + ", address=" + address + ", name=" + name
+            + ", typeOfService=" + typeOfService + ", description=" + description + ", id=" + id + ", photoURL="
+            + photoURL + "]";
+    }
+
 }

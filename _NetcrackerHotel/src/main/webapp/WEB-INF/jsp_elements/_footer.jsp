@@ -4,7 +4,11 @@
 <footer>
 	<div class="credits text-center">
 		<p >
-			Netcracker 2017
+			Netcracker 2017 <br>
+			debug info <br>
+			${currentUser} <br>
+			${choosenHotel} <br>
+			${review} <br>
 		</p>
 	</div>
 </footer>

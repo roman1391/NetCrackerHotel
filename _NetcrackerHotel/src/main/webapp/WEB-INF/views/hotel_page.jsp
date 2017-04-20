@@ -27,17 +27,17 @@
 								${success}</div>
 						</c:if>
 
-						Name: ${choosenHotel.name }<br> Country:
-						${choosenHotel.country }<br> City: ${choosenHotel.city}<br>
-						Address: ${choosenHotel.address }<br> typeOfService:
-						${choosenHotel.typeOfService }<br> Description:
-						${choosenHotel.description }<br> photoURL:
-						${choosenHotel.photoURL }<br>
-						<form:form method="post" id="feedback" action="feedback_page"
-							modelAttribute="choosenHotel">
-							<form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
-							<form:button type="submit">Leave feedback</form:button>
-						</form:form>
+						Name: ${choosenHotel.name }<br> 
+						Country: ${choosenHotel.country }<br> City: ${choosenHotel.city}<br>
+						Address: ${choosenHotel.address }<br> typeOfService: ${choosenHotel.typeOfService }<br>
+						Description: ${choosenHotel.description }<br> 
+						photoURL: ${choosenHotel.photoURL }<br>
+						<c:if test="${currentUser.authority.toString() eq 'USER'}">
+							<form:form method="post" id="review" action="review_page" modelAttribute="choosenHotel">
+								<form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
+								<form:button type="submit">Leave review</form:button>
+							</form:form>
+						</c:if>
 					</div>
 				</div>
 			</div>
