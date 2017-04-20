@@ -32,11 +32,19 @@ public class Photo {
         this.idPhoto = idPhoto;
     }
 
-    public Photo(int idHotel, String photoName) {
+    public Photo(int idHotel) {
         this.idHotel = idHotel;
-        this.photoName = photoName;
+        generateName();
     }
 
     public Photo() {
+    }
+
+    private void generateName(){
+        StringBuilder randString = new StringBuilder();
+        int count = (int)(Math.random()*29+1);
+        for(int i=0;i<count;i++)
+            randString.append((char)((int)(Math.random()*26+65)));
+        setPhotoName(randString.toString());
     }
 }

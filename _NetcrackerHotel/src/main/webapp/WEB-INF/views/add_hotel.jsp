@@ -15,7 +15,6 @@
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <%@include file="../jsp_elements/addhotelform.jsp"%>
-    <script src="<c:url value="/resources/js/photo.js"/>" type="text/javascript"></script>
 </div>
 <%@include file="../jsp_elements/_footer.jsp" %>
 </body>

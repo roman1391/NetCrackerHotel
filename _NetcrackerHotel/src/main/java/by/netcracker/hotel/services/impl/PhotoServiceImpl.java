@@ -7,6 +7,7 @@ import by.netcracker.hotel.services.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,30 +19,29 @@ import java.util.Map;
  */
 @Service("PhotoServiceImpl")
 public class PhotoServiceImpl implements PhotoService {
-    private final WebApplicationContext context;
     private final PhotoDAO photoDAO;
 
     @Autowired
-    public PhotoServiceImpl(WebApplicationContext context, PhotoDAO hotelDAO, PhotoDAO photoDAO) {
-        this.context = context;
+    public PhotoServiceImpl(PhotoDAO photoDAO) {
         this.photoDAO = photoDAO;
     }
 
 
     @Override
-    public void addPhoto(Photo photo, File file) {
+    public void addPhoto(Photo photo) {
         photoDAO.add(photo);
-        try {
-            Map uploadResult = CloudinaryConnector.getCloudinary().uploader().upload(file,
-                    CloudinaryConnector.picureTransform(photo.getPhotoName()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Override
     public List<Photo> getPhotosForHotel(int id) {
         return photoDAO.getPhotosForHotel(id);
     }
+
+    @Override
+    public void addPhotosToHotel(List<Photo> photos) {
+        for(Photo photo: photos){
+            addPhoto(photo);
+        }
+    }
+
 }

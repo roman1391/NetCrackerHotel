@@ -33,7 +33,7 @@
 							<a href="list_of_hotels">Hotel management</a>
 						</p>
 						<p>
-							<a href="add_hotel">Add hotel</a>
+							<a href="hotel/add">Add hotel</a>
 						</p>
 					</div>
 				</div>

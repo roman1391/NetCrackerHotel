@@ -77,12 +77,6 @@ public class AdminController {
         return "list_of_users";
     }
 
-    @RequestMapping(value = "/add_hotel", method = RequestMethod.GET)
-    public String about(Model model) {
-        model.addAttribute("hotel", new Hotel());
-        return "add_hotel";
-    }
-
     @RequestMapping(value = "/delete_user", method = RequestMethod.POST)
     public String deleteUser(@Valid @ModelAttribute("user") User user, Model model) {
         userService.deleteUserByUsername(user);

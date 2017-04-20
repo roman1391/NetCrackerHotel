@@ -14,8 +14,13 @@ public class PhotoMapper implements RowMapper<Photo> {
     @Override
     public Photo mapRow(ResultSet resultSet, int i) throws SQLException {
         Photo photo = new Photo();
-        photo.setIdPhoto(resultSet.getInt(1));
+        int currentID = resultSet.getInt(1);
+        photo.setIdPhoto(currentID);
         do {
+            if (currentID != resultSet.getInt(1)) {
+                resultSet.previous();
+                break;
+            }
             switch (resultSet.getString(2)) {
                 case ColumnName.IDHOTEL: {
                     photo.setIdHotel(resultSet.getInt(3));

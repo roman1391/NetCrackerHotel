@@ -16,14 +16,6 @@ public class Hotel {
     public Hotel(){
     }
 
-    /*public Hotel(String country, String city, String address, String name, int typeOfService){
-        this.country = country;
-        this.city = city;
-        this.address = address;
-        this.name = name;
-        this.typeOfService = typeOfService;
-    }*/
-
     public String getDescription() {
         return description;
     }

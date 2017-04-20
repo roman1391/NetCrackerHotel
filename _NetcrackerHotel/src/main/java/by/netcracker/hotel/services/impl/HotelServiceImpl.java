@@ -17,7 +17,6 @@ import java.util.List;
 
 @Service("HotelServiceImpl")
 public class HotelServiceImpl implements HotelService {
-    private final WebApplicationContext context;
     private final HotelDAO hotelDAO;
 
     @Override
@@ -27,8 +26,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Autowired
-    public HotelServiceImpl(WebApplicationContext context, HotelDAO hotelDAO) {
-        this.context = context;
+    public HotelServiceImpl(HotelDAO hotelDAO) {
         this.hotelDAO = hotelDAO;
     }
 

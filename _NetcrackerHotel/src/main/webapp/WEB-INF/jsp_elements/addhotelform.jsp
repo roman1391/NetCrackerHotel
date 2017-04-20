@@ -6,10 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<form:form style="margin: 20px" action="add-hotel" method="post" modelAttribute="hotel"
+<form:form style="margin: 20px" action="/hotel/add" method="post" modelAttribute="hotel"
            enctype="multipart/form-data" id="selectPhoto">
     <div class="form-group">
-        <input type="file" name="file" id="file" value="Choose photo">
+        <input type="file" name="file" accept="image/*">
     </div>
     <div class="form-group">
         <form:label path="name">Hotel name</form:label>

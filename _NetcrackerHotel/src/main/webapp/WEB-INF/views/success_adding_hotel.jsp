@@ -15,6 +15,7 @@
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <%@include file="../jsp_elements/hotelMin.jsp" %>
+    <%@include file="../jsp_elements/addphotoform.jsp"%>
 </div>
 <%@include file="../jsp_elements/_footer.jsp" %>
 </body>
