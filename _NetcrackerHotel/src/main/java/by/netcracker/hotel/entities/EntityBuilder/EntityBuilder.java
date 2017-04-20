@@ -8,16 +8,14 @@ import by.netcracker.hotel.enums.ROLE;
  */
 public class EntityBuilder {
 
-    public static User buildUser(String firstName, String lastName,
-                                 String username, String password, String email,
-                                 boolean enabled, ROLE authority) {
+    public static User buildUser(String firstName, String lastName, String username, String password, String email,
+        boolean enabled, ROLE authority) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(password);
-        user.setAccessLevel(1);
         user.setEnabled(enabled);
         user.setAuthority(authority);
         return user;

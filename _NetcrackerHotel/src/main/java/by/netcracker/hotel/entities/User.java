@@ -1,11 +1,12 @@
 package by.netcracker.hotel.entities;
 
-import by.netcracker.hotel.dto.UserDTO;
-import by.netcracker.hotel.enums.ROLE;
+import java.util.Objects;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Objects;
+
+import by.netcracker.hotel.dto.UserDTO;
+import by.netcracker.hotel.enums.ROLE;
 
 public class User implements BusinessObject {
 
@@ -15,7 +16,6 @@ public class User implements BusinessObject {
         user.setEmail("sdfsdf@df.ru");
         user.setFirstName("FirstName");
         user.setLastName("dsfsdf");
-        user.setAccessLevel(1);
         return user;
     }
 
@@ -36,15 +36,19 @@ public class User implements BusinessObject {
     @Size(min = 6, message = "Password is min 6 and max 15 symbols ")
     private String password;
 
-/*    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\." + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Invalid email address")*/
+    /*
+     * @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\." +
+     * "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@" +
+     * "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+     * message = "Invalid email address")
+     */
     private String email;
-
-    private int accessLevel;
 
     private boolean enabled;
 
     private ROLE authority;
+
+    private String avatar;
 
     public boolean getEnabled() {
         return enabled;
@@ -110,14 +114,6 @@ public class User implements BusinessObject {
         this.email = email;
     }
 
-    public int getAccessLevel() {
-        return accessLevel;
-    }
-
-    public void setAccessLevel(int accessLevel) {
-        this.accessLevel = accessLevel;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -125,17 +121,22 @@ public class User implements BusinessObject {
         if (o == null || getClass() != o.getClass())
             return false;
         User user = (User) o;
-        return getId() == user.getId() && getAccessLevel() == user.getAccessLevel()
-                && Objects.equals(getFirstName(), user.getFirstName())
-                && Objects.equals(getLastName(), user.getLastName())
-                && Objects.equals(getUsername(), user.getUsername())
-                && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getEmail(), user.getEmail());
+        return getId() == user.getId() && Objects.equals(getFirstName(), user.getFirstName())
+            && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getUsername(), user.getUsername())
+            && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getEmail(), user.getEmail());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getUsername(), getPassword(), getEmail(),
-                getAccessLevel());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getUsername(), getPassword(), getEmail());
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @Override
@@ -148,7 +149,7 @@ public class User implements BusinessObject {
         dto.setEmail(getEmail());
         dto.setAuthority(getAuthority());
         dto.setEnabled(getEnabled());
-        dto.setAccessLevel(getAccessLevel());
+        dto.setAvatar(getAvatar());
         return dto;
     }
 
