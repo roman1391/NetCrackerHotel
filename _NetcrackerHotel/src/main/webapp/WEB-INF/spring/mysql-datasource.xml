@@ -12,9 +12,5 @@
 	      p:password="1234">
 	</bean>
 
-	<!--<jdbc:initialize-database>
-		<jdbc:script  location="classpath*:/org/springframework/social/connect/jdbc/JdbcUsersConnectionRepository.sql"/>
-	</jdbc:initialize-database> -->
-
 
 </beans>

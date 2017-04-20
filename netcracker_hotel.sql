@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `netcracker_hotel` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `netcracker_hotel`;
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
 -- Host: localhost    Database: netcracker_hotel
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.7.17-0ubuntu0.16.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +14,47 @@ USE `netcracker_hotel`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `netcracker_hotel`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `netcracker_hotel` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `netcracker_hotel`;
+
+--
+-- Table structure for table `UserConnection`
+--
+
+DROP TABLE IF EXISTS `UserConnection`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `UserConnection` (
+  `userId` varchar(255) NOT NULL,
+  `providerId` varchar(255) NOT NULL,
+  `providerUserId` varchar(255) NOT NULL,
+  `rank` int(11) NOT NULL,
+  `displayName` varchar(255) DEFAULT NULL,
+  `profileUrl` varchar(512) DEFAULT NULL,
+  `imageUrl` varchar(512) DEFAULT NULL,
+  `accessToken` varchar(512) NOT NULL,
+  `secret` varchar(512) DEFAULT NULL,
+  `refreshToken` varchar(512) DEFAULT NULL,
+  `expireTime` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`userId`,`providerId`,`providerUserId`),
+  UNIQUE KEY `UserConnectionRank` (`userId`,`providerId`,`rank`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `UserConnection`
+--
+
+LOCK TABLES `UserConnection` WRITE;
+/*!40000 ALTER TABLE `UserConnection` DISABLE KEYS */;
+/*!40000 ALTER TABLE `UserConnection` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `attribute`
@@ -129,7 +168,7 @@ CREATE TABLE `value` (
   `attribute_id` int(11) NOT NULL,
   `attribute_value` varchar(90) NOT NULL,
   PRIMARY KEY (`value_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=418 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=392 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-19 22:07:14
+-- Dump completed on 2017-04-20 19:06:18
