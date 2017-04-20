@@ -9,9 +9,5 @@
 		<p>${hotel.country}, ${hotel.city}</p>
 		<p>${hotel.address}</p>
 		<p>${hotel.name} ${hotel.typeOfService}</p>
-		<form:form method="post" id="hotelpage" action="hotel_page" modelAttribute="choosenHotel" >
-			<form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
-			<form:button type="submit">See hotel</form:button>
-		</form:form>
 	</div>
 </div>
