@@ -2,6 +2,7 @@ package by.netcracker.hotel.services.impl;
 
 import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.entities.Hotel;
+import by.netcracker.hotel.entities.Photo;
 import by.netcracker.hotel.services.HotelService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,11 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public void addHotel(Hotel hotel) {
         hotelDAO.add(hotel);
+    }
+
+    @Override
+    public void setMainPhotoForHotel(int idHotel, int idPhoto) {
+        hotelDAO.setMainPhotoForHotel(idHotel, idPhoto);
     }
 
 }

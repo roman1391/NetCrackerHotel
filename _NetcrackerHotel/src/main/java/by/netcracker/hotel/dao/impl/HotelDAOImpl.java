@@ -101,4 +101,9 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
                 (resultSet, i) -> resultSet.getString(1));
     }
 
+    @Override
+    public void setMainPhotoForHotel(int idHotel, int idPhoto) {
+        getJdbcTemplate().update(SqlQuery.SET_MAIN_PHOTO_FOR_HOTEL.getQuery(), idHotel, idPhoto);
+    }
+
 }

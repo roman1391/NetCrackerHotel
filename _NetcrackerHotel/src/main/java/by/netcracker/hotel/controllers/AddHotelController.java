@@ -54,6 +54,7 @@ public class AddHotelController {
         if (!file.isEmpty()) {
             Photo photo = new Photo(hotel.getId());
             photoService.addPhoto(photo);
+            hotelService.setMainPhotoForHotel(hotel.getId(), photo.getIdPhoto());
             savePhotoInCloudinary(file, photo.getPhotoName());
             String photoUrl = CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo.getPhotoName());
             hotel.setPhotoURL(photoUrl);

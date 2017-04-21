@@ -40,8 +40,21 @@ public class PhotoDAOImpl extends JdbcDaoSupport implements PhotoDAO {
     }
 
     @Override
-    public void add(Photo photo) {
+    public void add(Photo photo) {/*
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.PHOTOS.name().toLowerCase());
+        getJdbcTemplate().update(SqlQuery.ADD_PHOTO.getQuery(), photo.getIdHotel(), photo.getPhotoName());
+    */
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        getJdbcTemplate().update(new PreparedStatementCreator() {
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = connection.prepareStatement(SqlQuery.ADD_ENTITY_ID.getQuery(),
+                        new String[]{"id"});
+                ps.setString(1, TypeName.PHOTOS.name().toLowerCase());
+                return ps;
+            }
+        }, keyHolder);
+
+        photo.setIdPhoto(keyHolder.getKey().intValue());
         getJdbcTemplate().update(SqlQuery.ADD_PHOTO.getQuery(), photo.getIdHotel(), photo.getPhotoName());
     }
 
