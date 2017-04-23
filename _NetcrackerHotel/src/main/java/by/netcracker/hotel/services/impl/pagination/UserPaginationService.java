@@ -39,6 +39,13 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
         BoPaginationColumn col = null;
 
         col = new BoPaginationColumn();
+        col.setColumnName("Username");
+        col.setOrderColumns("username");
+        col.setOrderDirections("desc");
+        col.setWidth(30);
+        columns.add(col);
+
+        col = new BoPaginationColumn();
         col.setColumnName("Authority");
         col.setOrderColumns("authority");
         col.setOrderDirections("desc");
@@ -47,13 +54,6 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
 
         col = new BoPaginationColumn();
         col.setColumnName("Enabled");
-        col.setWidth(30);
-        columns.add(col);
-
-        col = new BoPaginationColumn();
-        col.setColumnName("Username");
-        col.setOrderColumns("username");
-        col.setOrderDirections("desc");
         col.setWidth(30);
         columns.add(col);
 
