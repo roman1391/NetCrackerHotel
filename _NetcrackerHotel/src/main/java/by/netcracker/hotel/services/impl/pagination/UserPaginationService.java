@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.paginationspring.bo.BoPaginationColumn;
+import com.github.paginationspring.dao.PaginationDao;
 import com.github.paginationspring.service.PaginationServiceAbstract;
 
 import by.netcracker.hotel.dao.impl.pagination.UserPaginationDAO;
@@ -19,7 +20,8 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
 
     private static Logger log = Logger.getLogger(UserPaginationService.class);
 
-    private UserPaginationDAO userPaginationDAO;
+    @SuppressWarnings("unused")
+    private PaginationDao<User, UserSearchParam> userPaginationDAO;
 
     @Autowired
     public void setPaginationDao(UserPaginationDAO userPaginationDAO) {
@@ -42,9 +44,6 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
 
         col = new BoPaginationColumn();
         col.setColumnName("Enabled");
-        // col.setOrderColumns("a.season, c.teamAlias, b.lastName,
-        // b.firstName");
-        // col.setOrderDirections("desc, asc, asc, asc");
         col.setWidth(20);
         columns.add(col);
 
@@ -57,20 +56,13 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
 
         col = new BoPaginationColumn();
         col.setColumnName("Email");
-        // col.setOrderColumns("a.season, c.teamAlias, b.lastName,
-        // b.firstName");
-        // col.setOrderDirections("desc, asc, asc, asc");
         col.setWidth(25);
         columns.add(col);
 
         col = new BoPaginationColumn();
         col.setColumnName("Profile");
-        // col.setOrderColumns("a.season, c.teamAlias, b.lastName,
-        // b.firstName");
-        // col.setOrderDirections("desc, asc, asc, asc");
         col.setWidth(30);
         columns.add(col);
-
     }
 
     @Override
@@ -81,8 +73,6 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
         bo.setEnabled(user.getEnabled() ? "Enabled" : "Unenabled");
         bo.setUsername(user.getUsername());
         bo.setEmail(user.getEmail());
-
         return bo;
     }
-
 }

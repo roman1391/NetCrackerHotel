@@ -8,14 +8,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.github.paginationspring.bo.BoPaginationParam;
-
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.pagination.UserSearchParam;
 
 @Repository
-public class UserPaginationDAO implements com.github.paginationspring.dao.PaginationDao {
+public class UserPaginationDAO implements com.github.paginationspring.dao.PaginationDao<User, UserSearchParam> {
     UserDAO userDAO;
 
     @Autowired
@@ -24,8 +22,7 @@ public class UserPaginationDAO implements com.github.paginationspring.dao.Pagina
     }
 
     @Override
-    public int retrieveCountResult(BoPaginationParam pparam) throws Exception {
-        System.out.println(pparam);
+    public int retrieveCountResult(UserSearchParam pparam) throws Exception {
         UserSearchParam param = (UserSearchParam) pparam;
         List<User> list = userDAO.getAll();
         if (param.getAuthority() != null && !param.getAuthority().equals("")) {
@@ -59,7 +56,7 @@ public class UserPaginationDAO implements com.github.paginationspring.dao.Pagina
     }
 
     @Override
-    public List retrievePageResult(BoPaginationParam pparam) throws Exception {
+    public List<User> retrievePageResult(UserSearchParam pparam) throws Exception {
         List<User> list = userDAO.getAll();
         int index = Integer.parseInt(pparam.getResultIndex());
         UserSearchParam param = (UserSearchParam) pparam;
@@ -76,6 +73,7 @@ public class UserPaginationDAO implements com.github.paginationspring.dao.Pagina
                     });
                 } else if (param.getSortAscDesc().equals("a")) {
                     Collections.sort(list, new Comparator<User>() {
+
                         @Override
                         public int compare(User user1, User user2) {
                             return user2.getUsername().compareTo(user1.getUsername());
@@ -90,7 +88,9 @@ public class UserPaginationDAO implements com.github.paginationspring.dao.Pagina
                             return user1.getAuthority().toString().compareTo(user2.getAuthority().toString());
                         }
                     });
-                } else if (param.getSortAscDesc().equals("a")) {
+                } else if (param.getSortAscDesc().equals("a"))
+
+                {
                     Collections.sort(list, new Comparator<User>() {
                         @Override
                         public int compare(User user1, User user2) {
@@ -135,7 +135,6 @@ public class UserPaginationDAO implements com.github.paginationspring.dao.Pagina
                 list1.add(list.get(i));
             }
         }
-
         return list1;
     }
 
