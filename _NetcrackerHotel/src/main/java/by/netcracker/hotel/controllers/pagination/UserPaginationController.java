@@ -29,7 +29,7 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
         setDefaultRecordPerPage(10);
         setDefaultSortName("Authority");
         setDefaultSortAscDesc("d");
-        setPageLink("list_of_users"); // url
+        setPageLink("/list_of_users"); // url
     }
 
     @Autowired

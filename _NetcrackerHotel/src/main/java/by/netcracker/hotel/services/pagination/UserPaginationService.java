@@ -35,9 +35,8 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
 
         col = new BoPaginationColumn();
         col.setColumnName("Authority");
-        // col.setOrderColumns("a.season, c.teamAlias, b.lastName,
-        // b.firstName");
-        // col.setOrderDirections("desc, asc, asc, asc");
+        // col.setOrderColumns("authority");
+        // col.setOrderDirections("desc");
         col.setWidth(30);
         columns.add(col);
 
@@ -59,6 +58,14 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
 
         col = new BoPaginationColumn();
         col.setColumnName("Email");
+        // col.setOrderColumns("a.season, c.teamAlias, b.lastName,
+        // b.firstName");
+        // col.setOrderDirections("desc, asc, asc, asc");
+        col.setWidth(30);
+        columns.add(col);
+
+        col = new BoPaginationColumn();
+        col.setColumnName("Profile");
         // col.setOrderColumns("a.season, c.teamAlias, b.lastName,
         // b.firstName");
         // col.setOrderDirections("desc, asc, asc, asc");

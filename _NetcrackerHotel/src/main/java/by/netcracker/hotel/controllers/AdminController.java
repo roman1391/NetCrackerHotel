@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -56,9 +57,9 @@ public class AdminController {
         return "admin_page";
     }
 
-    @RequestMapping(value = "/edit_form", method = RequestMethod.POST)
-    public String getEditForms(@Valid @ModelAttribute("user") User user, Model model) {
-        user = (User) userService.getUserByUsername(user.getUsername());
+    @RequestMapping(value = "/edit_form/{username}", method = RequestMethod.GET)
+    public String getEditForms(@Valid @PathVariable("username") String username, Model model) {
+        User user = userService.getUserByUsername(username);
         model.addAttribute("user", user);
         return "user_editing";
     }

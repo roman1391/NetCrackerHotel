@@ -16,6 +16,7 @@
 </head>
 
 <body>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 	<%@include file="../jsp_elements/_header.jsp"%>
 	<div id="wrapper">
 		<div class="container">
@@ -79,8 +80,8 @@
 
 							</div>
 
-							<a href="list_of_users">Back to list of users</a> <br> <a
-								href="admin_page">To admin page</a>
+							<a href="${contextPath}/list_of_users">Back to list of users</a> <br> <a
+								href="${contextPath}/admin_page">To admin page</a>
 						</div>
 					</div>
 				</div>

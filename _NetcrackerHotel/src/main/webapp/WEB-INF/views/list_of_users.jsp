@@ -34,7 +34,7 @@
                             <td class="caption" style="width:50px;">Filter:</td>
                             <td style="width:120px;">
                             <form:select path="authority" cssStyle="width:110px;">
-                               <form:option value="authority" label="--authority--"/>
+                               <form:option value="" label="--authority--"/>
                                <form:option value="ADMIN" label="ADMIN"/>
                                <form:option value="USER" label="USER"/>
                                <form:option value="BLOCKED" label="BLOCKED"/>
@@ -42,9 +42,9 @@
                             </td>
                             <td style="width:200px;">
                                 <form:select path="enabled">
-                                   	<form:option value="enabled" label="--enabled--"/>
-                               		<form:option value="Enabled" label="Enabled"/>
-                               		<form:option value="Unenabled" label="Unenabled"/>
+                                   	<form:option value="" label="--enabled--"/>
+                               		<form:option value="true" label="Enabled"/>
+                               		<form:option value="false" label="Unenabled"/>
                                 </form:select>
                             </td>
                             <td style="width:80px;">Username:</td>
@@ -65,6 +65,7 @@
                     <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.enabled}"/></span></td>
                     <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.username}"/></span></td>
                     <td class="cell"><span><c:out value="${bo.email}"/></span></td> 
+                    <td class="cell"><span><a href="edit_form/${bo.username}">See profile</a> </span></td> 
                 </jsp:attribute>
             </pg:pagination>
         </form:form>

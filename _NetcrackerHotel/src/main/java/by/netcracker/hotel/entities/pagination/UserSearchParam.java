@@ -1,5 +1,7 @@
 package by.netcracker.hotel.entities.pagination;
 
+import java.util.Arrays;
+
 import com.github.paginationspring.bo.BoPaginationParam;
 
 public class UserSearchParam extends BoPaginationParam {
@@ -30,6 +32,16 @@ public class UserSearchParam extends BoPaginationParam {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "UserSearchParam [authority=" + authority + ", enabled=" + enabled + ", username=" + username
+            + ", getSelectedIds()=" + Arrays.toString(getSelectedIds()) + ", getResultIndex()=" + getResultIndex()
+            + ", getRecordPerPage()=" + getRecordPerPage() + ", getSortName()=" + getSortName() + ", getSortAscDesc()="
+            + getSortAscDesc() + ", getOrderColumns()=" + getOrderColumns() + ", getOrderDirections()="
+            + getOrderDirections() + ", getSelectall()=" + getSelectall() + ", getClass()=" + getClass()
+            + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
     }
 
 }
