@@ -25,6 +25,33 @@ public class UserPaginationDAO implements com.github.paginationspring.dao.Pagina
     public int retrieveCountResult(UserSearchParam pparam) throws Exception {
         UserSearchParam param = (UserSearchParam) pparam;
         List<User> list = userDAO.getAll();
+        list = filterList(list, param);
+        return list.size();
+    }
+
+    @Override
+    public List<User> retrievePageResult(UserSearchParam pparam) throws Exception {
+        List<User> list = userDAO.getAll();
+        int index = Integer.parseInt(pparam.getResultIndex());
+        UserSearchParam param = (UserSearchParam) pparam;
+
+        sortList(list, param);
+        list = filterList(list, param);
+        List<User> list1 = getOnePage(list, index);
+        return list1;
+    }
+
+    private List<User> getOnePage(List<User> list, int index) {
+        List<User> list1 = new ArrayList<User>();
+        for (int i = index; i < index + 10; i++) {
+            if (list.size() > i) {
+                list1.add(list.get(i));
+            }
+        }
+        return list1;
+    }
+
+    private List<User> filterList(List<User> list, UserSearchParam param) {
         if (param.getAuthority() != null && !param.getAuthority().equals("")) {
             List<User> list1 = new ArrayList<User>();
             for (int i = 0; i < list.size(); i++) {
@@ -52,15 +79,10 @@ public class UserPaginationDAO implements com.github.paginationspring.dao.Pagina
             }
             list = list1;
         }
-        return list.size();
+        return list;
     }
 
-    @Override
-    public List<User> retrievePageResult(UserSearchParam pparam) throws Exception {
-        List<User> list = userDAO.getAll();
-        int index = Integer.parseInt(pparam.getResultIndex());
-        UserSearchParam param = (UserSearchParam) pparam;
-
+    private void sortList(List<User> list, UserSearchParam param) {
         if (param.getSortName() != null && !param.getSortName().equals("")) {
             System.out.println(param.getSortName());
             if (param.getSortName().equals("Username")) {
@@ -100,42 +122,6 @@ public class UserPaginationDAO implements com.github.paginationspring.dao.Pagina
                 }
             }
         }
-
-        if (param.getAuthority() != null && !param.getAuthority().equals("")) {
-            List<User> list1 = new ArrayList<User>();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getAuthority().toString().equals(param.getAuthority())) {
-                    list1.add(list.get(i));
-                }
-            }
-            list = list1;
-        }
-        if (param.getEnabled() != null && !param.getEnabled().equals("")) {
-            List<User> list1 = new ArrayList<User>();
-            for (int i = 0; i < list.size(); i++) {
-                if (((Boolean) list.get(i).getEnabled()).toString().equals(param.getEnabled())) {
-                    list1.add(list.get(i));
-                }
-            }
-            list = list1;
-        }
-        if (param.getUsername() != null && !param.getUsername().equals("")) {
-            List<User> list1 = new ArrayList<User>();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getUsername().contains((param.getUsername()))) {
-                    list1.add(list.get(i));
-                }
-            }
-            list = list1;
-        }
-
-        List<User> list1 = new ArrayList<User>();
-        for (int i = index; i < index + 10; i++) {
-            if (list.size() > i) {
-                list1.add(list.get(i));
-            }
-        }
-        return list1;
     }
 
 }

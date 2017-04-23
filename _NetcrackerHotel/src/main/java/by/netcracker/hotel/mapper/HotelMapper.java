@@ -14,8 +14,13 @@ public class HotelMapper implements RowMapper<Hotel> {
     @Override
     public Hotel mapRow(ResultSet resultSet, int i) throws SQLException {
         Hotel hotel = new Hotel();
-        hotel.setId(resultSet.getInt(1));
+        int currentID = resultSet.getInt(1);
+        hotel.setId(currentID);
         do {
+            if (currentID != resultSet.getInt(1)) {
+                resultSet.previous();
+                break;
+            }
             switch (resultSet.getString(2)) {
                 case ColumnName.COUNTRY: {
                     hotel.setCountry(resultSet.getString(3));

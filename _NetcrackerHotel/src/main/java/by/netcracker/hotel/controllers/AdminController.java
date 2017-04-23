@@ -78,10 +78,10 @@ public class AdminController {
         return "admin_page";
     }
 
-    @RequestMapping(value = "/list_of_hotels", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/list_of_hotels", method = RequestMethod.GET)
     public String getAllHotels(Model model) {
         model.addAttribute("hotel", new Hotel());
         return "list_of_hotels";
-    }
+    }*/
 
 }

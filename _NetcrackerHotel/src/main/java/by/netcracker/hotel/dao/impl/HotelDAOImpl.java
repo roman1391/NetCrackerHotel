@@ -1,5 +1,22 @@
 package by.netcracker.hotel.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+
 import by.netcracker.hotel.cloud.CloudinaryConnector;
 import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.constant.TypeName;
@@ -8,21 +25,6 @@ import by.netcracker.hotel.entities.Photo;
 import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.mapper.HotelMapper;
 import by.netcracker.hotel.mapper.PhotoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
 
 /**
  * Created by Varvara on 4/4/2017.
@@ -48,14 +50,14 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
         getJdbcTemplate().update(new PreparedStatementCreator() {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(SqlQuery.ADD_ENTITY_ID.getQuery(),
-                        new String[]{"id"});
+                    new String[] { "id" });
                 ps.setString(1, TypeName.HOTEL.name().toLowerCase());
                 return ps;
             }
         }, keyHolder);
 
-        getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(),
-                hotel.getAddress(), hotel.getTypeOfService(), hotel.getName(), hotel.getDescription());
+        getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(), hotel.getAddress(),
+            hotel.getTypeOfService(), hotel.getName(), hotel.getDescription());
         hotel.setId(keyHolder.getKey().intValue());
     }
 
@@ -72,10 +74,10 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     @Override
     public Hotel getByID(Integer id) {
         try {
-            Hotel hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(),
-                    new Object[]{id}, new HotelMapper());
+            Hotel hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
+                new HotelMapper());
             Photo photo = getJdbcTemplate().queryForObject(SqlQuery.GET_MAIN_PHOTO_FOR_HOTEL.getQuery(),
-                    new Object[]{id}, new PhotoMapper());
+                new Object[] { id }, new PhotoMapper());
             hotel.setPhotoURL(CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo.getPhotoName()));
             return hotel;
         } catch (EmptyResultDataAccessException e) {
@@ -85,20 +87,21 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
     @Override
     public List<Hotel> getAll() {
-        return null;
+        return getJdbcTemplate().query(SqlQuery.GET_ALL.getQuery(), new Object[] { TypeName.HOTEL.getType() },
+            new RowMapperResultSetExtractor<Hotel>(new HotelMapper()) {
+            });
     }
 
     @Override
     public List<Integer> findIDsBySearchString(String searchString) {
         searchString = "%" + searchString + "%";
-        return getJdbcTemplate().query(SqlQuery.SEARCH_HOTEL.getQuery(), new Object[]{searchString},
-                (resultSet, i) -> resultSet.getInt(1));
+        return getJdbcTemplate().query(SqlQuery.SEARCH_HOTEL.getQuery(), new Object[] { searchString },
+            (resultSet, i) -> resultSet.getInt(1));
     }
 
     @Override
     public List<String> getPlaces() {
-        return getJdbcTemplate().query(SqlQuery.GET_PLACES.getQuery(),
-                (resultSet, i) -> resultSet.getString(1));
+        return getJdbcTemplate().query(SqlQuery.GET_PLACES.getQuery(), (resultSet, i) -> resultSet.getString(1));
     }
 
     @Override

@@ -1,0 +1,89 @@
+package by.netcracker.hotel.services.impl.pagination;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.paginationspring.bo.BoPaginationColumn;
+import com.github.paginationspring.dao.PaginationDao;
+import com.github.paginationspring.service.PaginationServiceAbstract;
+
+import by.netcracker.hotel.dao.HotelDAO;
+import by.netcracker.hotel.dao.UserDAO;
+import by.netcracker.hotel.dao.impl.pagination.HotelPaginationDAO;
+import by.netcracker.hotel.entities.Hotel;
+import by.netcracker.hotel.entities.pagination.HotelRow;
+import by.netcracker.hotel.entities.pagination.HotelSearchParam;
+
+@Service
+public class HotelPaginationService extends PaginationServiceAbstract<HotelSearchParam, HotelRow, Hotel> {
+
+    private static Logger log = Logger.getLogger(HotelPaginationService.class);
+
+    @SuppressWarnings("unused")
+    private PaginationDao<Hotel, HotelSearchParam> hotelPaginationDAO;
+    private HotelDAO hotelDAO;
+
+    @Autowired
+    public void setPaginationDao(HotelPaginationDAO hotelPaginationDAO, UserDAO userDAO) {
+        super.setPaginationDao(hotelPaginationDAO);
+        this.hotelPaginationDAO = hotelPaginationDAO;
+        this.hotelDAO = hotelDAO;
+    }
+
+    @Override
+    public void assignColumnsDefinition(List<BoPaginationColumn> columns) throws Exception {
+
+        log.debug("setting columns def.");
+        BoPaginationColumn col = null;
+
+        col = new BoPaginationColumn();
+        col.setColumnName("Name");
+        col.setOrderColumns("name");
+        col.setOrderDirections("desc");
+        col.setWidth(30);
+        columns.add(col);
+
+        col = new BoPaginationColumn();
+        col.setColumnName("Service");
+        col.setOrderColumns("typeOfService");
+        col.setOrderDirections("desc");
+        col.setWidth(30);
+        columns.add(col);
+
+        col = new BoPaginationColumn();
+        col.setColumnName("Country");
+        col.setOrderColumns("country");
+        col.setWidth(30);
+        columns.add(col);
+
+        col = new BoPaginationColumn();
+        col.setColumnName("City");
+        col.setOrderColumns("city");
+        col.setWidth(30);
+        columns.add(col);
+
+    }
+
+    @Override
+    protected HotelRow assignDataToBo(Hotel hotel) throws Exception {
+
+        HotelRow bo = new HotelRow();
+        bo.setHotelId(hotel.getId());
+        bo.setName(hotel.getName());
+        bo.setTypeOfService(String.valueOf(hotel.getTypeOfService()));
+        bo.setCountry(hotel.getCountry());
+        bo.setCity(hotel.getCity());
+        return bo;
+    }
+
+    public void deleteButtonAction(HotelSearchParam pparam, String buttonAction) {
+        if (buttonAction != null && buttonAction.equals("deleteButton")) {
+            for (String id : pparam.getSelectedIds()) {
+                hotelDAO.deleteByID(Integer.parseInt(id));
+            }
+        }
+    }
+}
