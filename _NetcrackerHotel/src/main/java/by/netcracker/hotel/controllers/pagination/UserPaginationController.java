@@ -25,7 +25,7 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
     public UserPaginationController() {
         setOptionDisplayCheckbox(true);
         setOptionDisplaySerialNo(true);
-        setOptionWidth(800);
+        setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortName("Authority");
         setDefaultSortAscDesc("d");
@@ -41,17 +41,12 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
     @RequestMapping(value = "/list_of_users", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineJsp(@ModelAttribute(PPARAM) UserSearchParam pparam,
         @RequestParam(value = BUTTON_ACTION, required = false) String buttonAction, Model model) throws Exception {
+        userPaginationService.deleteButtonAction(pparam, buttonAction);
         System.out.println(buttonAction);
         System.out.println(pparam);
         Map<String, Object> map = assignModel(pparam, buttonAction);
         model.addAllAttributes(map);
 
-        /*
-         * if ("deleteButton".equalsIgnoreCase(buttonAction) &&
-         * !ArrayUtils.isEmpty(pparam.getSelectedIds())) { // deleteButton
-         * button is pressed for (String pk : pparam.getSelectedIds()) {
-         * log.info("selected id=" + pk); } }
-         */
         return "list_of_users";
     }
 

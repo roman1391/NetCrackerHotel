@@ -8,9 +8,9 @@
 <head>
 <title>Home</title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
-<link
-	href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
-	rel="stylesheet">
+<%-- <link type="text/css" href="<c:url value="/resources/css/cssreset.css" />" rel="stylesheet" media="screen, projection"> --%>
+<link type="text/css" href="<c:url value="/resources/css/seasonstat.css"/>?vi=<%=(new java.util.Random()).nextInt(10)%>${pageContext.session.id}" rel="stylesheet" media="screen, projection"/>
+<link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />" rel="stylesheet">
 
 </head>
 
@@ -34,7 +34,7 @@
                             <td class="caption" style="width:50px;">Filter:</td>
                             <td style="width:120px;">
                             <form:select path="authority" cssStyle="width:110px;">
-                               <form:option value="" label="--authority--"/>
+                               <form:option value="" label="-authority-"/>
                                <form:option value="ADMIN" label="ADMIN"/>
                                <form:option value="USER" label="USER"/>
                                <form:option value="BLOCKED" label="BLOCKED"/>
@@ -42,7 +42,7 @@
                             </td>
                             <td style="width:200px;">
                                 <form:select path="enabled">
-                                   	<form:option value="" label="--enabled--"/>
+                                   	<form:option value="" label="-enabled-"/>
                                		<form:option value="true" label="Enabled"/>
                                		<form:option value="false" label="Unenabled"/>
                                 </form:select>
@@ -57,7 +57,7 @@
                  <jsp:attribute name="controlButton">
                      <div style="padding-top:10px;">
                         <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button">Delete</form:button></span>
-                        <span class="button"><form:button id="addButton" name="buttonAction" value="addButton" class="button">Add</form:button></span>
+                        <span ><a href="add_user_ref">Add new user</a></span>
                     </div> 
                 </jsp:attribute>  
                 <jsp:attribute name="columnsContent">

@@ -1,0 +1,203 @@
+/*----------------------------------------------------------------------------------------
+ *              Major CSS
+ ----------------------------------------------------------------------------------------*/
+html {
+    font-size:100.01%;
+    height: 100%;
+}
+body {
+    font-size:70%;
+    /*font-size:11px;*/
+    color:#222;background:#fff;font-family:Verdana,Geneva,sans-serif;
+    margin-top:0px;margin-bottom:0px;
+    margin-left:10px;
+    margin-right:10px;
+    height: 100%;
+}
+input[type="text"], input[type="password"] {
+    border:1px solid #C0C0C0;
+    padding-left:2px;
+}
+input[type="checkbox"] {
+    border: 0px;
+    margin:0px;
+    padding:0px;
+    height: 13px;
+    width: 13px;
+}
+
+input[type="submit"], input[type="button"], input[type="reset"] {
+    background: none;
+    border: 0;
+    margin:1px 0 5px 0;
+    padding:0;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    white-space:nowrap;
+    width:100px;
+}
+
+.caption{
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    font-weight:bold;
+    color: #4A4A4A;
+    vertical-align:top;
+}
+
+.message {
+    border: 0 none;
+    list-style: none outside none;
+    margin: 0;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+}
+#paginationSearchDiv {
+    border: 1px solid #E5E5E5;
+}
+/******************************************************
+* search table
+******************************************************/
+.searchtable {
+}
+.searchtable td{
+    padding:7px;
+    white-space: normal;
+}
+.searchtable .caption{
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    font-weight:bold;
+    color: #4A4A4A;
+    vertical-align:top;
+    text-align:right;
+}
+
+
+
+/******************************************************
+* Pagination (Mandatory for pagination)
+******************************************************/
+button.button {
+    background: none;
+    border: 0;
+    margin:1px 0 5px 0;
+    padding:0;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    white-space:nowrap;
+    width:70px;
+    color:#666666;
+}
+span.button {
+    background-color: #F7FFFF;
+    border: 1px solid #C0C0C0;
+    padding-top:2px;
+    padding-bottom:2px;
+}
+.pagination_button {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: #666666;
+    background-color: #ECEEEF;
+    padding-top: 3px;
+    vertical-align:bottom;
+    margin-bottom:-15px;
+}
+.pagination_page {
+    padding-bottom: 3px;
+    vertical-align:bottom;
+    font-size:14px;
+    color: #666666;
+    display:inline-block;
+    float:inherit;
+}
+.pagination_page a:link {color: #666666;}
+.pagination_page a:visited {color: #666666;}
+.pagination_page a:hover {color: #666666;}
+.pagination_page a:active {color: #666666;}
+.paginationRecordCount {text-align:right;padding-bottom:3px;}
+.paginationRecordCountCharacter {font-size:12px;color:#666666;}
+.paginationNoRecordText {padding-top:50px;padding-bottom:50px;text-align:center;}
+.paginationLink {text-align:center;padding-top:10px;}
+.paginationLinkFirst {padding-left:10px;}
+.paginationLinkFirstCharacter {font-size:18px;}
+.paginationLinkPrevious {padding-left:10px;}
+.paginationLinkPreviousCharacter {font-size:18px;}
+.paginationLinkDotDotBegin {padding-left:10px;}
+.paginationLinkPages {padding-left:10px;}
+.paginationLinkBetweenPages {padding-left:10px;}
+.paginationLinkNext {padding-left:10px;}
+.paginationLinkNextCharacter {font-size:18px;}
+.paginationLinkLast {padding-left:10px;}
+.paginationLinkLastCharacter {font-size:18px;}
+.paginationLinkActivePageCharacter {}
+
+
+/******************************************************
+* sl table (Mandatory for pagination)
+******************************************************/
+.sltable {
+    border-collapse: collapse;
+    border-spacing: 0;
+	border-left:1px solid #E5E5E5;
+    border-top:1px solid #E5E5E5;
+}
+.sltable div.serialNoHeader {
+    height:1px;padding-left:20px;
+}
+.sltable div.checkboxHeader {
+    height:1px;padding-left:20px;
+}
+.sltable tr.oddrow{
+    background-color: #FFFFFF;
+    height: 35px;
+}
+.sltable tr.evenrow{
+    background-color: #F6F7F2;
+    height: 35px;
+}
+.sltable td.cell {
+    padding:0.5em 0.5em 0.5em 0.5em;
+    white-space: normal;
+    vertical-align:top;
+}
+.sltable tr.oddrow td.cell{
+    border-right:1px solid #E5E5E5;
+    border-bottom:1px solid #E5E5E5;
+}
+.sltable tr.evenrow td.cell{
+    border-right:1px solid #E5E5E5;
+    border-bottom:1px solid #E5E5E5;
+}
+.sltable tr.header{
+    background-color: #F0F8FF;
+}
+.sltable tr.header th.header{
+    border-right:1px solid #E5E5E5;
+    border-bottom:1px solid #E5E5E5;
+    vertical-align:bottom;
+    text-align:left;
+    white-space:nowrap;
+    padding:0.5em 0.5em 0.5em 0.5em;
+    white-space: normal;
+}
+.sltable .header{
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    font-weight:bold;
+    color: #4A4A4A;
+}
+.sltable a.header:link {color: #4A4A4A;text-decoration:none;}
+.sltable a.header:visited {color: #4A4A4A;text-decoration:none;}
+.sltable a.header:hover {color: #4A4A4A;text-decoration:none;}
+.sltable a.header:active {color: #4A4A4A;text-decoration:none;}
+.paginationColumnHeader {text-decoration:underline;}
+.sltable span.sortarrow {
+    padding-left:5px;
+    text-decoration: none;  
+}

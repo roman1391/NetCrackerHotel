@@ -10,6 +10,7 @@ import com.github.paginationspring.bo.BoPaginationColumn;
 import com.github.paginationspring.dao.PaginationDao;
 import com.github.paginationspring.service.PaginationServiceAbstract;
 
+import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.dao.impl.pagination.UserPaginationDAO;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.pagination.UserRow;
@@ -22,11 +23,13 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
 
     @SuppressWarnings("unused")
     private PaginationDao<User, UserSearchParam> userPaginationDAO;
+    private UserDAO userDAO;
 
     @Autowired
-    public void setPaginationDao(UserPaginationDAO userPaginationDAO) {
+    public void setPaginationDao(UserPaginationDAO userPaginationDAO, UserDAO userDAO) {
         super.setPaginationDao(userPaginationDAO);
         this.userPaginationDAO = userPaginationDAO;
+        this.userDAO = userDAO;
     }
 
     @Override
@@ -39,12 +42,12 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
         col.setColumnName("Authority");
         col.setOrderColumns("authority");
         col.setOrderDirections("desc");
-        col.setWidth(20);
+        col.setWidth(30);
         columns.add(col);
 
         col = new BoPaginationColumn();
         col.setColumnName("Enabled");
-        col.setWidth(20);
+        col.setWidth(30);
         columns.add(col);
 
         col = new BoPaginationColumn();
@@ -56,7 +59,7 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
 
         col = new BoPaginationColumn();
         col.setColumnName("Email");
-        col.setWidth(25);
+        col.setWidth(30);
         columns.add(col);
 
         col = new BoPaginationColumn();
@@ -74,5 +77,13 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
         bo.setUsername(user.getUsername());
         bo.setEmail(user.getEmail());
         return bo;
+    }
+
+    public void deleteButtonAction(UserSearchParam pparam, String buttonAction) {
+        if (buttonAction != null && buttonAction.equals("deleteButton")) {
+            for (String id : pparam.getSelectedIds()) {
+                userDAO.deleteByID(Integer.parseInt(id));
+            }
+        }
     }
 }
