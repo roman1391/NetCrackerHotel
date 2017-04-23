@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.paginationspring.controller.PaginationControllerAbstract;
 
 import by.netcracker.hotel.entities.pagination.UserSearchParam;
-import by.netcracker.hotel.services.pagination.UserPaginationService;
+import by.netcracker.hotel.services.impl.pagination.UserPaginationService;
 
 @Controller
 public class UserPaginationController extends PaginationControllerAbstract<UserSearchParam> {

@@ -1,6 +1,8 @@
 package by.netcracker.hotel.dao.impl.pagination;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +61,46 @@ public class UserPaginationDAO implements com.github.paginationspring.dao.Pagina
     @Override
     public List retrievePageResult(BoPaginationParam pparam) throws Exception {
         List<User> list = userDAO.getAll();
-
         int index = Integer.parseInt(pparam.getResultIndex());
-
         UserSearchParam param = (UserSearchParam) pparam;
+
+        if (param.getSortName() != null && !param.getSortName().equals("")) {
+            System.out.println(param.getSortName());
+            if (param.getSortName().equals("Username")) {
+                if (param.getSortAscDesc().equals("d")) {
+                    Collections.sort(list, new Comparator<User>() {
+                        @Override
+                        public int compare(User user1, User user2) {
+                            return user1.getUsername().compareTo(user2.getUsername());
+                        }
+                    });
+                } else if (param.getSortAscDesc().equals("a")) {
+                    Collections.sort(list, new Comparator<User>() {
+                        @Override
+                        public int compare(User user1, User user2) {
+                            return user2.getUsername().compareTo(user1.getUsername());
+                        }
+                    });
+                }
+            } else if (param.getSortName().equals("Authority")) {
+                if (param.getSortAscDesc().equals("d")) {
+                    Collections.sort(list, new Comparator<User>() {
+                        @Override
+                        public int compare(User user1, User user2) {
+                            return user1.getAuthority().toString().compareTo(user2.getAuthority().toString());
+                        }
+                    });
+                } else if (param.getSortAscDesc().equals("a")) {
+                    Collections.sort(list, new Comparator<User>() {
+                        @Override
+                        public int compare(User user1, User user2) {
+                            return user2.getAuthority().toString().compareTo(user1.getAuthority().toString());
+                        }
+                    });
+                }
+            }
+        }
+
         if (param.getAuthority() != null && !param.getAuthority().equals("")) {
             List<User> list1 = new ArrayList<User>();
             for (int i = 0; i < list.size(); i++) {

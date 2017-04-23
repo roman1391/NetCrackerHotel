@@ -1,4 +1,4 @@
-package by.netcracker.hotel.services.pagination;
+package by.netcracker.hotel.services.impl.pagination;
 
 import java.util.List;
 
@@ -35,9 +35,9 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
 
         col = new BoPaginationColumn();
         col.setColumnName("Authority");
-        // col.setOrderColumns("authority");
-        // col.setOrderDirections("desc");
-        col.setWidth(30);
+        col.setOrderColumns("authority");
+        col.setOrderDirections("desc");
+        col.setWidth(20);
         columns.add(col);
 
         col = new BoPaginationColumn();
@@ -45,14 +45,13 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
         // col.setOrderColumns("a.season, c.teamAlias, b.lastName,
         // b.firstName");
         // col.setOrderDirections("desc, asc, asc, asc");
-        col.setWidth(30);
+        col.setWidth(20);
         columns.add(col);
 
         col = new BoPaginationColumn();
         col.setColumnName("Username");
-        // col.setOrderColumns("a.season, c.teamAlias, b.lastName,
-        // b.firstName");
-        // col.setOrderDirections("desc, asc, asc, asc");
+        col.setOrderColumns("username");
+        col.setOrderDirections("desc");
         col.setWidth(30);
         columns.add(col);
 
@@ -61,7 +60,7 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
         // col.setOrderColumns("a.season, c.teamAlias, b.lastName,
         // b.firstName");
         // col.setOrderDirections("desc, asc, asc, asc");
-        col.setWidth(30);
+        col.setWidth(25);
         columns.add(col);
 
         col = new BoPaginationColumn();
