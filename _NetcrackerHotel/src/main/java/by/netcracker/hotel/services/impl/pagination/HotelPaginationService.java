@@ -56,12 +56,19 @@ public class HotelPaginationService extends PaginationServiceAbstract<HotelSearc
         col = new BoPaginationColumn();
         col.setColumnName("Country");
         col.setOrderColumns("country");
+        col.setOrderDirections("desc");
         col.setWidth(30);
         columns.add(col);
 
         col = new BoPaginationColumn();
         col.setColumnName("City");
         col.setOrderColumns("city");
+        col.setOrderDirections("desc");
+        col.setWidth(30);
+        columns.add(col);
+
+        col = new BoPaginationColumn();
+        col.setColumnName("Page");
         col.setWidth(30);
         columns.add(col);
 

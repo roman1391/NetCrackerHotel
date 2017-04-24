@@ -66,6 +66,7 @@
                     <td class="cell"><span><c:out value="${bo.typeOfService}"/></span></td>
                     <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.country}"/></span></td>
                     <td class="cell"><span><c:out value="${bo.city}"/></span></td> 
+                    <td class="cell"><span><a href="hotel_page/${bo.hotelId}">Hotel</a> </span></td> 
                 </jsp:attribute>
             </pg:pagination>
         </form:form>

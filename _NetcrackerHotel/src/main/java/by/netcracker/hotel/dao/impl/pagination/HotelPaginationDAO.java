@@ -120,6 +120,42 @@ public class HotelPaginationDAO implements com.github.paginationspring.dao.Pagin
                         }
                     });
                 }
+            } else if (param.getSortName().equals("Country")) {
+                if (param.getSortAscDesc().equals("d")) {
+                    Collections.sort(list, new Comparator<Hotel>() {
+                        @Override
+                        public int compare(Hotel hotel1, Hotel hotel2) {
+                            return hotel1.getCountry().compareTo(hotel2.getCountry());
+                        }
+                    });
+                } else if (param.getSortAscDesc().equals("a"))
+
+                {
+                    Collections.sort(list, new Comparator<Hotel>() {
+                        @Override
+                        public int compare(Hotel hotel1, Hotel hotel2) {
+                            return hotel2.getCountry().compareTo(hotel1.getCountry());
+                        }
+                    });
+                }
+            } else if (param.getSortName().equals("Service")) {
+                if (param.getSortAscDesc().equals("d")) {
+                    Collections.sort(list, new Comparator<Hotel>() {
+                        @Override
+                        public int compare(Hotel hotel1, Hotel hotel2) {
+                            return hotel1.getTypeOfService() - (hotel2.getTypeOfService());
+                        }
+                    });
+                } else if (param.getSortAscDesc().equals("a"))
+
+                {
+                    Collections.sort(list, new Comparator<Hotel>() {
+                        @Override
+                        public int compare(Hotel hotel1, Hotel hotel2) {
+                            return hotel2.getTypeOfService() - (hotel1.getTypeOfService());
+                        }
+                    });
+                }
             }
         }
     }
