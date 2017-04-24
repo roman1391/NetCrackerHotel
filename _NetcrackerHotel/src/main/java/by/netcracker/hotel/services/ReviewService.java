@@ -6,4 +6,6 @@ public interface ReviewService extends AbstractService<Review, Integer> {
 
     void addReview(Review review);
 
+    String checkReview(int hotelId);
+
 }

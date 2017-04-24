@@ -6,7 +6,7 @@
 <%@taglib prefix="pg" uri="http://pagination/pagination-spring3.tld" %>
 <html>
 <head>
-<title>List of users</title>
+<title>List of hotels</title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 <%-- <link type="text/css" href="<c:url value="/resources/css/cssreset.css" />" rel="stylesheet" media="screen, projection"> --%>
 <link type="text/css" href="<c:url value="/resources/css/seasonstat.css"/>?vi=<%=(new java.util.Random()).nextInt(10)%>${pageContext.session.id}" rel="stylesheet" media="screen, projection"/>
@@ -41,13 +41,7 @@
                                <form:option value="5" label="5 stars"/>
                             </form:select>
                             </td>
-                            <td style="width:200px;">
-                                <%-- <form:select path="enabled">
-                                   	<form:option value="" label="-enabled-"/>
-                               		<form:option value="true" label="Enabled"/>
-                               		<form:option value="false" label="Unenabled"/>
-                                </form:select> --%>
-                            </td>
+                            <td style="width:200px;"></td>
                             <td style="width:80px;">Name:</td>
                             <td style="width:160px;"><form:input path="name" cssStyle="width:150px;"/></td>
                             <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button">Search</form:button></span></td>
