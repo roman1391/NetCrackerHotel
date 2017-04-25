@@ -48,6 +48,11 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
+    public List<Hotel> getAll() {
+        return hotelDAO.getAll();
+    }
+
+    @Override
     public List<String> getPlaces() {
         return hotelDAO.getPlaces();
     }

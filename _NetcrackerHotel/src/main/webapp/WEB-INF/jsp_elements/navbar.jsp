@@ -25,9 +25,11 @@
                     <a class="nav-link" href="${contextPath}/profile">Profile</a>
                 </li>
             </c:if>
+            <c:if test="${authority ne 'GUEST'}">
             <li class="nav-item">
-                <a class="nav-link " href="#">Hotels</a>
+                <a class="nav-link " href="${contextPath}/booked_room">Hotels</a>
             </li>
+            </c:if>
             <li class="nav-item">   
                 <a class="nav-link" href="${contextPath}/search-page">Search hotels</a>
             </li>

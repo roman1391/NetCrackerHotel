@@ -2,6 +2,7 @@ package by.netcracker.hotel.controllers;
 
 import javax.validation.Valid;
 
+import by.netcracker.hotel.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import by.netcracker.hotel.entities.Hotel;
-import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.ReviewService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/hotel_page")
@@ -34,6 +35,8 @@ public class HotelController {
         model.addAttribute("reviewInfo", reviewInfo);
         model.addAttribute("choosenHotel", hotel);
         model.addAttribute("review", new Review());
+        model.addAttribute("hotel_rooms", Hotel.getRooms());
+        model.addAttribute("order", new Order());
         return "hotel_page";
     }
 
@@ -44,6 +47,8 @@ public class HotelController {
         model.addAttribute("choosenHotel", hotel);
         return "review_page";
     }
+
+
 
     @RequestMapping(value = "/send_review", method = RequestMethod.POST)
     public String sendFeenback(@Valid @ModelAttribute("choosenHotel") Hotel hotel,
