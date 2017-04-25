@@ -6,15 +6,16 @@
 <%@taglib prefix="pg" uri="http://pagination/pagination-spring3.tld" %>
 <html>
 <head>
-<title>List of hotels</title>
+<title>List of hotels2</title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 <%-- <link type="text/css" href="<c:url value="/resources/css/cssreset.css" />" rel="stylesheet" media="screen, projection"> --%>
 <link type="text/css" href="<c:url value="/resources/css/seasonstat.css"/>?vi=<%=(new java.util.Random()).nextInt(10)%>${pageContext.session.id}" rel="stylesheet" media="screen, projection"/>
 <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />" rel="stylesheet">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
-	<%@include file="../jsp_elements/_header.jsp"%>
+	<jsp:include page="/WEB-INF/jsp_elements/_header.jsp"></jsp:include>
 	<div id="wrapper">
 		<div class="container">
 			<div class="row row-offcanvas row-offcanvas-left">
@@ -55,13 +56,7 @@
                         <span ><a href="hotel/add">Add new hotel</a></span>
                     </div> 
                 </jsp:attribute>  
-                <jsp:attribute name="columnsContent">
-                <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.name}"/></span></td>
-                    <td class="cell"><span><c:out value="${bo.typeOfService}"/></span></td>
-                    <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.country}"/></span></td>
-                    <td class="cell"><span><c:out value="${bo.city}"/></span></td> 
-                    <td class="cell"><span><a href="hotel_page/${bo.hotelId}">Hotel</a> </span></td> 
-                </jsp:attribute>
+                
             </pg:pagination>
         </form:form>
     </div> 
@@ -72,7 +67,7 @@
 				</div>
 			</div>
 		</div>
-		<%@include file="../jsp_elements/_footer.jsp"%>
+		<jsp:include page="/WEB-INF/jsp_elements/_header.jsp"></jsp:include>
 	</div>
 </body>
 </html>

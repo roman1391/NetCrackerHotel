@@ -6,7 +6,7 @@
 <%@taglib prefix="pg" uri="http://pagination/pagination-spring3.tld" %>
 <html>
 <head>
-<title>List of users (AJAX)</title>
+<title>List of users</title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 <%-- <link type="text/css" href="<c:url value="/resources/css/cssreset.css" />" rel="stylesheet" media="screen, projection"> --%>
 <link type="text/css" href="<c:url value="/resources/css/seasonstat.css"/>?vi=<%=(new java.util.Random()).nextInt(10)%>${pageContext.session.id}" rel="stylesheet" media="screen, projection"/>
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-	<%@include file="../jsp_elements/_header.jsp"%>
+	<jsp:include page="/WEB-INF/jsp_elements/_header.jsp"></jsp:include>
 	<div id="wrapper">
 		<div class="container">
 			<div class="row row-offcanvas row-offcanvas-left">
@@ -71,7 +71,7 @@
 				</div>
 			</div>
 		</div>
-		<%@include file="../jsp_elements/_footer.jsp"%>
+		<jsp:include page="/WEB-INF/jsp_elements/_footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

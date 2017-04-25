@@ -28,7 +28,8 @@ public class HotelPaginationController extends PaginationControllerAbstract<Hote
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");
-        setPageLink("/list_of_hotels"); // url
+        setPageLink("/pagination/list_of_hotels_ajax");
+        setAjax(true);
     }
 
     @Autowired
@@ -38,11 +39,20 @@ public class HotelPaginationController extends PaginationControllerAbstract<Hote
     }
 
     @RequestMapping(value = "/list_of_hotels", method = { RequestMethod.GET, RequestMethod.POST })
-    public String defineJsp(@ModelAttribute(PPARAM) HotelSearchParam pparam,
+    public String defineJsp(@ModelAttribute(PPARAM) HotelSearchParam pparam, Model model) throws Exception {
+        // hotelPaginationService.deleteButtonAction(pparam, buttonAction);
+        Map<String, Object> map = assignModel(pparam, null, false);
+        model.addAllAttributes(map);
+        return "pagination/list_of_hotels";
+    }
+
+    @RequestMapping(value = "pagination/list_of_hotels_ajax", method = { RequestMethod.GET, RequestMethod.POST })
+    public String defineAjaxJsp(@ModelAttribute(PPARAM) HotelSearchParam pparam,
         @RequestParam(value = BUTTON_ACTION, required = false) String buttonAction, Model model) throws Exception {
-        hotelPaginationService.deleteButtonAction(pparam, buttonAction);
+        log.debug("pparam.resultIndex=" + pparam.getResultIndex());
         Map<String, Object> map = assignModel(pparam, buttonAction);
         model.addAllAttributes(map);
-        return "list_of_hotels";
+
+        return "pagination/list_of_hotels_ajax";
     }
 }
