@@ -18,7 +18,7 @@ import by.netcracker.hotel.services.impl.pagination.HotelPaginationService;
 
 @Controller
 public class HotelPaginationController extends PaginationControllerAbstract<HotelSearchParam> {
-    private static Logger log = Logger.getLogger(UserPaginationController.class);
+    private static Logger log = Logger.getLogger(HotelPaginationController.class);
 
     private HotelPaginationService hotelPaginationService;
 

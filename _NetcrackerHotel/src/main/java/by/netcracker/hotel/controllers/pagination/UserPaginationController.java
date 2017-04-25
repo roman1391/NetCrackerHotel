@@ -28,7 +28,8 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");
-        setPageLink("/list_of_users"); // url
+        setPageLink("/list_of_users_ajax"); // url
+        setAjax(true);
     }
 
     @Autowired
@@ -38,12 +39,21 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
     }
 
     @RequestMapping(value = "/list_of_users", method = { RequestMethod.GET, RequestMethod.POST })
-    public String defineJsp(@ModelAttribute(PPARAM) UserSearchParam pparam,
-        @RequestParam(value = BUTTON_ACTION, required = false) String buttonAction, Model model) throws Exception {
-        userPaginationService.deleteButtonAction(pparam, buttonAction);
-        Map<String, Object> map = assignModel(pparam, buttonAction);
+    public String defineJsp(@ModelAttribute(PPARAM) UserSearchParam pparam, Model model) throws Exception {
+        // userPaginationService.deleteButtonAction(pparam, buttonAction);
+        Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
         return "list_of_users";
+    }
+
+    @RequestMapping(value = "/list_of_users_ajax", method = { RequestMethod.GET, RequestMethod.POST })
+    public String defineAjaxJsp(@ModelAttribute(PPARAM) UserSearchParam pparam,
+        @RequestParam(value = BUTTON_ACTION, required = false) String buttonAction, Model model) throws Exception {
+        log.debug("pparam.resultIndex=" + pparam.getResultIndex());
+        Map<String, Object> map = assignModel(pparam, buttonAction);
+        model.addAllAttributes(map);
+
+        return "list_of_users_ajax"; // jsp
     }
 
 }
