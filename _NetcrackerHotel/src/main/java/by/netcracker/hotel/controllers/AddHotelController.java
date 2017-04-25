@@ -3,8 +3,10 @@ package by.netcracker.hotel.controllers;
 import by.netcracker.hotel.cloud.CloudinaryConnector;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Photo;
+import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.PhotoService;
+import by.netcracker.hotel.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,13 +30,15 @@ public class AddHotelController {
 
     private final HotelService hotelService;
     private final PhotoService photoService;
+    private final RoomService roomService;
 
     private static String UPLOADED_FOLDER;
     private final ServletContext context;
 
     @Autowired
-    public AddHotelController(ServletContext context, HotelService hotelService, PhotoService photoService) {
+    public AddHotelController(ServletContext context, HotelService hotelService, PhotoService photoService, RoomService roomService) {
         this.context = context;
+        this.roomService = roomService;
         UPLOADED_FOLDER = this.context.getRealPath("/resources/img/");
         this.hotelService = hotelService;
         this.photoService = photoService;
@@ -42,7 +46,7 @@ public class AddHotelController {
 
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String about(Model model) {
+    public String add(Model model) {
         model.addAttribute("hotel", new Hotel());
         return "add_hotel";
     }
@@ -60,7 +64,7 @@ public class AddHotelController {
             hotel.setPhotoURL(photoUrl);
         }
         model.addAttribute("id", hotel.getId());
-        return "success_adding_hotel";
+        return "add_hotel_photo_and_description";
     }
 
     @RequestMapping(value = "/photo/{id}", method = RequestMethod.POST)
@@ -77,7 +81,26 @@ public class AddHotelController {
             photosUrl.add(photoUrl);
         }
         model.addAttribute("photos", photosUrl);
-        return "success_adding_hotel";
+        model.addAttribute("id", hotelID);
+        return "add_hotel_photo_and_description";
+    }
+
+    @RequestMapping(value = "/{id}/room", method = RequestMethod.GET)
+    public String rooms(@PathVariable("id") int hotelID, Model model) {
+        model.addAttribute("hotel", hotelService.getByID(hotelID));
+        model.addAttribute("id", hotelID);
+        model.addAttribute("room", new Room());
+        return "add_rooms_to_hotel";
+    }
+
+    @RequestMapping(value = "/{id}/room", method = RequestMethod.POST)
+    public String addRoom(@ModelAttribute("room") Room room, @PathVariable("id") int hotelID, Model model) {
+        model.addAttribute("hotel", hotelService.getByID(hotelID));
+        model.addAttribute("id", hotelID);
+        room.setHotelID(hotelID);
+        roomService.add(room);
+        model.addAttribute("rooms", roomService.getByHotelID(hotelID));
+        return "add_rooms_to_hotel";
     }
 
     private void savePhotoInCloudinary(MultipartFile file, String photoName) {

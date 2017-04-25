@@ -9,13 +9,13 @@
          pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Hotel added</title>
+    <title>Photo & description</title>
 </head>
 <body>
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <%@include file="../jsp_elements/hotelMin.jsp" %>
-    <%@include file="../jsp_elements/addphotoform.jsp"%>
+    <%@include file="../jsp_elements/addphotoform.jsp" %>
 </div>
 <%@include file="../jsp_elements/_footer.jsp" %>
 </body>

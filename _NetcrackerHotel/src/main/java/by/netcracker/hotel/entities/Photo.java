@@ -42,7 +42,7 @@ public class Photo {
 
     private void generateName(){
         StringBuilder randString = new StringBuilder();
-        int count = (int)(Math.random()*29+1);
+        int count = (int)(Math.random()*27+3);
         for(int i=0;i<count;i++)
             randString.append((char)((int)(Math.random()*26+65)));
         setPhotoName(randString.toString());

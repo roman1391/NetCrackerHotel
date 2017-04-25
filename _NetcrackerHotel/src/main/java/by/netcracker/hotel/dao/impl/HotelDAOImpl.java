@@ -73,16 +73,16 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
     @Override
     public Hotel getByID(Integer id) {
+        Hotel hotel = new Hotel();
         try {
-            Hotel hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
+            hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new HotelMapper());
             Photo photo = getJdbcTemplate().queryForObject(SqlQuery.GET_MAIN_PHOTO_FOR_HOTEL.getQuery(),
                 new Object[] { id }, new PhotoMapper());
             hotel.setPhotoURL(CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo.getPhotoName()));
-            return hotel;
         } catch (EmptyResultDataAccessException e) {
-            return null;
         }
+        return hotel;
     }
 
     @Override

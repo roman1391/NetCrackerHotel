@@ -4,8 +4,8 @@ public class Room {
 
 	private int id;
 	private int cost;
-	private int clas;
 	private int capacity;
+	private int hotelID;
 
 	public int getId() {
 		return id;
@@ -23,14 +23,6 @@ public class Room {
 		this.cost = cost;
 	}
 
-	public int getClas() {
-		return clas;
-	}
-
-	public void setClas(int clas) {
-		this.clas = clas;
-	}
-
 	public int getCapacity() {
 		return capacity;
 	}
@@ -39,4 +31,11 @@ public class Room {
 		this.capacity = capacity;
 	}
 
+	public int getHotelID() {
+		return hotelID;
+	}
+
+	public void setHotelID(int hotelID) {
+		this.hotelID = hotelID;
+	}
 }
