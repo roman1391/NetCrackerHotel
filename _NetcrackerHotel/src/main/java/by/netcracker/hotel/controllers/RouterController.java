@@ -1,6 +1,8 @@
 package by.netcracker.hotel.controllers;
 
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.services.HotelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class RouterController {
 
+    @Autowired
+    private HotelService hotelService;
+
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public ModelAndView home(@RequestParam(value = "error", required = false) String error) {
         ModelAndView model = new ModelAndView();
+       // model.addObject("hotels", hotelService.getAll());
         model.setViewName("home");
         return model;
     }

@@ -1,19 +1,33 @@
 package by.netcracker.hotel.entities;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Varvara on 4/1/2017.
  */
 public class Hotel {
+
+    private int id;
     private String country;
     private String city;
     private String address;
     private String name;
     private int typeOfService;
-    private String description;;
-    private int id;
+    private String description;
     private String photoURL;
 
     public Hotel() {
+    }
+
+    public static List<Room> getRooms(){
+        List<Room> rooms = new ArrayList<>();
+        rooms.add(new Room(1, 1, 1, 1));
+        rooms.add(new Room(2, 2, 2, 2));
+        rooms.add(new Room(3, 3, 3, 3));
+        rooms.add(new Room(4, 4, 4, 4));
+        return rooms;
     }
 
     public String getDescription() {

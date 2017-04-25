@@ -7,6 +7,15 @@ public class Room {
 	private int capacity;
 	private int hotelID;
 
+	public Room(int id, int cost, int capacity, int hotelID) {
+		this.id = id;
+		this.cost = cost;
+		this.capacity = capacity;
+		this.hotelID = hotelID;
+	}
+
+	public Room(){}
+
 	public int getId() {
 		return id;
 	}

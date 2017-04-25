@@ -25,6 +25,12 @@ public class ColumnName {
 	public static final String VERIFICATION_TOKEN_DATE = "token_date";
 	public static final String IDHOTEL = "idhotel";
 	public static final String PHOTO = "photo";
+	public static final String ORDER_USER_ID = "user_id";
+	public static final String ORDER_ROOM_ID = "room_id";
+	public static final String ARRIVAL_DATE = "arrival_date";
+	public static final String LEAVE_DATE = "leave_date";
+	public static final String PAY_VALUE = "pay_value";
+	public static final String IS_PAID = "is_paid";
 	public static final String CAPACITY = "capacity";
 	public static final String COST = "cost";
 	public static final String HOTEL_ID = "hotel_id";

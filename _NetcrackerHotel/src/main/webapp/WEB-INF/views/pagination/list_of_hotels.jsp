@@ -56,7 +56,7 @@
                         <span ><a href="hotel/add">Add new hotel</a></span>
                     </div> 
                 </jsp:attribute>  
-                
+
             </pg:pagination>
         </form:form>
     </div> 
