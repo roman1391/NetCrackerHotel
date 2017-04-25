@@ -40,7 +40,6 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
 
     @RequestMapping(value = "/list_of_users", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineJsp(@ModelAttribute(PPARAM) UserSearchParam pparam, Model model) throws Exception {
-        // userPaginationService.deleteButtonAction(pparam, buttonAction);
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
         return "pagination/list_of_users";
@@ -49,10 +48,9 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
     @RequestMapping(value = "pagination/list_of_users_ajax", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineAjaxJsp(@ModelAttribute(PPARAM) UserSearchParam pparam,
         @RequestParam(value = BUTTON_ACTION, required = false) String buttonAction, Model model) throws Exception {
-        log.debug("pparam.resultIndex=" + pparam.getResultIndex());
+        userPaginationService.deleteButtonAction(pparam, buttonAction);
         Map<String, Object> map = assignModel(pparam, buttonAction);
         model.addAllAttributes(map);
-
         return "pagination/list_of_users_ajax";
     }
 

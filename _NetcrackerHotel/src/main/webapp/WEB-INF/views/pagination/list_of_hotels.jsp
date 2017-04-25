@@ -6,7 +6,7 @@
 <%@taglib prefix="pg" uri="http://pagination/pagination-spring3.tld" %>
 <html>
 <head>
-<title>List of hotels2</title>
+<title>List of hotels</title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 <%-- <link type="text/css" href="<c:url value="/resources/css/cssreset.css" />" rel="stylesheet" media="screen, projection"> --%>
 <link type="text/css" href="<c:url value="/resources/css/seasonstat.css"/>?vi=<%=(new java.util.Random()).nextInt(10)%>${pageContext.session.id}" rel="stylesheet" media="screen, projection"/>
@@ -22,7 +22,7 @@
 				Admin page! <br>
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
-					<h4>List of hotels: *в разработке*</h4>
+					<h4>List of hotels:</h4>
 						
 	<div style="padding-top:50px;padding-bottom:50px;padding-left:30px;padding-right:30px;">
         <c:url value="${paginationResult.pageLink}" var="pageLink"/>

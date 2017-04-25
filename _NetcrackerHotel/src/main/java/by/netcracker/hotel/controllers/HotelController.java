@@ -31,6 +31,7 @@ public class HotelController {
     public String hotelPage(@Valid @PathVariable("id") int hotelID, Model model) {
         Hotel hotel = hotelService.getByID(hotelID);
         String reviewInfo = reviewService.checkReview(hotelID);
+        model.addAttribute("reviewInfo", reviewInfo);
         model.addAttribute("choosenHotel", hotel);
         model.addAttribute("review", new Review());
         return "hotel_page";

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import by.netcracker.hotel.dao.ReviewDAO;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.UserService;
 
@@ -48,9 +49,15 @@ public class ReviewServiceImpl implements ReviewService {
         } else if (info instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) info;
             User user = (User) userService.getUserByUsername(userDetails.getUsername());
-            reviewInfo = reviewDAO.checkUsersReview(hotelId, user.getId());
+            if (user.getAuthority().equals(ROLE.ADMIN)) {
+                reviewInfo = "moderate";
+            } else {
+                reviewInfo = reviewDAO.checkUsersReview(hotelId, user.getId());
+            }
+        } else {
+            reviewInfo = "no";
         }
-        return null;
+        return reviewInfo;
     }
 
 }

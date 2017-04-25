@@ -40,7 +40,6 @@ public class HotelPaginationController extends PaginationControllerAbstract<Hote
 
     @RequestMapping(value = "/list_of_hotels", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineJsp(@ModelAttribute(PPARAM) HotelSearchParam pparam, Model model) throws Exception {
-        // hotelPaginationService.deleteButtonAction(pparam, buttonAction);
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
         return "pagination/list_of_hotels";
@@ -49,7 +48,6 @@ public class HotelPaginationController extends PaginationControllerAbstract<Hote
     @RequestMapping(value = "pagination/list_of_hotels_ajax", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineAjaxJsp(@ModelAttribute(PPARAM) HotelSearchParam pparam,
         @RequestParam(value = BUTTON_ACTION, required = false) String buttonAction, Model model) throws Exception {
-        log.debug("pparam.resultIndex=" + pparam.getResultIndex());
         Map<String, Object> map = assignModel(pparam, buttonAction);
         model.addAllAttributes(map);
 

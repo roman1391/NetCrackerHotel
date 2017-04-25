@@ -14,7 +14,7 @@
         <!-- Uncomment after configuring tomcat for ssl -->
         <!-- <intercept-url pattern="/**" requires-channel="https" />
         <port-mappings>
-            <port-mapping http="8081" https="8443" />
+            <port-mapping http="8080" https="8443" />
         </port-mappings> -->
 
         <intercept-url pattern="/user_page" access="hasRole('USER')"/>
