@@ -30,6 +30,8 @@ public class HotelController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String hotelPage(@Valid @PathVariable("id") int hotelID, Model model) {
         Hotel hotel = hotelService.getByID(hotelID);
+        String reviewInfo = reviewService.checkReview(hotelID);
+        model.addAttribute("reviewInfo", reviewInfo);
         model.addAttribute("choosenHotel", hotel);
         model.addAttribute("review", new Review());
         return "hotel_page";
@@ -47,9 +49,7 @@ public class HotelController {
     public String sendFeenback(@Valid @ModelAttribute("choosenHotel") Hotel hotel,
         @Valid @ModelAttribute("review") Review review, Model model) {
         reviewService.addReview(review);
-        System.out.println(review);
         hotel = hotelService.getByID(review.getHotelId());
-        System.out.println(hotel.getName());
         model.addAttribute("choosenHotel", hotel);
         model.addAttribute("success", "Thank you for review");
         return "hotel_page";

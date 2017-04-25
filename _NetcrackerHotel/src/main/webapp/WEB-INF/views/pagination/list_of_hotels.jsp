@@ -6,22 +6,23 @@
 <%@taglib prefix="pg" uri="http://pagination/pagination-spring3.tld" %>
 <html>
 <head>
-<title>List of users</title>
+<title>List of hotels</title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 <%-- <link type="text/css" href="<c:url value="/resources/css/cssreset.css" />" rel="stylesheet" media="screen, projection"> --%>
 <link type="text/css" href="<c:url value="/resources/css/seasonstat.css"/>?vi=<%=(new java.util.Random()).nextInt(10)%>${pageContext.session.id}" rel="stylesheet" media="screen, projection"/>
 <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />" rel="stylesheet">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
-	<%@include file="../jsp_elements/_header.jsp"%>
+	<jsp:include page="/WEB-INF/jsp_elements/_header.jsp"></jsp:include>
 	<div id="wrapper">
 		<div class="container">
 			<div class="row row-offcanvas row-offcanvas-left">
 				Admin page! <br>
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
-					<h4>List of hotels: *в разработке*</h4>
+					<h4>List of hotels:</h4>
 						
 	<div style="padding-top:50px;padding-bottom:50px;padding-left:30px;padding-right:30px;">
         <c:url value="${paginationResult.pageLink}" var="pageLink"/>
@@ -41,13 +42,7 @@
                                <form:option value="5" label="5 stars"/>
                             </form:select>
                             </td>
-                            <td style="width:200px;">
-                                <%-- <form:select path="enabled">
-                                   	<form:option value="" label="-enabled-"/>
-                               		<form:option value="true" label="Enabled"/>
-                               		<form:option value="false" label="Unenabled"/>
-                                </form:select> --%>
-                            </td>
+                            <td style="width:200px;"></td>
                             <td style="width:80px;">Name:</td>
                             <td style="width:160px;"><form:input path="name" cssStyle="width:150px;"/></td>
                             <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button">Search</form:button></span></td>
@@ -61,13 +56,7 @@
                         <span ><a href="hotel/add">Add new hotel</a></span>
                     </div> 
                 </jsp:attribute>  
-                <jsp:attribute name="columnsContent">
-                <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.name}"/></span></td>
-                    <td class="cell"><span><c:out value="${bo.typeOfService}"/></span></td>
-                    <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.country}"/></span></td>
-                    <td class="cell"><span><c:out value="${bo.city}"/></span></td> 
-                    <td class="cell"><span><a href="hotel_page/${bo.hotelId}">Hotel</a> </span></td> 
-                </jsp:attribute>
+                
             </pg:pagination>
         </form:form>
     </div> 
@@ -78,7 +67,7 @@
 				</div>
 			</div>
 		</div>
-		<%@include file="../jsp_elements/_footer.jsp"%>
+		<jsp:include page="/WEB-INF/jsp_elements/_header.jsp"></jsp:include>
 	</div>
 </body>
 </html>

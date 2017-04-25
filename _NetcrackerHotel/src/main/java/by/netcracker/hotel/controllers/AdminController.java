@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
@@ -77,11 +76,5 @@ public class AdminController {
         model.addAttribute("success", "User - " + user.getUsername() + " was successfully deleted.");
         return "admin_page";
     }
-
-    /*@RequestMapping(value = "/list_of_hotels", method = RequestMethod.GET)
-    public String getAllHotels(Model model) {
-        model.addAttribute("hotel", new Hotel());
-        return "list_of_hotels";
-    }*/
 
 }

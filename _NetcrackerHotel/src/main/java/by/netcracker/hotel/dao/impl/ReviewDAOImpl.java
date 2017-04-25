@@ -32,8 +32,7 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
     public void add(Review review) {
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.REVIEW.name().toLowerCase());
         getJdbcTemplate().update(SqlQuery.ADD_REVIEW.getQuery(), review.getUserId(), review.getHotelId(),
-            review.getText(), review.getDate(), review.getRating());
-
+            review.getText(), review.getStatus(), review.getDate(), String.valueOf(review.getRating()));
     }
 
     @Override
@@ -58,6 +57,30 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
     public List<Review> getAll() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public String checkUsersReview(int hotelId, int userId) {
+        String reviewStatus;
+        String reviewinfo;
+        try {
+            reviewStatus = getJdbcTemplate().queryForObject(SqlQuery.CHECK_REVIEW.getQuery(), String.class,
+                new Object[] { userId, hotelId });
+        } catch (Exception e) {
+            reviewStatus = "1";
+        }
+        switch (reviewStatus) {
+        case "1":
+            reviewinfo = "exist";
+            break;
+        case "0":
+            reviewinfo = "notExist";
+            break;
+        default:
+            reviewinfo = "exist";
+            break;
+        }
+        return reviewinfo;
     }
 
 }

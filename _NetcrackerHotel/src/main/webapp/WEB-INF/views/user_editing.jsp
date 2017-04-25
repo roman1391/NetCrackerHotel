@@ -7,7 +7,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<title>Home</title>
+<title>User page</title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 <link
 	href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"

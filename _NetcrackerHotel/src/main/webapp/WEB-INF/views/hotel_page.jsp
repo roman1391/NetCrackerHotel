@@ -32,12 +32,28 @@
 						Address: ${choosenHotel.address }<br> typeOfService: ${choosenHotel.typeOfService }<br>
 						Description: ${choosenHotel.description }<br> 
 						photoURL: ${choosenHotel.photoURL }<br>
-						<c:if test="${currentUser.authority.toString() eq 'USER'}">
+						<c:choose>
+						<c:when test="${reviewInfo eq 'forbidden'}">
+            				<div style="margin: 10px" class="alert alert-danger" >
+                 				To leave a review please log in </div>
+						</c:when>
+						<c:when test="${reviewInfo eq 'notExist'}">
 							<form:form method="post" id="review" action="review_page" modelAttribute="choosenHotel">
 								<form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
 								<form:button type="submit">Leave review</form:button>
 							</form:form>
-						</c:if>
+						</c:when>
+						<c:when test="${reviewInfo eq 'exist'}">
+							<div style="margin: 10px" class="alert alert-success" >
+                 				You have already left review </div>
+						</c:when>
+						<c:when test="${reviewInfo eq 'moderate'}">
+							<form:form method="post" id="review" action="list_of_reviews" modelAttribute="choosenHotel">
+								<form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
+								<form:button type="submit">See all reviews (not work yet)</form:button>
+							</form:form>
+						</c:when>
+						</c:choose>
 					</div>
 				</div>
 			</div>
