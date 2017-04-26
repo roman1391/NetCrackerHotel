@@ -1,8 +1,5 @@
 package by.netcracker.hotel.dao;
 
-import by.netcracker.hotel.exceptions.UserNotFoundException;
-
-import java.sql.SQLException;
 import java.util.List;
 
 /**

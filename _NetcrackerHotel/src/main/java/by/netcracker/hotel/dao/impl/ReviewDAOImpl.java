@@ -6,15 +6,20 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import by.netcracker.hotel.dao.ReviewDAO;
 import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.Review;
+import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.SqlQuery;
+import by.netcracker.hotel.mapper.ReviewMapper;
+import by.netcracker.hotel.mapper.UserMapper;
 
-@Component("ReviewDAOImpl")
+@Repository
 public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
     private DataSource dataSource;
 
@@ -37,7 +42,7 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
 
     @Override
     public void deleteByID(Integer id) {
-        // TODO Auto-generated method stub
+        getJdbcTemplate().update(SqlQuery.DELETE_BY_ID.getQuery(), id);
 
     }
 
@@ -49,14 +54,19 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
 
     @Override
     public Review getByID(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
+                new ReviewMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public List<Review> getAll() {
-        // TODO Auto-generated method stub
-        return null;
+        return getJdbcTemplate().query(SqlQuery.GET_ALL.getQuery(), new Object[] { TypeName.REVIEW.getType() },
+            new RowMapperResultSetExtractor<Review>(new ReviewMapper()) {
+            });
     }
 
     @Override

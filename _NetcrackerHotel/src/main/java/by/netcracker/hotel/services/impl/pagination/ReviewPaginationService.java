@@ -87,6 +87,7 @@ public class ReviewPaginationService extends PaginationServiceAbstract<ReviewSea
         bo.setUsername(userDAO.getByID((review.getUserId())).getUsername());
         bo.setHotelname(hotelDAO.getByID(review.getHotelId()).getName());
         bo.setTime(review.getDate());
+        bo.setStatus(review.getStatus());
         return bo;
     }
 

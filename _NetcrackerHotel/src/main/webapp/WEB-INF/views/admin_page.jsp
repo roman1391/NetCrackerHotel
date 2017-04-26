@@ -35,6 +35,9 @@
 						<p>
 							<a href="hotel/add">Add hotel</a>
 						</p>
+						<p>
+							<a href="list_of_reviews">Review management</a>
+						</p>
 					</div>
 				</div>
 			</div>
