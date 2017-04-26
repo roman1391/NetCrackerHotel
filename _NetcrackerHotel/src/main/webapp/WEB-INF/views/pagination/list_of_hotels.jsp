@@ -52,7 +52,7 @@
                 </jsp:attribute>
                  <jsp:attribute name="controlButton">
                      <div style="padding-top:10px;">
-                        <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button">Delete</form:button></span>
+                        <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Delete</form:button></span>
                         <span ><a href="hotel/add">Add new hotel</a></span>
                     </div> 
                 </jsp:attribute>  
@@ -71,3 +71,10 @@
 	</div>
 </body>
 </html>
+
+<script>
+function clicked(e)
+{
+    if(!confirm('Are you sure?'))e.preventDefault();
+}
+</script>

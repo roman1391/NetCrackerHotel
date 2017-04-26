@@ -50,20 +50,20 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
         getJdbcTemplate().update(new PreparedStatementCreator() {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(SqlQuery.ADD_ENTITY_ID.getQuery(),
-                        new String[]{"id"});
+                    new String[] { "id" });
                 ps.setString(1, TypeName.HOTEL.name().toLowerCase());
                 return ps;
             }
         }, keyHolder);
 
-        getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(),
-                hotel.getAddress(), hotel.getTypeOfService(), hotel.getName(), hotel.getDescription());
+        getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(), hotel.getAddress(),
+            hotel.getTypeOfService(), hotel.getName(), hotel.getDescription());
         hotel.setId(keyHolder.getKey().intValue());
     }
 
     @Override
-    public void deleteByID(Integer integer) {
-
+    public void deleteByID(Integer id) {
+        getJdbcTemplate().update(SqlQuery.DELETE_BY_ID.getQuery(), id);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
             hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new HotelMapper());
             Photo photo = getJdbcTemplate().queryForObject(SqlQuery.GET_MAIN_PHOTO_FOR_HOTEL.getQuery(),
-                    new Object[]{id}, new PhotoMapper());
+                new Object[] { id }, new PhotoMapper());
             hotel.setPhotoURL(CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo.getPhotoName()));
         } catch (EmptyResultDataAccessException e) {
         }
@@ -95,14 +95,13 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     @Override
     public List<Integer> findIDsBySearchString(String searchString) {
         searchString = "%" + searchString + "%";
-        return getJdbcTemplate().query(SqlQuery.SEARCH_HOTEL.getQuery(), new Object[]{searchString},
-                (resultSet, i) -> resultSet.getInt(1));
+        return getJdbcTemplate().query(SqlQuery.SEARCH_HOTEL.getQuery(), new Object[] { searchString },
+            (resultSet, i) -> resultSet.getInt(1));
     }
 
     @Override
     public List<String> getPlaces() {
-        return getJdbcTemplate().query(SqlQuery.GET_PLACES.getQuery(),
-                (resultSet, i) -> resultSet.getString(1));
+        return getJdbcTemplate().query(SqlQuery.GET_PLACES.getQuery(), (resultSet, i) -> resultSet.getString(1));
     }
 
     @Override

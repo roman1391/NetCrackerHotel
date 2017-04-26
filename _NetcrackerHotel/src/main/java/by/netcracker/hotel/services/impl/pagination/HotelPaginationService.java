@@ -27,7 +27,7 @@ public class HotelPaginationService extends PaginationServiceAbstract<HotelSearc
     private HotelDAO hotelDAO;
 
     @Autowired
-    public void setPaginationDao(HotelPaginationDAO hotelPaginationDAO, UserDAO userDAO) {
+    public void setPaginationDao(HotelPaginationDAO hotelPaginationDAO, UserDAO userDAO, HotelDAO hotelDAO) {
         super.setPaginationDao(hotelPaginationDAO);
         this.hotelPaginationDAO = hotelPaginationDAO;
         this.hotelDAO = hotelDAO;

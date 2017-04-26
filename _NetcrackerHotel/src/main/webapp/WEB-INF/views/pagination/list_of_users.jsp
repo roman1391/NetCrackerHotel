@@ -49,14 +49,14 @@
                             </td>
                             <td style="width:80px;">Username:</td>
                             <td style="width:160px;"><form:input path="username" cssStyle="width:150px;"/></td>
-                            <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button">Search</form:button></span></td>
+                            <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button"  >Search</form:button></span></td>
                             <td style="width:75px;"><span class="button"><form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
                         </tr>
                     </table>  
                 </jsp:attribute>
                  <jsp:attribute name="controlButton">
                      <div style="padding-top:10px;">
-                        <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button">Delete</form:button></span>
+                        <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Delete</form:button></span>
                         <span ><a href="add_user_ref">Add new user</a></span>
                     </div> 
                 </jsp:attribute>  
@@ -75,6 +75,13 @@
 	</div>
 </body>
 </html>
+
+<script>
+function clicked(e)
+{
+    if(!confirm('Are you sure?'))e.preventDefault();
+}
+</script>
 
 <%-- 						<h3>List of administrators:</h3>
 						<div>
