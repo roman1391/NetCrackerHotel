@@ -13,46 +13,15 @@ import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.pagination.HotelSearchParam;
 
 @Repository
-public class HotelPaginationDAO implements com.github.paginationspring.dao.PaginationDao<Hotel, HotelSearchParam> {
-
-    HotelDAO hotelDAO;
+public class HotelPaginationDAO extends AbstractPaginationJdbcDAO<Hotel, HotelSearchParam> {
 
     @Autowired
     public HotelPaginationDAO(HotelDAO hotelDAO) {
-        this.hotelDAO = hotelDAO;
+        super(hotelDAO);
     }
 
     @Override
-    public int retrieveCountResult(HotelSearchParam pparam) throws Exception {
-        HotelSearchParam param = (HotelSearchParam) pparam;
-        List<Hotel> list = hotelDAO.getAll();
-        list = filterList(list, param);
-        return list.size();
-    }
-
-    @Override
-    public List<Hotel> retrievePageResult(HotelSearchParam pparam) throws Exception {
-        List<Hotel> list = hotelDAO.getAll();
-        int index = Integer.parseInt(pparam.getResultIndex());
-        HotelSearchParam param = (HotelSearchParam) pparam;
-
-        sortList(list, param);
-        list = filterList(list, param);
-        List<Hotel> list1 = getOnePage(list, index);
-        return list1;
-    }
-
-    private List<Hotel> getOnePage(List<Hotel> list, int index) {
-        List<Hotel> list1 = new ArrayList<Hotel>();
-        for (int i = index; i < index + 10; i++) {
-            if (list.size() > i) {
-                list1.add(list.get(i));
-            }
-        }
-        return list1;
-    }
-
-    private List<Hotel> filterList(List<Hotel> list, HotelSearchParam param) {
+    protected List<Hotel> filterList(List<Hotel> list, HotelSearchParam param) {
         if (param.getCity() != null && !param.getCity().equals("")) {
             List<Hotel> list1 = new ArrayList<Hotel>();
             for (int i = 0; i < list.size(); i++) {
@@ -83,7 +52,8 @@ public class HotelPaginationDAO implements com.github.paginationspring.dao.Pagin
         return list;
     }
 
-    private void sortList(List<Hotel> list, HotelSearchParam param) {
+    @Override
+    protected void sortList(List<Hotel> list, HotelSearchParam param) {
         if (param.getSortName() != null && !param.getSortName().equals("")) {
             System.out.println(param.getSortName());
             if (param.getSortName().equals("Name")) {

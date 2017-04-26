@@ -25,13 +25,6 @@ public class AdminController {
         this.userService = userService;
     }
 
-    // @RequestMapping(value = "/list_of_users", method = RequestMethod.GET)
-    // public String getAllUsers(Model model) {
-    // model.addAttribute("users", userService.getAll());
-    // model.addAttribute("user", new User());
-    // return "list_of_users";
-    // }
-
     @RequestMapping(value = "/add_user_ref", method = RequestMethod.GET)
     public String getAddUserForm(Model model) {
         model.addAttribute("user", new User());
