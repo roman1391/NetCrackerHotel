@@ -1,6 +1,7 @@
 package by.netcracker.hotel.dao.impl;
 
 import by.netcracker.hotel.dao.OrderDAO;
+import by.netcracker.hotel.dao.constant.ColumnName;
 import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.enums.SqlQuery;
@@ -59,6 +60,12 @@ public class OrderDAOImpl extends JdbcDaoSupport implements OrderDAO {
 
     public List<Order> getByUserId(Integer userId){
         return getJdbcTemplate().query(SqlQuery.GET_BY_ID.getQuery(),new Object[]{userId},
+                new RowMapperResultSetExtractor<Order>(new OrderMapper()){});
+    }
+
+    @Override
+    public List<Order> getByUserId(int userId) {
+        return getJdbcTemplate().query(SqlQuery.GET_BY.getQuery(), new Object[]{ColumnName.ORDER_USER_ID.toLowerCase(), userId},
                 new RowMapperResultSetExtractor<Order>(new OrderMapper()){});
     }
 }

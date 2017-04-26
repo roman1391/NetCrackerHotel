@@ -6,6 +6,8 @@ import by.netcracker.hotel.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Alexander on 25.04.2017.
  */
@@ -26,6 +28,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void addOrder(Order order) {
         orderDAO.add(order);
+    }
+
+    @Override
+    public List<Order> getByUserId(int userId) {
+        return orderDAO.getByUserId(userId);
     }
 
     public void findByUserId(Integer id){
