@@ -34,9 +34,9 @@ public class OrderController {
         return "book_page";
     }
 
-    @RequestMapping(value = "/booked_room", method = RequestMethod.GET)
+    @RequestMapping(value = "/booked_room", method = RequestMethod.POST)
     public String bookedRooms(@ModelAttribute("currentUser") User user, Model model){
-        model.addAttribute("orders", orderService.getByID(user.getId()));
+        model.addAttribute("orders", orderService.getByUserId(user.getId()));
         return "bookedRooms";
     }
 }

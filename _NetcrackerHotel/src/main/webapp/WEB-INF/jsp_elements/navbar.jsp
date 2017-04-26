@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="authority" value="${currentUser.authority.toString()}"/>
 
@@ -26,9 +27,16 @@
                 </li>
             </c:if>
             <c:if test="${authority ne 'GUEST'}">
-            <li class="nav-item">
-                <a class="nav-link " href="${contextPath}/booked_room">Hotels</a>
-            </li>
+                <li class="nav-item">
+                    <form:form method="post" id="curUser" action="${contextPath}/booked_room" modelAttribute="currentUser">
+                        <form:input path="id" type="hidden" name="id" value="${currentUser.id}"></form:input>
+                        <form:input path="username" type="hidden" name="username" value="${currentUser.username}"></form:input>
+                        <%-- <form:button class="nav-link" type="submit">Book</form:button> --%>
+                        <form:button class="nav-link" type="submit">Booked rooms</form:button>
+
+                        <!-- <a class="nav-link" type="submit" href="">Hotels</a> -->
+                    </form:form>
+                </li>
             </c:if>
             <li class="nav-item">   
                 <a class="nav-link" href="${contextPath}/search-page">Search hotels</a>

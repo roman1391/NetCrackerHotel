@@ -38,7 +38,7 @@ public class OrderMapper implements RowMapper<Order>{
                     order.setPayValue(resultSet.getInt(3));
                     break;
                 case ColumnName.IS_PAID:
-                    order.setRoomId(resultSet.getInt(3));
+                    order.setPaid(resultSet.getBoolean(3));
                     break;
             }
         }
