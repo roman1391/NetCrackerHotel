@@ -1,7 +1,6 @@
 package by.netcracker.hotel.services;
 
 import by.netcracker.hotel.entities.Hotel;
-import by.netcracker.hotel.entities.Photo;
 
 import java.util.List;
 

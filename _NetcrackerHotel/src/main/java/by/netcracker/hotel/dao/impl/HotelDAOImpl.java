@@ -17,14 +17,11 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import by.netcracker.hotel.cloud.CloudinaryConnector;
 import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.Hotel;
-import by.netcracker.hotel.entities.Photo;
 import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.mapper.HotelMapper;
-import by.netcracker.hotel.mapper.PhotoMapper;
 
 /**
  * Created by Varvara on 4/4/2017.

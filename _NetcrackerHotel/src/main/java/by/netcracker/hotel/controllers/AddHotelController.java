@@ -2,10 +2,8 @@ package by.netcracker.hotel.controllers;
 
 import by.netcracker.hotel.cloud.CloudinaryConnector;
 import by.netcracker.hotel.entities.Hotel;
-import by.netcracker.hotel.entities.Photo;
 import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.services.HotelService;
-import by.netcracker.hotel.services.PhotoService;
 import by.netcracker.hotel.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,19 +26,17 @@ import java.util.Map;
 public class AddHotelController {
 
     private final HotelService hotelService;
-    private final PhotoService photoService;
     private final RoomService roomService;
 
     private static String UPLOADED_FOLDER;
     private final ServletContext context;
 
     @Autowired
-    public AddHotelController(ServletContext context, HotelService hotelService, PhotoService photoService, RoomService roomService) {
+    public AddHotelController(ServletContext context, HotelService hotelService, RoomService roomService) {
         this.context = context;
         this.roomService = roomService;
         UPLOADED_FOLDER = this.context.getRealPath("/resources/img/");
         this.hotelService = hotelService;
-        this.photoService = photoService;
     }
 
 
