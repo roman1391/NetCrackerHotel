@@ -1,5 +1,17 @@
 package by.netcracker.hotel.social;
 
+import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.services.UserService;
+import jdk.nashorn.internal.runtime.Context;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -11,21 +23,29 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.security.Security;
+import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * Created by slava on 20.04.17.
  */
 public class SimpleSignInAdapter implements SignInAdapter {
     private final RequestCache requestCache;
+    private UserDetailsService userService;
 
-    @Inject
-    public SimpleSignInAdapter(RequestCache requestCache) {
+    @Autowired
+    public SimpleSignInAdapter(RequestCache requestCache,UserDetailsService userService) {
         this.requestCache = requestCache;
+        this.userService = userService;
     }
 
     @Override
     public String signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
-        SignInUtil.signin(localUserId);
+        UserDetails user = userService.loadUserByUsername(localUserId);
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,null, null);
+        SecurityContext context = SecurityContextHolder.getContext();
+        context.setAuthentication(token);
         return extractOriginalUrl(request);
     }
 

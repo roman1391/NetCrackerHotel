@@ -25,7 +25,9 @@
                    factory-method="noOpText" />
 
        <social:jdbc-connection-repository data-source-ref="dataSource"
-                                          encryptor-ref="textEncryptor" />
+                                          encryptor-ref="textEncryptor"
+                                          connection-signup-ref="FacebookConnectionSignUp"
+       />
 
        <bean id="psc" class="org.springframework.social.connect.web.ProviderSignInController"
              autowire="constructor" />

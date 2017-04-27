@@ -20,6 +20,8 @@ public interface UserService extends AbstractService<User, Integer> {
 
     User getUserByUsername(String username);
 
+    User getUserByEmail(String email);
+
     boolean update(UserDTO dto);
 
     void blockUser(User user);
@@ -36,5 +38,5 @@ public interface UserService extends AbstractService<User, Integer> {
 
     void saveRegisteredUser(User user);
 
-    void deleteUserByUsername(User user);
+    void deleteUserByUsername(String username);
 }

@@ -33,6 +33,13 @@
 	<!--<beans:bean id="connectController" class="org.springframework.social.connect.web.ConnectController"
 		  autowire="constructor" />-->
 
+	<beans:bean id="signinController"
+				class= "org.springframework.social.connect.web.ProviderSignInController" >
+		<beans:property name="applicationUrl" value="http://localhost:8080" />
+		<beans:property name="signInUrl" value="/" />
+	</beans:bean>
+
+
 	<context:component-scan base-package="by.netcracker.hotel" use-default-filters="false">
 		<context:include-filter expression="org.springframework.stereotype.Controller"
 								type="annotation"/>

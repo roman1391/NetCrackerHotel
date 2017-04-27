@@ -24,7 +24,9 @@
         <intercept-url pattern="/admin_page" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/list_of_users" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/add_hotel" access="hasRole('ADMIN')"/>
-
+        <intercept-url pattern="/signup/**" access="permitAll" />
+        <intercept-url pattern="/signin/**" access="permitAll" />
+        
         <form-login login-page='/login_page'
                     authentication-success-handler-ref="SuccessLoginHandler"
                     authentication-failure-url="/login?error=true"

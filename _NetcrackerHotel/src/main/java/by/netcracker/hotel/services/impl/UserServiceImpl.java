@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
     private VerificationTokenDAO tokenDAO;
 
+
     @Autowired
     public UserServiceImpl(UserDAO userDAO, VerificationTokenDAO tokenDAO) {
         this.userDAO = userDAO;
@@ -57,8 +58,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        return userDAO.getByEmail(email);
+    }
+
+    @Override
     public List<User> getAll() {
-        return (List<User>) userDAO.getAll();
+        return userDAO.getAll();
     }
 
     private boolean usernameExist(String username) {
@@ -130,8 +136,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserByUsername(User user) {
-        userDAO.deleteByUsername(user.getUsername());
+    public void deleteUserByUsername(String username) {
+        userDAO.deleteByUsername(username);
     }
 
 }

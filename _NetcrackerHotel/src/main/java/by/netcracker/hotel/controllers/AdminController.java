@@ -72,7 +72,7 @@ public class AdminController {
 
     @RequestMapping(value = "/delete_user", method = RequestMethod.POST)
     public String deleteUser(@Valid @ModelAttribute("user") User user, Model model) {
-        userService.deleteUserByUsername(user);
+        userService.deleteUserByUsername(user.getUsername());
         model.addAttribute("success", "User - " + user.getUsername() + " was successfully deleted.");
         return "admin_page";
     }

@@ -30,10 +30,6 @@
 				</div>
 			</div>
 		</div>
-		<form action="<c:url value="/connect/facebook" />" method="POST">
-			<input type="hidden" name="scope" value="public_profile,email" />
-			<button type="submit">Facebook</button>
-		</form>
 		<%@include file="../jsp_elements/_footer.jsp"%>
 	</div>
 </body>

@@ -7,6 +7,9 @@ import by.netcracker.hotel.events.OnRegistrationCompleteEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 /**
  * Created by slava КПСС on 07.04.17.
@@ -38,7 +42,8 @@ public class RegistrationController {
     private final long TOKEN_LIFE_TIME = 86400000;
 
     @Autowired
-    public RegistrationController(UserService userService,ApplicationEventPublisher eventPublisher) {
+    public RegistrationController(UserService userService,
+                                  ApplicationEventPublisher eventPublisher) {
         this.userService = userService;
         this.eventPublisher = eventPublisher;
     }
@@ -78,6 +83,7 @@ public class RegistrationController {
 
         if ((cal.getTime().getTime() - verificationToken.getDate().getTime()) >= TOKEN_LIFE_TIME) {
             userService.deleteVerificationToken(verificationToken.getId());
+            userService.deleteUserByUsername(user.getUsername());
             return new ModelAndView("badUser","message", "Invalid time");
         }
 
