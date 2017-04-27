@@ -54,33 +54,26 @@ public class AddHotelController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addHotel(@ModelAttribute("hotel") Hotel hotel, @RequestParam("file") MultipartFile file,
                            Model model) {
-        hotelService.addHotel(hotel);
+        //hotelService.addHotel(hotel);
         if (!file.isEmpty()) {
-            Photo photo = new Photo(hotel.getId());
-            photoService.addPhoto(photo);
-            hotelService.setMainPhotoForHotel(hotel.getId(), photo.getIdPhoto());
-            savePhotoInCloudinary(file, photo.getPhotoName());
-            String photoUrl = CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo.getPhotoName());
-            hotel.setPhotoURL(photoUrl);
+            String photo = CloudinaryConnector.generateNameForPhoto();
+            hotel.setMainPhoto(photo);
+            savePhotoInCloudinary(file, photo);
         }
+        hotelService.addHotel(hotel);
         model.addAttribute("id", hotel.getId());
         return "add_hotel_photo_and_description";
     }
 
     @RequestMapping(value = "/photo/{id}", method = RequestMethod.POST)
     public String addPhotosToHotel(@PathVariable("id") int hotelID, @RequestParam("files") List<MultipartFile> files, Model model) {
+        Hotel hotel = hotelService.getByID(hotelID);
         for (MultipartFile file : files) {
-            Photo photo = new Photo(hotelID);
-            photoService.addPhoto(photo);
-            savePhotoInCloudinary(file, photo.getPhotoName());
+            String photo = CloudinaryConnector.generateNameForPhoto();
+            hotel.addPhoto(photo);
+            savePhotoInCloudinary(file, photo);
         }
-        model.addAttribute("hotel", hotelService.getByID(hotelID));
-        List<String> photosUrl = new ArrayList<>();
-        for (Photo photo : photoService.getPhotosForHotel(hotelID)) {
-            String photoUrl = CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo.getPhotoName());
-            photosUrl.add(photoUrl);
-        }
-        model.addAttribute("photos", photosUrl);
+        model.addAttribute("hotel", hotel);
         model.addAttribute("id", hotelID);
         return "add_hotel_photo_and_description";
     }

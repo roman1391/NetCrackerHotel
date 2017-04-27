@@ -1,6 +1,8 @@
 package by.netcracker.hotel.entities;
 
 
+import by.netcracker.hotel.cloud.CloudinaryConnector;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +18,19 @@ public class Hotel {
     private String name;
     private int typeOfService;
     private String description;
-    private String photoURL;
+    private String mainPhoto;
+    private List<String> photos;
 
     public Hotel() {
+        photos = new ArrayList<>();
+    }
+
+    public List<String> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<String> photos) {
+        this.photos = photos;
     }
 
     public static List<Room> getRooms(){
@@ -86,19 +98,22 @@ public class Hotel {
         this.id = id;
     }
 
-    public String getPhotoURL() {
-        return photoURL;
+    public String getMainPhoto() {
+        return mainPhoto;
     }
 
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
+    public void setMainPhoto(String mainPhoto) {
+        this.mainPhoto = CloudinaryConnector.getCloudinary().url().format("jpg").generate(mainPhoto);
     }
 
     @Override
     public String toString() {
         return "Hotel [country=" + country + ", city=" + city + ", address=" + address + ", name=" + name
-            + ", typeOfService=" + typeOfService + ", description=" + description + ", id=" + id + ", photoURL="
-            + photoURL + "]";
+            + ", typeOfService=" + typeOfService + ", description=" + description + ", id=" + id + ", mainPhoto="
+            + mainPhoto + "]";
     }
 
+    public void addPhoto(String photo) {
+        photos.add(CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo));
+    }
 }

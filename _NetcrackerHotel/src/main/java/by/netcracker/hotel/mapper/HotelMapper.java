@@ -1,5 +1,6 @@
 package by.netcracker.hotel.mapper;
 
+import by.netcracker.hotel.cloud.CloudinaryConnector;
 import by.netcracker.hotel.dao.constant.ColumnName;
 import by.netcracker.hotel.entities.Hotel;
 import org.springframework.jdbc.core.RowMapper;
@@ -40,6 +41,14 @@ public class HotelMapper implements RowMapper<Hotel> {
                 }
                 case ColumnName.CLASS: {
                     hotel.setTypeOfService(resultSet.getInt(3));
+                    break;
+                }
+                case ColumnName.MAIN_PHOTO: {
+                    hotel.setMainPhoto(resultSet.getString(3));
+                    break;
+                }
+                case ColumnName.PHOTO: {
+                    hotel.addPhoto(resultSet.getString(3));
                     break;
                 }
             }

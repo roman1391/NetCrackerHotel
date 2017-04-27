@@ -7,9 +7,9 @@
 --%>
 
 <form style="margin: 50px">
-    <c:if test="${not empty photos}">
+    <c:if test="${not empty hotel.photos}">
         <div class="row">
-            <c:forEach var="photo" items="${photos}">
+            <c:forEach var="photo" items="${hotel.photos}">
                 <div class="col-md-4">
                     <div class="thumbnail">
                         <a href="${photo}">

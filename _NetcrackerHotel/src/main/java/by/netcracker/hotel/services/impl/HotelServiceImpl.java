@@ -62,9 +62,5 @@ public class HotelServiceImpl implements HotelService {
         hotelDAO.add(hotel);
     }
 
-    @Override
-    public void setMainPhotoForHotel(int idHotel, int idPhoto) {
-        hotelDAO.setMainPhotoForHotel(idHotel, idPhoto);
-    }
 
 }

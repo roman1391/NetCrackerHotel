@@ -40,4 +40,5 @@ public class ColumnName {
     public static final String STATUS = "status";
     public static final String TIME = "time";
     public static final String STAR = "star";
+    public static final String MAIN_PHOTO = "main_photo";
 }

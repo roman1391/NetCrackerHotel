@@ -31,7 +31,7 @@
                     Country: ${choosenHotel.country }<br> City: ${choosenHotel.city}<br>
                     Address: ${choosenHotel.address }<br> typeOfService: ${choosenHotel.typeOfService }<br>
                     Description: ${choosenHotel.description }<br>
-                    photoURL: ${choosenHotel.photoURL }<br>
+                    mainPhoto: ${choosenHotel.mainPhoto }<br>
 
                         <c:choose>
                             <c:when test="${reviewInfo eq 'forbidden'}">

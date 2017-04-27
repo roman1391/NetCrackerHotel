@@ -2,7 +2,7 @@
 
 <div class="row list-group-item">
 	<div class="col-4">
-		<img src="<c:url value="${hotel.photoURL}"/>" class="rounded"
+		<img src="<c:url value="${hotel.mainPhoto}"/>" class="rounded"
 			alt="${hotel.name}" width="200">
 	</div>
 	<div class="col-8">

@@ -50,15 +50,18 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
         getJdbcTemplate().update(new PreparedStatementCreator() {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(SqlQuery.ADD_ENTITY_ID.getQuery(),
-                    new String[] { "id" });
+                        new String[]{"id"});
                 ps.setString(1, TypeName.HOTEL.name().toLowerCase());
                 return ps;
             }
         }, keyHolder);
-
-        getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(), hotel.getAddress(),
-            hotel.getTypeOfService(), hotel.getName(), hotel.getDescription());
         hotel.setId(keyHolder.getKey().intValue());
+        getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(), hotel.getAddress(),
+                hotel.getTypeOfService(), hotel.getName(), hotel.getDescription(), hotel.getMainPhoto());
+        for (String photo : hotel.getPhotos()) {
+            getJdbcTemplate().update(SqlQuery.ADD_PHOTO.getQuery(), hotel.getId(), photo);
+        }
+
     }
 
     @Override
@@ -75,11 +78,8 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     public Hotel getByID(Integer id) {
         Hotel hotel = new Hotel();
         try {
-            hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
-                new HotelMapper());
-            Photo photo = getJdbcTemplate().queryForObject(SqlQuery.GET_MAIN_PHOTO_FOR_HOTEL.getQuery(),
-                new Object[] { id }, new PhotoMapper());
-            hotel.setPhotoURL(CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo.getPhotoName()));
+            hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[]{id},
+                    new HotelMapper());
         } catch (EmptyResultDataAccessException e) {
         }
         return hotel;
@@ -87,16 +87,16 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
     @Override
     public List<Hotel> getAll() {
-        return getJdbcTemplate().query(SqlQuery.GET_ALL.getQuery(), new Object[] { TypeName.HOTEL.getType() },
-            new RowMapperResultSetExtractor<Hotel>(new HotelMapper()) {
-            });
+        return getJdbcTemplate().query(SqlQuery.GET_ALL.getQuery(), new Object[]{TypeName.HOTEL.getType()},
+                new RowMapperResultSetExtractor<Hotel>(new HotelMapper()) {
+                });
     }
 
     @Override
     public List<Integer> findIDsBySearchString(String searchString) {
         searchString = "%" + searchString + "%";
-        return getJdbcTemplate().query(SqlQuery.SEARCH_HOTEL.getQuery(), new Object[] { searchString },
-            (resultSet, i) -> resultSet.getInt(1));
+        return getJdbcTemplate().query(SqlQuery.SEARCH_HOTEL.getQuery(), new Object[]{searchString},
+                (resultSet, i) -> resultSet.getInt(1));
     }
 
     @Override
@@ -105,8 +105,10 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     }
 
     @Override
-    public void setMainPhotoForHotel(int idHotel, int idPhoto) {
-        getJdbcTemplate().update(SqlQuery.SET_MAIN_PHOTO_FOR_HOTEL.getQuery(), idHotel, idPhoto);
+    public void addPhotos(List<String> photos, int hotelID) {
+        for (String photo : photos) {
+            getJdbcTemplate().update(SqlQuery.ADD_PHOTO.getQuery(), hotelID, photo);
+        }
     }
 
 }
