@@ -16,8 +16,8 @@ import java.util.UUID;
 /**
  * Created by slava on 27.04.17.
  */
-@Component("FacebookConnectionSignUp")
-public class FacebookConnectionSignUp implements ConnectionSignUp {
+@Component("SocialConnectionSignUp")
+public class SocialConnectionSignUp implements ConnectionSignUp {
 
 
     @Autowired
@@ -26,12 +26,26 @@ public class FacebookConnectionSignUp implements ConnectionSignUp {
     @Override
     public String execute(Connection<?> connection) {
         UserProfile profile = connection.fetchUserProfile();
+        String provider = connection.getKey().getProviderId();
         User user = new User();
-        user.setEmail(profile.getEmail());
-        user.setUsername(profile.getId());
-        user.setPassword(UUID.randomUUID().toString());
-        user.setFirstName(profile.getFirstName());
-        user.setLastName(profile.getLastName());
+        switch (provider) {
+            case "facebook": {
+                user.setEmail(profile.getEmail());
+                user.setUsername(profile.getId());
+                user.setPassword(UUID.randomUUID().toString());
+                user.setFirstName(profile.getFirstName());
+                user.setLastName(profile.getLastName());
+                break;
+            }
+            case "twitter":{
+                user.setEmail("none");
+                user.setUsername(profile.getUsername());
+                user.setPassword(UUID.randomUUID().toString());
+                user.setFirstName(profile.getFirstName());
+                user.setLastName(profile.getLastName());
+                break;
+            }
+        }
         try {
             userService.addUserByAdmin(user);
         } catch (UsernameExistException | EmailExistException e){

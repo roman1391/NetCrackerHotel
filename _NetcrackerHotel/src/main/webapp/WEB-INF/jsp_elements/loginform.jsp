@@ -32,3 +32,9 @@
     </button>
 </form>
 
+<form action="<c:url value="/signin/twitter" />" method="POST">
+    <button type="submit" class="btn btn-link" >
+        <i class="fa fa-twitter-square fa-3x"></i>
+    </button>
+</form>
+

@@ -18,6 +18,8 @@
 
        <facebook:config app-id="${facebook.appId}" app-secret="${facebook.appSecret}"
                         app-namespace="socialshowcase" />
+       
+       <twitter:config app-id="${twitter.appId}" app-secret="${twitter.appSecret}" />
 
        <bean id="userIdSource" class="org.springframework.social.security.AuthenticationNameUserIdSource" />
 
@@ -26,7 +28,7 @@
 
        <social:jdbc-connection-repository data-source-ref="dataSource"
                                           encryptor-ref="textEncryptor"
-                                          connection-signup-ref="FacebookConnectionSignUp"
+                                          connection-signup-ref="SocialConnectionSignUp"
        />
 
        <bean id="psc" class="org.springframework.social.connect.web.ProviderSignInController"
