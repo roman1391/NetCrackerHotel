@@ -11,17 +11,9 @@
 <html>
 <head>
     <title>Profile</title>
-    <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
     <style>
         img {
             width: 100px;
-
-        }
-
-        input, .save-btn, .cancel-btn, .edit-btn {
-            float: left;
-            clear: left;
-            margin: 20px;
         }
 
         input:not([type]):disabled {
@@ -38,25 +30,52 @@
 
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
-    <button onclick="onEditClick()" class="edit-btn">Edit</button>
-    <img src="" id="avatar">
-    <form:form id="updateForm" action="update" method="post" modelAttribute="activeUser"
-               enctype="multipart/form-data">
-        <div class="form-group">
-            <input type="file" name="file" id="loadAvatar" onclick="onFileSelected(event)">
-            <form:input path="avatar"/>
-            <form:input path="email" id="email" value="${currentUser.email}"
-                        class="editable"/>
-            <form:input path="firstName" id="firstName" value="${currentUser.firstName}"
-                        class="editable"/>
-            <form:input path="lastName" id="lastName" value="${currentUser.lastName}"
-                        class="editable"/>
+    <div class="jumbotron">
+      <div class="content">
+        <form:form id="updateForm" action="update" method="post" modelAttribute="activeUser"
+                   enctype="multipart/form-data" >
+        <div class="d-inline-block form-group">
+            <img src="" id="avatar">
+            <div class="form-group">
+                <input type="file" name="file" id="loadAvatar" onclick="onFileSelected(event)">
+                <form:input path="avatar" class="form-control" />
+            </div>
         </div>
-        <form:button type="submit" class="save-btn">Save</form:button>
-        <button onclick="onCancel()" class="cancel-btn">Cancel</button>
-    </form:form>
-    <%@include file="../jsp_elements/_footer.jsp" %>
+        <div class="d-inline-block form-group">
+            <div class="form-group">
+                <form:label path="email" >Email:</form:label>
+                <form:input  path="email" id="email" value="${currentUser.email}"
+                             class="editable form-control"/>
+            </div>
+            <div class="form-group">
+                <form:label path="username"  >Username:</form:label>
+                <form:input path="username" id="username" value="${currentUser.username}"
+                            class="editable form-control" />
+            </div>
+            <div class="form-group">
+                <form:label path="firstName" >First name:</form:label>
+                <form:input path="firstName" id="firstName" value="${currentUser.firstName}"
+                            class="editable form-control"/>
+            </div>
+            <div class="form-group">
+                <form:label path="lastName" >Last name:</form:label>
+                <form:input path="lastName" id="lastName" value="${currentUser.lastName}"
+                            class="editable form-control"/>
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="btn-group">
+                    <form:button id="save-btn" type="submit" class="btn btn-success">Save</form:button>
+                    <button id="cancel-btn" onclick="onCancel()" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+
+        </form:form>
+        <button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
+       </div>
+    </div>
 </div>
+<%@include file="../jsp_elements/_footer.jsp" %>
 </body>
 <script>
     var isEditable = true;
@@ -72,9 +91,9 @@
             });
         }
         $('.editable').attr("disabled", !isEditable);
-        $('.save-btn').css('display', isEditable ? 'block' : 'none');
-        $('.cancel-btn').css('display', isEditable ? 'block' : 'none');
-        $('.edit-btn').css('display', !isEditable ? 'block' : 'none');
+        $('#save-btn').css('display', isEditable ? 'block' : 'none');
+        $('#cancel-btn').css('display', isEditable ? 'block' : 'none');
+        $('#edit-btn').css('display', !isEditable ? 'block' : 'none');
     }
 
     $("#updateForm").submit(function (eventObj) {
@@ -115,5 +134,4 @@
     }
     onEditClick();
 </script>
-
 </html>

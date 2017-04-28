@@ -25,16 +25,20 @@
     </div>
 </form>
 
-<form action="<c:url value="/signin/facebook" />" method="POST">
-    <input type="hidden" name="scope" value="public_profile,email" />
-    <button type="submit" class="btn btn-link" >
-        <i class="fa fa-facebook-official fa-3x"></i>
-    </button>
-</form>
-
-<form action="<c:url value="/signin/twitter" />" method="POST">
-    <button type="submit" class="btn btn-link" >
-        <i class="fa fa-twitter-square fa-3x"></i>
-    </button>
-</form>
-
+<div class="form-group" >
+  <div class="d-inline-block">
+     <form action="<c:url value="/signin/facebook" />" method="POST">
+        <input type="hidden" name="scope" value="public_profile,email" />
+        <button type="submit" class="btn btn-link" >
+          <i class="fa fa-facebook-official fa-3x"></i>
+        </button>
+     </form>
+  </div>
+  <div class="d-inline-block">
+      <form action="<c:url value="/signin/twitter" />" method="POST">
+        <button type="submit" class="btn btn-link" >
+          <i class="fa fa-twitter-square fa-3x"></i>
+        </button>
+      </form>
+  </div>
+</div>
