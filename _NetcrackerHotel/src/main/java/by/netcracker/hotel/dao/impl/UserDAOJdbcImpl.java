@@ -10,7 +10,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.dao.constant.ColumnName;
@@ -23,7 +23,7 @@ import by.netcracker.hotel.mapper.UserMapper;
  * Created by slava on 02.04.17.
  */
 
-@Component("UserDAOJdbcImpl")
+@Repository
 public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     private DataSource dataSource;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

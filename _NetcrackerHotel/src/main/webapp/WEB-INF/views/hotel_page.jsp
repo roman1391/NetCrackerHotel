@@ -14,6 +14,7 @@
 </head>
 
 <body>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 	<%@include file="../jsp_elements/_header.jsp"%>
 	<div id="wrapper">
 		<div class="container">
@@ -65,7 +66,7 @@
                                 <td>${room.hotelID}</td>
                                 <c:if test="${currentUser.authority.toString() ne 'GUEST'}">
                                     <td>
-                                        <form:form method="post" id="order" action="/book_page" modelAttribute="order">
+                                        <form:form method="post" id="order" action="${contextPath}/book_page" modelAttribute="order">
                                             <form:input path="userId" type="hidden" name="userId" value="${currentUser.id}"></form:input>
                                             <form:input path="roomId" type="hidden" name="roomId" value="${room.id}"></form:input>
                                             <form:button type="submit">Book</form:button>

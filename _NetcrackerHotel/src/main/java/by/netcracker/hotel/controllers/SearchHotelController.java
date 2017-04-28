@@ -26,7 +26,6 @@ public class SearchHotelController {
 
     @RequestMapping(value = "/search-page", method = RequestMethod.GET)
     public String getSearchPage(Model model) {
-        model.addAttribute("searchFilter", new SearchFilter());
         model.addAttribute("places", hotelService.getPlaces());
         return "search_page";
     }
