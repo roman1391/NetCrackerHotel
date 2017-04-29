@@ -2,6 +2,8 @@ package by.netcracker.hotel.controllers.pagination;
 
 import java.util.Map;
 
+import by.netcracker.hotel.entities.Hotel;
+import by.netcracker.hotel.services.HotelService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ public class HotelPaginationController extends PaginationControllerAbstract<Hote
     private static Logger log = Logger.getLogger(HotelPaginationController.class);
 
     private HotelPaginationService hotelPaginationService;
+    private HotelService hotelService;
 
     public HotelPaginationController() {
         setOptionDisplayCheckbox(true);
@@ -33,15 +36,17 @@ public class HotelPaginationController extends PaginationControllerAbstract<Hote
     }
 
     @Autowired
-    public void setPaginationService(HotelPaginationService hotelPaginationService) {
+    public void setPaginationService(HotelPaginationService hotelPaginationService, HotelService hotelService) {
         super.setPaginationService(hotelPaginationService);
         this.hotelPaginationService = hotelPaginationService;
+        this.hotelService = hotelService;
     }
 
     @RequestMapping(value = "/list_of_hotels", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineJsp(@ModelAttribute(PPARAM) HotelSearchParam pparam, Model model) throws Exception {
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
+        model.addAttribute("hotels", hotelService.getHotelNames());
         return "pagination/list_of_hotels";
     }
 

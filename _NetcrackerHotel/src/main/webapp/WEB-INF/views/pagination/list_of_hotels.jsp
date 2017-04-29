@@ -12,6 +12,10 @@
 <link type="text/css" href="<c:url value="/resources/css/seasonstat.css"/>?vi=<%=(new java.util.Random()).nextInt(10)%>${pageContext.session.id}" rel="stylesheet" media="screen, projection"/>
 <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+<link href="<c:url value="/resources/css/search.css" />" rel="stylesheet">
+<link href="<c:url value="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>"
+          rel="stylesheet"/>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -44,7 +48,9 @@
                             </td>
                             <td style="width:200px;"></td>
                             <td style="width:80px;">Name:</td>
-                            <td style="width:160px;"><form:input path="name" cssStyle="width:150px;"/></td>
+                            <td style="width:160px;"><form:select path="name" class="form-control" id="selectHotel" multiple="multiple" cssStyle="width:150px;">
+                                <form:options items="${hotels}"/>
+                            </form:select></td>
                             <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button">Search</form:button></span></td>
                             <td style="width:75px;"><span class="button"><form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
                         </tr>
@@ -70,6 +76,9 @@
 		<jsp:include page="/WEB-INF/jsp_elements/_header.jsp"></jsp:include>
 	</div>
 </body>
+<script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
+<script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 </html>
 
 <script>

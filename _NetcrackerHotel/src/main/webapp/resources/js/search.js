@@ -44,3 +44,12 @@ $(document).ready(function () {
         tags: false
     });
 });
+
+$(document).ready(function () {
+    $("#selectHotel").select2({
+        placeholder: 'Hotel',
+        minimumInputLength: 1,
+        maximumSelectionLength: 1,
+        tags: true
+    });
+});

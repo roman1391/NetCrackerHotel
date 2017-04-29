@@ -12,4 +12,6 @@ public interface HotelService extends AbstractService <Hotel, Integer> {
     List<Hotel> getAll();
     List<String> getPlaces();
     void addHotel(Hotel hotel);
+
+    List<String> getHotelNames();
 }
