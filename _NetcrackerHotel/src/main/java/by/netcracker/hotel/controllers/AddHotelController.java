@@ -54,6 +54,8 @@ public class AddHotelController {
             String photo = CloudinaryConnector.generateNameForPhoto();
             hotel.setMainPhoto(photo);
             savePhotoInCloudinary(file, photo);
+        } else {
+            hotel.setMainPhoto("BTTELV");
         }
         hotelService.addHotel(hotel);
         model.addAttribute("id", hotel.getId());
@@ -63,10 +65,15 @@ public class AddHotelController {
     @RequestMapping(value = "/photo/{id}", method = RequestMethod.POST)
     public String addPhotosToHotel(@PathVariable("id") int hotelID, @RequestParam("files") List<MultipartFile> files, Model model) {
         Hotel hotel = hotelService.getByID(hotelID);
-        for (MultipartFile file : files) {
-            String photo = CloudinaryConnector.generateNameForPhoto();
-            hotel.addPhoto(photo);
-            savePhotoInCloudinary(file, photo);
+        if (!files.get(0).isEmpty()) {
+            for (MultipartFile file : files) {
+                String photo = CloudinaryConnector.generateNameForPhoto();
+                hotel.addPhoto(photo);
+                savePhotoInCloudinary(file, photo);
+                hotelService.addPhoto(photo, hotelID);
+            }
+        } else {
+            model.addAttribute("message", "Please, choose photo to add");
         }
         model.addAttribute("hotel", hotel);
         model.addAttribute("id", hotelID);

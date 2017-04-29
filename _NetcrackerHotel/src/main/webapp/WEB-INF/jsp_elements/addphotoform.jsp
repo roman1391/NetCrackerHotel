@@ -10,7 +10,7 @@
     <c:if test="${not empty hotel.photos}">
         <div class="row">
             <c:forEach var="photo" items="${hotel.photos}">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <div class="thumbnail">
                         <a href="${photo}">
                             <img src="${photo}" style="width:100%">
@@ -19,6 +19,9 @@
                 </div>
             </c:forEach>
         </div>
+    </c:if>
+    <c:if test="${not empty message}">
+        <div class="row">${message}</div>
     </c:if>
 </form>
 <form style="margin: 20px" action="/hotel/photo/${id}" method="post"

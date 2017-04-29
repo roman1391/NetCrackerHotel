@@ -54,11 +54,16 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
         }, keyHolder);
         hotel.setId(keyHolder.getKey().intValue());
         getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(), hotel.getAddress(),
-                hotel.getTypeOfService(), hotel.getName(), hotel.getDescription(), hotel.getMainPhoto());
+                hotel.getTypeOfService(), hotel.getName(), hotel.getDescription(), getPhotoName(hotel.getMainPhoto()));
         for (String photo : hotel.getPhotos()) {
-            getJdbcTemplate().update(SqlQuery.ADD_PHOTO.getQuery(), hotel.getId(), photo);
+            getJdbcTemplate().update(SqlQuery.ADD_PHOTO.getQuery(), hotel.getId(), getPhotoName(photo));
         }
 
+    }
+
+    private String getPhotoName(String photo) {
+        String[] urlParts = photo.split("[./]");
+        return urlParts[urlParts.length-2];
     }
 
     @Override
@@ -104,10 +109,8 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     }
 
     @Override
-    public void addPhotos(List<String> photos, int hotelID) {
-        for (String photo : photos) {
+    public void addPhoto(String photo, int hotelID) {
             getJdbcTemplate().update(SqlQuery.ADD_PHOTO.getQuery(), hotelID, photo);
-        }
     }
 
     @Override

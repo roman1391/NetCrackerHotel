@@ -65,5 +65,10 @@ public class HotelServiceImpl implements HotelService {
         return hotelDAO.getHotelNames();
     }
 
+    @Override
+    public void addPhoto(String photo, int hotelID) {
+        hotelDAO.addPhoto(photo, hotelID);
+    }
+
 
 }
