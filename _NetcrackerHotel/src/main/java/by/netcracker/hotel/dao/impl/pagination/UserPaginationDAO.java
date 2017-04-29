@@ -1,127 +1,129 @@
 package by.netcracker.hotel.dao.impl.pagination;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import by.netcracker.hotel.dao.UserDAO;
+import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.pagination.UserSearchParam;
+import by.netcracker.hotel.enums.SqlQuery;
+import by.netcracker.hotel.mapper.UserMapper;
 
 @Repository
-public class UserPaginationDAO implements com.github.paginationspring.dao.PaginationDao<User, UserSearchParam> {
-    UserDAO userDAO;
+public class UserPaginationDAO extends JdbcDaoSupport
+    implements com.github.paginationspring.dao.PaginationDao<User, UserSearchParam> {
+    private DataSource dataSource;
+    List<Object> paramsToQuery = new ArrayList<>();
+    private boolean isSorted = false;
+    // UserDAO userDAO;
+
+    @PostConstruct
+    private void initialize() {
+        setDataSource(dataSource);
+    }
 
     @Autowired
-    public UserPaginationDAO(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserPaginationDAO(DataSource dataSource, UserDAO userDAO) {
+        this.dataSource = dataSource;
+        // this.userDAO = userDAO;
     }
 
     @Override
     public int retrieveCountResult(UserSearchParam pparam) throws Exception {
-        UserSearchParam param = (UserSearchParam) pparam;
-        List<User> list = userDAO.getAll();
-        list = filterList(list, param);
-        return list.size();
+        int rows = getJdbcTemplate().queryForObject(buildCountQuery(pparam), paramsToQuery.toArray(), Integer.class);
+        int countResult = rows / 8;
+        return countResult;
     }
 
     @Override
     public List<User> retrievePageResult(UserSearchParam pparam) throws Exception {
-        List<User> list = userDAO.getAll();
-        int index = Integer.parseInt(pparam.getResultIndex());
-        UserSearchParam param = (UserSearchParam) pparam;
-
-        sortList(list, param);
-        list = filterList(list, param);
-        List<User> list1 = getOnePage(list, index);
-        return list1;
+        List<User> pageResult = getJdbcTemplate().query(buildPageQuery(pparam), paramsToQuery.toArray(),
+            new RowMapperResultSetExtractor<User>(new UserMapper()) {
+            });
+        return pageResult;
     }
 
-    private List<User> getOnePage(List<User> list, int index) {
-        List<User> list1 = new ArrayList<User>();
-        for (int i = index; i < index + 10; i++) {
-            if (list.size() > i) {
-                list1.add(list.get(i));
-            }
-        }
-        return list1;
+    public List<User> getUsers(UserSearchParam pparam) {
+        return getJdbcTemplate().query(buildFullQuery(pparam), paramsToQuery.toArray(),
+            new RowMapperResultSetExtractor<User>(new UserMapper()) {
+            });
     }
 
-    private List<User> filterList(List<User> list, UserSearchParam param) {
-        if (param.getAuthority() != null && !param.getAuthority().equals("")) {
-            List<User> list1 = new ArrayList<User>();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getAuthority().toString().equals(param.getAuthority())) {
-                    list1.add(list.get(i));
-                }
-            }
-            list = list1;
-        }
-        if (param.getEnabled() != null && !param.getEnabled().equals("")) {
-            List<User> list1 = new ArrayList<User>();
-            for (int i = 0; i < list.size(); i++) {
-                if (((Boolean) list.get(i).getEnabled()).toString().equals(param.getEnabled())) {
-                    list1.add(list.get(i));
-                }
-            }
-            list = list1;
-        }
-        if (param.getUsername() != null && !param.getUsername().equals("")) {
-            List<User> list1 = new ArrayList<User>();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getUsername().contains((param.getUsername()))) {
-                    list1.add(list.get(i));
-                }
-            }
-            list = list1;
-        }
-        return list;
+    public String buildPageQuery(UserSearchParam pparam) {
+        StringBuffer query = new StringBuffer();
+        int rows = Integer.parseInt(pparam.getResultIndex()) * 8;
+        query.append(buildFullQuery(pparam)).append(" limit " + rows + " , 80");
+        return query.toString();
     }
 
-    private void sortList(List<User> list, UserSearchParam param) {
-        if (param.getSortName() != null && !param.getSortName().equals("")) {
-            System.out.println(param.getSortName());
-            if (param.getSortName().equals("Username")) {
-                if (param.getSortAscDesc().equals("d")) {
-                    Collections.sort(list, new Comparator<User>() {
-                        @Override
-                        public int compare(User user1, User user2) {
-                            return user1.getUsername().compareTo(user2.getUsername());
-                        }
-                    });
-                } else if (param.getSortAscDesc().equals("a")) {
-                    Collections.sort(list, new Comparator<User>() {
+    public String buildCountQuery(UserSearchParam pparam) {
+        StringBuffer query = new StringBuffer();
+        query.append("select count(*) from (");
+        query.append(buildFullQuery(pparam)).append(" ) ccc");
+        return query.toString();
+    }
 
-                        @Override
-                        public int compare(User user1, User user2) {
-                            return user2.getUsername().compareTo(user1.getUsername());
-                        }
-                    });
-                }
-            } else if (param.getSortName().equals("Authority")) {
-                if (param.getSortAscDesc().equals("d")) {
-                    Collections.sort(list, new Comparator<User>() {
-                        @Override
-                        public int compare(User user1, User user2) {
-                            return user1.getAuthority().toString().compareTo(user2.getAuthority().toString());
-                        }
-                    });
-                } else if (param.getSortAscDesc().equals("a"))
-
-                {
-                    Collections.sort(list, new Comparator<User>() {
-                        @Override
-                        public int compare(User user1, User user2) {
-                            return user2.getAuthority().toString().compareTo(user1.getAuthority().toString());
-                        }
-                    });
+    public String buildFullQuery(UserSearchParam pparam) {
+        StringBuffer query = new StringBuffer();
+        Map<String, String> mapFilters = new HashMap<>();
+        mapFilters.put("authority", pparam.getAuthority());
+        mapFilters.put("enabled", pparam.getEnabled());
+        mapFilters.put("username", pparam.getUsername());
+        paramsToQuery.clear();
+        // простой запрос
+        if (pparam.getSortName() == null) {
+            query.append(SqlQuery.ALL_PAGINATION.getQuery()); // 1:type_id
+            paramsToQuery.add(TypeName.USER.getType());
+        } else { // если есть сортировка
+            paramsToQuery.add("user");
+            paramsToQuery.add(pparam.getSortName());
+            query.append(SqlQuery.SORTED_PAGINATION.getQuery()); // 2:'user','username'
+            isSorted = true;
+        }
+        // фильтры
+        if (hasAnyFilter(mapFilters)) {
+            if (isSorted) {
+                query.append(" " + SqlQuery.AFTER_SORTED_PART.getQuery());
+            } else {
+                query.append(SqlQuery.AFTER_ALL_PART.getQuery());
+            }
+            int cycle = 0; // counts number of cycles
+            for (Map.Entry<String, String> entry : mapFilters.entrySet()) {
+                if (entry.getValue() != null && !entry.getValue().equals("")) {
+                    ++cycle;
+                    paramsToQuery.add(entry.getKey());
+                    paramsToQuery.add(entry.getValue());
+                    query.append(cycle == 2 ? " where entity_id in " : "");
+                    query.append(cycle == 3 ? " and entity_id in " : "");
+                    query.append(SqlQuery.ADD_FILTER.getQuery()); // +2:атрибут+значение;
+                    query.append(cycle == 1 ? " xxx " : "");
                 }
             }
+            query.append(" ) ");
+            query.append(isSorted ? " order by num" : "");
         }
+        isSorted = false;
+        return query.toString();
+    }
+
+    private boolean hasAnyFilter(Map<String, String> map) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (entry.getValue() != null && !entry.getValue().equals("")) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
