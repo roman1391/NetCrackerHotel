@@ -140,4 +140,9 @@ public class UserServiceImpl implements UserService {
         userDAO.deleteByUsername(username);
     }
 
+    @Override
+    public List<String> getUsernames() {
+        return userDAO.getUsernames();
+    }
+
 }

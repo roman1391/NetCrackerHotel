@@ -39,4 +39,6 @@ public interface UserService extends AbstractService<User, Integer> {
     void saveRegisteredUser(User user);
 
     void deleteUserByUsername(String username);
+
+    List<String> getUsernames();
 }

@@ -1,10 +1,7 @@
 package by.netcracker.hotel;
 
 import by.netcracker.hotel.dao.VerificationTokenDAO;
-import by.netcracker.hotel.dao.impl.UserDAOJdbcImpl;
-import by.netcracker.hotel.entities.EntityBuilder.EntityBuilder;
 import by.netcracker.hotel.entities.VerificationToken;
-import by.netcracker.hotel.enums.ROLE;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package by.netcracker.hotel;
 
 import by.netcracker.hotel.dao.UserDAO;
-import by.netcracker.hotel.dao.impl.UserDAOJdbcImpl;
+import by.netcracker.hotel.dao.impl.UserDAOImpl;
 import by.netcracker.hotel.entities.EntityBuilder.EntityBuilder;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
@@ -38,7 +38,7 @@ public class UserDAOTest {
 
     @Before
     public void setUp() {
-        userDAO = (UserDAOJdbcImpl) context.getBean("UserDAOJdbcImpl");
+        userDAO = (UserDAOImpl) context.getBean("UserDAOJdbcImpl");
         expected = EntityBuilder.buildUser("Test", "Test", "test",
                 "12345", "test@gmail.com", true, ROLE.USER);
     }

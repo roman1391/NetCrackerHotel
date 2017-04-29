@@ -35,3 +35,12 @@ $(document).ready(function () {
         tags: true
     });
 });
+
+$(document).ready(function () {
+    $("#selectUser").select2({
+        placeholder: 'Username',
+        minimumInputLength: 1,
+        maximumSelectionLength: 1,
+        tags: false
+    });
+});

@@ -5,6 +5,7 @@ import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.exceptions.UserNotFoundException;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by slava on 02.04.17.
@@ -18,4 +19,5 @@ public interface UserDAO extends AbstractDAO<User,Integer> {
 
     void deleteByEmail(String email);
 
+    List<String> getUsernames();
 }

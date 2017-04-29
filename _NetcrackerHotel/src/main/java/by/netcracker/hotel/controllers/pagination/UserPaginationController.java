@@ -2,6 +2,7 @@ package by.netcracker.hotel.controllers.pagination;
 
 import java.util.Map;
 
+import by.netcracker.hotel.services.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
     private static Logger log = Logger.getLogger(UserPaginationController.class);
 
     private UserPaginationService userPaginationService;
+    private UserService userService;
 
     public UserPaginationController() {
         setOptionDisplayCheckbox(true);
@@ -33,15 +35,17 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
     }
 
     @Autowired
-    public void setPaginationService(UserPaginationService userPaginationService) {
+    public void setPaginationService(UserPaginationService userPaginationService, UserService userService) {
         super.setPaginationService(userPaginationService);
         this.userPaginationService = userPaginationService;
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/list_of_users", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineJsp(@ModelAttribute(PPARAM) UserSearchParam pparam, Model model) throws Exception {
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
+        model.addAttribute("usernames", userService.getUsernames());
         return "pagination/list_of_users";
     }
 

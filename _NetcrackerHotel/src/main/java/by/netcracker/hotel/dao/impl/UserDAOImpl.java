@@ -1,5 +1,7 @@
 package by.netcracker.hotel.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -7,6 +9,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,7 +27,7 @@ import by.netcracker.hotel.mapper.UserMapper;
  */
 
 @Repository
-public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
+public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     private DataSource dataSource;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -34,7 +37,7 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     }
 
     @Autowired
-    public UserDAOJdbcImpl(DataSource dataSource) {
+    public UserDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -115,6 +118,11 @@ public class UserDAOJdbcImpl extends JdbcDaoSupport implements UserDAO {
     @Override
     public void deleteByEmail(String email) {
         getJdbcTemplate().update(SqlQuery.DELETE_BY.getQuery(), ColumnName.USER_EMAIL, email);
+    }
+
+    @Override
+    public List<String> getUsernames() {
+        return getJdbcTemplate().query(SqlQuery.GET_USERNAMES.getQuery(), (resultSet, i) -> resultSet.getString(1));
     }
 
     @Override
