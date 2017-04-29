@@ -91,8 +91,10 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
     @Override
     public List<Integer> findIDsBySearchString(String searchString) {
-        searchString = "%" + searchString + "%";
-        return getJdbcTemplate().query(SqlQuery.SEARCH_HOTEL.getQuery(), new Object[]{searchString},
+        String searchString1 = "% " + searchString + " %";
+        String searchString2 = searchString + " %";
+        String searchString3 = "% " + searchString;
+        return getJdbcTemplate().query(SqlQuery.SEARCH_HOTEL.getQuery(), new Object[]{searchString, searchString1, searchString2, searchString3},
                 (resultSet, i) -> resultSet.getInt(1));
     }
 

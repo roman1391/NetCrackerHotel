@@ -19,15 +19,19 @@ public class CloudinaryConnector {
         return cloudinary;
     }
 
-    public static Map picureTransform(String name){
+    public static Map picureTransform(String name) {
         return ObjectUtils.asMap("public_id", name,
                 "transformation", new Transformation().crop("limit").width(400).height(400));
     }
-    public static String generateNameForPhoto(){
+
+    public static String generateNameForPhoto() {
         StringBuilder randString = new StringBuilder();
-        int count = (int)(Math.random()*27+3);
-        for(int i=0;i<count;i++)
-            randString.append((char)((int)(Math.random()*26+65)));
+        int count = (int) (Math.random() * COUNT_SYMBOLS + MIN_SYMBOLS);
+        for (int i = 0; i < count; i++) {
+            randString.append((char) ((int) (Math.random() * SYMBOLS + 'A')));
+        }
         return randString.toString();
     }
+
+    private static int SYMBOLS = 26, COUNT_SYMBOLS = 27, MIN_SYMBOLS = 3;
 }
