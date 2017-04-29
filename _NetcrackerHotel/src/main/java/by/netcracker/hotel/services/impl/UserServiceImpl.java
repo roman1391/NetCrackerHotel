@@ -86,9 +86,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean update(UserDTO entity) {
+    public boolean update(User entity) {
         try {
-            userDAO.update(entity.toObject());
+            userDAO.update(entity);
             return true;
         } catch (Exception e) {
             return false;
@@ -99,14 +99,14 @@ public class UserServiceImpl implements UserService {
     public void blockUser(User user) {
         user = getUserByUsername(user.getUsername());
         user.setAuthority(ROLE.BLOCKED);
-        update(user.toDTO());
+        update(user);
     }
 
     @Override
     public void unblockUser(User user) {
         user = getUserByUsername(user.getUsername());
         user.setAuthority(ROLE.USER);
-        update(user.toDTO());
+        update(user);
     }
 
     @Override

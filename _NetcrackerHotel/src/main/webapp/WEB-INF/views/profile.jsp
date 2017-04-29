@@ -32,10 +32,10 @@
 <div id="wrapper">
     <div class="jumbotron">
       <div class="content">
-        <form:form id="updateForm" action="update" method="post" modelAttribute="activeUser"
+        <form:form id="updateForm" action="update" method="post" modelAttribute="currentUser"
                    enctype="multipart/form-data" >
         <div class="d-inline-block form-group">
-            <img src="" id="avatar">
+            <img src="<c:url value="${currentUser.avatar}"/>">
             <div class="form-group">
                 <input type="file" name="file" id="loadAvatar" onclick="onFileSelected(event)">
                 <form:input path="avatar" class="form-control" />
@@ -47,11 +47,13 @@
                 <form:input  path="email" id="email" value="${currentUser.email}"
                              class="editable form-control"/>
             </div>
+            <%--
             <div class="form-group">
                 <form:label path="username"  >Username:</form:label>
                 <form:input path="username" id="username" value="${currentUser.username}"
                             class="editable form-control" />
             </div>
+            --%>
             <div class="form-group">
                 <form:label path="firstName" >First name:</form:label>
                 <form:input path="firstName" id="firstName" value="${currentUser.firstName}"
@@ -81,7 +83,7 @@
     var isEditable = true;
     var oldValues = {};
 
-    $('#avatar').attr('src', '<%=curUser.getAvatar() != null ? curUser.getAvatar() : 13%>');
+    $('#avatar').attr('src', '${currentUser.avatar}');
 
     function onEditClick() {
         isEditable = !isEditable;

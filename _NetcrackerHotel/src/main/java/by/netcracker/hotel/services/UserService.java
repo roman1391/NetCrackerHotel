@@ -22,7 +22,7 @@ public interface UserService extends AbstractService<User, Integer> {
 
     User getUserByEmail(String email);
 
-    boolean update(UserDTO dto);
+    boolean update(User dto);
 
     void blockUser(User user);
 
