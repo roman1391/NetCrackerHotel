@@ -29,7 +29,7 @@
 
     function initialize() {
         var geocoder = new google.maps.Geocoder();
-        var address = '${choosenHotel.address}';
+        var address = '${choosenHotel.country} ${choosenHotel.city} ${choosenHotel.address} ${choosenHotel.name}';
         geocoder.geocode({'address': address}, function(results, status) {
             if (status === 'OK') {
                 map.setCenter(results[0].geometry.location);
@@ -55,7 +55,7 @@
             }
         });
         var mapProp = {
-            zoom: 14,
+            zoom: 15,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
