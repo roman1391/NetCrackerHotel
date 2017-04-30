@@ -13,7 +13,7 @@ import com.github.paginationspring.service.PaginationServiceAbstract;
 import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.ReviewDAO;
 import by.netcracker.hotel.dao.UserDAO;
-import by.netcracker.hotel.dao.impl.pagination.ReviewPaginationDAO;
+import by.netcracker.hotel.dao.pagination.ReviewPaginationDAO;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.pagination.ReviewRow;
 import by.netcracker.hotel.entities.pagination.ReviewSearchParam;

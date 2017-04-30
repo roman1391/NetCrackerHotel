@@ -48,8 +48,8 @@
                             <td style="width:200px;">
                                 <form:select path="enabled">
                                    	<form:option value="" label="-enabled-"/>
-                               		<form:option value="true" label="Enabled"/>
-                               		<form:option value="false" label="Unenabled"/>
+                               		<form:option value="1" label="Enabled"/>
+                               		<form:option value="0" label="Unenabled"/>
                                 </form:select>
                             </td>
                             <td style="width:80px;">Username:</td>

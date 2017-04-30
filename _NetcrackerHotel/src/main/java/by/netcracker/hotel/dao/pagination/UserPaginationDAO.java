@@ -1,7 +1,5 @@
-package by.netcracker.hotel.dao.impl.pagination;
+package by.netcracker.hotel.dao.pagination;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +18,6 @@ public class UserPaginationDAO extends AbstractPaginationJdbcDAO<User, UserSearc
 
     @Autowired
     private DataSource dataSource;
-    List<Object> paramsToQuery = new ArrayList<>();
 
     @PostConstruct
     private void initialize() {
@@ -40,6 +37,13 @@ public class UserPaginationDAO extends AbstractPaginationJdbcDAO<User, UserSearc
         mapFilters.put("authority", pparam.getAuthority());
         mapFilters.put("enabled", pparam.getEnabled());
         mapFilters.put("username", pparam.getUsername());
+    }
+
+    @Override
+    public void setBoToDbMap(Map<String, String> boToDbMap, UserSearchParam pparam) {
+        boToDbMap.put("username", "username");
+        boToDbMap.put("authority", "authority");
+        boToDbMap.put("enabled", "enabled");
     }
 
 }

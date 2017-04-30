@@ -12,7 +12,7 @@ import com.github.paginationspring.service.PaginationServiceAbstract;
 
 import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.UserDAO;
-import by.netcracker.hotel.dao.impl.pagination.HotelPaginationDAO;
+import by.netcracker.hotel.dao.pagination.HotelPaginationDAO;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.pagination.HotelRow;
 import by.netcracker.hotel.entities.pagination.HotelSearchParam;
@@ -47,7 +47,7 @@ public class HotelPaginationService extends PaginationServiceAbstract<HotelSearc
         columns.add(col);
 
         col = new BoPaginationColumn();
-        col.setColumnName("Service");
+        col.setColumnName("Class");
         col.setOrderColumns("typeOfService");
         col.setOrderDirections("desc");
         col.setWidth(30);
