@@ -1,53 +1,151 @@
 package by.netcracker.hotel.dao.impl.pagination;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.github.paginationspring.bo.BoPaginationParam;
 
-import by.netcracker.hotel.dao.AbstractDAO;
+import by.netcracker.hotel.enums.SqlQuery;
 
-public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam>
+public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> extends JdbcDaoSupport
     implements com.github.paginationspring.dao.PaginationDao<E, P> {
 
-    AbstractDAO<E, Integer> dao;
+    private DataSource dataSource;
+    private boolean isSorted = false;
+    private RowMapper<E> rowMapper;
+    protected List<Object> paramsToQuery = new ArrayList<>();
+    protected Map<String, String> mapFilters = new HashMap<>();
+    protected int rowAmount;
+    protected int typeId;
+    protected String typeName;
 
-    @Autowired
-    public AbstractPaginationJdbcDAO(AbstractDAO<E, Integer> dao) {
-        this.dao = dao;
+    public AbstractPaginationJdbcDAO(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     @Override
     public int retrieveCountResult(P pparam) throws Exception {
-        List<E> list = dao.getAll();
-        list = filterList(list, pparam);
-        return list.size();
+        int rows = getJdbcTemplate().queryForObject(buildCountQuery(pparam), paramsToQuery.toArray(), Integer.class);
+        int countResult = rows / getRowAmount();
+        return countResult;
     }
 
     @Override
     public List<E> retrievePageResult(P pparam) throws Exception {
-        List<E> list = dao.getAll();
-        int index = Integer.parseInt(pparam.getResultIndex());
-
-        sortList(list, pparam);
-        list = filterList(list, pparam);
-        List<E> list1 = getOnePage(list, index);
-        return list1;
+        List<E> pageResult = getJdbcTemplate().query(buildPageQuery(pparam), paramsToQuery.toArray(),
+            new RowMapperResultSetExtractor<E>(rowMapper) {
+            });
+        return pageResult;
     }
 
-    private List<E> getOnePage(List<E> list, int index) {
-        List<E> list1 = new ArrayList<E>();
-        for (int i = index; i < index + 10; i++) {
-            if (list.size() > i) {
-                list1.add(list.get(i));
+    public String buildPageQuery(P pparam) {
+        StringBuffer query = new StringBuffer();
+        int rows = Integer.parseInt(pparam.getResultIndex()) * getRowAmount();
+        query.append(buildFullQuery(pparam, mapFilters)).append(" limit " + rows + " , 80");
+        return query.toString();
+    }
+
+    public String buildCountQuery(P pparam) {
+        StringBuffer query = new StringBuffer();
+        query.append("select count(*) from (");
+        query.append(buildFullQuery(pparam, mapFilters)).append(" ) ccc");
+        return query.toString();
+    }
+
+    public String buildFullQuery(P pparam, Map<String, String> map) {
+        StringBuffer query = new StringBuffer();
+        Map<String, String> mapFilters = new HashMap<>();
+        paramsToQuery.clear();
+        // простой запрос
+        if (pparam.getSortName() == null) {
+            query.append(SqlQuery.ALL_PAGINATION.getQuery()); // 1:type_id
+            paramsToQuery.add(typeId);
+        } else { // если есть сортировка
+            paramsToQuery.add(typeName);
+            paramsToQuery.add(pparam.getSortName());
+            query.append(SqlQuery.SORTED_PAGINATION.getQuery()); // 2:'user','username'
+            isSorted = true;
+        }
+        // фильтры
+        setMapFilters(mapFilters, pparam);
+        if (hasAnyFilter(mapFilters)) {
+            if (isSorted) {
+                query.append(" " + SqlQuery.AFTER_SORTED_PART.getQuery());
+            } else {
+                query.append(SqlQuery.AFTER_ALL_PART.getQuery());
+            }
+            int cycle = 0; // counts number of cycles
+            for (Map.Entry<String, String> entry : mapFilters.entrySet()) {
+                if (entry.getValue() != null && !entry.getValue().equals("")) {
+                    ++cycle;
+                    paramsToQuery.add(entry.getKey());
+                    paramsToQuery.add(entry.getValue());
+                    query.append(cycle == 2 ? " where entity_id in " : "");
+                    query.append(cycle == 3 ? " and entity_id in " : "");
+                    query.append(SqlQuery.ADD_FILTER.getQuery()); // +2:атрибут+значение;
+                    query.append(cycle == 1 ? " xxx " : "");
+                }
+            }
+            query.append(" ) ");
+            query.append(isSorted ? " order by num" : "");
+        }
+        isSorted = false;
+        return query.toString();
+    }
+
+    private boolean hasAnyFilter(Map<String, String> map) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (entry.getValue() != null && !entry.getValue().equals("")) {
+                return true;
             }
         }
-        return list1;
+        return false;
     }
 
-    protected abstract void sortList(List<E> list, P param);
+    public RowMapper<E> getRowMapper() {
+        return rowMapper;
+    }
 
-    protected abstract List<E> filterList(List<E> list, P param);
+    public void setRowMapper(RowMapper<E> rowMapper) {
+        this.rowMapper = rowMapper;
+    }
+
+    public Map<String, String> getMapFilters() {
+        return mapFilters;
+    }
+
+    public abstract void setMapFilters(Map<String, String> mapFilters, P pparam);
+
+    public int getRowAmount() {
+        return rowAmount;
+    }
+
+    public void setRowAmount(int rowAmount) {
+        this.rowAmount = rowAmount;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
 }

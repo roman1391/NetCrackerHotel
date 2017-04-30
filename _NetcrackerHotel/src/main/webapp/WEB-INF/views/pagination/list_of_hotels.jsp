@@ -48,7 +48,8 @@
                             </td>
                             <td style="width:200px;"></td>
                             <td style="width:80px;">Name:</td>
-                            <td style="width:160px;"><form:select path="name" class="form-control" id="selectHotel" multiple="multiple" cssStyle="width:150px;">
+                            <td style="width:160px;">
+                            <form:select path="name" class="form-control" id="selectHotel" multiple="multiple" cssStyle="width:150px;">
                                 <form:options items="${hotels}"/>
                             </form:select></td>
                             <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button">Search</form:button></span></td>

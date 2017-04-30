@@ -1,133 +1,45 @@
 package by.netcracker.hotel.dao.impl.pagination;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import by.netcracker.hotel.dao.HotelDAO;
+import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.pagination.HotelSearchParam;
+import by.netcracker.hotel.mapper.HotelMapper;
 
 @Repository
 public class HotelPaginationDAO extends AbstractPaginationJdbcDAO<Hotel, HotelSearchParam> {
 
     @Autowired
-    public HotelPaginationDAO(HotelDAO hotelDAO) {
-        super(hotelDAO);
+    private DataSource dataSource;
+    List<Object> paramsToQuery = new ArrayList<>();
+
+    @PostConstruct
+    private void initialize() {
+        setDataSource(dataSource);
+    }
+
+    public HotelPaginationDAO(DataSource dataSource) {
+        super(dataSource);
+        setRowAmount(8);
+        setRowMapper(new HotelMapper());
+        setTypeId(TypeName.HOTEL.getType());
+        setTypeName("hotel");
     }
 
     @Override
-    protected List<Hotel> filterList(List<Hotel> list, HotelSearchParam param) {
-        if (param.getCity() != null && !param.getCity().equals("")) {
-            List<Hotel> list1 = new ArrayList<Hotel>();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getCity().equals(param.getCity())) {
-                    list1.add(list.get(i));
-                }
-            }
-            list = list1;
-        }
-        if (param.getName() != null && !param.getName().equals("")) {
-            List<Hotel> list1 = new ArrayList<Hotel>();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getName().contains((param.getName()))) {
-                    list1.add(list.get(i));
-                }
-            }
-            list = list1;
-        }
-        if ((param.getTypeOfService() != null) && !param.getTypeOfService().equals("")) {
-            List<Hotel> list1 = new ArrayList<Hotel>();
-            for (int i = 0; i < list.size(); i++) {
-                if (String.valueOf(list.get(i).getTypeOfService()).equals(param.getTypeOfService())) {
-                    list1.add(list.get(i));
-                }
-            }
-            list = list1;
-        }
-        return list;
-    }
+    public void setMapFilters(Map<String, String> mapFilters, HotelSearchParam pparam) {
+        mapFilters.put("typeOfService", pparam.getTypeOfService());
+        mapFilters.put("name", pparam.getName());
 
-    @Override
-    protected void sortList(List<Hotel> list, HotelSearchParam param) {
-        if (param.getSortName() != null && !param.getSortName().equals("")) {
-            System.out.println(param.getSortName());
-            if (param.getSortName().equals("Name")) {
-                if (param.getSortAscDesc().equals("d")) {
-                    Collections.sort(list, new Comparator<Hotel>() {
-                        @Override
-                        public int compare(Hotel hotel1, Hotel hotel2) {
-                            return hotel1.getName().compareTo(hotel2.getName());
-                        }
-                    });
-                } else if (param.getSortAscDesc().equals("a")) {
-                    Collections.sort(list, new Comparator<Hotel>() {
-                        @Override
-                        public int compare(Hotel hotel1, Hotel hotel2) {
-                            return hotel2.getName().compareTo(hotel1.getName());
-                        }
-                    });
-                }
-            } else if (param.getSortName().equals("City")) {
-                if (param.getSortAscDesc().equals("d")) {
-                    Collections.sort(list, new Comparator<Hotel>() {
-                        @Override
-                        public int compare(Hotel hotel1, Hotel hotel2) {
-                            return hotel1.getCity().compareTo(hotel2.getCity());
-                        }
-                    });
-                } else if (param.getSortAscDesc().equals("a"))
-
-                {
-                    Collections.sort(list, new Comparator<Hotel>() {
-                        @Override
-                        public int compare(Hotel hotel1, Hotel hotel2) {
-                            return hotel2.getCity().compareTo(hotel1.getCity());
-                        }
-                    });
-                }
-            } else if (param.getSortName().equals("Country")) {
-                if (param.getSortAscDesc().equals("d")) {
-                    Collections.sort(list, new Comparator<Hotel>() {
-                        @Override
-                        public int compare(Hotel hotel1, Hotel hotel2) {
-                            return hotel1.getCountry().compareTo(hotel2.getCountry());
-                        }
-                    });
-                } else if (param.getSortAscDesc().equals("a"))
-
-                {
-                    Collections.sort(list, new Comparator<Hotel>() {
-                        @Override
-                        public int compare(Hotel hotel1, Hotel hotel2) {
-                            return hotel2.getCountry().compareTo(hotel1.getCountry());
-                        }
-                    });
-                }
-            } else if (param.getSortName().equals("Service")) {
-                if (param.getSortAscDesc().equals("d")) {
-                    Collections.sort(list, new Comparator<Hotel>() {
-                        @Override
-                        public int compare(Hotel hotel1, Hotel hotel2) {
-                            return hotel1.getTypeOfService() - (hotel2.getTypeOfService());
-                        }
-                    });
-                } else if (param.getSortAscDesc().equals("a"))
-
-                {
-                    Collections.sort(list, new Comparator<Hotel>() {
-                        @Override
-                        public int compare(Hotel hotel1, Hotel hotel2) {
-                            return hotel2.getTypeOfService() - (hotel1.getTypeOfService());
-                        }
-                    });
-                }
-            }
-        }
     }
 
 }
