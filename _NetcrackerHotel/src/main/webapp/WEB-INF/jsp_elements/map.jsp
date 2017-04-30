@@ -5,7 +5,7 @@
   Time: 7:31 PM
   To change this template use File | Settings | File Templates.
 --%>
-<a href="#myMapModal" class="btn" data-toggle="modal">${choosenHotel.address }</a>
+<a href="#myMapModal" class="btn" data-toggle="modal" style="font-style: italic">${choosenHotel.country }, ${choosenHotel.city}, ${choosenHotel.address }</a>
 
 <div class="modal fade" id="myMapModal">
     <div class="modal-dialog">

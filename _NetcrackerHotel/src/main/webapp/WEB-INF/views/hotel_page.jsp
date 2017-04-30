@@ -9,7 +9,6 @@
     <title>Hotel page</title>
     <link href="<c:url value="/resources/css/hotel.css" />" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFgpUSSiedFLKSDnk8J186A52ZJ2UVswk"></script>
-    <script src="<c:url value="/resources/js/gmaps.js"/>" type="text/javascript"></script>
 </head>
 
 <body>
@@ -20,7 +19,11 @@
         <div class="row row-offcanvas row-offcanvas-left">
             <div class="col-xs-12 col-sm-9">
                 <div class="jumbotron">
-                    <h4 style="text-align: center">${choosenHotel.name }</h4>
+                    <h4 style="text-align: center">${choosenHotel.name }
+                    <c:forEach var="i" begin="1" end="${choosenHotel.typeOfService}">
+                        <i class="fa fa-star"></i>
+                    </c:forEach>
+                    </h4>
                     <%@include file="../jsp_elements/map.jsp" %>
 
 
@@ -32,11 +35,7 @@
                     <%@include file="../jsp_elements/photoCarousel.jsp" %>
 
 
-                    Country: ${choosenHotel.country }<br> City: ${choosenHotel.city}<br>
                     Description: ${choosenHotel.description }<br>
-                    mainPhoto: ${choosenHotel.mainPhoto }<br>
-                    <br> typeOfService: ${choosenHotel.typeOfService }<br>
-
 
                     <c:choose>
                         <c:when test="${reviewInfo eq 'forbidden'}">
