@@ -25,6 +25,8 @@ import java.util.Map;
 @RequestMapping(value = "/hotel")
 public class AddHotelController {
 
+    private static final int MAX_SIZE_MAIN_PHOTO = 400;
+    private static final String DEFAULT_MAIN_PHOTO = "BTTELV";
     private final HotelService hotelService;
     private final RoomService roomService;
 
@@ -49,27 +51,26 @@ public class AddHotelController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addHotel(@ModelAttribute("hotel") Hotel hotel, @RequestParam("file") MultipartFile file,
                            Model model) {
-        //hotelService.addHotel(hotel);
         if (!file.isEmpty()) {
             String photo = CloudinaryConnector.generateNameForPhoto();
             hotel.setMainPhoto(photo);
-            savePhotoInCloudinary(file, photo);
+            savePhotoInCloudinary(file, photo, MAX_SIZE_MAIN_PHOTO);
         } else {
-            hotel.setMainPhoto("BTTELV");
+            hotel.setMainPhoto(DEFAULT_MAIN_PHOTO);
         }
         hotelService.addHotel(hotel);
         model.addAttribute("id", hotel.getId());
         return "add_hotel_photo_and_description";
     }
 
-    @RequestMapping(value = "/photo/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "{id}/photo", method = RequestMethod.POST)
     public String addPhotosToHotel(@PathVariable("id") int hotelID, @RequestParam("files") List<MultipartFile> files, Model model) {
         Hotel hotel = hotelService.getByID(hotelID);
         if (!files.get(0).isEmpty()) {
             for (MultipartFile file : files) {
                 String photo = CloudinaryConnector.generateNameForPhoto();
                 hotel.addPhoto(photo);
-                savePhotoInCloudinary(file, photo);
+                savePhotoInCloudinary(file, photo, 0);
                 hotelService.addPhoto(photo, hotelID);
             }
         } else {
@@ -98,12 +99,12 @@ public class AddHotelController {
         return "add_rooms_to_hotel";
     }
 
-    private void savePhotoInCloudinary(MultipartFile file, String photoName) {
+    private void savePhotoInCloudinary(MultipartFile file, String photoName, int size) {
         File convFile = new File(UPLOADED_FOLDER + "img");
         try {
             file.transferTo(convFile);
             Map uploadResult = CloudinaryConnector.getCloudinary().uploader().upload(convFile,
-                    CloudinaryConnector.picureTransform(photoName));
+                    CloudinaryConnector.pictureTransform(photoName, size));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -19,10 +19,14 @@ public class CloudinaryConnector {
         return cloudinary;
     }
 
-    public static Map picureTransform(String name) {
-        return ObjectUtils.asMap("public_id", name,
-                "transformation", new Transformation().crop("limit").width(400).height(400));
+    public static Map pictureTransform(String name, int size) {
+        if (size > 0) {
+            return ObjectUtils.asMap("public_id", name,
+                    "transformation", new Transformation().crop("limit").width(size).height(size));
+        }
+        return ObjectUtils.asMap("public_id", name);
     }
+
 
     public static String generateNameForPhoto() {
         StringBuilder randString = new StringBuilder();
@@ -33,5 +37,5 @@ public class CloudinaryConnector {
         return randString.toString();
     }
 
-    private static int SYMBOLS = 26, COUNT_SYMBOLS = 27, MIN_SYMBOLS = 3;
+    private final static int SYMBOLS = 26, COUNT_SYMBOLS = 27, MIN_SYMBOLS = 3;
 }

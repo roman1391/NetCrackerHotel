@@ -2,6 +2,7 @@ package by.netcracker.hotel.entities;
 
 
 import by.netcracker.hotel.cloud.CloudinaryConnector;
+import com.cloudinary.Transformation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +104,7 @@ public class Hotel {
     }
 
     public void setMainPhoto(String mainPhoto) {
-        this.mainPhoto = CloudinaryConnector.getCloudinary().url().format("jpg").generate(mainPhoto);
+        this.mainPhoto = CloudinaryConnector.getCloudinary().url().format("jpg").transformation(new Transformation().width(PHOTO_WIDTH).height(PHOTO_HEIGHT).crop("fit")).generate(mainPhoto);
     }
 
     @Override
@@ -114,6 +115,8 @@ public class Hotel {
     }
 
     public void addPhoto(String photo) {
-        photos.add(CloudinaryConnector.getCloudinary().url().format("jpg").generate(photo));
+        photos.add(CloudinaryConnector.getCloudinary().url().format("jpg").transformation(new Transformation().width(PHOTO_WIDTH).height(PHOTO_HEIGHT).crop("fill")).generate(photo));
     }
+
+    private static final int PHOTO_WIDTH = 600, PHOTO_HEIGHT = 300;
 }

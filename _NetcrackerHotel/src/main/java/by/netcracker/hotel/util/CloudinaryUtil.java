@@ -11,7 +11,9 @@ import java.util.Date;
  * Created by Alexander on 18.04.2017.
  */
 public class CloudinaryUtil {
+    private static final int MAX_SIZE_PHOTO = 400;
     public static String UPLOADED_FOLDER;
+
 
     public static String saveFileToCloud(MultipartFile file) {
         if (!file.isEmpty()) {
@@ -21,7 +23,7 @@ public class CloudinaryUtil {
                 Long id = new Date().getTime();
 
                 CloudinaryConnector.getCloudinary().uploader().upload(convFile,
-                        CloudinaryConnector.picureTransform(id.toString()));
+                        CloudinaryConnector.pictureTransform(id.toString(), MAX_SIZE_PHOTO));
                 return CloudinaryConnector.getCloudinary().url().format("jpg").generate(id.toString());
             } catch (IOException e) {
                 e.printStackTrace();

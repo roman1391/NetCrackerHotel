@@ -7,10 +7,6 @@
 <html>
 <head>
 <title>Hotel page</title>
-<link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
-<link
-	href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
-	rel="stylesheet">
 </head>
 
 <body>
@@ -21,14 +17,16 @@
 			<div class="row row-offcanvas row-offcanvas-left">
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
-						<h3>Hotel page</h3>
+						<h3>${choosenHotel.name }</h3>
 
 						<c:if test="${success!=null}">
 							<div style="margin: 50px" class="alert alert-success">
 								${success}</div>
 						</c:if>
 
-                    Name: ${choosenHotel.name }<br>
+                        <%@include file="../jsp_elements/photoCarousel.jsp"%>
+
+
                     Country: ${choosenHotel.country }<br> City: ${choosenHotel.city}<br>
                     Address: ${choosenHotel.address }<br> typeOfService: ${choosenHotel.typeOfService }<br>
                     Description: ${choosenHotel.description }<br>
@@ -86,6 +84,7 @@
     </div>
     <%@include file="../jsp_elements/_footer.jsp" %>
 </div>
-
+<script src="<c:url value="/resources/bootstrap-4.0.0-alpha.6-dist/js/bootstrap.js"/>"></script>
+<script src="<c:url value="/resources/js/hotel.js"/>" type="text/javascript"></script>
 </body>
 </html>

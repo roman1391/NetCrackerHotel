@@ -24,7 +24,7 @@
         <div class="row">${message}</div>
     </c:if>
 </form>
-<form style="margin: 20px" action="/hotel/photo/${id}" method="post"
+<form style="margin: 20px" action="/hotel/${id}/photo" method="post"
       enctype="multipart/form-data" id="selectPhoto">
     <div class="form-group">
         <input type="file" name="files" multiple accept="image/*">
