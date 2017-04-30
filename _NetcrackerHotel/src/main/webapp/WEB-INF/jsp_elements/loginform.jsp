@@ -41,4 +41,13 @@
         </button>
       </form>
   </div>
+    <div class="d-inline-block">
+        <form action="<c:url value="/signin/vkontakte" />" method="POST">
+            <input type="hidden" name="scope" value="email" />
+            <button type="submit" class="btn btn-link" >
+                <i class="fa fa-vk fa-3x"></i>
+            </button>
+        </form>
+    </div>
+
 </div>

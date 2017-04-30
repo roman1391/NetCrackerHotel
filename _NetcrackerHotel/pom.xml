@@ -16,6 +16,7 @@
 		<spring-social.version>1.1.4.RELEASE</spring-social.version>
 		<spring-social-facebook.version>3.0.0.M1</spring-social-facebook.version>
 		<spring-social-twitter.version>1.1.2.RELEASE</spring-social-twitter.version>
+		<spring-social-vkontakte.version>2.0.0.BUILD-SNAPSHOT</spring-social-vkontakte.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -120,6 +121,12 @@
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-twitter</artifactId>
 			<version>${spring-social-twitter.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-vkontakte</artifactId>
+			<version>${spring-social-vkontakte.version}</version>
 		</dependency>
 
 		<dependency>
@@ -280,19 +287,32 @@
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
+			<version>2.3</version>
 		</dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
             <version>1.7.24</version>
         </dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
 
     </dependencies>
 	<repositories>
 		<repository>
 			<id>alfresco-public</id>
 			<url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+		</repository>
+
+		<repository>
+			<id>snapshot</id>
+			<name>Fugru Maven Snapshot Repository</name>
+			<url>http://fugru.com/archiva/repository/snapshots</url>
+			<releases><enabled>false</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
 	</repositories>
 

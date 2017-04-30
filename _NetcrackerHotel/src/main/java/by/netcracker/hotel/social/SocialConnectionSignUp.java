@@ -9,6 +9,7 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -29,6 +30,15 @@ public class SocialConnectionSignUp implements ConnectionSignUp {
         String provider = connection.getKey().getProviderId();
         User user = new User();
         switch (provider) {
+            case "vkontakte":{
+                Connection<VKontakte> conVK = (Connection<VKontakte>) connection;
+                user.setEmail(conVK.getApi().getEmail());
+                user.setUsername(profile.getId());
+                user.setPassword(UUID.randomUUID().toString());
+                user.setFirstName(profile.getFirstName());
+                user.setLastName(profile.getLastName());
+                break;
+            }
             case "facebook": {
                 user.setEmail(profile.getEmail());
                 user.setUsername(profile.getId());
