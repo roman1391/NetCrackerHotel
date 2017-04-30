@@ -1,4 +1,4 @@
-package by.netcracker.hotel.dao.impl.pagination;
+package by.netcracker.hotel.dao.pagination;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +23,7 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
     private RowMapper<E> rowMapper;
     protected List<Object> paramsToQuery = new ArrayList<>();
     protected Map<String, String> mapFilters = new HashMap<>();
+    protected Map<String, String> boToDbMap = new HashMap<>();
     protected int rowAmount;
     protected int typeId;
     protected String typeName;
@@ -62,23 +63,26 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
 
     public String buildFullQuery(P pparam, Map<String, String> map) {
         StringBuffer query = new StringBuffer();
-        Map<String, String> mapFilters = new HashMap<>();
         paramsToQuery.clear();
+        setBoToDbMap(boToDbMap, pparam);
+        setMapFilters(mapFilters, pparam);
         // простой запрос
         if (pparam.getSortName() == null) {
             query.append(SqlQuery.ALL_PAGINATION.getQuery()); // 1:type_id
+            query.append(!hasAnyFilter(mapFilters) ? " order by entity_id " : "");
             paramsToQuery.add(typeId);
         } else { // если есть сортировка
             paramsToQuery.add(typeName);
-            paramsToQuery.add(pparam.getSortName());
+            paramsToQuery.add(boToDbMap.get(pparam.getSortName().toLowerCase()));
             query.append(SqlQuery.SORTED_PAGINATION.getQuery()); // 2:'user','username'
+            query.append(pparam.getOrderDirections().equals("asc") ? " desc " : " asc ");
+            query.append(" ) aaa) bbb on v.entity_id = bbb.entity_id order by bbb.num ) ooo ");
             isSorted = true;
         }
         // фильтры
-        setMapFilters(mapFilters, pparam);
         if (hasAnyFilter(mapFilters)) {
             if (isSorted) {
-                query.append(" " + SqlQuery.AFTER_SORTED_PART.getQuery());
+                query.append(" ").append(SqlQuery.AFTER_SORTED_PART.getQuery());
             } else {
                 query.append(SqlQuery.AFTER_ALL_PART.getQuery());
             }
@@ -95,8 +99,9 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
                 }
             }
             query.append(" ) ");
-            query.append(isSorted ? " order by num" : "");
+            query.append(isSorted ? " order by num" : " order by entity_id");
         }
+
         isSorted = false;
         return query.toString();
     }
@@ -147,5 +152,11 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
+
+    public Map<String, String> getBoToDbMap() {
+        return boToDbMap;
+    }
+
+    public abstract void setBoToDbMap(Map<String, String> boToDbMap, P pparam);
 
 }

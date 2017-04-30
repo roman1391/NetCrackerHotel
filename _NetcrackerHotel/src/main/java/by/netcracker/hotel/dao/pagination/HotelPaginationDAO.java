@@ -1,7 +1,5 @@
-package by.netcracker.hotel.dao.impl.pagination;
+package by.netcracker.hotel.dao.pagination;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +18,6 @@ public class HotelPaginationDAO extends AbstractPaginationJdbcDAO<Hotel, HotelSe
 
     @Autowired
     private DataSource dataSource;
-    List<Object> paramsToQuery = new ArrayList<>();
 
     @PostConstruct
     private void initialize() {
@@ -37,9 +34,17 @@ public class HotelPaginationDAO extends AbstractPaginationJdbcDAO<Hotel, HotelSe
 
     @Override
     public void setMapFilters(Map<String, String> mapFilters, HotelSearchParam pparam) {
-        mapFilters.put("typeOfService", pparam.getTypeOfService());
-        mapFilters.put("name", pparam.getName());
+        mapFilters.put("class", pparam.getTypeOfService());
+        mapFilters.put("hotel_name", pparam.getName());
 
+    }
+
+    @Override
+    public void setBoToDbMap(Map<String, String> boToDbMap, HotelSearchParam pparam) {
+        boToDbMap.put("class", "class");
+        boToDbMap.put("city", "city");
+        boToDbMap.put("name", "hotel_name");
+        boToDbMap.put("country", "country");
     }
 
 }

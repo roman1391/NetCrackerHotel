@@ -38,7 +38,7 @@
                             <td class="caption" style="width:50px;">Filter:</td>
                             <td style="width:120px;">
                             <form:select path="typeOfService" cssStyle="width:110px;">
-                               <form:option value="" label="-service-"/>
+                               <form:option value="" label="-class-"/>
                                <form:option value="1" label="1 star"/>
                                <form:option value="2" label="2 stars"/>
                                <form:option value="3" label="3 stars"/>

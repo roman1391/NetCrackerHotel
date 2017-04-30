@@ -11,7 +11,7 @@ import com.github.paginationspring.dao.PaginationDao;
 import com.github.paginationspring.service.PaginationServiceAbstract;
 
 import by.netcracker.hotel.dao.UserDAO;
-import by.netcracker.hotel.dao.impl.pagination.UserPaginationDAO;
+import by.netcracker.hotel.dao.pagination.UserPaginationDAO;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.pagination.UserRow;
 import by.netcracker.hotel.entities.pagination.UserSearchParam;
