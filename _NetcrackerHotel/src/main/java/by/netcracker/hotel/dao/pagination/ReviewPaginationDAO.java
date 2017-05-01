@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.pagination.ReviewSearchParam;
@@ -18,6 +19,8 @@ public class ReviewPaginationDAO extends AbstractPaginationJdbcDAO<Review, Revie
 
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private HotelDAO hotelDAO;
 
     @PostConstruct
     private void initialize() {
@@ -26,24 +29,26 @@ public class ReviewPaginationDAO extends AbstractPaginationJdbcDAO<Review, Revie
 
     public ReviewPaginationDAO(DataSource dataSource) {
         super(dataSource);
-        setRowAmount(8);
+        setRowAmount(7);
         setRowMapper(new ReviewMapper());
-        setTypeId(TypeName.USER.getType());
-        setTypeName("user");
+        setTypeId(TypeName.REVIEW.getType());
+        setTypeName("review");
     }
 
     @Override
     public void setMapFilters(Map<String, String> mapFilters, ReviewSearchParam pparam) {
-        mapFilters.put("authority", pparam.getHotelname());
-        mapFilters.put("enabled", pparam.getStatus());
-        mapFilters.put("username", pparam.getUsername());
+        mapFilters.put("hotelid",
+            pparam.getHotelname() == null ? "" : String.valueOf((hotelDAO.getByName(pparam.getHotelname()).getId())));
+        mapFilters.put("status", pparam.getStatus());
+        mapFilters.put("rev_username", pparam.getUsername());
     }
 
     @Override
     public void setBoToDbMap(Map<String, String> boToDbMap, ReviewSearchParam pparam) {
-        boToDbMap.put("username", "username");
-        boToDbMap.put("authority", "authority");
-        boToDbMap.put("enabled", "enabled");
+        boToDbMap.put("username", "rev_username");
+        boToDbMap.put("hotelname", "authority");
+        boToDbMap.put("status", "status");
+        boToDbMap.put("time", "time");
     }
 
 }
