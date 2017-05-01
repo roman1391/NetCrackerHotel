@@ -42,4 +42,5 @@ public class ColumnName {
     public static final String STAR = "star";
     public static final String MAIN_PHOTO = "main_photo";
     public static final String REVIEW_HOTEL_ID = "hotelid";
+    public static final String REV_USERNAME = "rev_username";
 }

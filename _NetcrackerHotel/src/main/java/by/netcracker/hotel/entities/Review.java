@@ -5,6 +5,7 @@ public class Review {
     private int id;
     private int userId;
     private int hotelId;
+    private String username;
     private String text;
     private String status;
     private String date;
@@ -80,10 +81,18 @@ public class Review {
         this.rating = rating;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public String toString() {
-        return "Feedback [id=" + id + ", userId=" + userId + ", hotelId=" + hotelId + ", text=" + text + ", status="
-            + status + ", date=" + date + ", rating=" + rating + "]";
+        return "Review [id=" + id + ", userId=" + userId + ", hotelId=" + hotelId + ", username=" + username + ", text="
+            + text + ", status=" + status + ", date=" + date + ", rating=" + rating + "]";
     }
 
     @Override
@@ -97,6 +106,7 @@ public class Review {
         result = prime * result + ((status == null) ? 0 : status.hashCode());
         result = prime * result + ((text == null) ? 0 : text.hashCode());
         result = prime * result + userId;
+        result = prime * result + ((username == null) ? 0 : username.hashCode());
         return result;
     }
 
@@ -131,6 +141,11 @@ public class Review {
         } else if (!text.equals(other.text))
             return false;
         if (userId != other.userId)
+            return false;
+        if (username == null) {
+            if (other.username != null)
+                return false;
+        } else if (!username.equals(other.username))
             return false;
         return true;
     }

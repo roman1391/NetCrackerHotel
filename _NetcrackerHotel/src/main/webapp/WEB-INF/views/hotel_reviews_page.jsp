@@ -28,7 +28,7 @@
 					rating: ${review.rating }<br>
 					text: ${review.text }<br>
 					date: ${review.date }<br>
-					userId: ${review.userId }<br>
+					username: ${review.username }<br>
 					hotelId: ${review.hotelId }<br>
 					status: ${review.status }<br>
 					<br>	
