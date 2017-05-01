@@ -50,7 +50,7 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
     public String buildPageQuery(P pparam) {
         StringBuffer query = new StringBuffer();
         int rows = Integer.parseInt(pparam.getResultIndex()) * getRowAmount();
-        query.append(buildFullQuery(pparam, mapFilters)).append(" limit " + rows + " , 80");
+        query.append(buildFullQuery(pparam, mapFilters)).append(" limit " + rows + " , " + rowAmount * 10);
         return query.toString();
     }
 
@@ -76,7 +76,7 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
             paramsToQuery.add(boToDbMap.get(pparam.getSortName().toLowerCase()));
             query.append(SqlQuery.SORTED_PAGINATION.getQuery()); // 2:'user','username'
             query.append(pparam.getOrderDirections().equals("asc") ? " desc " : " asc ");
-            query.append(" ) aaa) bbb on v.entity_id = bbb.entity_id order by bbb.num ) ooo ");
+            query.append(" ) aaa) bbb on v.entity_id = bbb.entity_id order by bbb.num ) ooo  ");
             isSorted = true;
         }
         // фильтры
