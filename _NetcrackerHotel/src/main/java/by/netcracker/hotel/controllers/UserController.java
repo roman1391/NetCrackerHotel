@@ -13,6 +13,11 @@ import by.netcracker.hotel.services.UserService;
 import by.netcracker.hotel.util.CloudinaryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import static by.netcracker.hotel.util.CloudinaryUtil.saveFileToCloud;
@@ -75,6 +81,10 @@ public class UserController {
         } else {
             String appUrl = request.getContextPath();
             eventPublisher.publishEvent(new ForgotPasswordEvent(user, appUrl));
+            Authentication auth = new UsernamePasswordAuthenticationToken(
+                    user, null,
+                    Arrays.asList(new SimpleGrantedAuthority("CHANGE_PASSWORD_PRIVILEGE")));
+            SecurityContextHolder.getContext().setAuthentication(auth);
             model.addAttribute("message","We send you verification email.");
             return "forgot_password";
         }
@@ -88,15 +98,16 @@ public class UserController {
             return new ModelAndView("reset_password","error",
                     "Verification token not found. Try reset password again.");
         } else {
-            User user = (User) userService.getByVerificationToken(verificationToken.getToken());
-            return new ModelAndView("reset_password","user",user);
+            return new ModelAndView("reset_password");
         }
     }
 
 
     @RequestMapping(value = "/reset_password",method = RequestMethod.POST)
-    public String resetPassword(@RequestParam String password,WebRequest request, Model model){
-
-         return "reset_password";
+    public ModelAndView resetPassword(@RequestParam String password,WebRequest request, Model model){
+         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+         userService.changeUserPassword(user,password);
+         return new ModelAndView("login_page","message",
+                 "You complete reset password");
     }
 }

@@ -13,6 +13,11 @@
 <div id="wrapper">
 
     <div class="container">
+        <c:if test="${message!=null}" >
+            <div style="margin: 50px" class="alert alert-success" >
+                    ${message}
+            </div>
+        </c:if>
         <div class="row row-offcanvas row-offcanvas-left">
             <%@include file="../jsp_elements/_sidebar.jsp" %>
         </div>

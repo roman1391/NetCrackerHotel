@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label for="password">Enter new password</label>
                         <input id="password" class="form-control" name="password"
-                               placeholder="New password" required
+                               placeholder="New password" type="password" required
                                data-validation="length alphanumeric"
                                data-validation-length="6-15"
                                data-validation-error-msg="Password has to be an alphanumeric value (6-15 chars)">
@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <label for="confirmPassword">Confirm password</label>
                         <input id="confirmPassword" class="form-control"
-                               placeholder="Confirm password"
+                               placeholder="Confirm password" type="password"
                                data-validation-confirm="password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Confirm</button>
