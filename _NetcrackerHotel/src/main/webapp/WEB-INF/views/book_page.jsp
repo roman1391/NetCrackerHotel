@@ -35,6 +35,8 @@
                     </c:if>
                     roomId: ${order.roomId }<br>
                     UserId: ${order.userId }<br>
+                    First Name: ${order.firstName }<br>
+                    Last Name: ${order.lastName }<br>
                     ArrivalDate: ${order.arrivalDate }<br>
                     LeaveDate: ${order.leaveDate }<br>
                     PayValue: ${order.payValue}<br>

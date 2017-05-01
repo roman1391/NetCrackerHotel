@@ -64,13 +64,13 @@
                         <tbody>
                         <c:forEach items="${hotel_rooms}" var="room" varStatus="loop">
                             <tr>
-                                <td>${room.id}</td>
-                                <td>${room.cost}</td>
-                                <td>${room.capacity}</td>
-                                <td>${room.hotelID}</td>
+                                <td>Room ID: ${room.id}  </td>
+                                <td>Cost: ${room.cost}  </td>
+                                <td>Capacity: ${room.capacity}  </td>
+                                <td>Hotel ID: ${room.hotelID}  </td>
                                 <c:if test="${currentUser.authority.toString() ne 'GUEST'}">
                                     <td>
-                                        <form:form method="post" id="order" action="${contextPath}/book_page"
+                                        <form:form method="post" id="order" action="${contextPath}/book_page/${room.id}"
                                                    modelAttribute="order">
                                             <form:input path="userId" type="hidden" name="userId"
                                                         value="${currentUser.id}"></form:input>

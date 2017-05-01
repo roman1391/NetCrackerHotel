@@ -35,6 +35,8 @@
                                 <br>Order Id: ${order.id}
                                 <br>Room Id: ${order.roomId}
                                 <br>User Id: ${order.userId}
+                                <br>First Name: ${order.firstName }
+                                <br>Last Name: ${order.lastName }
                                 <br>Arrival Date: ${order.arrivalDate}
                                 <br>Leave Date: ${order.leaveDate}
                                 <br>Pay Value: ${order.payValue}

@@ -39,7 +39,7 @@ CREATE TABLE `attribute` (
 
 LOCK TABLES `attribute` WRITE;
 /*!40000 ALTER TABLE `attribute` DISABLE KEYS */;
-INSERT INTO `attribute` (`attribute_id`, `type_id`, `attribute_name`, `datatype`) VALUES (1,1,'first_name','varchar'),(2,1,'last_name','varchar'),(3,1,'username','varchar'),(4,1,'password','varchar'),(5,1,'avatar','varchar'),(6,2,'country','varchar'),(7,2,'city','varchar'),(8,2,'address','varchar'),(9,2,'class','int'),(10,3,'cost','int'),(11,3,'capacity','int'),(12,3,'hotel_id','int'),(13,4,'user_id','int'),(14,4,'pay_value','int'),(15,4,'is_paid','int'),(16,4,'room_id','int'),(18,4,'arrival_date','date'),(19,4,'leave_date','date'),(21,2,'photo','varchar'),(22,1,'email','varchar'),(23,1,'enabled','boolean'),(24,1,'authority','varchar'),(25,2,'hotel_name','varchar'),(26,2,'hotel_description','varchar'),(27,7,'token_user_id','int'),(28,7,'token','varchar'),(29,7,'token_date','date'),(31,8,'userid','int'),(32,8,'hotelid','int'),(33,8,'feedback','varchar'),(34,8,'status','varchar'),(35,8,'time','date'),(36,8,'star','int'),(37,2,'main_photo','varchar'),(38,8,'rev_username','varchar');
+INSERT INTO `attribute` (`attribute_id`, `type_id`, `attribute_name`, `datatype`) VALUES (1,1,'first_name','varchar'),(2,1,'last_name','varchar'),(3,1,'username','varchar'),(4,1,'password','varchar'),(5,1,'avatar','varchar'),(6,2,'country','varchar'),(7,2,'city','varchar'),(8,2,'address','varchar'),(9,2,'class','int'),(10,3,'cost','int'),(11,3,'capacity','int'),(12,3,'hotel_id','int'),(13,4,'user_id','int'),(14,4,'pay_value','int'),(15,4,'is_paid','int'),(16,4,'room_id','int'),(18,4,'arrival_date','date'),(19,4,'leave_date','date'),(21,2,'photo','varchar'),(22,1,'email','varchar'),(23,1,'enabled','boolean'),(24,1,'authority','varchar'),(25,2,'hotel_name','varchar'),(26,2,'hotel_description','varchar'),(27,7,'token_user_id','int'),(28,7,'token','varchar'),(29,7,'token_date','date'),(31,8,'userid','int'),(32,8,'hotelid','int'),(33,8,'feedback','varchar'),(34,8,'status','varchar'),(35,8,'time','date'),(36,8,'star','int'),(37,2,'main_photo','varchar'),(38,8,'rev_username','varchar'),(39,4,'firstname','varchar'),(40,4,'lastname','varchar');
 /*!40000 ALTER TABLE `attribute` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-01 15:35:39
+-- Dump completed on 2017-05-01 16:49:34

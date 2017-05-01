@@ -22,7 +22,6 @@ public class HotelPaginationService extends PaginationServiceAbstract<HotelSearc
 
     private static Logger log = Logger.getLogger(HotelPaginationService.class);
 
-    @SuppressWarnings("unused")
     private PaginationDao<Hotel, HotelSearchParam> hotelPaginationDAO;
     private HotelDAO hotelDAO;
 

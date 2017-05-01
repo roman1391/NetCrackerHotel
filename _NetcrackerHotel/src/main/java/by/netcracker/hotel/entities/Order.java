@@ -15,10 +15,13 @@ public class Order {
     private Date leaveDate;
     private int payValue;
     private boolean isPaid;
+    private String firstName;
+    private String lastName;
 
 
     public Order(){}
-    public Order(int id, int roomId, int userId, Date arrivalDate, Date leaveDate, int payValue, boolean isPaid) {
+
+    public Order(int id, int roomId, int userId, Date arrivalDate, Date leaveDate, int payValue, boolean isPaid, String firstName, String lastName) {
         this.id = id;
         this.roomId = roomId;
         this.userId = userId;
@@ -26,6 +29,8 @@ public class Order {
         this.leaveDate = leaveDate;
         this.payValue = payValue;
         this.isPaid = isPaid;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public int getId() {
@@ -82,5 +87,21 @@ public class Order {
 
     public void setPaid(boolean paid) {
         isPaid = paid;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

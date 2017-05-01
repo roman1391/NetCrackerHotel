@@ -1,16 +1,20 @@
 package by.netcracker.hotel.dao;
 
-import by.netcracker.hotel.entities.Hotel;
-
 import java.util.List;
+
+import by.netcracker.hotel.entities.Hotel;
 
 /**
  * Created by Varvara on 4/4/2017.
  */
-public interface HotelDAO extends AbstractDAO<Hotel, Integer>{
+public interface HotelDAO extends AbstractDAO<Hotel, Integer> {
     List<Integer> findIDsBySearchString(String searchString);
+
     List<String> getPlaces();
+
     void addPhoto(String photo, int hotelID);
 
     List<String> getHotelNames();
+
+    Hotel getByName(String name);
 }

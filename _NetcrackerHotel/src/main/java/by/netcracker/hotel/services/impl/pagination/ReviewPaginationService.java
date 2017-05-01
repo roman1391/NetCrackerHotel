@@ -17,6 +17,7 @@ import by.netcracker.hotel.dao.pagination.ReviewPaginationDAO;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.pagination.ReviewRow;
 import by.netcracker.hotel.entities.pagination.ReviewSearchParam;
+import by.netcracker.hotel.entities.pagination.UserSearchParam;
 
 @Service
 public class ReviewPaginationService extends PaginationServiceAbstract<ReviewSearchParam, ReviewRow, Review> {
@@ -26,7 +27,6 @@ public class ReviewPaginationService extends PaginationServiceAbstract<ReviewSea
     @SuppressWarnings("unused")
     private PaginationDao<Review, ReviewSearchParam> reviewPaginationDAO;
     private ReviewDAO reviewDAO;
-    private UserDAO userDAO;
     private HotelDAO hotelDAO;
 
     @Autowired
@@ -35,7 +35,6 @@ public class ReviewPaginationService extends PaginationServiceAbstract<ReviewSea
         super.setPaginationDao(reviewPaginationDAO);
         this.reviewPaginationDAO = reviewPaginationDAO;
         this.reviewDAO = reviewDAO;
-        this.userDAO = userDAO;
         this.hotelDAO = hotelDAO;
     }
 
@@ -84,11 +83,19 @@ public class ReviewPaginationService extends PaginationServiceAbstract<ReviewSea
     protected ReviewRow assignDataToBo(Review review) throws Exception {
         ReviewRow bo = new ReviewRow();
         bo.setReviewId(review.getId());
-        bo.setUsername(userDAO.getByID((review.getUserId())).getUsername());
+        bo.setUsername(review.getUsername());
         bo.setHotelname(hotelDAO.getByID(review.getHotelId()).getName());
         bo.setTime(review.getDate());
         bo.setStatus(review.getStatus());
         return bo;
+    }
+
+    public void deleteButtonAction(UserSearchParam pparam, String buttonAction) {
+        if (buttonAction != null && buttonAction.equals("deleteButton")) {
+            for (String id : pparam.getSelectedIds()) {
+                reviewDAO.deleteByID(Integer.parseInt(id));
+            }
+        }
     }
 
 }
