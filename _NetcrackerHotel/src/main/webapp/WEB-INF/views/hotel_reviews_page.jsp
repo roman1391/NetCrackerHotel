@@ -25,7 +25,7 @@
                     </c:if>
                     <c:if test="${fn:length(currentReviews) gt 0}">
 					<c:forEach var="review" items="${currentReviews}">
-					rating: ${review.rating }<br>
+					rating: ${review.rating  }<br>
 					text: ${review.text }<br>
 					date: ${review.date }<br>
 					username: ${review.username }<br>
