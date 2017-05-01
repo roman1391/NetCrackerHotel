@@ -34,29 +34,43 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
 
     @Override
     public int retrieveCountResult(P pparam) throws Exception {
-        int rows = getJdbcTemplate().queryForObject(buildCountQuery(pparam), paramsToQuery.toArray(), Integer.class);
-        int countResult = rows / getRowAmount();
+        int countResult = getJdbcTemplate().queryForObject(buildCountQuery(pparam), paramsToQuery.toArray(),
+            Integer.class);
         return countResult;
     }
 
     @Override
     public List<E> retrievePageResult(P pparam) throws Exception {
-        List<E> pageResult = getJdbcTemplate().query(buildPageQuery(pparam), paramsToQuery.toArray(),
-            new RowMapperResultSetExtractor<E>(rowMapper) {
-            });
+        String fullQuery = buildFullQuery(pparam, mapFilters);
+        StringBuffer query = new StringBuffer();
+        query.append("create view temp as ( ").append(fullQuery).append(" ) ;");
+        getJdbcTemplate().update(query.toString(), paramsToQuery.toArray());
+        StringBuffer query2 = new StringBuffer();
+        query2.append(" select entity_id, attribute_name, attribute_value from temp "
+            + "where entity_id in (select entity_id from (select distinct entity_id from temp limit " + pparam.getResultIndex() + ", 10) abc ); ");
+        List<E> pageResult = getJdbcTemplate().query(query2.toString(), new RowMapperResultSetExtractor<E>(rowMapper) {
+        });
+        getJdbcTemplate().update(" drop view temp;");
         return pageResult;
     }
 
-    public String buildPageQuery(P pparam) {
+/*    public String buildPageQuery(P pparam) {
+        String fullQuery = buildFullQuery(pparam, mapFilters);
         StringBuffer query = new StringBuffer();
-        int rows = Integer.parseInt(pparam.getResultIndex()) * getRowAmount();
-        query.append(buildFullQuery(pparam, mapFilters)).append(" limit " + rows + " , 80");
+        query.append("create view temp as ( ").append(fullQuery).append(" ) ;");
+        query.append(" select entity_id, attribute_name, attribute_value from temp "
+            + "where entity_id in (select entity_id from (select distinct entity_id from temp limit 10) abc ); "
+            + " drop view temp;");
+        // int rows = Integer.parseInt(pparam.getResultIndex()) *
+        // getRowAmount();
+        // query.append(buildFullQuery(pparam, mapFilters)).append(" limit " +
+        // rows + " , 80");
         return query.toString();
-    }
+    }*/
 
     public String buildCountQuery(P pparam) {
         StringBuffer query = new StringBuffer();
-        query.append("select count(*) from (");
+        query.append("select count(distinct entity_id) from (");
         query.append(buildFullQuery(pparam, mapFilters)).append(" ) ccc");
         return query.toString();
     }
