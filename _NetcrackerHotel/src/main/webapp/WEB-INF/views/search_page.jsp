@@ -23,11 +23,11 @@
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <%@include file="../jsp_elements/searchform.jsp"%>
     <%@include file="../jsp_elements/searchresult.jsp"%>
 </div>
 <%@include file="../jsp_elements/_footer.jsp" %>
+<script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
 </body>
 </html>
