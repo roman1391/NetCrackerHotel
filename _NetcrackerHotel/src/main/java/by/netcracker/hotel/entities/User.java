@@ -13,14 +13,6 @@ import by.netcracker.hotel.enums.ROLE;
 
 public class User implements BusinessObject {
 
-    public static List<Order> getOrder(){
-        List<Order> list = new ArrayList<>();
-        list.add(new Order(1,1,1, new Date(), new Date(), 1000, false));
-        list.add(new Order(2,2,2, new Date(), new Date(), 2000, false));
-        list.add(new Order(3,3,3, new Date(), new Date(), 3000, false));
-        return list;
-    }
-
     public static User getUser() {
         User user = new User();
         user.setId(1);

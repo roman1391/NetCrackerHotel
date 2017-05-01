@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import by.netcracker.hotel.entities.*;
+import by.netcracker.hotel.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +25,13 @@ import by.netcracker.hotel.services.ReviewService;
 public class HotelController {
     private final HotelService hotelService;
     private final ReviewService reviewService;
+    private final RoomService roomService;
 
     @Autowired
-    public HotelController(HotelService hotelService, ReviewService reviewService) {
+    public HotelController(HotelService hotelService, ReviewService reviewService, RoomService roomService) {
         this.hotelService = hotelService;
         this.reviewService = reviewService;
+        this.roomService = roomService;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -37,7 +41,7 @@ public class HotelController {
         model.addAttribute("reviewInfo", reviewInfo);
         model.addAttribute("choosenHotel", hotel);
         model.addAttribute("review", new Review());
-        model.addAttribute("hotel_rooms", Hotel.getRooms());
+        model.addAttribute("hotel_rooms", roomService.getByHotelID(hotelID));
         model.addAttribute("order", new Order());
         return "hotel_page";
     }

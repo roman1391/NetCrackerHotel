@@ -43,4 +43,6 @@ public class ColumnName {
     public static final String MAIN_PHOTO = "main_photo";
     public static final String REVIEW_HOTEL_ID = "hotelid";
     public static final String REV_USERNAME = "rev_username";
+    public static final String ORDER_FIRST_NAME = "firstname";
+    public static final String ORDER_LAST_NAME = "lastname";
 }

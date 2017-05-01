@@ -7,9 +7,8 @@ import by.netcracker.hotel.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -22,16 +21,25 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping(value = "/book_page", method = RequestMethod.POST)
-    public String bookPage(@ModelAttribute("room") Room room,
+    @RequestMapping(value = "/book_complete", method = RequestMethod.POST)
+    public String bookComplete(@ModelAttribute("room") Room room,
                            @ModelAttribute("order") Order order, Model model){
 
         order.setArrivalDate(new Date()); //временные костыли
         order.setLeaveDate(new Date()); //тоже самое
         orderService.addOrder(order);//TODO
-        model.addAttribute("ordersDemo", User.getOrder());
+        //model.addAttribute("ordersDemo", User.getOrder());
         model.addAttribute("order", order);
         return "book_page";
+    }
+
+    @RequestMapping(value = "/book_page/{id}", method = RequestMethod.POST)
+    public String bookPage(@ModelAttribute("order") Order order,
+                           @PathVariable("id") int roomId,
+                           Model model){
+        model.addAttribute("order", order);
+        model.addAttribute("roomId", roomId);
+        return "add_order";
     }
 
     @RequestMapping(value = "/booked_room", method = RequestMethod.POST)
