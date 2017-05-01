@@ -21,6 +21,7 @@
 			<input style="margin-right: 5px" name="_spring_security_remember_me"
 				   type="checkbox" class="checkAdmin">Remember me</label>
         <button type="submit" class="btn btn-primary">Login</button>
+        <a href="/forgot_password" class="btn btn-link" >Forgot password ?</a>
         <a href="registration" class="btn btn-link">Register</a>
     </div>
 </form>

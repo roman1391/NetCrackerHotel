@@ -6,6 +6,7 @@ import by.netcracker.hotel.dto.UserDTO;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.VerificationToken;
 import by.netcracker.hotel.exceptions.EmailExistException;
+import by.netcracker.hotel.exceptions.UserNotFoundException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 
 /**
@@ -41,4 +42,6 @@ public interface UserService extends AbstractService<User, Integer> {
     void deleteUserByUsername(String username);
 
     List<String> getUsernames();
+
+    void changeUserPassword(User user,String password);
 }

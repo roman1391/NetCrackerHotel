@@ -20,4 +20,6 @@ public interface UserDAO extends AbstractDAO<User,Integer> {
     void deleteByEmail(String email);
 
     List<String> getUsernames();
+
+    void userPasswordUpdate(User user,String password);
 }

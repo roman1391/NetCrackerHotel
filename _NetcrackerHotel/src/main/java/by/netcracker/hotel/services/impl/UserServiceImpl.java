@@ -3,6 +3,7 @@ package by.netcracker.hotel.services.impl;
 import java.util.Date;
 import java.util.List;
 
+import by.netcracker.hotel.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -145,4 +146,8 @@ public class UserServiceImpl implements UserService {
         return userDAO.getUsernames();
     }
 
+    @Override
+    public void changeUserPassword(User user, String password) {
+          userDAO.userPasswordUpdate(user,password);
+    }
 }
