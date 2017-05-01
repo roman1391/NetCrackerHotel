@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="authority" value="${currentUser.authority.toString()}"/>
 
@@ -16,49 +17,46 @@
             <li class="nav-item active">
                 <a class="nav-link" href="${contextPath}/home">Home <span class="sr-only">(current)</span></a>
             </li>
-            <c:if test="${authority eq 'ADMIN'}">
+            <sec:authorize access="hasRole('ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/admin_page">Admin page</a>
                 </li>
-            </c:if>
-            <c:if test="${authority ne 'GUEST'}">
+            </sec:authorize>
+            <sec:authorize access="hasAnyRole('ADMIN', 'USER', 'BLOCKED')">
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/profile">Profile</a>
                 </li>
-            </c:if>
-            <c:if test="${authority ne 'GUEST'}">
+            </sec:authorize>
+            <sec:authorize access="hasAnyRole('ADMIN', 'USER')">
                 <li class="nav-item">
                     <form:form method="post" id="curUser" action="${contextPath}/booked_room" modelAttribute="currentUser">
                         <form:input path="id" type="hidden" name="id" value="${currentUser.id}"></form:input>
                         <form:input path="username" type="hidden" name="username" value="${currentUser.username}"></form:input>
-                        <%-- <form:button class="nav-link" type="submit">Book</form:button> --%>
-                        <form:button class="nav-link" type="submit">Booked rooms</form:button>
+                        <form:button class="nav-link" type="submit">View all bookings</form:button>
 
                         <!-- <a class="nav-link" type="submit" href="">Hotels</a> -->
                     </form:form>
                 </li>
-            </c:if>
+            </sec:authorize>
             <li class="nav-item">   
                 <a class="nav-link" href="${contextPath}/search-page">Search hotels</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${contextPath}/about">About</a>
             </li>
-            <c:choose>
-                <c:when test="${authority eq 'GUEST'}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="${contextPath}/login">Log in</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${contextPath}/registration">Sign up</a>
-                    </li>
-                </c:when>
-                <c:when test="${authority ne 'GUEST'}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="${contextPath}/j_spring_security_logout">Logout</a>
-                    </li>
-                </c:when>
-            </c:choose>
+            <sec:authorize access="!isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="${contextPath}/login">Log in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${contextPath}/registration">Sign up</a>
+                </li>
+             </sec:authorize>
+             <sec:authorize access="hasAnyRole('ADMIN', 'USER', 'BLOCKED')">
+                <li class="nav-item">
+                    <a class="nav-link" href="${contextPath}/j_spring_security_logout">Logout</a>
+                </li>
+             </sec:authorize>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">

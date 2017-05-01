@@ -53,14 +53,13 @@
                             <div style="margin: 10px" class="alert alert-success">
                                 You have already left review
                             </div>
-                        </c:when>
-                        <c:when test="${reviewInfo eq 'moderate'}">
-                            <form:form method="post" id="review" action="list_of_reviews" modelAttribute="choosenHotel">
-                                <form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
-                                <form:button type="submit">See all reviews (not work yet)</form:button>
-                            </form:form>
-                        </c:when>
+                        </c:when>                          
                     </c:choose>
+                    
+                    <form:form method="post" id="review" action="list_of_reviews" modelAttribute="choosenHotel">
+                        <form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
+                        <form:button type="submit">See all reviews </form:button>
+                    </form:form>
                     <table>
                         <tbody>
                         <c:forEach items="${hotel_rooms}" var="room" varStatus="loop">
