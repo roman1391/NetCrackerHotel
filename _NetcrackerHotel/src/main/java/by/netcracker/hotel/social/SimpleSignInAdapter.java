@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.WebAttributes;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.social.connect.Connection;
@@ -33,11 +35,14 @@ import java.util.Collection;
 public class SimpleSignInAdapter implements SignInAdapter {
     private final RequestCache requestCache;
     private UserDetailsService userService;
+    private RememberMeServices rememberMeServices;
 
     @Autowired
-    public SimpleSignInAdapter(RequestCache requestCache,UserDetailsService userService) {
+    public SimpleSignInAdapter(RequestCache requestCache,UserDetailsService userService,
+                               RememberMeServices rememberMeServices) {
         this.requestCache = requestCache;
         this.userService = userService;
+        this.rememberMeServices = rememberMeServices;
     }
 
     @Override
@@ -46,6 +51,8 @@ public class SimpleSignInAdapter implements SignInAdapter {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,null, null);
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(token);
+        rememberMeServices.loginSuccess((HttpServletRequest) request.getNativeRequest(),
+                (HttpServletResponse) request.getNativeResponse(),context.getAuthentication());
         return extractOriginalUrl(request);
     }
 

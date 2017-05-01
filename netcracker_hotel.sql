@@ -120,10 +120,10 @@ UNLOCK TABLES;
 -- Table structure for table `userconnection`
 --
 
-DROP TABLE IF EXISTS `userconnection`;
+DROP TABLE IF EXISTS `UserConnection`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `userconnection` (
+CREATE TABLE `UserConnection` (
   `userId` varchar(255) NOT NULL,
   `providerId` varchar(255) NOT NULL,
   `providerUserId` varchar(255) NOT NULL,
@@ -144,9 +144,9 @@ CREATE TABLE `userconnection` (
 -- Dumping data for table `userconnection`
 --
 
-LOCK TABLES `userconnection` WRITE;
-/*!40000 ALTER TABLE `userconnection` DISABLE KEYS */;
-/*!40000 ALTER TABLE `userconnection` ENABLE KEYS */;
+LOCK TABLES `UserConnection` WRITE;
+/*!40000 ALTER TABLE `UserConnection` DISABLE KEYS */;
+/*!40000 ALTER TABLE `UserConnection` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
