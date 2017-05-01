@@ -26,7 +26,6 @@ public class HotelPaginationDAO extends AbstractPaginationJdbcDAO<Hotel, HotelSe
 
     public HotelPaginationDAO(DataSource dataSource) {
         super(dataSource);
-        setRowAmount(7);
         setRowMapper(new HotelMapper());
         setTypeId(TypeName.HOTEL.getType());
         setTypeName("hotel");

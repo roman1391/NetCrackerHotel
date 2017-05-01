@@ -24,7 +24,6 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
     protected List<Object> paramsToQuery = new ArrayList<>();
     protected Map<String, String> mapFilters = new HashMap<>();
     protected Map<String, String> boToDbMap = new HashMap<>();
-    protected int rowAmount;
     protected int typeId;
     protected String typeName;
 
@@ -34,14 +33,15 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
 
     @Override
     public int retrieveCountResult(P pparam) throws Exception {
-        int rows = getJdbcTemplate().queryForObject(buildCountQuery(pparam), paramsToQuery.toArray(), Integer.class);
-        int countResult = rows / getRowAmount();
+        int countResult = getJdbcTemplate().queryForObject(buildCountQuery(pparam), paramsToQuery.toArray(),
+            Integer.class);
         return countResult;
     }
 
     @Override
     public List<E> retrievePageResult(P pparam) throws Exception {
-        List<E> pageResult = getJdbcTemplate().query(buildPageQuery(pparam), paramsToQuery.toArray(),
+        String query = buildPageQuery(pparam);
+        List<E> pageResult = getJdbcTemplate().query(query, paramsToQuery.toArray(),
             new RowMapperResultSetExtractor<E>(rowMapper) {
             });
         return pageResult;
@@ -49,14 +49,18 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
 
     public String buildPageQuery(P pparam) {
         StringBuffer query = new StringBuffer();
-        int rows = Integer.parseInt(pparam.getResultIndex()) * getRowAmount();
-        query.append(buildFullQuery(pparam, mapFilters)).append(" limit " + rows + " , " + rowAmount * 10);
+        query.append("select ooo.entity_id, attribute_name, attribute_value,num from value ooo "
+            + "inner join attribute on ooo.attribute_id = attribute.attribute_id "
+            + "inner join (select (@row_numb:=@row_numb + 1) AS num, entity_id "
+            + "from (SELECT @row_numb:=0) AS t, ( select distinct entity_id from(");
+        query.append(buildFullQuery(pparam, mapFilters)).append(" ) nn ) aaa limit " + pparam.getResultIndex()
+            + " ,10 ) yyy on ooo.entity_id = yyy.entity_id order by num ");
         return query.toString();
     }
 
     public String buildCountQuery(P pparam) {
         StringBuffer query = new StringBuffer();
-        query.append("select count(*) from (");
+        query.append("select count(distinct entity_id) from (");
         query.append(buildFullQuery(pparam, mapFilters)).append(" ) ccc");
         return query.toString();
     }
@@ -128,14 +132,6 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
     }
 
     public abstract void setMapFilters(Map<String, String> mapFilters, P pparam);
-
-    public int getRowAmount() {
-        return rowAmount;
-    }
-
-    public void setRowAmount(int rowAmount) {
-        this.rowAmount = rowAmount;
-    }
 
     public int getTypeId() {
         return typeId;

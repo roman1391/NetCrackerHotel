@@ -26,7 +26,6 @@ public class UserPaginationDAO extends AbstractPaginationJdbcDAO<User, UserSearc
 
     public UserPaginationDAO(DataSource dataSource) {
         super(dataSource);
-        setRowAmount(8);
         setRowMapper(new UserMapper());
         setTypeId(TypeName.USER.getType());
         setTypeName("user");

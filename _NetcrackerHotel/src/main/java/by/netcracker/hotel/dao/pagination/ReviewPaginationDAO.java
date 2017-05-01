@@ -29,7 +29,6 @@ public class ReviewPaginationDAO extends AbstractPaginationJdbcDAO<Review, Revie
 
     public ReviewPaginationDAO(DataSource dataSource) {
         super(dataSource);
-        setRowAmount(7);
         setRowMapper(new ReviewMapper());
         setTypeId(TypeName.REVIEW.getType());
         setTypeName("review");
