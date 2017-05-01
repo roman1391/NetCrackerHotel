@@ -1,5 +1,7 @@
 package by.netcracker.hotel.services;
 
+import java.util.List;
+
 import by.netcracker.hotel.entities.Review;
 
 public interface ReviewService extends AbstractService<Review, Integer> {
@@ -8,4 +10,5 @@ public interface ReviewService extends AbstractService<Review, Integer> {
 
     String checkReview(int hotelId);
 
+    public List<Review> getByHotelId(int hotelId);
 }

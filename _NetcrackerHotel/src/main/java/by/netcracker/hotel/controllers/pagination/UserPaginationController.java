@@ -2,7 +2,6 @@ package by.netcracker.hotel.controllers.pagination;
 
 import java.util.Map;
 
-import by.netcracker.hotel.services.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.paginationspring.controller.PaginationControllerAbstract;
 
 import by.netcracker.hotel.entities.pagination.UserSearchParam;
+import by.netcracker.hotel.services.UserService;
 import by.netcracker.hotel.services.impl.pagination.UserPaginationService;
 
 @Controller

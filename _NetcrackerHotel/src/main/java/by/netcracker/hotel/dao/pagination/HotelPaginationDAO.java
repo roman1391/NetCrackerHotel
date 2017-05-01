@@ -36,7 +36,6 @@ public class HotelPaginationDAO extends AbstractPaginationJdbcDAO<Hotel, HotelSe
     public void setMapFilters(Map<String, String> mapFilters, HotelSearchParam pparam) {
         mapFilters.put("class", pparam.getTypeOfService());
         mapFilters.put("hotel_name", pparam.getName());
-
     }
 
     @Override

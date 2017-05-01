@@ -21,30 +21,34 @@ public class ReviewMapper implements RowMapper<Review> {
                 break;
             }
             switch (resultSet.getString(2)) {
-                case ColumnName.USERID: {
-                    review.setUserId(Integer.parseInt(resultSet.getString(3)));
-                    break;
-                }
-                case ColumnName.HOTELID: {
-                    review.setHotelId(Integer.parseInt(resultSet.getString(3)));
-                    break;
-                }
-                case ColumnName.FEEDBACK: {
-                    review.setText(resultSet.getString(3));
-                    break;
-                }
-                case ColumnName.STATUS: {
-                    review.setStatus(resultSet.getString(3));
-                    break;
-                }
-                case ColumnName.TIME: {
-                    review.setDate(resultSet.getString(3));
-                    break;
-                }
-                case ColumnName.STAR: {
-                    review.setRating(Integer.parseInt(resultSet.getString(3)));
-                    break;
-                }
+            case ColumnName.USERID: {
+                review.setUserId(Integer.parseInt(resultSet.getString(3)));
+                break;
+            }
+            case ColumnName.REV_USERNAME: {
+                review.setUsername(resultSet.getString(3));
+                break;
+            }
+            case ColumnName.HOTELID: {
+                review.setHotelId(Integer.parseInt(resultSet.getString(3)));
+                break;
+            }
+            case ColumnName.FEEDBACK: {
+                review.setText(resultSet.getString(3));
+                break;
+            }
+            case ColumnName.STATUS: {
+                review.setStatus(resultSet.getString(3));
+                break;
+            }
+            case ColumnName.TIME: {
+                review.setDate(resultSet.getString(3));
+                break;
+            }
+            case ColumnName.STAR: {
+                review.setRating(Integer.parseInt(resultSet.getString(3)));
+                break;
+            }
             }
         } while (resultSet.next());
         return review;

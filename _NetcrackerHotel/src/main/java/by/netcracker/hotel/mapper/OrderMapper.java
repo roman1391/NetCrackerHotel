@@ -22,24 +22,38 @@ public class OrderMapper implements RowMapper<Order>{
                 break;
             }
             switch (resultSet.getString(2)){
-                case ColumnName.ORDER_USER_ID:
+                case ColumnName.ORDER_USER_ID: {
                     order.setUserId(resultSet.getInt(3));
                     break;
-                case ColumnName.ORDER_ROOM_ID:
+                }
+                case ColumnName.ORDER_ROOM_ID: {
                     order.setRoomId(resultSet.getInt(3));
                     break;
-                case ColumnName.ARRIVAL_DATE:
+                }
+                case ColumnName.ARRIVAL_DATE: {
                     order.setArrivalDate(resultSet.getDate(3));
                     break;
-                case ColumnName.LEAVE_DATE:
+                }
+                case ColumnName.LEAVE_DATE: {
                     order.setLeaveDate(resultSet.getDate(3));
                     break;
-                case ColumnName.PAY_VALUE:
+                }
+                case ColumnName.PAY_VALUE: {
                     order.setPayValue(resultSet.getInt(3));
                     break;
-                case ColumnName.IS_PAID:
+                }
+                case ColumnName.IS_PAID: {
                     order.setPaid(resultSet.getBoolean(3));
                     break;
+                }
+                case ColumnName.ORDER_FIRST_NAME:{
+                    order.setFirstName(resultSet.getString(3));
+                    break;
+                }
+                case ColumnName.ORDER_LAST_NAME:{
+                    order.setLastName(resultSet.getString(3));
+                    break;
+                }
             }
         }
         while(resultSet.next());
