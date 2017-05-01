@@ -18,7 +18,7 @@
 			<div class="row row-offcanvas row-offcanvas-left">
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
-					<sec:authorize access="hasRole('ADMIN')">
+					<sec:authorize access="hasRole('BLOCKED')">
 						<div style="margin: 50px" class="alert alert-danger">
 							Profile was blocked!</div>
 					</sec:authorize>
