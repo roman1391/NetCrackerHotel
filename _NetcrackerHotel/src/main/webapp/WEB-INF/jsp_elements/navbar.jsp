@@ -52,7 +52,7 @@
                     <a class="nav-link" href="${contextPath}/registration">Sign up</a>
                 </li>
              </sec:authorize>
-             <sec:authorize access="hasAnyRole('ADMIN', 'USER', 'BLOCKED')">
+             <sec:authorize access="isAuthenticated()">
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/j_spring_security_logout">Logout</a>
                 </li>

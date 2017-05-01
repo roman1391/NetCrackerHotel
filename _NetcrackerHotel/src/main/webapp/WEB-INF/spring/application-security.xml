@@ -37,14 +37,28 @@
         <logout logout-success-url="/home"/>
 
         <remember-me  data-source-ref="dataSource"
-                      token-validity-seconds="86400"/>
+                      token-validity-seconds="86400" />
+        <security:remember-me data-source-ref="dataSource"
+                     services-ref="socialRememberMe" />
+
     </http>
 
+    <beans:bean id = "socialRememberMe" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices" >
+        <beans:property name="userDetailsService" ref="userDetailsManager" />
+        <beans:property name="key" value="1535135124421" />
+        <beans:property name="alwaysRemember" value="true"/>
+        <beans:property name="tokenValiditySeconds" value="86400" />
+        <beans:property name="tokenRepository" ref="tokenRepository" />
+    </beans:bean>
+
+    <beans:bean id="tokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl" >
+        <beans:property name="dataSource" ref="dataSource" />
+    </beans:bean>
 
     <authentication-manager>
         <authentication-provider>
             <password-encoder ref="bcrypt"/>
-            <jdbc-user-service data-source-ref="dataSource"
+            <jdbc-user-service id="userDetailsManager" data-source-ref="dataSource"
                                users-by-username-query="SELECT (
 SELECT v.attribute_value FROM value v
     INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id

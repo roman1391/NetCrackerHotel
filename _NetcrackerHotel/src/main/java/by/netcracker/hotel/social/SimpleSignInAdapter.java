@@ -21,6 +21,7 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ import javax.servlet.http.HttpSession;
 import java.security.Security;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by slava on 20.04.17.
@@ -35,14 +37,13 @@ import java.util.Collection;
 public class SimpleSignInAdapter implements SignInAdapter {
     private final RequestCache requestCache;
     private UserDetailsService userService;
+    @Resource(name="socialRememberMe")
     private RememberMeServices rememberMeServices;
 
     @Autowired
-    public SimpleSignInAdapter(RequestCache requestCache,UserDetailsService userService,
-                               RememberMeServices rememberMeServices) {
+    public SimpleSignInAdapter(RequestCache requestCache,UserDetailsService userService) {
         this.requestCache = requestCache;
         this.userService = userService;
-        this.rememberMeServices = rememberMeServices;
     }
 
     @Override
@@ -51,8 +52,9 @@ public class SimpleSignInAdapter implements SignInAdapter {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,null, null);
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(token);
+        Collection<? extends GrantedAuthority> list = context.getAuthentication().getAuthorities();
         rememberMeServices.loginSuccess((HttpServletRequest) request.getNativeRequest(),
-                (HttpServletResponse) request.getNativeResponse(),context.getAuthentication());
+                (HttpServletResponse) request.getNativeResponse(), context.getAuthentication());
         return extractOriginalUrl(request);
     }
 
