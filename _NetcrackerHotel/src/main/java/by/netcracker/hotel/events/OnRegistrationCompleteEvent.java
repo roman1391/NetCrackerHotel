@@ -1,21 +1,18 @@
 package by.netcracker.hotel.events;
 
-import by.netcracker.hotel.entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.stereotype.Component;
 
-import java.util.Locale;
+import by.netcracker.hotel.entities.User;
 
 /**
  * Created by slava on 13.04.17.
  */
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
+    private static final long serialVersionUID = 1L;
     private String appUrl;
     private User user;
 
-    public OnRegistrationCompleteEvent(
-            User user,String appUrl) {
+    public OnRegistrationCompleteEvent(User user, String appUrl) {
         super(user);
         this.user = user;
         this.appUrl = appUrl;

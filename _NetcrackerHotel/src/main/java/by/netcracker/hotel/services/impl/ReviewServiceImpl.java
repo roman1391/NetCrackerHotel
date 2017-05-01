@@ -2,6 +2,7 @@ package by.netcracker.hotel.services.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -58,6 +59,11 @@ public class ReviewServiceImpl implements ReviewService {
             reviewInfo = "no";
         }
         return reviewInfo;
+    }
+
+    @Override
+    public List<Review> getByHotelId(int hotelId) {
+        return reviewDAO.getByHotelId(hotelId);
     }
 
 }

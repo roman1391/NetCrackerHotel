@@ -12,12 +12,11 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import by.netcracker.hotel.dao.ReviewDAO;
+import by.netcracker.hotel.dao.constant.ColumnName;
 import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.Review;
-import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.mapper.ReviewMapper;
-import by.netcracker.hotel.mapper.UserMapper;
 
 @Repository
 public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
@@ -49,7 +48,6 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
     @Override
     public void update(Review entity) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -91,6 +89,15 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
             break;
         }
         return reviewinfo;
+    }
+
+    @Override
+    public List<Review> getByHotelId(int hotelId) {
+        return (List<Review>) getJdbcTemplate().query(SqlQuery.GET_BY.getQuery(),
+            new Object[] { ColumnName.REVIEW_HOTEL_ID, hotelId },
+            new RowMapperResultSetExtractor<Review>(new ReviewMapper()) {
+            });
+
     }
 
 }
