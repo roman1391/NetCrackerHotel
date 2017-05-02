@@ -37,13 +37,9 @@ import static by.netcracker.hotel.util.CloudinaryUtil.saveFileToCloud;
 @Controller
 public class UserController {
 
-    private ApplicationEventPublisher eventPublisher;
-    private final long TOKEN_LIFE_TIME = 86400000;
-
     @Autowired
     public UserController(ServletContext context,ApplicationEventPublisher eventPublisher) {
         CloudinaryUtil.UPLOADED_FOLDER = context.getRealPath("/resources/img/");
-        this.eventPublisher = eventPublisher;
     }
 
     @Autowired
@@ -64,50 +60,5 @@ public class UserController {
         model.addObject("role", ROLE.GUEST);
         model.setViewName("about");
         return model;
-    }
-
-    @RequestMapping(value = "/forgot_password",method = RequestMethod.GET)
-    public String forgotPassword(){
-        return "forgot_password";
-    }
-
-    @RequestMapping(value = "/forgot_password",method = RequestMethod.POST)
-    public String forgotPassword(@RequestParam String email,WebRequest request, Model model){
-
-        User user = userService.getUserByEmail(email);
-        if(user==null) {
-            model.addAttribute("error","Account with this email didn't exist.");
-            return "forgot_password";
-        } else {
-            String appUrl = request.getContextPath();
-            eventPublisher.publishEvent(new ForgotPasswordEvent(user, appUrl));
-            Authentication auth = new UsernamePasswordAuthenticationToken(
-                    user, null,
-                    Arrays.asList(new SimpleGrantedAuthority("CHANGE_PASSWORD_PRIVILEGE")));
-            SecurityContextHolder.getContext().setAuthentication(auth);
-            model.addAttribute("message","We send you verification email.");
-            return "forgot_password";
-        }
-
-    }
-
-    @RequestMapping(value = "/reset_password",method = RequestMethod.GET)
-    public ModelAndView resetPassword(WebRequest request, Model model, @RequestParam("token") String token){
-        VerificationToken verificationToken = userService.getVerificationToken(token);
-        if (verificationToken == null) {
-            return new ModelAndView("reset_password","error",
-                    "Verification token not found. Try reset password again.");
-        } else {
-            return new ModelAndView("reset_password");
-        }
-    }
-
-
-    @RequestMapping(value = "/reset_password",method = RequestMethod.POST)
-    public ModelAndView resetPassword(@RequestParam String password,WebRequest request, Model model){
-         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-         userService.changeUserPassword(user,password);
-         return new ModelAndView("login_page","message",
-                 "You complete reset password");
     }
 }

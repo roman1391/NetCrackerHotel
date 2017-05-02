@@ -12,10 +12,6 @@
 <head>
     <title>Profile</title>
     <style>
-        img {
-            width: 100px;
-        }
-
         input:not([type]):disabled {
             background: transparent;
             border: none;
@@ -31,11 +27,16 @@
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <div class="jumbotron">
+        <c:if test="${message!=null}">
+            <div style="margin: 50px" class="alert alert-success" >
+                    ${message}
+            </div>
+        </c:if>
       <div class="content">
         <form:form id="updateForm" action="update" method="post" modelAttribute="currentUser"
                    enctype="multipart/form-data" >
         <div class="d-inline-block form-group">
-            <img src="<c:url value="${currentUser.avatar}"/>">
+            <img class="img-responsive" src="<c:url value="${currentUser.avatar}"/>">
             <div class="form-group">
                 <input type="file" name="file" id="loadAvatar" onclick="onFileSelected(event)">
                 <form:input path="avatar" class="form-control" />
@@ -73,7 +74,11 @@
             </div>
 
         </form:form>
-        <button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
+          <div class="btn-group">
+              <button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
+              <a id ="changePassword" class="btn btn-primary" href="/change_password">Change password</a>
+          </div>
+
        </div>
     </div>
 </div>
