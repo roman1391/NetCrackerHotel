@@ -13,8 +13,8 @@
     <a class="navbar-brand" href="${contextPath}/home">Netcracker</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+        <ul class="nav navbar-nav mr-auto">
+            <li class="nav-item">
                 <a class="nav-link" href="${contextPath}/home">Home <span class="sr-only">(current)</span></a>
             </li>
             <sec:authorize access="hasRole('ADMIN')">

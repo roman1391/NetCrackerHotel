@@ -12,3 +12,4 @@
 </header>
 
 <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>" type="text/javascript"></script>
+<script src="<c:url value="/resources/js/navbar_item_activate.js" />" type="text/javascript"></script>
