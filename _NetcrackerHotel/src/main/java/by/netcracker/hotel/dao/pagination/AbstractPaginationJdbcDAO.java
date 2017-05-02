@@ -49,12 +49,10 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
 
     public String buildPageQuery(P pparam) {
         StringBuffer query = new StringBuffer();
-        query.append("select ooo.entity_id, attribute_name, attribute_value,num from value ooo "
-            + "inner join attribute on ooo.attribute_id = attribute.attribute_id "
-            + "inner join (select (@row_numb:=@row_numb + 1) AS num, entity_id "
-            + "from (SELECT @row_numb:=0) AS t, ( select distinct entity_id from(");
-        query.append(buildFullQuery(pparam, mapFilters)).append(" ) nn ) aaa limit " + pparam.getResultIndex()
-            + " ,10 ) yyy on ooo.entity_id = yyy.entity_id order by num ");
+        query.append(SqlQuery.MAKE_PAGE.getQuery()).append(buildFullQuery(pparam, mapFilters))
+            .append(" ) nn ) aaa limit ")
+            .append(pparam.getResultIndex())
+            .append(" ,10 ) yyy on ooo.entity_id = yyy.entity_id order by num ");
         return query.toString();
     }
 
