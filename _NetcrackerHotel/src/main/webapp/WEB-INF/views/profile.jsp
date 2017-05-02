@@ -69,14 +69,14 @@
             <div class="form-group">
                 <div class="btn-group">
                     <form:button id="save-btn" type="submit" class="btn btn-success">Save</form:button>
-                    <button id="cancel-btn" onclick="onCancel()" class="btn btn-danger">Cancel</button>
+                    <button style="margin-left: 5px" id="cancel-btn" onclick="onCancel()" class="btn btn-danger">Cancel</button>
                 </div>
             </div>
 
         </form:form>
           <div class="btn-group">
               <button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
-              <a id ="changePassword" class="btn btn-primary" href="/change_password">Change password</a>
+              <a style="margin-left: 5px" id ="changePassword" class="btn btn-warning" href="/change_password">Change password</a>
           </div>
 
        </div>
