@@ -33,6 +33,11 @@
                     ${message}
             </div>
         </c:if>
+        <c:if test="${error!=null}">
+            <div style="margin: 50px" class="alert alert-danger" >
+                    ${error}
+            </div>
+        </c:if>
       <div class="content">
         <form:form id="updateForm" action="update" method="post" modelAttribute="currentUser"
                    enctype="multipart/form-data" >
@@ -46,31 +51,29 @@
         <div class="d-inline-block form-group">
             <div class="form-group">
                 <form:label path="email" >Email:</form:label>
-                <form:input  path="email" id="email" value="${currentUser.email}"
+                <form:input disabled="true" path="email" id="email" value="${currentUser.email}"
                              class="editable form-control"/>
             </div>
-            <%--
             <div class="form-group">
                 <form:label path="username"  >Username:</form:label>
-                <form:input path="username" id="username" value="${currentUser.username}"
+                <form:input disabled="true" path="username" id="username" value="${currentUser.username}"
                             class="editable form-control" />
             </div>
-            --%>
             <div class="form-group">
                 <form:label path="firstName" >First name:</form:label>
-                <form:input path="firstName" id="firstName" value="${currentUser.firstName}"
+                <form:input disabled="true" path="firstName" id="firstName" value="${currentUser.firstName}"
                             class="editable form-control"/>
             </div>
             <div class="form-group">
                 <form:label path="lastName" >Last name:</form:label>
-                <form:input path="lastName" id="lastName" value="${currentUser.lastName}"
+                <form:input disabled="true" path="lastName" id="lastName" value="${currentUser.lastName}"
                             class="editable form-control"/>
             </div>
         </div>
             <div class="form-group">
                 <div class="btn-group">
-                    <form:button id="save-btn" type="submit" class="btn btn-success">Save</form:button>
-                    <button style="margin-left: 5px" id="cancel-btn" onclick="onCancel()" class="btn btn-danger">Cancel</button>
+                    <form:button id="save-btn" style="display: none" type="submit" class="btn btn-success">Save</form:button>
+                    <button style="margin-left: 5px; display: none" id="cancel-btn" onclick="onCancel()" class="btn btn-danger">Cancel</button>
                 </div>
             </div>
 
@@ -88,33 +91,30 @@
 <%@include file="../jsp_elements/_footer.jsp" %>
 </body>
 <script>
-    var isEditable = true;
     var oldValues = {};
 
     $('#avatar').attr('src', '${currentUser.avatar}');
 
     function onEditClick() {
-        isEditable = !isEditable;
-        if (isEditable) {
-            $('input.editable').each(function (index, data) {
+        $('input.editable').each(function (index, data) {
                 oldValues[index] = data.value;
-            });
-        }
-        $('.editable').attr("disabled", !isEditable);
-        $('#save-btn').css('display',isEditable ? 'block':'none');
-        $('#cancel-btn').css('display',isEditable ? 'block':'none');
-        $('#edit-btn').css('display', !isEditable ? 'block' : 'none');
+        });
+        $('.editable').attr("disabled", false);
+        $('#save-btn').css('display','block');
+        $('#cancel-btn').css('display','block');
+        $('#edit-btn').css('display', 'none');
+        $('#changePassword').css('display','none');
     }
 
     $("#updateForm").submit(function (eventObj) {
-        var userId = <%=curUser.getId()%>;
+        var userId = '<%=curUser.getId()%>';
         $('<input />').attr('type', 'hidden')
             .attr('name', "id")
             .attr('value', userId)
             .appendTo('#updateForm');
         $('<input />').attr('type', 'hidden')
             .attr('name', "authority")
-            .attr('value', '<%=curUser.getAuthority()%>')
+            .attr('value', '<%=curUser.getAuthority().toString()%>')
             .appendTo('#updateForm');
         $('<input />').attr('type', 'hidden')
             .attr('name', "enabled")
@@ -140,8 +140,11 @@
         $('input.editable').each(function (index, data) {
             $(data).val(oldValues[index]);
         });
-        onEditClick();
+        $('.editable').attr("disabled", true);
+        $('#save-btn').css('display','none');
+        $('#cancel-btn').css('display','none');
+        $('#edit-btn').css('display', 'block');
+        $('#changePassword').css('display','block');
     }
-    onEditClick();
 </script>
 </html>

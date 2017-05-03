@@ -49,6 +49,13 @@
         />
         <form:errors path="password" cssClass="ui-state-error-text"/>
     </div>
+    <div class="form-group">
+        <label for="confirmPassword">Confirm password</label>
+        <input id="confirmPassword" class="form-control"
+               placeholder="Confirm password" type="password"
+               data-validation="confirmation"
+               data-validation-confirm="password" required>
+    </div>
 
     <div class="form-group">
         <form:button type="submit" class="btn btn-primary">Registration</form:button>

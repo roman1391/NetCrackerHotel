@@ -48,9 +48,13 @@ public class UserController {
 
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String save(@ModelAttribute("currentUser") User dto, @RequestParam("file") MultipartFile file) {
+    public String save(@ModelAttribute("currentUser") User dto, @RequestParam("file") MultipartFile file,Model model) {
         dto.setAvatar(saveFileToCloud(file));
-        userService.update(dto);
+        if(userService.update(dto)){
+           model.addAttribute("message","Update successfully");
+        } else {
+            model.addAttribute("error","Update error");
+        }
         return "profile";
     }
 
