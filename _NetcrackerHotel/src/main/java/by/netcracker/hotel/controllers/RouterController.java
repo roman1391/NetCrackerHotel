@@ -13,13 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class RouterController {
 
-    @Autowired
-    private HotelService hotelService;
-
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public ModelAndView home(@RequestParam(value = "error", required = false) String error) {
         ModelAndView model = new ModelAndView();
-       // model.addObject("hotels", hotelService.getAll());
+        model.addObject("error",error);
         model.setViewName("home");
         return model;
     }

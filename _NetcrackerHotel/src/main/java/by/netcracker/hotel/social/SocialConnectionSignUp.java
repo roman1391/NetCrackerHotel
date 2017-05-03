@@ -37,7 +37,6 @@ public class SocialConnectionSignUp implements ConnectionSignUp {
                 user.setPassword(UUID.randomUUID().toString());
                 user.setFirstName(profile.getFirstName());
                 user.setLastName(profile.getLastName());
-                ROLE a = ROLE.VKONTAKTE_USER;
                 user.setAuthority(ROLE.VKONTAKTE_USER);
                 break;
             }

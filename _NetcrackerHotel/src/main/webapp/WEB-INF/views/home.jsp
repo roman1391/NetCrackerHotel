@@ -18,6 +18,11 @@
 			<div class="row row-offcanvas row-offcanvas-left">
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
+						<c:if test="${error!=null}">
+							<div style="margin: 50px" class="alert alert-danger" >
+									${error}
+							</div>
+						</c:if>
 					<sec:authorize access="hasRole('BLOCKED')">
 						<div style="margin: 50px" class="alert alert-danger">
 							Profile was blocked!</div>

@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
@@ -49,7 +50,13 @@ public class SimpleSignInAdapter implements SignInAdapter {
 
     @Override
     public String signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
-        UserDetails user = userService.loadUserByUsername(localUserId);
+        UserDetails user;
+        try {
+            user = userService.loadUserByUsername(localUserId);
+        } catch (UsernameNotFoundException e){
+            e.printStackTrace();
+            return "/?error=Failed to login by "+connection.getKey().getProviderId();
+        }
         String provider = connection.getKey().getProviderId().toUpperCase();
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,null,
                 Arrays.asList(new SimpleGrantedAuthority(provider+"_USER")));
