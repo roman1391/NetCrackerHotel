@@ -36,8 +36,6 @@ public class ReviewPaginationDAO extends AbstractPaginationJdbcDAO<Review, Revie
 
     @Override
     public void setMapFilters(Map<String, String> mapFilters, ReviewSearchParam pparam) {
-        mapFilters.put("hotelid",
-            pparam.getHotelname() == null ? "" : String.valueOf((hotelDAO.getByName(pparam.getHotelname()).getId())));
         mapFilters.put("status", pparam.getStatus());
         mapFilters.put("rev_username", pparam.getUsername());
     }
@@ -45,7 +43,6 @@ public class ReviewPaginationDAO extends AbstractPaginationJdbcDAO<Review, Revie
     @Override
     public void setBoToDbMap(Map<String, String> boToDbMap, ReviewSearchParam pparam) {
         boToDbMap.put("username", "rev_username");
-        boToDbMap.put("hotelname", "hotelid");
         boToDbMap.put("status", "status");
         boToDbMap.put("time", "time");
     }

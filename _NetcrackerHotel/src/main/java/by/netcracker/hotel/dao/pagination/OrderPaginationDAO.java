@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.entities.pagination.OrderSearchParam;
@@ -19,8 +18,6 @@ public class OrderPaginationDAO extends AbstractPaginationJdbcDAO<Order, OrderSe
 
     @Autowired
     private DataSource dataSource;
-    @Autowired
-    private UserDAO userDAO;
 
     @PostConstruct
     private void initialize() {

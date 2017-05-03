@@ -44,8 +44,8 @@ public class OrderDAOImpl extends JdbcDaoSupport implements OrderDAO {
     }
 
     @Override
-    public void deleteByID(Integer integer) {
-
+    public void deleteByID(Integer id) {
+        getJdbcTemplate().update(SqlQuery.DELETE_BY_ID.getQuery(), id);
     }
 
     @Override
