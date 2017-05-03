@@ -36,7 +36,7 @@ public class SearchHotelController {
         String place = searchFilter.getPlace();
         model.addAttribute("places", hotelService.getPlaces());
         if (place != null) {
-            List<String> places = new ArrayList<>(Arrays.asList(place.split("[, ]")));
+            List<String> places = new ArrayList<>(Arrays.asList(place.split("[,]")));
             List<Hotel> hotels = hotelService.findHotels(places);
             if (hotels.isEmpty()) {
                 model.addAttribute("message", "Nothing has been found. Please, try again!");

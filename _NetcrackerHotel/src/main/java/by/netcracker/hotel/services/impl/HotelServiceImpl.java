@@ -31,7 +31,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<Hotel> findHotels(List<String> searchStrings) {
-        List<Hotel> hotels = new ArrayList<>();
+        /*List<Hotel> hotels = new ArrayList<>();
         if (!searchStrings.isEmpty()) {
             List<Integer> ids = new ArrayList<>();
             ids.addAll(hotelDAO.findIDsBySearchString(searchStrings.remove(0)));
@@ -41,8 +41,8 @@ public class HotelServiceImpl implements HotelService {
             for (Integer id : ids) {
                 hotels.add(hotelDAO.getByID(id));
             }
-        }
-        return hotels;
+        }*/
+        return hotelDAO.findHotelsBySearchStrings(searchStrings);
     }
 
     @Override

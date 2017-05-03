@@ -48,14 +48,14 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
         getJdbcTemplate().update(new PreparedStatementCreator() {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(SqlQuery.ADD_ENTITY_ID.getQuery(),
-                    new String[] { "id" });
+                        new String[]{"id"});
                 ps.setString(1, TypeName.HOTEL.name().toLowerCase());
                 return ps;
             }
         }, keyHolder);
         hotel.setId(keyHolder.getKey().intValue());
         getJdbcTemplate().update(SqlQuery.ADD_HOTEL.getQuery(), hotel.getCountry(), hotel.getCity(), hotel.getAddress(),
-            hotel.getTypeOfService(), hotel.getName(), hotel.getDescription(), getPhotoName(hotel.getMainPhoto()));
+                hotel.getTypeOfService(), hotel.getName(), hotel.getDescription(), getPhotoName(hotel.getMainPhoto()));
         for (String photo : hotel.getPhotos()) {
             getJdbcTemplate().update(SqlQuery.ADD_PHOTO.getQuery(), hotel.getId(), getPhotoName(photo));
         }
@@ -81,8 +81,8 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     public Hotel getByID(Integer id) {
         Hotel hotel = new Hotel();
         try {
-            hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
-                new HotelMapper());
+            hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[]{id},
+                    new HotelMapper());
         } catch (EmptyResultDataAccessException e) {
         }
         return hotel;
@@ -90,19 +90,17 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
     @Override
     public List<Hotel> getAll() {
-        return getJdbcTemplate().query(SqlQuery.GET_ALL.getQuery(), new Object[] { TypeName.HOTEL.getType() },
-            new RowMapperResultSetExtractor<Hotel>(new HotelMapper()) {
-            });
+        return getJdbcTemplate().query(SqlQuery.GET_ALL.getQuery(), new Object[]{TypeName.HOTEL.getType()},
+                new RowMapperResultSetExtractor<Hotel>(new HotelMapper()) {
+                });
     }
 
     @Override
     public List<Integer> findIDsBySearchString(String searchString) {
-        String searchString1 = "% " + searchString + " %";
-        String searchString2 = searchString + " %";
-        String searchString3 = "% " + searchString;
+        searchString = "%searchString%";
         return getJdbcTemplate().query(SqlQuery.SEARCH_HOTEL.getQuery(),
-            new Object[] { searchString, searchString1, searchString2, searchString3 },
-            (resultSet, i) -> resultSet.getInt(1));
+                new Object[]{searchString, searchString},
+                (resultSet, i) -> resultSet.getInt(1));
     }
 
     @Override
@@ -124,10 +122,23 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     public Hotel getByName(String name) {
         try {
             return (Hotel) getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),
-                new Object[] { ColumnName.HOTEL_NAME, name }, new HotelMapper());
+                    new Object[]{ColumnName.HOTEL_NAME, name}, new HotelMapper());
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    @Override
+    public List<Hotel> findHotelsBySearchStrings(List<String> searchStrings) {
+        StringBuilder parametrs = new StringBuilder("value.attribute_value like '%" + searchStrings.get(0) + "%'");
+        searchStrings.remove(0);
+        for (String searchString : searchStrings) {
+            parametrs.append("or value.attribute_value like '%" + searchString + "%'");
+        }
+        String query = SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS.getQuery() + " (" + parametrs.toString() + ")) ORDER BY entity_id";
+        return getJdbcTemplate().query(query,
+                new RowMapperResultSetExtractor<Hotel>(new HotelMapper()) {
+                });
     }
 
 }
