@@ -45,7 +45,7 @@ public class ReviewPaginationDAO extends AbstractPaginationJdbcDAO<Review, Revie
     @Override
     public void setBoToDbMap(Map<String, String> boToDbMap, ReviewSearchParam pparam) {
         boToDbMap.put("username", "rev_username");
-        boToDbMap.put("hotelname", "authority");
+        boToDbMap.put("hotelname", "hotelid");
         boToDbMap.put("status", "status");
         boToDbMap.put("time", "time");
     }

@@ -10,7 +10,10 @@ import com.github.paginationspring.bo.BoPaginationColumn;
 import com.github.paginationspring.dao.PaginationDao;
 import com.github.paginationspring.service.PaginationServiceAbstract;
 
+import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.OrderDAO;
+import by.netcracker.hotel.dao.RoomDAO;
+import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.dao.pagination.OrderPaginationDAO;
 import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.entities.pagination.OrderRow;
@@ -24,12 +27,19 @@ public class OrderPaginationService extends PaginationServiceAbstract<OrderSearc
     @SuppressWarnings("unused")
     private PaginationDao<Order, OrderSearchParam> orderPaginationDAO;
     private OrderDAO orderDAO;
+    private RoomDAO roomDAO;
+    private HotelDAO hotelDAO;
+    private UserDAO userDAO;
 
     @Autowired
-    public void setPaginationDao(OrderPaginationDAO orderPaginationDAO, OrderDAO orderDAO) {
+    public void setPaginationDao(OrderPaginationDAO orderPaginationDAO, OrderDAO orderDAO, HotelDAO hotelDAO,
+        RoomDAO roomDAO, UserDAO userDAO) {
         super.setPaginationDao(orderPaginationDAO);
         this.orderPaginationDAO = orderPaginationDAO;
         this.orderDAO = orderDAO;
+        this.roomDAO = roomDAO;
+        this.hotelDAO = hotelDAO;
+        this.userDAO = userDAO;
     }
 
     @Override
@@ -71,6 +81,11 @@ public class OrderPaginationService extends PaginationServiceAbstract<OrderSearc
     @Override
     protected OrderRow assignDataToBo(Order order) throws Exception {
         OrderRow bo = new OrderRow();
+        bo.setOrderId(order.getId());
+        bo.setHotelname(hotelDAO.getByID(roomDAO.getByID(order.getRoomId()).getHotelID()).getName());
+        bo.setUsername(userDAO.getByID(order.getUserId()).getUsername());
+        bo.setArrivalDate(order.getArrivalDate().toString());
+        bo.setLeaveDate(order.getLeaveDate().toString());
         return bo;
     }
 

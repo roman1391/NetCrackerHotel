@@ -6,7 +6,7 @@
 <%@taglib prefix="pg" uri="http://pagination/pagination-spring3.tld" %>
 <html>
 <head>
-    <title>List of users</title>
+    <title>List of orders</title>
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
     <%-- <link type="text/css" href="<c:url value="/resources/css/cssreset.css" />" rel="stylesheet" media="screen, projection"> --%>
     <link type="text/css"
@@ -32,7 +32,7 @@
 				Admin page! <br>
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
-					<h4>List of users:</h4>
+					<h4>List of orders:</h4>
 
 	<div style="padding-top:50px;padding-bottom:50px;padding-left:30px;padding-right:30px;">
         <c:url value="${paginationResult.pageLink}" var="pageLink"/>
@@ -41,27 +41,11 @@
                 <jsp:attribute name="searchContent">
                       <table class="searchtable">
                         <tr>
-                            <td class="caption" style="width:50px;">Filter:</td>
-                            <td style="width:120px;">
-                            <form:select path="authority" cssStyle="width:110px;">
-                               <form:option value="" label="-authority-"/>
-                               <form:option value="ADMIN" label="ADMIN"/>
-                               <form:option value="USER" label="USER"/>
-                               <form:option value="BLOCKED" label="BLOCKED"/>
-                            </form:select>
-                            </td>
-                            <td style="width:200px;">
-                                <form:select path="enabled">
-                                   	<form:option value="" label="-enabled-"/>
-                               		<form:option value="1" label="Enabled"/>
-                               		<form:option value="0" label="Unenabled"/>
-                                </form:select>
-                            </td>
+                            <td style="width:80px;">Hotelname:</td>
+                            <td style="width:160px;"><form:input path="hotelname" cssStyle="width:150px;"/></td>
                             <td style="width:80px;">Username:</td>
-                            <td style="width:160px;"><form:select path="username" class="form-control" id="selectUser" multiple="multiple" cssStyle="width:150px;">
-                                <form:options items="${usernames}"/>
-                            </form:select></td>
-                            <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button"  >Search</form:button></span></td>
+                            <td style="width:160px;"><form:input path="username" cssStyle="width:150px;"/></td>
+                            <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button" >Search</form:button></span></td>
                             <td style="width:75px;"><span class="button"><form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
                         </tr>
                     </table>
@@ -69,7 +53,6 @@
                  <jsp:attribute name="controlButton">
                      <div style="padding-top:10px;">
                         <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Delete</form:button></span>
-                        <span ><a href="add_user_ref">Add new user</a></span>
                     </div>
                 </jsp:attribute>
 
@@ -98,71 +81,3 @@ $('#clearButton').click(function() {
     $("#selectUser").val(null).trigger("change");
 });
 </script>
-
-<%-- 						<h3>List of administrators:</h3>
-						<div>
-							<table border="1">
-								<tr>
-									<th>Username</th>
-									<th>Profile</th>
-								</tr>
-								<c:forEach var="user" items="${users}">
-									<c:if test="${user.authority eq 'ADMIN'}">
-										<tr>
-											<td>${user.username}</td>
-											<td><form:form id="editUser" action="edit_form"
-													modelAttribute="user" method="post">
-													<form:input path="username" type="hidden" name="username"
-														value="${user.username}"></form:input>
-													<form:button type="submit">See profile</form:button>
-												</form:form></td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</table>
-						</div>
-
-						<h3>List of users:</h3>
-						<div>
-							<table border="1">
-								<tr>
-									<th>Username</th>
-									<th>Status</th>
-									<th>Profile</th>
-									<th>Block</th>
-								</tr>
-								<c:forEach var="user" items="${users}">
-									<c:if test="${user.authority ne 'ADMIN'}">
-										<tr>
-											<td>${user.username}</td>
-											<td>${user.authority}</td>
-											<td><form:form id="editUser" action="edit_form"
-													modelAttribute="user" method="post">
-													<form:input path="username" type="hidden" name="username"
-														value="${user.username}"></form:input>
-													<form:button type="submit">See profile</form:button>
-												</form:form></td>
-											<c:choose>
-												<c:when test="${user.authority ne 'BLOCKED' }">
-													<td><form:form id="blockUser" action="block_user"
-															modelAttribute="user" method="post">
-															<form:input path="username" type="hidden" name="username"
-																value="${user.username}"></form:input>
-															<form:button type="submit">Block</form:button>
-														</form:form></td>
-												</c:when>
-												<c:when test="${user.authority eq 'BLOCKED' }">
-													<td><form:form id="unblockUser" action="unblock_user"
-															modelAttribute="user" method="post">
-															<form:input path="username" type="hidden" name="username"
-																value="${user.username}"></form:input>
-															<form:button type="submit">Unblock</form:button>
-														</form:form></td>
-												</c:when>
-											</c:choose>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</table>
-							<a href="add_user_ref">Add new user</a>
-						</div> --%>

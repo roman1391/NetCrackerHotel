@@ -1,19 +1,22 @@
 package by.netcracker.hotel.dao.impl;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Repository;
+
 import by.netcracker.hotel.dao.RoomDAO;
 import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.mapper.RoomMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapperResultSetExtractor;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Repository;
-
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Varvara on 4/25/2017.
@@ -49,8 +52,13 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
     }
 
     @Override
-    public Room getByID(Integer integer) {
-        return null;
+    public Room getByID(Integer id) {
+        try {
+            return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
+                new RoomMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
@@ -60,15 +68,15 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
 
     @Override
     public List<Room> getByHotelID(int hotelID) {
-        return getJdbcTemplate().query(SqlQuery.GET_ROOMS_BY_HOTEL_ID.getQuery(), new Object[]{hotelID},
-                new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
-                });
+        return getJdbcTemplate().query(SqlQuery.GET_ROOMS_BY_HOTEL_ID.getQuery(), new Object[] { hotelID },
+            new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
+            });
     }
 
     @Override
     public List<Room> getFreeRoomsInHotelByDate(int hotelID, Date start, Date end) {
-        return getJdbcTemplate().query(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_BY_DATE.getQuery(), new Object[]{hotelID, start, end},
-                new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
-                });
+        return getJdbcTemplate().query(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_BY_DATE.getQuery(),
+            new Object[] { hotelID, start, end }, new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
+            });
     }
 }
