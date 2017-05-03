@@ -3,7 +3,9 @@ package by.netcracker.hotel.controllers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+import by.netcracker.hotel.entities.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +39,8 @@ public class SearchHotelController {
         List<String> places = hotelService.getPlaces();
         if (place != null) {
             List<String> chosenPlaces = new ArrayList<>(Arrays.asList(place.split("[,]")));
-            List<Hotel> hotels = hotelService.findHotels(chosenPlaces);
+            Map<Hotel, List<Room>> hotels = hotelService.findHotels(chosenPlaces, searchFilter.getStartDate(),
+                    searchFilter.getEndDate());
             if (hotels.isEmpty()) {
                 model.addAttribute("message", "Nothing has been found. Please, try again!");
                 hotels = null;

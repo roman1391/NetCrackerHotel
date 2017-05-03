@@ -12,13 +12,14 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Varvara on 4/25/2017.
  */
 @Repository
-public class RoomDAOImpl  extends JdbcDaoSupport implements RoomDAO {
+public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
     private DataSource dataSource;
 
     @PostConstruct
@@ -59,7 +60,14 @@ public class RoomDAOImpl  extends JdbcDaoSupport implements RoomDAO {
 
     @Override
     public List<Room> getByHotelID(int hotelID) {
-        return getJdbcTemplate().query(SqlQuery.GET_ROOMS_BY_HOTEL_ID.getQuery(), new Object[] { hotelID },
+        return getJdbcTemplate().query(SqlQuery.GET_ROOMS_BY_HOTEL_ID.getQuery(), new Object[]{hotelID},
+                new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
+                });
+    }
+
+    @Override
+    public List<Room> getFreeRoomsInHotelByDate(int hotelID, Date start, Date end) {
+        return getJdbcTemplate().query(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_BY_DATE.getQuery(), new Object[]{hotelID, start, end},
                 new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
                 });
     }
