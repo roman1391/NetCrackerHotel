@@ -45,7 +45,8 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     public void add(User user) {
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.USER.name().toLowerCase());
         getJdbcTemplate().update(SqlQuery.ADD_USER.getQuery(), user.getFirstName(), user.getLastName(),
-            user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail());
+            user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail(),
+                user.getAuthority().name(), user.getEnabled());
     }
 
     @Override

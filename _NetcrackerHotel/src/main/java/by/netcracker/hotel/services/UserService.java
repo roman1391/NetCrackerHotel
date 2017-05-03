@@ -15,7 +15,7 @@ import by.netcracker.hotel.exceptions.UsernameExistException;
 public interface UserService extends AbstractService<User, Integer> {
     User registerUser(User user) throws UsernameExistException, EmailExistException;
 
-    User addUserByAdmin(User user) throws UsernameExistException, EmailExistException;
+    User addEnabledUser(User user) throws UsernameExistException, EmailExistException;
 
     List<User> getAll();
 

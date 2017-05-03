@@ -37,6 +37,7 @@ import java.util.List;
 public class SimpleSignInAdapter implements SignInAdapter {
     private final RequestCache requestCache;
     private UserDetailsService userService;
+
     @Resource(name="socialRememberMe")
     private RememberMeServices rememberMeServices;
 
@@ -49,10 +50,11 @@ public class SimpleSignInAdapter implements SignInAdapter {
     @Override
     public String signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
         UserDetails user = userService.loadUserByUsername(localUserId);
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,null, null);
+        String provider = connection.getKey().getProviderId().toUpperCase();
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,null,
+                Arrays.asList(new SimpleGrantedAuthority(provider+"_USER")));
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(token);
-        Collection<? extends GrantedAuthority> list = context.getAuthentication().getAuthorities();
         rememberMeServices.loginSuccess((HttpServletRequest) request.getNativeRequest(),
                 (HttpServletResponse) request.getNativeResponse(), context.getAuthentication());
         return extractOriginalUrl(request);

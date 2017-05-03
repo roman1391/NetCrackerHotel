@@ -2,6 +2,7 @@ package by.netcracker.hotel.controllers;
 
 import javax.validation.Valid;
 
+import by.netcracker.hotel.enums.ROLE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,8 @@ public class AdminController {
             return "add_user";
         }
         try {
-            User added = (User) userService.addUserByAdmin(user);
+            user.setAuthority(ROLE.USER);
+            User added = (User) userService.addEnabledUser(user);
         } catch (UsernameExistException e) {
             model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
             return "add_user";

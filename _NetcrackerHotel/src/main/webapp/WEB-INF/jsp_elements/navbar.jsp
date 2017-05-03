@@ -22,12 +22,14 @@
                     <a class="nav-link" href="${contextPath}/admin_page">Admin page</a>
                 </li>
             </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
+            <sec:authorize access="hasAnyRole('ADMIN','USER',
+            'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER','BLOCKED')">
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/profile">Profile</a>
                 </li>
             </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
+            <sec:authorize access="hasAnyRole('ADMIN','USER',
+            'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER')">
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/booked_room?id=${currentUser.id}">View all bookings</a>
                 </li>

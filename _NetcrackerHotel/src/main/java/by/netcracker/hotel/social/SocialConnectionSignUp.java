@@ -1,6 +1,7 @@
 package by.netcracker.hotel.social;
 
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.UserService;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UserProfile;
-import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +37,8 @@ public class SocialConnectionSignUp implements ConnectionSignUp {
                 user.setPassword(UUID.randomUUID().toString());
                 user.setFirstName(profile.getFirstName());
                 user.setLastName(profile.getLastName());
+                ROLE a = ROLE.VKONTAKTE_USER;
+                user.setAuthority(ROLE.VKONTAKTE_USER);
                 break;
             }
             case "facebook": {
@@ -45,6 +47,7 @@ public class SocialConnectionSignUp implements ConnectionSignUp {
                 user.setPassword(UUID.randomUUID().toString());
                 user.setFirstName(profile.getFirstName());
                 user.setLastName(profile.getLastName());
+                user.setAuthority(ROLE.FACEBOOK_USER);
                 break;
             }
             case "twitter":{
@@ -53,11 +56,12 @@ public class SocialConnectionSignUp implements ConnectionSignUp {
                 user.setPassword(UUID.randomUUID().toString());
                 user.setFirstName(profile.getFirstName());
                 user.setLastName(profile.getLastName());
+                user.setAuthority(ROLE.TWITTER_USER);
                 break;
             }
         }
         try {
-            userService.addUserByAdmin(user);
+            userService.addEnabledUser(user);
         } catch (UsernameExistException | EmailExistException e){
             e.printStackTrace();
         }

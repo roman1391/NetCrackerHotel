@@ -37,23 +37,24 @@ public class UserServiceImpl implements UserService {
         } else if (emailExist(user.getEmail())) {
             throw new EmailExistException("Account with email - " + user.getEmail() + " are exist");
         } else {
+            user.setAuthority(ROLE.USER);
+            user.setEnabled(false);
             userDAO.add(user);
             return userDAO.getByUsername(user.getUsername());
         }
     }
 
+
+
     @Override
-    public User addUserByAdmin(User user) throws UsernameExistException, EmailExistException {
+    public User addEnabledUser(User user) throws UsernameExistException, EmailExistException {
         if (usernameExist(user.getUsername())) {
             throw new UsernameExistException("Account with username - " + user.getUsername() + " are exist");
         } else if (emailExist(user.getEmail())) {
             throw new EmailExistException("Account with email - " + user.getEmail() + " are exist");
         } else {
-            userDAO.add(user);
-            user = userDAO.getByUsername(user.getUsername());
             user.setEnabled(true);
-            user.setAuthority(ROLE.USER);
-            userDAO.update(user);
+            userDAO.add(user);
             return userDAO.getByUsername(user.getUsername());
         }
     }

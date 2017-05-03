@@ -8,6 +8,7 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title>Profile</title>
@@ -76,7 +77,9 @@
         </form:form>
           <div class="btn-group">
               <button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
-              <a style="margin-left: 5px" id ="changePassword" class="btn btn-warning" href="/change_password">Change password</a>
+              <sec:authorize access="hasAnyRole('USER','ADMIN')" >
+                  <a style="margin-left: 5px" id ="changePassword" class="btn btn-warning" href="/change_password">Change password</a>
+              </sec:authorize>
           </div>
 
        </div>
@@ -98,8 +101,8 @@
             });
         }
         $('.editable').attr("disabled", !isEditable);
-        $('#save-btn').css('display', isEditable ? 'block' : 'none');
-        $('#cancel-btn').css('display', isEditable ? 'block' : 'none');
+        $('#save-btn').css('display',isEditable ? 'block':'none');
+        $('#cancel-btn').css('display',isEditable ? 'block':'none');
         $('#edit-btn').css('display', !isEditable ? 'block' : 'none');
     }
 
