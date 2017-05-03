@@ -131,9 +131,8 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     @Override
     public List<Hotel> findHotelsBySearchStrings(List<String> searchStrings) {
         StringBuilder parametrs = new StringBuilder("value.attribute_value like '%" + searchStrings.get(0) + "%'");
-        searchStrings.remove(0);
-        for (String searchString : searchStrings) {
-            parametrs.append("or value.attribute_value like '%" + searchString + "%'");
+        for (int i = 1; i < searchStrings.size(); i++) {
+            parametrs.append("or value.attribute_value like '%" + searchStrings.get(i) + "%'");
         }
         String query = SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS.getQuery() + " (" + parametrs.toString() + ")) ORDER BY entity_id";
         return getJdbcTemplate().query(query,

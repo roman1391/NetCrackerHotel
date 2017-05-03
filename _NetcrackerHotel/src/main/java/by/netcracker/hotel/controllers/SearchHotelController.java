@@ -34,19 +34,22 @@ public class SearchHotelController {
     @RequestMapping(value = "/find-hotels", method = RequestMethod.POST)
     public String findHotels(@ModelAttribute("searchFilter") SearchFilter searchFilter, Model model) {
         String place = searchFilter.getPlace();
-        model.addAttribute("places", hotelService.getPlaces());
+        List<String> places = hotelService.getPlaces();
         if (place != null) {
-            List<String> places = new ArrayList<>(Arrays.asList(place.split("[,]")));
-            List<Hotel> hotels = hotelService.findHotels(places);
+            List<String> chosenPlaces = new ArrayList<>(Arrays.asList(place.split("[,]")));
+            List<Hotel> hotels = hotelService.findHotels(chosenPlaces);
             if (hotels.isEmpty()) {
                 model.addAttribute("message", "Nothing has been found. Please, try again!");
                 hotels = null;
             }
+            places.removeAll(chosenPlaces);
             model.addAttribute("hotels", hotels);
             model.addAttribute("choosenHotel", new Hotel());
+            model.addAttribute("search", chosenPlaces);
         } else {
             model.addAttribute("message", "Please, enter place for search!");
         }
+        model.addAttribute("places", places);
         return "search_page";
     }
 
