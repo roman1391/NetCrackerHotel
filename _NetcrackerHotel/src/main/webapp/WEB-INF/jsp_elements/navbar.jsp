@@ -22,20 +22,14 @@
                     <a class="nav-link" href="${contextPath}/admin_page">Admin page</a>
                 </li>
             </sec:authorize>
-            <sec:authorize access="hasAnyRole('ADMIN', 'USER', 'BLOCKED')">
+            <sec:authorize access="isAuthenticated()">
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/profile">Profile</a>
                 </li>
             </sec:authorize>
-            <sec:authorize access="hasAnyRole('ADMIN', 'USER')">
+            <sec:authorize access="isAuthenticated()">
                 <li class="nav-item">
-                    <form:form method="post" id="curUser" action="${contextPath}/booked_room" modelAttribute="currentUser">
-                        <form:input path="id" type="hidden" name="id" value="${currentUser.id}"></form:input>
-                        <form:input path="username" type="hidden" name="username" value="${currentUser.username}"></form:input>
-                        <form:button class="nav-link" type="submit">View all bookings</form:button>
-
-                        <!-- <a class="nav-link" type="submit" href="">Hotels</a> -->
-                    </form:form>
+                    <a class="nav-link" href="${contextPath}/booked_room?id=${currentUser.id}">View all bookings</a>
                 </li>
             </sec:authorize>
             <li class="nav-item">   

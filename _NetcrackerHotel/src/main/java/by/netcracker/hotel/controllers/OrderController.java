@@ -42,9 +42,9 @@ public class OrderController {
         return "add_order";
     }
 
-    @RequestMapping(value = "/booked_room", method = RequestMethod.POST)
-    public String bookedRooms(@ModelAttribute("currentUser") User user, Model model){
-        model.addAttribute("orders", orderService.getByUserId(user.getId()));
+    @RequestMapping(value = "/booked_room", method = RequestMethod.GET)
+    public String bookedRooms(@RequestParam String id, Model model){
+        model.addAttribute("orders", orderService.getByUserId(Integer.parseInt(id)));
         return "bookedRooms";
     }
 }
