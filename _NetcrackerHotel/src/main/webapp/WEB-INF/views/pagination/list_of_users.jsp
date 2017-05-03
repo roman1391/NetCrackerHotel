@@ -77,7 +77,6 @@
         </form:form>
     </div>
 
-
                     <a href="admin_page">Back to admin page</a>
                 </div>
             </div>

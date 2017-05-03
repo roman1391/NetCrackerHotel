@@ -77,10 +77,10 @@
 		</div>
 		<jsp:include page="/WEB-INF/jsp_elements/_header.jsp"></jsp:include>
 	</div>
+    <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+    <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
 </body>
-<script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
-<script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 </html>
 
 <script>

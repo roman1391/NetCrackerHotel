@@ -74,8 +74,12 @@
                                                    modelAttribute="order">
                                             <form:input path="userId" type="hidden" name="userId"
                                                         value="${currentUser.id}"></form:input>
+											<form:input path="username" type="hidden" name="username"
+                                                        value="${currentUser.username}"></form:input>
                                             <form:input path="roomId" type="hidden" name="roomId"
                                                         value="${room.id}"></form:input>
+                                            <form:input path="hotelname" type="hidden" name="hotelname"
+                                                        value=" ${choosenHotel.name }"></form:input>
                                             <form:button type="submit">Book</form:button>
                                         </form:form>
                                     </td>

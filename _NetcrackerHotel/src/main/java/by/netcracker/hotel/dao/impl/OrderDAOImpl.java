@@ -39,12 +39,13 @@ public class OrderDAOImpl extends JdbcDaoSupport implements OrderDAO {
     public void add(Order order) {
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.ORDER.name().toLowerCase());
         getJdbcTemplate().update(SqlQuery.ADD_ORDER.getQuery(), order.getUserId(), order.getRoomId(),
-            order.getArrivalDate(), order.getLeaveDate(), order.getPayValue(), order.isPaid(), order.getFirstName(), order.getLastName());
+            order.getUsername(), order.getHotelname(), order.getArrivalDate(), order.getLeaveDate(),
+            order.getPayValue(), order.isPaid(), order.getFirstName(), order.getLastName());
     }
 
     @Override
-    public void deleteByID(Integer integer) {
-
+    public void deleteByID(Integer id) {
+        getJdbcTemplate().update(SqlQuery.DELETE_BY_ID.getQuery(), id);
     }
 
     @Override

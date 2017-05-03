@@ -30,6 +30,7 @@ public class OrderPaginationService extends PaginationServiceAbstract<OrderSearc
         super.setPaginationDao(orderPaginationDAO);
         this.orderPaginationDAO = orderPaginationDAO;
         this.orderDAO = orderDAO;
+
     }
 
     @Override
@@ -54,11 +55,15 @@ public class OrderPaginationService extends PaginationServiceAbstract<OrderSearc
 
         col = new BoPaginationColumn();
         col.setColumnName("Arrival");
+        col.setColumnName("arrival");
+        col.setOrderDirections("desc");
         col.setWidth(30);
         columns.add(col);
 
         col = new BoPaginationColumn();
         col.setColumnName("Leave");
+        col.setColumnName("leave");
+        col.setOrderDirections("desc");
         col.setWidth(30);
         columns.add(col);
 
@@ -71,6 +76,11 @@ public class OrderPaginationService extends PaginationServiceAbstract<OrderSearc
     @Override
     protected OrderRow assignDataToBo(Order order) throws Exception {
         OrderRow bo = new OrderRow();
+        bo.setOrderId(order.getId());
+        bo.setHotelname(order.getHotelname());
+        bo.setUsername(order.getUsername());
+        bo.setArrivalDate(order.getArrivalDate().toString());
+        bo.setLeaveDate(order.getLeaveDate().toString());
         return bo;
     }
 

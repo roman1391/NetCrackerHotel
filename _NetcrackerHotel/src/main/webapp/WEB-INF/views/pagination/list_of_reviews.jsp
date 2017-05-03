@@ -40,8 +40,6 @@
                                <form:option value="blocked" label="BLOCKED"/>
                             </form:select>
                             </td>
-                            <td style="width:80px;">Hotelname:</td>
-                            <td style="width:160px;"><form:input path="hotelname" cssStyle="width:150px;"/></td>
                             <td style="width:80px;">Username:</td>
                             <td style="width:160px;"><form:input path="username" cssStyle="width:150px;"/></td>
                             <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button"  >Search</form:button></span></td>

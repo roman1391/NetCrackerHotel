@@ -33,11 +33,16 @@ public class OrderPaginationDAO extends AbstractPaginationJdbcDAO<Order, OrderSe
 
     @Override
     public void setMapFilters(Map<String, String> mapFilters, OrderSearchParam pparam) {
+        mapFilters.put("ord_user", pparam.getUsername());
+        mapFilters.put("ord_hotel", pparam.getHotelname());
     }
 
     @Override
     public void setBoToDbMap(Map<String, String> boToDbMap, OrderSearchParam pparam) {
-
+        boToDbMap.put("arrival", "arrival_date");
+        boToDbMap.put("leave", "leave_date");
+        boToDbMap.put("username", "ord_user");
+        boToDbMap.put("hotel", "ord_hotel");
     }
 
 }

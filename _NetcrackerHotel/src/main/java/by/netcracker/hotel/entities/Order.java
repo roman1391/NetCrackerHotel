@@ -1,8 +1,6 @@
 package by.netcracker.hotel.entities;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Alexander on 25.04.2017.
@@ -17,11 +15,14 @@ public class Order {
     private boolean isPaid;
     private String firstName;
     private String lastName;
+    private String username;
+    private String hotelname;
 
+    public Order() {
+    }
 
-    public Order(){}
-
-    public Order(int id, int roomId, int userId, Date arrivalDate, Date leaveDate, int payValue, boolean isPaid, String firstName, String lastName) {
+    public Order(int id, int roomId, int userId, Date arrivalDate, Date leaveDate, int payValue, boolean isPaid,
+        String firstName, String lastName) {
         this.id = id;
         this.roomId = roomId;
         this.userId = userId;
@@ -103,5 +104,21 @@ public class Order {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getHotelname() {
+        return hotelname;
+    }
+
+    public void setHotelname(String hotelname) {
+        this.hotelname = hotelname;
     }
 }

@@ -32,7 +32,11 @@
     <form:input path="userId" type="hidden" name="userId"
                 value="${currentUser.id}"></form:input>
     <form:input path="roomId" type="hidden" name="roomId"
-                value="${roomId}"></form:input>
+                value="${order.roomId}"></form:input>
+    <form:input path="username" type="hidden" name="username"
+                value="${order.username}"></form:input>
+     <form:input path="hotelname" type="hidden" name="hotelname"
+                value="${order.hotelname}"></form:input>
     <div class="form-group">
         <form:button type="submit" class="btn btn-primary">Add new order</form:button>
     </div>

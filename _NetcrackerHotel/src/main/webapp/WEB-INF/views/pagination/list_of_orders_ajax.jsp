@@ -10,9 +10,9 @@
 <pg:pagination_ajax pparam="${pparam}" paginationResult="${paginationResult}">
     <jsp:attribute name="columnsContent">
                 <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.username}"/></span></td>
-                    <td class="cell"><span><c:out value="${bo.authority}"/></span></td>
-                    <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.enabled}"/></span></td>
-                    <td class="cell"><span><c:out value="${bo.email}"/></span></td> 
+                    <td class="cell"><span><c:out value="${bo.hotelname}"/></span></td>
+                    <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.arrivalDate}"/></span></td>
+                    <td class="cell"><span><c:out value="${bo.leaveDate}"/></span></td> 
                     <td class="cell"><span><a href="edit_form/${bo.username}">See profile</a> </span></td> 
                 </jsp:attribute>
 </pg:pagination_ajax>

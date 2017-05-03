@@ -14,11 +14,11 @@
 </head>
 
 <body>
-	<%@include file="../jsp_elements/_header.jsp"%>
+	<jsp:include page="/WEB-INF/jsp_elements/_header.jsp"></jsp:include>
 	<div id="wrapper">
 		<div class="container">
 			<div class="row row-offcanvas row-offcanvas-left">
-				Admin page! <br /> <a href="j_spring_security_logout">Logout</a>
+				Admin page! <br />
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
 						<h2>Admin page</h2>
@@ -26,23 +26,15 @@
 							<div style="margin: 50px" class="alert alert-success">
 								${success}</div>
 						</c:if>
-						<p>
-							<a href="list_of_users">User managment</a>
-						</p>
-						<p>
-							<a href="list_of_hotels">Hotel management</a>
-						</p>
-						<p>
-							<a href="hotel/add">Add hotel</a>
-						</p>
-						<p>
-							<a href="list_of_reviews">Review management</a>
-						</p>
+						<p><a href="list_of_users">User management</a></p>
+						<p><a href="list_of_hotels">Hotel management</a></p>
+						<p><a href="list_of_reviews">Review management</a></p>
+						<p><a href="list_of_orders">Order management</a></p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<%@include file="../jsp_elements/_footer.jsp"%>
+		<jsp:include page="/WEB-INF/jsp_elements/_footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

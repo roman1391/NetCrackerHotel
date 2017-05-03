@@ -45,4 +45,6 @@ public class ColumnName {
     public static final String REV_USERNAME = "rev_username";
     public static final String ORDER_FIRST_NAME = "firstname";
     public static final String ORDER_LAST_NAME = "lastname";
+    public static final String ORDER_HOTEL = "ord_hotel";
+    public static final String ORDER_USERNAME = "ord_user";
 }

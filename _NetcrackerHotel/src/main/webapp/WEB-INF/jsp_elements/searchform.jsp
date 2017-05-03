@@ -3,6 +3,9 @@
     <div class="form-group">
         <form:label path="place">Enter country, city or hotel name:</form:label>
         <form:select path="place" class="form-control" id="selectPlace" multiple="multiple">
+            <c:forEach var="place" items="${search}">
+            <form:option selected="selected"  value="${place}"/>
+            </c:forEach>
             <form:options items="${places}" />
         </form:select>
     </div>
