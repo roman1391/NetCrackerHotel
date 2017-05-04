@@ -49,16 +49,18 @@
             </div>
         </div>
         <div class="d-inline-block form-group">
-            <div class="form-group">
-                <form:label path="email" >Email:</form:label>
-                <form:input disabled="true" path="email" id="email" value="${currentUser.email}"
+            <sec:authorize access="hasAnyRole('USER','ADMIN')" >
+                <div class="form-group">
+                  <form:label path="email" >Email:</form:label>
+                  <form:input disabled="true" path="email" id="email" value="${currentUser.email}"
                              class="editable form-control"/>
-            </div>
-            <div class="form-group">
-                <form:label path="username"  >Username:</form:label>
-                <form:input disabled="true" path="username" id="username" value="${currentUser.username}"
+                </div>
+                <div class="form-group">
+                  <form:label path="username"  >Username:</form:label>
+                  <form:input disabled="true" path="username" id="username" value="${currentUser.username}"
                             class="editable form-control" />
-            </div>
+                </div>
+            </sec:authorize>
             <div class="form-group">
                 <form:label path="firstName" >First name:</form:label>
                 <form:input disabled="true" path="firstName" id="firstName" value="${currentUser.firstName}"
