@@ -54,7 +54,7 @@ public class UserController {
     public String save(@ModelAttribute("currentUser") User dto, @RequestParam("file") MultipartFile file,Model model) {
         dto.setAvatar(saveFileToCloud(file));
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(userDetails.getUsername().equals(dto.getUsername())){
+        if(!userDetails.getUsername().equals(dto.getUsername())){
            try{
                userService.profileUpdate(dto);
            } catch (UsernameExistException e){
