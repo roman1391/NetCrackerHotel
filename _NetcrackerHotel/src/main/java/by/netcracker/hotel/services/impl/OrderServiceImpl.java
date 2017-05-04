@@ -35,6 +35,11 @@ public class OrderServiceImpl implements OrderService {
         return orderDAO.getByUserId(userId);
     }
 
+    @Override
+    public void deleteByOrderId(int orderId) {
+        orderDAO.deleteByID(orderId);
+    }
+
     public void findByUserId(Integer id){
 
     }
