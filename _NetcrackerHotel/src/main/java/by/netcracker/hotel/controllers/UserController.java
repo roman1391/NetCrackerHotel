@@ -7,7 +7,9 @@ import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.VerificationToken;
 import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.events.ForgotPasswordEvent;
+import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UserNotFoundException;
+import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.OrderService;
 import by.netcracker.hotel.services.UserService;
 import by.netcracker.hotel.util.CloudinaryUtil;
@@ -51,10 +53,19 @@ public class UserController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String save(@ModelAttribute("currentUser") User dto, @RequestParam("file") MultipartFile file,Model model) {
         dto.setAvatar(saveFileToCloud(file));
-        if(userService.update(dto)){
-           model.addAttribute("message","Update successfully");
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(userDetails.getUsername().equals(dto.getUsername())){
+           try{
+               userService.profileUpdate(dto);
+           } catch (UsernameExistException e){
+               model.addAttribute("error", "Account with username - " + dto.getUsername() + " are exist");
+               return "profile";
+           } catch (EmailExistException e){
+               model.addAttribute("error", "Account with email - " + dto.getEmail() + " are exist");
+               return "profile";
+           }
         } else {
-            model.addAttribute("error","Update error");
+            userService.update(dto);
         }
         return "profile";
     }

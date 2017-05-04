@@ -88,11 +88,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean update(User entity) {
-        try {
-            userDAO.update(entity);
-            return true;
-        } catch (Exception e) {
+    public void profileUpdate(User user) throws UsernameExistException, EmailExistException {
+        if (usernameExist(user.getUsername())) {
+            throw new UsernameExistException("Account with username - " + user.getUsername() + " are exist");
+        } else if (emailExist(user.getEmail())) {
+            throw new EmailExistException("Account with email - " + user.getEmail() + " are exist");
+        } else {
+            userDAO.update(user);
+        }
+    }
+
+    @Override
+    public boolean update(User entity){
+        try{
+           userDAO.update(entity);
+           return true;
+
+        } catch (Exception e){
+            e.printStackTrace();
             return false;
         }
     }

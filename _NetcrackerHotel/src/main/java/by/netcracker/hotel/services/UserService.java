@@ -44,4 +44,6 @@ public interface UserService extends AbstractService<User, Integer> {
     List<String> getUsernames();
 
     void changeUserPassword(User user,String password);
+
+    void profileUpdate(User user) throws UsernameExistException,EmailExistException;
 }
