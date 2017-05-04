@@ -32,7 +32,13 @@
                         <tbody>
                         <c:forEach items="${orders}" var="order">
                             <tr>
-                                <br>Order Id: ${order.id}
+                                Order Id: ${order.id}
+                                <form:form method="post" id="currentUser" action="${contextPath}/delete_order/${order.id}"
+                                           modelAttribute="currentUser">
+                                    <form:input path="id" type="hidden" name="id"
+                                                value="${currentUser.id}"></form:input>
+                                    <form:button type="submit">Delete order</form:button>
+                                </form:form>
                                 <br>Room Id: ${order.roomId}
                                 <br>User Id: ${order.userId}
                                 <br>First Name: ${order.firstName }
@@ -41,7 +47,7 @@
                                 <br>Leave Date: ${order.leaveDate}
                                 <br>Pay Value: ${order.payValue}
                                 <br>Is Paid: ${order.isPaid()}
-                                <br>
+
                                 <c:if test="${currentUser.authority.toString() ne 'GUEST'}"></c:if>
                             </tr>
                         </c:forEach>

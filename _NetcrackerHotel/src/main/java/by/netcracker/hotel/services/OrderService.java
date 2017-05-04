@@ -11,4 +11,6 @@ public interface OrderService extends AbstractService<Order, Integer> {
     void addOrder(Order order);
 
     List<Order> getByUserId(int userId);
+
+    void deleteByOrderId(int orderId);
 }

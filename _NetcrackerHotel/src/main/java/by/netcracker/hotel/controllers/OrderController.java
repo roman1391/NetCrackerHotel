@@ -47,4 +47,13 @@ public class OrderController {
         model.addAttribute("orders", orderService.getByUserId(Integer.parseInt(id)));
         return "bookedRooms";
     }
+
+    @RequestMapping(value = "/delete_order/{id}", method = RequestMethod.POST)
+    public String deleteOrder(@ModelAttribute("currentUser") User user,
+                              @PathVariable("id") int orderId,
+                              Model model){
+
+        orderService.deleteByOrderId(orderId);
+        return bookedRooms(String.valueOf(user.getId()),model);
+    }
 }
