@@ -3,6 +3,8 @@ package by.netcracker.hotel.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -117,6 +119,26 @@ public class AdminController {
     public String deleteOrder(@Valid @PathVariable("id") int id, @ModelAttribute("order") Order order, Model model) {
         orderService.deleteByOrderId(id);
         return "admin/admin_page";
+    }
+
+    @RequestMapping(value = "/edit_form/update", method = RequestMethod.POST)
+    public String save(@ModelAttribute("user") User user, Model model) {
+        // dto.setAvatar(saveFileToCloud(file));
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!userDetails.getUsername().equals(user.getUsername())) {
+            try {
+                userService.profileUpdate(user);
+            } catch (UsernameExistException e) {
+                model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
+                return "profile";
+            } catch (EmailExistException e) {
+                model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
+                return "profile";
+            }
+        } else {
+            userService.update(user);
+        }
+        return "admin/user_editing";
     }
 
 }

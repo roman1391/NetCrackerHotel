@@ -34,7 +34,7 @@
 					<div class="jumbotron">
 					<h4>List of orders:</h4>
 
-	<div style="padding-top:50px;padding-bottom:50px;padding-left:30px;padding-right:30px;">
+	<div style="padding-top:15px;padding-left:5px;padding-right:10px;">
         <c:url value="${paginationResult.pageLink}" var="pageLink"/>
         <form:form id="pgform" method="post" modelAttribute="pparam" action="${pageLink}">
             <pg:pagination pparam="${pparam}" paginationResult="${paginationResult}">
