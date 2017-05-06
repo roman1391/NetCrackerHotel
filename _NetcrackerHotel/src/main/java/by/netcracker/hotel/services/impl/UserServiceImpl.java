@@ -16,8 +16,10 @@ import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.UserService;
+import org.springframework.web.context.annotation.SessionScope;
 
 @Service("UserServiceImpl")
+@SessionScope
 public class UserServiceImpl implements UserService {
 
     private UserDAO userDAO;

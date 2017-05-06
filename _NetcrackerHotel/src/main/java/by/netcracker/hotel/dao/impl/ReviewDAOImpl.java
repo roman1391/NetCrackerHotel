@@ -3,6 +3,7 @@ package by.netcracker.hotel.dao.impl;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import by.netcracker.hotel.enums.SqlQuery;
 import by.netcracker.hotel.mapper.ReviewMapper;
 
 @Repository
+@Singleton
 public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
     private DataSource dataSource;
 

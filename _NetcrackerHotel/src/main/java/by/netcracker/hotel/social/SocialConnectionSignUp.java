@@ -11,6 +11,7 @@ import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.UUID;
 
@@ -18,6 +19,7 @@ import java.util.UUID;
  * Created by slava on 27.04.17.
  */
 @Component("SocialConnectionSignUp")
+@RequestScope
 public class SocialConnectionSignUp implements ConnectionSignUp {
 
 

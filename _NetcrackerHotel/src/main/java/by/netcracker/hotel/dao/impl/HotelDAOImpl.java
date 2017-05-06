@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import by.netcracker.hotel.mapper.HotelMapper;
  * Created by Varvara on 4/4/2017.
  */
 @Repository
+@Singleton
 public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
     private DataSource dataSource;

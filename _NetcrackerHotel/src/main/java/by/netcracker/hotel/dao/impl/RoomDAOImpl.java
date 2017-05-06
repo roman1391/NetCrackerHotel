@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import by.netcracker.hotel.mapper.RoomMapper;
  * Created by Varvara on 4/25/2017.
  */
 @Repository
+@Singleton
 public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
     private DataSource dataSource;
 

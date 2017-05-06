@@ -9,6 +9,7 @@ import by.netcracker.hotel.services.HotelService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ import java.util.Map;
  */
 
 @Service("HotelServiceImpl")
+@SessionScope
 public class HotelServiceImpl implements HotelService {
     private final HotelDAO hotelDAO;
     private final RoomDAO roomDAO;

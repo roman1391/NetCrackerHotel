@@ -23,6 +23,7 @@ import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.UserService;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,6 +37,7 @@ import java.util.UUID;
  */
 
 @Controller
+@RequestScope
 public class RegistrationController {
     private UserService userService;
     private ApplicationEventPublisher eventPublisher;

@@ -3,6 +3,7 @@ package by.netcracker.hotel.dao.impl;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import by.netcracker.hotel.mapper.OrderMapper;
  * Created by Alexander on 25.04.2017.
  */
 @Repository
+@Singleton
 public class OrderDAOImpl extends JdbcDaoSupport implements OrderDAO {
 
     private DataSource dataSource;
