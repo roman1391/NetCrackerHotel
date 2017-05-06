@@ -36,7 +36,7 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
     public void add(Review review) {
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.REVIEW.name().toLowerCase());
         getJdbcTemplate().update(SqlQuery.ADD_REVIEW.getQuery(), review.getUserId(), review.getUsername(),
-            review.getHotelId(), review.getText(), review.getStatus(), review.getDate(),
+            review.getHotelId(), review.getHotelname(), review.getText(), review.getStatus(), review.getDate(),
             String.valueOf(review.getRating()));
     }
 

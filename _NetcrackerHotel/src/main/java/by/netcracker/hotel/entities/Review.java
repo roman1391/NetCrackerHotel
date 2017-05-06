@@ -6,6 +6,7 @@ public class Review {
     private int userId;
     private int hotelId;
     private String username;
+    private String hotelname;
     private String text;
     private String status;
     private String date;
@@ -89,10 +90,19 @@ public class Review {
         this.username = username;
     }
 
+    public String getHotelname() {
+        return hotelname;
+    }
+
+    public void setHotelname(String hotelname) {
+        this.hotelname = hotelname;
+    }
+
     @Override
     public String toString() {
-        return "Review [id=" + id + ", userId=" + userId + ", hotelId=" + hotelId + ", username=" + username + ", text="
-            + text + ", status=" + status + ", date=" + date + ", rating=" + rating + "]";
+        return "Review [id=" + id + ", userId=" + userId + ", hotelId=" + hotelId + ", username=" + username
+            + ", hotelname=" + hotelname + ", text=" + text + ", status=" + status + ", date=" + date + ", rating="
+            + rating + "]";
     }
 
     @Override
@@ -101,6 +111,7 @@ public class Review {
         int result = 1;
         result = prime * result + ((date == null) ? 0 : date.hashCode());
         result = prime * result + hotelId;
+        result = prime * result + ((hotelname == null) ? 0 : hotelname.hashCode());
         result = prime * result + id;
         result = prime * result + rating;
         result = prime * result + ((status == null) ? 0 : status.hashCode());
@@ -125,6 +136,11 @@ public class Review {
         } else if (!date.equals(other.date))
             return false;
         if (hotelId != other.hotelId)
+            return false;
+        if (hotelname == null) {
+            if (other.hotelname != null)
+                return false;
+        } else if (!hotelname.equals(other.hotelname))
             return false;
         if (id != other.id)
             return false;

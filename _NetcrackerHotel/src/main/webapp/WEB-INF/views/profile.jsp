@@ -83,7 +83,7 @@
           <div class="btn-group">
               <button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
               <sec:authorize access="hasAnyRole('USER','ADMIN')" >
-                  <a style="margin-left: 5px" id ="changePassword" class="btn btn-warning" href="/change_password">Change password</a>
+                  <a style="margin-left: 5px" id ="changePassword" class="btn btn-warning" href="change_password">Change password</a>
               </sec:authorize>
           </div>
 

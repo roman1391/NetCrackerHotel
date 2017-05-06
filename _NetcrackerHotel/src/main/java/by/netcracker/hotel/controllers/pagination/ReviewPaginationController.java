@@ -48,6 +48,7 @@ public class ReviewPaginationController extends PaginationControllerAbstract<Rev
     @RequestMapping(value = "pagination/list_of_reviews_ajax", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineAjaxJsp(@ModelAttribute(PPARAM) ReviewSearchParam pparam,
         @RequestParam(value = BUTTON_ACTION, required = false) String buttonAction, Model model) throws Exception {
+        reviewPaginationService.deleteButtonAction(pparam, buttonAction);
         Map<String, Object> map = assignModel(pparam, buttonAction);
         model.addAllAttributes(map);
         return "pagination/list_of_reviews_ajax";

@@ -33,6 +33,10 @@ public class ReviewMapper implements RowMapper<Review> {
                 review.setHotelId(Integer.parseInt(resultSet.getString(3)));
                 break;
             }
+            case ColumnName.REV_HOTELNAME: {
+                review.setHotelname(resultSet.getString(3));
+                break;
+            }
             case ColumnName.FEEDBACK: {
                 review.setText(resultSet.getString(3));
                 break;
