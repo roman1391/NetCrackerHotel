@@ -56,7 +56,7 @@
                         </c:when>                          
                     </c:choose>
                     
-                    <form:form method="post" id="review" action="list_of_reviews" modelAttribute="choosenHotel">
+                    <form:form method="post" id="review" action="all_reviews" modelAttribute="choosenHotel">
                         <form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
                         <form:button type="submit">See all reviews </form:button>
                     </form:form>

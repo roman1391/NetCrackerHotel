@@ -92,4 +92,13 @@ public class AdminController {
         return "admin/check_review";
     }
 
+    @RequestMapping(value = "/check_review/{id}", method = RequestMethod.POST)
+    public String checkedReview(@Valid @ModelAttribute("review") Review review, @PathVariable("id") int id,
+        Model model) {
+        reviewService.update(review);
+        review = reviewService.getByID(id);
+        model.addAttribute("review", review);
+        return "admin/check_review";
+    }
+
 }

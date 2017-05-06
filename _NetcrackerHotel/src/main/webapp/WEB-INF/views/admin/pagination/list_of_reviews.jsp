@@ -35,9 +35,9 @@
                             <td style="width:120px;">
                             <form:select path="status" cssStyle="width:110px;">
                                <form:option value="" label="-status-"/>
-                               <form:option value="pending" label="PENDING"/>
-                               <form:option value="approved" label="APPROVED"/>
-                               <form:option value="blocked" label="BLOCKED"/>
+                               <form:option value="pending" label="Pending"/>
+                               <form:option value="approved" label="Approved"/>
+                               <form:option value="blocked" label="Blocked"/>
                             </form:select>
                             </td>
                             <td style="width:80px;">Username:</td>

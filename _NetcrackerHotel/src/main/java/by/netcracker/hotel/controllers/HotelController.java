@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import by.netcracker.hotel.entities.*;
-import by.netcracker.hotel.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +17,7 @@ import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.ReviewService;
+import by.netcracker.hotel.services.RoomService;
 
 @Controller
 @RequestMapping("/hotel_page")
@@ -46,6 +45,21 @@ public class HotelController {
         return "hotel_page";
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    public String hotelAfretReviewPage(@Valid @PathVariable("id") int hotelID,
+        @Valid @ModelAttribute("review") Review review, Model model) {
+        reviewService.addReview(review);
+        Hotel hotel = hotelService.getByID(hotelID);
+        String reviewInfo = reviewService.checkReview(hotelID);
+        model.addAttribute("reviewInfo", reviewInfo);
+        model.addAttribute("choosenHotel", hotel);
+        model.addAttribute("review", new Review());
+        model.addAttribute("hotel_rooms", roomService.getByHotelID(hotelID));
+        model.addAttribute("order", new Order());
+        model.addAttribute("success", "Thank you for review");
+        return "hotel_page";
+    }
+
     @RequestMapping(value = "/review_page", method = RequestMethod.POST)
     public String feedbackPage(@Valid @ModelAttribute("choosenHotel") Hotel hotel,
         @Valid @ModelAttribute("review") Review review, Model model) {
@@ -60,14 +74,14 @@ public class HotelController {
         reviewService.addReview(review);
         hotel = hotelService.getByID(review.getHotelId());
         model.addAttribute("choosenHotel", hotel);
-        model.addAttribute("success", "Thank you for review");
+        model.addAttribute("success", "Thank you! \t The review will be added after the administrator checks it");
         return "hotel_page";
     }
 
-    @RequestMapping(value = "/list_of_reviews", method = RequestMethod.POST)
+    @RequestMapping(value = "/all_reviews", method = RequestMethod.POST)
     public String seeReviews(@Valid @ModelAttribute("choosenHotel") Hotel hotel, Model model) {
-        List<Review> list = reviewService.getByHotelId(hotel.getId());
-        model.addAttribute("currentReviews", list);
+        List<Review> reviews = reviewService.getApprovedByHotelId(hotel.getId());
+        model.addAttribute("currentReviews", reviews);
         return "hotel_reviews_page";
     }
 }

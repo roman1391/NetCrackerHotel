@@ -20,7 +20,7 @@
                 <div class="jumbotron">
                     <h3>Review page</h3>
 
-                    <form:form method="post" id="review" action="send_review" modelAttribute="review" >
+                    <form:form method="post" id="review" action="${choosenHotel.id}" modelAttribute="review" >
 	 					Your rating:
 	 					<form:select path="rating"  >
                            <form:option value="${1}" label="1"/>

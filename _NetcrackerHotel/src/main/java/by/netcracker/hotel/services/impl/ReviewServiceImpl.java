@@ -1,6 +1,7 @@
 package by.netcracker.hotel.services.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -63,6 +64,18 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<Review> getByHotelId(int hotelId) {
         return reviewDAO.getByHotelId(hotelId);
+    }
+
+    @Override
+    public List<Review> getApprovedByHotelId(int hotelId) {
+        List<Review> allReviews = reviewDAO.getByHotelId(hotelId);
+        List<Review> approvedReviews = new ArrayList<Review>();
+        for (Review review : allReviews) {
+            if (review.getStatus().equals("approved")) {
+                approvedReviews.add(review);
+            }
+        }
+        return approvedReviews;
     }
 
     @Override
