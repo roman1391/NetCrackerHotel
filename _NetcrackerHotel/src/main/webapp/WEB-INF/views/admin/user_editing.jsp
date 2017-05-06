@@ -17,7 +17,7 @@
 
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-	<%@include file="../jsp_elements/_header.jsp"%>
+	<%@include file="../../jsp_elements/_header.jsp"%>
 	<div id="wrapper">
 		<div class="container">
 			<div class="row row-offcanvas row-offcanvas-left">
@@ -80,14 +80,14 @@
 
 							</div>
 
-							<a href="${contextPath}/list_of_users">Back to list of users</a> <br> <a
-								href="${contextPath}/admin_page">To admin page</a>
+							<a href="${contextPath}/admin/list_of_users">Back to list of users</a> <br> <a
+								href="${contextPath}/admin/admin_page">To admin page</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<%@include file="../jsp_elements/_footer.jsp"%>
+		<%@include file="../../jsp_elements/_footer.jsp"%>
 	</div>
 </body>
 

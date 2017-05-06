@@ -17,6 +17,7 @@ import by.netcracker.hotel.entities.pagination.ReviewSearchParam;
 import by.netcracker.hotel.services.impl.pagination.ReviewPaginationService;
 
 @Controller
+@RequestMapping("/admin")
 public class ReviewPaginationController extends PaginationControllerAbstract<ReviewSearchParam> {
     private static Logger log = Logger.getLogger(ReviewPaginationController.class);
 
@@ -28,7 +29,7 @@ public class ReviewPaginationController extends PaginationControllerAbstract<Rev
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");
-        setPageLink("/pagination/list_of_reviews_ajax");
+        setPageLink("/admin//pagination/list_of_reviews_ajax");
         setAjax(true);
     }
 
@@ -42,7 +43,7 @@ public class ReviewPaginationController extends PaginationControllerAbstract<Rev
     public String defineJsp(@ModelAttribute(PPARAM) ReviewSearchParam pparam, Model model) throws Exception {
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
-        return "pagination/list_of_reviews";
+        return "admin/pagination/list_of_reviews";
     }
 
     @RequestMapping(value = "pagination/list_of_reviews_ajax", method = { RequestMethod.GET, RequestMethod.POST })
@@ -51,7 +52,7 @@ public class ReviewPaginationController extends PaginationControllerAbstract<Rev
         reviewPaginationService.deleteButtonAction(pparam, buttonAction);
         Map<String, Object> map = assignModel(pparam, buttonAction);
         model.addAllAttributes(map);
-        return "pagination/list_of_reviews_ajax";
+        return "admin/pagination/list_of_reviews_ajax";
     }
 
 }

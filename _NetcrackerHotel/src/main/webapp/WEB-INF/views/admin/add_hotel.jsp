@@ -12,10 +12,10 @@
     <title>Add hotel</title>
 </head>
 <body>
-<%@include file="../jsp_elements/_header.jsp" %>
+<%@include file="../../jsp_elements/_header.jsp" %>
 <div id="wrapper">
-    <%@include file="../jsp_elements/addhotelform.jsp"%>
+    <%@include file="../../jsp_elements/addhotelform.jsp"%>
 </div>
-<%@include file="../jsp_elements/_footer.jsp" %>
+<%@include file="../../jsp_elements/_footer.jsp" %>
 </body>
 </html>

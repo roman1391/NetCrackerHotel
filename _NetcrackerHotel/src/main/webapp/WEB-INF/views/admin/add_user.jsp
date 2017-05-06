@@ -14,7 +14,7 @@
           rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <%@include file="../jsp_elements/_header.jsp"%>
+    <%@include file="../../jsp_elements/_header.jsp"%>
 	<div id="wrapper">
         <c:if test="${error!=null}">
             <div style="margin: 50px" class="alert alert-danger" >
@@ -22,9 +22,9 @@
             </div>
         </c:if>
 			<div class="content">
-				<%@include file="../jsp_elements/adduserform.jsp"%>
+				<%@include file="../../jsp_elements/adduserform.jsp"%>
 			</div>
-		<%@include file="../jsp_elements/_footer.jsp"%>
+		<%@include file="../../jsp_elements/_footer.jsp"%>
 	</div>
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>"
             type="text/javascript"></script>

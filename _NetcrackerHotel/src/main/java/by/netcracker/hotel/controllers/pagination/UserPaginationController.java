@@ -18,6 +18,7 @@ import by.netcracker.hotel.services.UserService;
 import by.netcracker.hotel.services.impl.pagination.UserPaginationService;
 
 @Controller
+@RequestMapping("/admin")
 public class UserPaginationController extends PaginationControllerAbstract<UserSearchParam> {
     private static Logger log = Logger.getLogger(UserPaginationController.class);
 
@@ -30,7 +31,7 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");
-        setPageLink("/pagination/list_of_users_ajax");
+        setPageLink("/admin/pagination/list_of_users_ajax");
         setAjax(true);
     }
 
@@ -46,7 +47,7 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
         model.addAttribute("usernames", userService.getUsernames());
-        return "pagination/list_of_users";
+        return "admin/pagination/list_of_users";
     }
 
     @RequestMapping(value = "pagination/list_of_users_ajax", method = { RequestMethod.GET, RequestMethod.POST })
@@ -55,7 +56,7 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
         userPaginationService.deleteButtonAction(pparam, buttonAction);
         Map<String, Object> map = assignModel(pparam, buttonAction);
         model.addAllAttributes(map);
-        return "pagination/list_of_users_ajax";
+        return "admin/pagination/list_of_users_ajax";
     }
 
 }

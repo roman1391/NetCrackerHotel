@@ -2,8 +2,6 @@ package by.netcracker.hotel.controllers.pagination;
 
 import java.util.Map;
 
-import by.netcracker.hotel.entities.Hotel;
-import by.netcracker.hotel.services.HotelService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.paginationspring.controller.PaginationControllerAbstract;
 
 import by.netcracker.hotel.entities.pagination.HotelSearchParam;
+import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.impl.pagination.HotelPaginationService;
 
 @Controller
+@RequestMapping("/admin")
 public class HotelPaginationController extends PaginationControllerAbstract<HotelSearchParam> {
     private static Logger log = Logger.getLogger(HotelPaginationController.class);
 
@@ -31,7 +31,7 @@ public class HotelPaginationController extends PaginationControllerAbstract<Hote
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");
-        setPageLink("/pagination/list_of_hotels_ajax");
+        setPageLink("/admin/pagination/list_of_hotels_ajax");
         setAjax(true);
     }
 
@@ -47,7 +47,7 @@ public class HotelPaginationController extends PaginationControllerAbstract<Hote
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
         model.addAttribute("hotels", hotelService.getHotelNames());
-        return "pagination/list_of_hotels";
+        return "admin/pagination/list_of_hotels";
     }
 
     @RequestMapping(value = "pagination/list_of_hotels_ajax", method = { RequestMethod.GET, RequestMethod.POST })
@@ -57,6 +57,6 @@ public class HotelPaginationController extends PaginationControllerAbstract<Hote
         Map<String, Object> map = assignModel(pparam, buttonAction);
         model.addAllAttributes(map);
 
-        return "pagination/list_of_hotels_ajax";
+        return "admin/pagination/list_of_hotels_ajax";
     }
 }

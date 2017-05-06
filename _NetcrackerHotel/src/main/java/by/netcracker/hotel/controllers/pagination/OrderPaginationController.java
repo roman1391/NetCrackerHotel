@@ -18,6 +18,7 @@ import by.netcracker.hotel.services.OrderService;
 import by.netcracker.hotel.services.impl.pagination.OrderPaginationService;
 
 @Controller
+@RequestMapping("/admin")
 public class OrderPaginationController extends PaginationControllerAbstract<OrderSearchParam> {
     private static Logger log = Logger.getLogger(OrderPaginationController.class);
 
@@ -30,7 +31,7 @@ public class OrderPaginationController extends PaginationControllerAbstract<Orde
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");
-        setPageLink("/pagination/list_of_orders_ajax");
+        setPageLink("/admin/pagination/list_of_orders_ajax");
         setAjax(true);
     }
 
@@ -45,7 +46,7 @@ public class OrderPaginationController extends PaginationControllerAbstract<Orde
     public String defineJsp(@ModelAttribute(PPARAM) OrderSearchParam pparam, Model model) throws Exception {
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
-        return "pagination/list_of_orders";
+        return "admin/pagination/list_of_orders";
     }
 
     @RequestMapping(value = "pagination/list_of_orders_ajax", method = { RequestMethod.GET, RequestMethod.POST })
@@ -54,6 +55,6 @@ public class OrderPaginationController extends PaginationControllerAbstract<Orde
         orderPaginationService.deleteButtonAction(pparam, buttonAction);
         Map<String, Object> map = assignModel(pparam, buttonAction);
         model.addAllAttributes(map);
-        return "pagination/list_of_orders_ajax";
+        return "admin/pagination/list_of_orders_ajax";
     }
 }

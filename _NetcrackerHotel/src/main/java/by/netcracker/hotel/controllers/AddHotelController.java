@@ -1,28 +1,34 @@
 package by.netcracker.hotel.controllers;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import by.netcracker.hotel.cloud.CloudinaryConnector;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.RoomService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.ServletContext;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Varvara on 4/11/2017.
  */
 
 @Controller
-@RequestMapping(value = "/hotel")
+@RequestMapping(value = "/admin/hotel")
 public class AddHotelController {
 
     private static final int MAX_SIZE_MAIN_PHOTO = 400;
@@ -41,16 +47,15 @@ public class AddHotelController {
         this.hotelService = hotelService;
     }
 
-
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("hotel", new Hotel());
-        return "add_hotel";
+        return "admin/add_hotel";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addHotel(@ModelAttribute("hotel") Hotel hotel, @RequestParam("file") MultipartFile file,
-                           Model model) {
+        Model model) {
         if (!file.isEmpty()) {
             String photo = CloudinaryConnector.generateNameForPhoto();
             hotel.setMainPhoto(photo);
@@ -60,11 +65,12 @@ public class AddHotelController {
         }
         hotelService.addHotel(hotel);
         model.addAttribute("id", hotel.getId());
-        return "add_hotel_photo_and_description";
+        return "admin/add_hotel_photo_and_description";
     }
 
     @RequestMapping(value = "{id}/photo", method = RequestMethod.POST)
-    public String addPhotosToHotel(@PathVariable("id") int hotelID, @RequestParam("files") List<MultipartFile> files, Model model) {
+    public String addPhotosToHotel(@PathVariable("id") int hotelID, @RequestParam("files") List<MultipartFile> files,
+        Model model) {
         Hotel hotel = hotelService.getByID(hotelID);
         if (!files.get(0).isEmpty()) {
             for (MultipartFile file : files) {
@@ -78,7 +84,7 @@ public class AddHotelController {
         }
         model.addAttribute("hotel", hotel);
         model.addAttribute("id", hotelID);
-        return "add_hotel_photo_and_description";
+        return "admin/add_hotel_photo_and_description";
     }
 
     @RequestMapping(value = "/{id}/room", method = RequestMethod.GET)
@@ -86,7 +92,7 @@ public class AddHotelController {
         model.addAttribute("hotel", hotelService.getByID(hotelID));
         model.addAttribute("id", hotelID);
         model.addAttribute("room", new Room());
-        return "add_rooms_to_hotel";
+        return "admin/add_rooms_to_hotel";
     }
 
     @RequestMapping(value = "/{id}/room", method = RequestMethod.POST)
@@ -96,7 +102,7 @@ public class AddHotelController {
         room.setHotelID(hotelID);
         roomService.add(room);
         model.addAttribute("rooms", roomService.getByHotelID(hotelID));
-        return "add_rooms_to_hotel";
+        return "admin/add_rooms_to_hotel";
     }
 
     private void savePhotoInCloudinary(MultipartFile file, String photoName, int size) {
@@ -104,7 +110,7 @@ public class AddHotelController {
         try {
             file.transferTo(convFile);
             Map uploadResult = CloudinaryConnector.getCloudinary().uploader().upload(convFile,
-                    CloudinaryConnector.pictureTransform(photoName, size));
+                CloudinaryConnector.pictureTransform(photoName, size));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -19,9 +19,9 @@
             <port-mapping http="8080" https="8443" />
         </port-mappings> -->
 
+		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/profile" access="hasAnyRole('USER','ADMIN','VKONTAKTE_USER',
                                                              'FACEBOOK_USER','TWITTER_USER')"/>
-        <intercept-url pattern="/admin_page" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/list_of_users" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/add_hotel" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/signup/**" access="permitAll" />

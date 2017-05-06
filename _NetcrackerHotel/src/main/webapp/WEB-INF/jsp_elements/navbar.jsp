@@ -19,7 +19,7 @@
             </li>
             <sec:authorize access="hasRole('ADMIN')">
                 <li class="nav-item">
-                    <a class="nav-link" href="${contextPath}/admin_page">Admin page</a>
+                    <a class="nav-link" href="${contextPath}/admin/admin_page">Admin page</a>
                 </li>
             </sec:authorize>
             <sec:authorize access="hasAnyRole('ADMIN','USER',

@@ -18,12 +18,12 @@
           rel="stylesheet" type="text/css" />
 </head>
 <body>
-<%@include file="../jsp_elements/_header.jsp" %>
+<%@include file="../../jsp_elements/_header.jsp" %>
 <div id="wrapper">
-    <%@include file="../jsp_elements/hotelMin.jsp" %>
-    <%@include file="../jsp_elements/addroomform.jsp" %>
+    <%@include file="../../jsp_elements/hotelMin.jsp" %>
+    <%@include file="../../jsp_elements/addroomform.jsp" %>
 </div>
-<%@include file="../jsp_elements/_footer.jsp" %>
+<%@include file="../../jsp_elements/_footer.jsp" %>
 <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>"
         type="text/javascript"></script>
 <script src="<c:url value="/resources/jQuery-Form-Validator/form-validator/jquery.form-validator.min.js"/>"
