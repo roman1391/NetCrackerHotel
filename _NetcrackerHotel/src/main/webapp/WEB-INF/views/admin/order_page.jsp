@@ -6,7 +6,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<title>Home</title>
+<title>Hotel page</title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 <link
 	href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
@@ -19,18 +19,28 @@
 	<div id="wrapper">
 		<div class="container">
 			<div class="row row-offcanvas row-offcanvas-left">
-				Admin page! <br />
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
-						<h2>Admin page</h2>
-						<c:if test="${success!=null}">
-							<div style="margin: 50px" class="alert alert-success">
-								${success}</div>
-						</c:if>
-						<p><a href="${contextPath}/admin/list_of_users">User management</a></p>
-						<p><a href="${contextPath}/admin/list_of_hotels">Hotel management</a></p>
-						<p><a href="${contextPath}/admin/list_of_reviews">Review management</a></p>
-						<p><a href="${contextPath}/admin/list_of_orders">Order management</a></p>
+						<h3>Order:</h3>
+						Order Id: ${order.id} <br>
+						Room Id: ${order.roomId} <br>
+						UserId: ${order.userId} <br>
+						First Name: ${order.firstName } <br>
+						LastName: ${order.lastName } <br>
+						Arrival Date:${order.arrivalDate} <br>
+						Leave Date: ${order.leaveDate} <br>
+						Pay value: ${order.payValue} <br>
+
+						<form:form method="post" id="order"
+							action="${contextPath}/admin/order_deleted/${order.id}"
+							modelAttribute="orderr">
+							<form:input path="userId" type="hidden" name="userId"
+								value="${order.userId}"></form:input>
+							<form:button type="submit">Delete order</form:button>
+						</form:form>
+						
+						<a href="${contextPath}/admin/list_of_orders">Back to list of orders</a> <br> 
+						<a href="${contextPath}/admin/admin_page">To admin page</a>
 					</div>
 				</div>
 			</div>

@@ -13,7 +13,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
-    <title>Hotel page</title>
+    <title>Booked rooms</title>
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
     <link
             href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
@@ -38,7 +38,7 @@
                                     <form:input path="id" type="hidden" name="id"
                                                 value="${currentUser.id}"></form:input>
                                     <form:button type="submit">Delete order</form:button>
-                                </form:form>
+								</form:form>
                                 <br>Room Id: ${order.roomId}
                                 <br>User Id: ${order.userId}
                                 <br>First Name: ${order.firstName }

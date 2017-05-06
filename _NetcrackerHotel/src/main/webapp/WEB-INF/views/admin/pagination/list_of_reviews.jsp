@@ -32,18 +32,20 @@
                       <table class="searchtable">
                         <tr>
                             <td class="caption" style="width:50px;">Filter:</td>
-                            <td style="width:120px;">
-                            <form:select path="status" cssStyle="width:110px;">
+                            <td style="width:78px;">
+                            <form:select path="status" cssStyle="width:78px;">
                                <form:option value="" label="-status-"/>
                                <form:option value="pending" label="Pending"/>
                                <form:option value="approved" label="Approved"/>
                                <form:option value="blocked" label="Blocked"/>
                             </form:select>
                             </td>
-                            <td style="width:80px;">Username:</td>
-                            <td style="width:160px;"><form:input path="username" cssStyle="width:150px;"/></td>
-                            <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button"  >Search</form:button></span></td>
-                            <td style="width:75px;"><span class="button"><form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
+                            <td style="width:60px;">Username:</td>
+                            <td style="width:100px;"><form:input path="username" cssStyle="width:100px;"/></td>
+                            <td style="width:60px;">Hotelname:</td>
+                            <td style="width:150px;"><form:input path="hotelname" cssStyle="width:130px;"/></td>
+                            <td style="width:65px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button"  >Search</form:button></span></td>
+                            <td style="width:65px;"><span class="button"><form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
                         </tr>
                     </table>  
                 </jsp:attribute>

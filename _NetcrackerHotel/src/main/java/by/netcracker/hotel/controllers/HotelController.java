@@ -56,7 +56,7 @@ public class HotelController {
         model.addAttribute("review", new Review());
         model.addAttribute("hotel_rooms", roomService.getByHotelID(hotelID));
         model.addAttribute("order", new Order());
-        model.addAttribute("success", "Thank you for review");
+        model.addAttribute("success", "Thank you! The review will be added after approving by administrator");
         return "hotel_page";
     }
 
@@ -66,16 +66,6 @@ public class HotelController {
         hotel = hotelService.getByID(hotel.getId());
         model.addAttribute("choosenHotel", hotel);
         return "review_page";
-    }
-
-    @RequestMapping(value = "/send_review", method = RequestMethod.POST)
-    public String sendFeenback(@Valid @ModelAttribute("choosenHotel") Hotel hotel,
-        @Valid @ModelAttribute("review") Review review, Model model) {
-        reviewService.addReview(review);
-        hotel = hotelService.getByID(review.getHotelId());
-        model.addAttribute("choosenHotel", hotel);
-        model.addAttribute("success", "Thank you! \t The review will be added after the administrator checks it");
-        return "hotel_page";
     }
 
     @RequestMapping(value = "/all_reviews", method = RequestMethod.POST)

@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
+import by.netcracker.hotel.services.OrderService;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.UserService;
 
@@ -24,11 +26,13 @@ import by.netcracker.hotel.services.UserService;
 public class AdminController {
     private final UserService userService;
     private final ReviewService reviewService;
+    private final OrderService orderService;
 
     @Autowired
-    public AdminController(UserService userService, ReviewService reviewService) {
+    public AdminController(UserService userService, ReviewService reviewService, OrderService orderService) {
         this.userService = userService;
         this.reviewService = reviewService;
+        this.orderService = orderService;
     }
 
     @RequestMapping(value = "/add_user_ref", method = RequestMethod.GET)
@@ -99,6 +103,20 @@ public class AdminController {
         review = reviewService.getByID(id);
         model.addAttribute("review", review);
         return "admin/check_review";
+    }
+
+    @RequestMapping(value = "/order_page/{id}", method = RequestMethod.GET)
+    public String orderPage(@Valid @PathVariable("id") int id, Model model) {
+        Order order = orderService.getByID(id);
+        model.addAttribute("order", order);
+        model.addAttribute("orderr", new Order());
+        return "admin/order_page";
+    }
+
+    @RequestMapping(value = "/order_deleted/{id}", method = RequestMethod.POST)
+    public String deleteOrder(@Valid @PathVariable("id") int id, @ModelAttribute("order") Order order, Model model) {
+        orderService.deleteByOrderId(id);
+        return "admin/admin_page";
     }
 
 }
