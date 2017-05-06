@@ -61,23 +61,6 @@
 								<button onclick="onSave()" class="save-btn">Save</button>
 								<button onclick="onCancel()" class="cancel-btn">Cancel</button>
 
-
-								<div class="form-group">
-									<label for="password">Change password:</label> <input
-										id="password" type="password" class="editablep form-control"
-										required>
-								</div>
-								<button onclick="onEditClickp()" class="edit-btnp">Change</button>
-								<button onclick="onSavep()" class="save-btnp">Save</button>
-								<button onclick="onCancelp()" class="cancel-btnp">Cancel</button>
-
-								<form:form id="deleteUser" action="delete_user"
-									modelAttribute="user" method="post">
-									<form:input path="username" type="hidden" name="username"
-										value="${user.username}"></form:input>
-									<form:button type="submit">Delete user</form:button>
-								</form:form>
-
 							</div>
 
 							<a href="${contextPath}/admin/list_of_users">Back to list of users</a> <br> 
@@ -90,51 +73,6 @@
 		<%@include file="../../jsp_elements/_footer.jsp"%>
 	</div>
 </body>
-
-<!-- <script>
-	var isEditable = true;
-	var oldValues = {};
-	function onEditClickp() {
-		isEditable = !isEditable;
-		if (isEditable) {
-			$('input.editablep').each(function(index, data) {
-				oldValues[index] = data.value;
-			});
-		}
-		$('.editablep').attr("disabled", !isEditable);
-		$('.save-btnp').css('display', isEditable ? 'block' : 'none');
-		$('.cancel-btnp').css('display', isEditable ? 'block' : 'none');
-		$('.edit-btnp').css('display', !isEditable ? 'block' : 'none');
-	}
-
-	function onSavep() {
-		var userDTO = {};
-		userDTO.id = $
-		{
-			user.id
-		}
-		;
-		$('input.editablep').each(function(index, data) {
-			userDTO[data.id] = data.value;
-		});
-		$.ajax({
-			url : "update",
-			method : "POST",
-			data : userDTO
-		}).done(function(msg) {
-			console.log(msg);
-			onEditClickp();
-		});
-	}
-
-	function onCancelp() {
-		$('input.editablep').each(function(index, data) {
-			$(data).val(oldValues[index]);
-		});
-		onEditClickp();
-	}
-	onEditClickp();
-</script> -->
 
 
 <script>
@@ -177,49 +115,6 @@
     }
     onEditClick();
 </script>
-
-<script>
-    var isEditable = true;
-    var oldValues = {};
-    function onEditClickp() {
-        isEditable = !isEditable;
-        if (isEditable) {
-            $('input.editablep').each(function (index, data) {
-                oldValues[index] = data.value;
-            });
-        }
-        $('.editablep').attr("disabled", !isEditable);
-        $('.save-btnp').css('display', isEditable ? 'block' : 'none');
-        $('.cancel-btnp').css('display', isEditable ? 'block' : 'none');
-        $('.edit-btnp').css('display', !isEditable ? 'block' : 'none');
-    }
-
-    function onSavep() {
-        var userDTO = {};
-        userDTO.id = ${user.id};
-            $('input.editablep').each(function (index, data) {
-                userDTO[data.id] = data.value;
-            });
-        $.ajax({
-            url: "update",
-            method: "POST",
-            data: userDTO
-        }).done(function (msg) {
-            console.log(msg);
-            onEditClickp();
-        });
-    }
-
-    function onCancelp() {
-        $('input.editablep').each(function (index, data) {
-            $(data).val(oldValues[index]);
-        });
-        onEditClickp();
-    }
-    onEditClickp();
-</script>
-
-
 
 
 </html>
