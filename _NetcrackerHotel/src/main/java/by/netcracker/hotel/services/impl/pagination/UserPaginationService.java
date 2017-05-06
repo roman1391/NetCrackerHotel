@@ -53,12 +53,14 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
         columns.add(col);
 
         col = new BoPaginationColumn();
-        col.setColumnName("Enabled");
+        col.setColumnName("State");
         col.setWidth(30);
         columns.add(col);
 
         col = new BoPaginationColumn();
         col.setColumnName("Email");
+        col.setOrderColumns("email");
+        col.setOrderDirections("desc");
         col.setWidth(30);
         columns.add(col);
 
@@ -73,7 +75,7 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
         UserRow bo = new UserRow();
         bo.setUserId(user.getId());
         bo.setAuthority(user.getAuthority().toString());
-        bo.setEnabled(user.getEnabled() ? "Enabled" : "Unenabled");
+        bo.setEnabled(user.getEnabled() ? "Enabled" : "Deactivated");
         bo.setUsername(user.getUsername());
         bo.setEmail(user.getEmail());
         return bo;
@@ -82,7 +84,9 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
     public void deleteButtonAction(UserSearchParam pparam, String buttonAction) {
         if (buttonAction != null && buttonAction.equals("deleteButton")) {
             for (String id : pparam.getSelectedIds()) {
-                userDAO.deleteByID(Integer.parseInt(id));
+                User user = userDAO.getByID(Integer.parseInt(id));
+                user.setEnabled(false);
+                userDAO.update(user);
             }
         }
     }

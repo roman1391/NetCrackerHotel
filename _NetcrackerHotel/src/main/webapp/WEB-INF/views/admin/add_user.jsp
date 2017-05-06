@@ -14,7 +14,7 @@
           rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <%@include file="../../jsp_elements/_header.jsp"%>
+    <jsp:include page="/WEB-INF/jsp_elements/_header.jsp"></jsp:include>
 	<div id="wrapper">
         <c:if test="${error!=null}">
             <div style="margin: 50px" class="alert alert-danger" >
@@ -24,7 +24,7 @@
 			<div class="content">
 				<%@include file="../../jsp_elements/adduserform.jsp"%>
 			</div>
-		<%@include file="../../jsp_elements/_footer.jsp"%>
+		<jsp:include page="/WEB-INF/jsp_elements/_footer.jsp"></jsp:include>
 	</div>
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>"
             type="text/javascript"></script>

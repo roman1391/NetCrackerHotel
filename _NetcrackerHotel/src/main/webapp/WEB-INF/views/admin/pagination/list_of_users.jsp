@@ -52,9 +52,9 @@
                             </td>
                             <td style="width:200px;">
                                 <form:select path="enabled">
-                                   	<form:option value="" label="-enabled-"/>
+                                   	<form:option value="" label="-state-"/>
                                		<form:option value="1" label="Enabled"/>
-                               		<form:option value="0" label="Unenabled"/>
+                               		<form:option value="0" label="Deactivated"/>
                                 </form:select>
                             </td>
                             <td style="width:80px;">Username:</td>
@@ -68,7 +68,7 @@
                 </jsp:attribute>
                  <jsp:attribute name="controlButton">
                      <div style="padding-top:10px;">
-                        <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Delete</form:button></span>
+                        <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Deactivate</form:button></span>
                         <span ><a href="add_user_ref">Add new user</a></span>
                     </div>
                 </jsp:attribute>

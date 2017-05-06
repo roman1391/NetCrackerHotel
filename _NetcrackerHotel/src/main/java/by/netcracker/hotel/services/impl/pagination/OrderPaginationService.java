@@ -55,14 +55,14 @@ public class OrderPaginationService extends PaginationServiceAbstract<OrderSearc
 
         col = new BoPaginationColumn();
         col.setColumnName("Arrival");
-        col.setColumnName("arrival");
+        col.setOrderColumns("arrival");
         col.setOrderDirections("desc");
         col.setWidth(30);
         columns.add(col);
 
         col = new BoPaginationColumn();
         col.setColumnName("Leave");
-        col.setColumnName("leave");
+        col.setOrderColumns("leave");
         col.setOrderDirections("desc");
         col.setWidth(30);
         columns.add(col);

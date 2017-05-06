@@ -43,6 +43,7 @@ public class UserPaginationDAO extends AbstractPaginationJdbcDAO<User, UserSearc
         boToDbMap.put("username", "username");
         boToDbMap.put("authority", "authority");
         boToDbMap.put("enabled", "enabled");
+        boToDbMap.put("email", "email");
     }
 
 }

@@ -21,7 +21,7 @@
 	<div id="wrapper">
 		<div class="container">
 			<div class="row row-offcanvas row-offcanvas-left">
-				Admin page! <br> <a href="j_spring_security_logout">Logout</a>
+				Admin page! 
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
 						<h1>User editing:</h1>
