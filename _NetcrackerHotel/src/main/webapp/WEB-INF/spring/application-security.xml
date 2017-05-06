@@ -22,8 +22,6 @@
 		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/profile" access="hasAnyRole('USER','ADMIN','VKONTAKTE_USER',
                                                              'FACEBOOK_USER','TWITTER_USER')"/>
-        <intercept-url pattern="/list_of_users" access="hasRole('ADMIN')"/>
-        <intercept-url pattern="/add_hotel" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/signup/**" access="permitAll" />
         <intercept-url pattern="/signin/**" access="permitAll" />
         <intercept-url pattern="/reset_password" access="hasRole('CHANGE_PASSWORD_PRIVILEGE')" />

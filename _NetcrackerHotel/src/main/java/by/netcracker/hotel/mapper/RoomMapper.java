@@ -22,15 +22,15 @@ public class RoomMapper implements RowMapper<Room> {
                 break;
             }
             switch (resultSet.getString(2)) {
-                case ColumnName.CAPACITY: {
+                case ColumnName.ROOM_CAPACITY: {
                     room.setCapacity(resultSet.getInt(3));
                     break;
                 }
-                case ColumnName.COST: {
+                case ColumnName.ROOM_COST: {
                     room.setCost(resultSet.getInt(3));
                     break;
                 }
-                case ColumnName.HOTEL_ID: {
+                case ColumnName.ROOM_HOTEL_ID: {
                     room.setHotelID(resultSet.getInt(3));
                     break;
                 }

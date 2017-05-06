@@ -23,15 +23,15 @@ public class HotelMapper implements RowMapper<Hotel> {
                 break;
             }
             switch (resultSet.getString(2)) {
-                case ColumnName.COUNTRY: {
+                case ColumnName.HOTEL_COUNTRY: {
                     hotel.setCountry(resultSet.getString(3));
                     break;
                 }
-                case ColumnName.CITY: {
+                case ColumnName.HOTEL_CITY: {
                     hotel.setCity(resultSet.getString(3));
                     break;
                 }
-                case ColumnName.ADDRESS: {
+                case ColumnName.HOTEL_ADDRESS: {
                     hotel.setAddress(resultSet.getString(3));
                     break;
                 }
@@ -39,15 +39,15 @@ public class HotelMapper implements RowMapper<Hotel> {
                     hotel.setName(resultSet.getString(3));
                     break;
                 }
-                case ColumnName.CLASS: {
+                case ColumnName.HOTRL_CLASS: {
                     hotel.setTypeOfService(resultSet.getInt(3));
                     break;
                 }
-                case ColumnName.MAIN_PHOTO: {
+                case ColumnName.HOTEL_MAIN_PHOTO: {
                     hotel.setMainPhoto(resultSet.getString(3));
                     break;
                 }
-                case ColumnName.PHOTO: {
+                case ColumnName.HOTEL_PHOTO: {
                     hotel.addPhoto(resultSet.getString(3));
                     break;
                 }

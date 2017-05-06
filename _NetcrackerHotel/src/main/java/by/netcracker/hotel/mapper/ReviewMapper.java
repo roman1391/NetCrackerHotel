@@ -21,35 +21,35 @@ public class ReviewMapper implements RowMapper<Review> {
                 break;
             }
             switch (resultSet.getString(2)) {
-            case ColumnName.USERID: {
+            case ColumnName.REVIEW_USERID: {
                 review.setUserId(Integer.parseInt(resultSet.getString(3)));
                 break;
             }
-            case ColumnName.REV_USERNAME: {
+            case ColumnName.REVIEW_USERNAME: {
                 review.setUsername(resultSet.getString(3));
                 break;
             }
-            case ColumnName.HOTELID: {
+            case ColumnName.REVIEW_HOTELID: {
                 review.setHotelId(Integer.parseInt(resultSet.getString(3)));
                 break;
             }
-            case ColumnName.REV_HOTELNAME: {
+            case ColumnName.REVIEW_HOTELNAME: {
                 review.setHotelname(resultSet.getString(3));
                 break;
             }
-            case ColumnName.FEEDBACK: {
+            case ColumnName.REVIEW_FEEDBACK: {
                 review.setText(resultSet.getString(3));
                 break;
             }
-            case ColumnName.STATUS: {
+            case ColumnName.REVIEW_STATUS: {
                 review.setStatus(resultSet.getString(3));
                 break;
             }
-            case ColumnName.TIME: {
+            case ColumnName.REVIEW_TIME: {
                 review.setDate(resultSet.getString(3));
                 break;
             }
-            case ColumnName.STAR: {
+            case ColumnName.REVIEW_STAR: {
                 review.setRating(Integer.parseInt(resultSet.getString(3)));
                 break;
             }

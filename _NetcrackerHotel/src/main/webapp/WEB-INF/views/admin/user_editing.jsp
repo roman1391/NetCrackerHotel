@@ -80,8 +80,8 @@
 
 							</div>
 
-							<a href="${contextPath}/admin/list_of_users">Back to list of users</a> <br> <a
-								href="${contextPath}/admin/admin_page">To admin page</a>
+							<a href="${contextPath}/admin/list_of_users">Back to list of users</a> <br> 
+							<a href="${contextPath}/admin/admin_page">To admin page</a>
 						</div>
 					</div>
 				</div>

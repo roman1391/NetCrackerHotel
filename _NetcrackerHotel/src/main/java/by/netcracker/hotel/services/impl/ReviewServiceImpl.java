@@ -30,8 +30,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Review getByID(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        return reviewDAO.getByID(id);
     }
 
     @Override
@@ -64,6 +63,18 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<Review> getByHotelId(int hotelId) {
         return reviewDAO.getByHotelId(hotelId);
+    }
+
+    @Override
+    public boolean update(Review review) {
+        try {
+            reviewDAO.update(review);
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

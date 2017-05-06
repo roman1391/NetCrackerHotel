@@ -47,8 +47,22 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
     }
 
     @Override
-    public void update(Review entity) {
-        // TODO Auto-generated method stub
+    public void update(Review review) {
+        update(review.getStatus(), ColumnName.REVIEW_STATUS, review.getId());
+
+    }
+
+    private boolean update(Object value, Object column, Object id) {
+        try {
+            if (value == null) {
+                return false;
+            } else {
+                getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(), value, column, id);
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

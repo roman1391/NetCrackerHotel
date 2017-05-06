@@ -39,19 +39,19 @@ public class OrderMapper implements RowMapper<Order> {
                 order.setUsername(resultSet.getString(3));
                 break;
             }
-            case ColumnName.ARRIVAL_DATE: {
+            case ColumnName.HOTEL_ARRIVAL_DATE: {
                 order.setArrivalDate(resultSet.getDate(3));
                 break;
             }
-            case ColumnName.LEAVE_DATE: {
+            case ColumnName.HOTEL_LEAVE_DATE: {
                 order.setLeaveDate(resultSet.getDate(3));
                 break;
             }
-            case ColumnName.PAY_VALUE: {
+            case ColumnName.ORDER_PAY_VALUE: {
                 order.setPayValue(resultSet.getInt(3));
                 break;
             }
-            case ColumnName.IS_PAID: {
+            case ColumnName.ORDER_IS_PAID: {
                 order.setPaid(resultSet.getBoolean(3));
                 break;
             }

@@ -11,4 +11,6 @@ public interface ReviewService extends AbstractService<Review, Integer> {
     String checkReview(int hotelId);
 
     public List<Review> getByHotelId(int hotelId);
+
+    boolean update(Review review);
 }

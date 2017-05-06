@@ -11,20 +11,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
+import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.UserService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
+    private final ReviewService reviewService;
 
     @Autowired
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, ReviewService reviewService) {
         this.userService = userService;
+        this.reviewService = reviewService;
     }
 
     @RequestMapping(value = "/add_user_ref", method = RequestMethod.GET)
@@ -78,6 +82,14 @@ public class AdminController {
         userService.deleteUserByUsername(user.getUsername());
         model.addAttribute("success", "User - " + user.getUsername() + " was successfully deleted.");
         return "admin/admin_page";
+    }
+
+    @RequestMapping(value = "/check_review/{id}", method = RequestMethod.GET)
+    public String checkReview(@Valid @PathVariable("id") int id, Model model) {
+        Review review = reviewService.getByID(id);
+        // reviewService.update(review);
+        model.addAttribute("review", review);
+        return "admin/check_review";
     }
 
 }

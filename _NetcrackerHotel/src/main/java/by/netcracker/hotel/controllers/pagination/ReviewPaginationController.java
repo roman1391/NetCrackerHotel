@@ -29,7 +29,7 @@ public class ReviewPaginationController extends PaginationControllerAbstract<Rev
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");
-        setPageLink("/admin//pagination/list_of_reviews_ajax");
+        setPageLink("/admin/pagination/list_of_reviews_ajax");
         setAjax(true);
     }
 
