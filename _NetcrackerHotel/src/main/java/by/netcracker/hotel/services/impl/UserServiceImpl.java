@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.dao.VerificationTokenDAO;
@@ -14,7 +15,6 @@ import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.UserService;
-import org.springframework.web.context.annotation.SessionScope;
 
 @Service("UserServiceImpl")
 @SessionScope

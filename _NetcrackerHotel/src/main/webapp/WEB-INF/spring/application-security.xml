@@ -60,30 +60,8 @@
         <authentication-provider>
             <password-encoder ref="bcrypt"/>
             <jdbc-user-service id="userDetailsManager" data-source-ref="dataSource"
-                               users-by-username-query="SELECT (
-SELECT v.attribute_value FROM value v
-    INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
-        WHERE attr.attribute_name = 'username' AND v.entity_id = aaa.entity_id) AS 'username',
-(SELECT v.attribute_value FROM value v
-    INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
-        WHERE attr.attribute_name = 'password' AND v.entity_id = aaa.entity_id) AS 'password',
-(SELECT if((SELECT v.attribute_value FROM value v
-    INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
-        WHERE attr.attribute_name = 'enabled' AND v.entity_id = aaa.entity_id)='1', TRUE,FALSE)) AS 'enabled'
-        FROM (SELECT v.entity_id FROM value v
-            INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
-                WHERE attr.attribute_name = 'username' AND v.attribute_value=?) aaa;"
-
-                               authorities-by-username-query="SELECT (
-SELECT v.attribute_value FROM value v
-    INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
-        WHERE attr.attribute_name = 'username' AND v.entity_id = aaa.entity_id) AS 'username',
-(SELECT v.attribute_value FROM value v
-    INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
-        WHERE attr.attribute_name = 'authority' AND v.entity_id = aaa.entity_id) AS 'authority'
-        FROM (SELECT v.entity_id FROM value v
-            INNER JOIN attribute attr ON v.attribute_id = attr.attribute_id
-                WHERE attr.attribute_name = 'username' AND v.attribute_value=?) aaa;"/>
+                               users-by-username-query="${users-by-username-query}"
+                               authorities-by-username-query="${authorities-by-username-query}"/>
         </authentication-provider>
 
     </authentication-manager>

@@ -1,5 +1,6 @@
 <%@ taglib  uri="http://www.springframework.org/tags/form" prefix="form"%>
-<form:form id="registrationForm" style="margin: 20px" action="add-user"
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<form:form id="registrationForm" style="margin: 20px" action="${contextPath}/admin/add-user"
            method="post" modelAttribute="user">
     <div class="form-group">
         <form:label path="firstName">First name</form:label>

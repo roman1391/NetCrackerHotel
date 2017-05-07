@@ -1,7 +1,5 @@
 package by.netcracker.hotel.dao.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,11 +8,11 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.dao.constant.ColumnName;
@@ -43,12 +41,13 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
         this.dataSource = dataSource;
     }
 
+    @Transactional
     @Override
     public void add(User user) {
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.USER.name().toLowerCase());
         getJdbcTemplate().update(SqlQuery.ADD_USER.getQuery(), user.getFirstName(), user.getLastName(),
-            user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail(),
-                user.getAuthority().name(), user.getEnabled());
+            user.getUsername(), passwordEncoder.encode(user.getPassword()), user.getEmail(), user.getAuthority().name(),
+            user.getEnabled());
     }
 
     @Override
