@@ -3,13 +3,11 @@ package by.netcracker.hotel.services.impl;
 import java.util.Date;
 import java.util.List;
 
-import by.netcracker.hotel.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.dao.VerificationTokenDAO;
-import by.netcracker.hotel.dto.UserDTO;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.VerificationToken;
 import by.netcracker.hotel.enums.ROLE;
@@ -22,7 +20,6 @@ public class UserServiceImpl implements UserService {
 
     private UserDAO userDAO;
     private VerificationTokenDAO tokenDAO;
-
 
     @Autowired
     public UserServiceImpl(UserDAO userDAO, VerificationTokenDAO tokenDAO) {
@@ -43,8 +40,6 @@ public class UserServiceImpl implements UserService {
             return userDAO.getByUsername(user.getUsername());
         }
     }
-
-
 
     @Override
     public User addEnabledUser(User user) throws UsernameExistException, EmailExistException {
@@ -88,6 +83,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void fullUpdate(User user) throws UsernameExistException, EmailExistException {
+        User oldUser = userDAO.getByID(user.getId());
+        // if (user.getUsername() == null)
+        // return;
+        if (!user.getUsername().equals(oldUser.getUsername()) && usernameExist(user.getUsername())) {
+            System.out.println("exist!");
+            throw new UsernameExistException();
+        } else if (!user.getEmail().equals(oldUser.getEmail()) && emailExist(user.getEmail())) {
+            throw new EmailExistException();
+        } else {
+            userDAO.update(user);
+        }
+    }
+
+    @Override
     public void profileUpdate(User user) throws UsernameExistException, EmailExistException {
         if (usernameExist(user.getUsername())) {
             throw new UsernameExistException("Account with username - " + user.getUsername() + " are exist");
@@ -99,12 +109,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean update(User entity){
-        try{
-           userDAO.update(entity);
-           return true;
+    public boolean update(User entity) {
+        try {
+            userDAO.update(entity);
+            return true;
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -162,6 +172,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeUserPassword(User user, String password) {
-          userDAO.userPasswordUpdate(user,password);
+        userDAO.userPasswordUpdate(user, password);
     }
 }

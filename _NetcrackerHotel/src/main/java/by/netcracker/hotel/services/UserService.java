@@ -2,11 +2,9 @@ package by.netcracker.hotel.services;
 
 import java.util.List;
 
-import by.netcracker.hotel.dto.UserDTO;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.VerificationToken;
 import by.netcracker.hotel.exceptions.EmailExistException;
-import by.netcracker.hotel.exceptions.UserNotFoundException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 
 /**
@@ -43,7 +41,9 @@ public interface UserService extends AbstractService<User, Integer> {
 
     List<String> getUsernames();
 
-    void changeUserPassword(User user,String password);
+    void changeUserPassword(User user, String password);
 
-    void profileUpdate(User user) throws UsernameExistException,EmailExistException;
+    void profileUpdate(User user) throws UsernameExistException, EmailExistException;
+
+    void fullUpdate(User user) throws UsernameExistException, EmailExistException;
 }
