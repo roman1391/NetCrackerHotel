@@ -90,4 +90,8 @@ public class UserPaginationService extends PaginationServiceAbstract<UserSearchP
             }
         }
     }
+
+    public void setPageNum(int num) {
+        ((UserPaginationDAO) userPaginationDAO).setPageNum(num);
+    }
 }

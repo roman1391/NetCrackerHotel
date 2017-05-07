@@ -21,6 +21,7 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
     private DataSource dataSource;
     private boolean isSorted = false;
     private RowMapper<E> rowMapper;
+    private int pageNum;
     protected List<Object> paramsToQuery = new ArrayList<>();
     protected Map<String, String> mapFilters = new HashMap<>();
     protected Map<String, String> boToDbMap = new HashMap<>();
@@ -29,6 +30,7 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
 
     public AbstractPaginationJdbcDAO(DataSource dataSource) {
         this.dataSource = dataSource;
+        setPageNum(10);
     }
 
     @Override
@@ -50,9 +52,10 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
     public String buildPageQuery(P pparam) {
         StringBuffer query = new StringBuffer();
         query.append(SqlQuery.MAKE_PAGE.getQuery()).append(buildFullQuery(pparam, mapFilters))
-            .append(" ) nn ) aaa limit ")
-            .append(pparam.getResultIndex())
-            .append(" ,10 ) yyy on ooo.entity_id = yyy.entity_id order by num ");
+            .append(" ) nn ) aaa limit ").append(pparam.getResultIndex())
+            // .append(" ,10 ) yyy on ooo.entity_id = yyy.entity_id order by num
+            // ");
+            .append(" ,").append(pageNum).append(" ) yyy on ooo.entity_id = yyy.entity_id order by num ");
         return query.toString();
     }
 
@@ -68,12 +71,12 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
         paramsToQuery.clear();
         setBoToDbMap(boToDbMap, pparam);
         setMapFilters(mapFilters, pparam);
-        // простой запрос
+        // simple query
         if (pparam.getSortName() == null) {
             query.append(SqlQuery.ALL_PAGINATION.getQuery()); // 1:type_id
             query.append(!hasAnyFilter(mapFilters) ? " order by entity_id " : "");
             paramsToQuery.add(typeId);
-        } else { // если есть сортировка
+        } else { // if sorting exist
             paramsToQuery.add(typeName);
             paramsToQuery.add(boToDbMap.get(pparam.getSortName().toLowerCase()));
             query.append(SqlQuery.SORTED_PAGINATION.getQuery()); // 2:'user','username'
@@ -81,7 +84,7 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
             query.append(" ) aaa) bbb on v.entity_id = bbb.entity_id order by bbb.num ) ooo  ");
             isSorted = true;
         }
-        // фильтры
+        // filters
         if (hasAnyFilter(mapFilters)) {
             if (isSorted) {
                 query.append(" ").append(SqlQuery.AFTER_SORTED_PART.getQuery());
@@ -149,6 +152,14 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
 
     public Map<String, String> getBoToDbMap() {
         return boToDbMap;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
 
     public abstract void setBoToDbMap(Map<String, String> boToDbMap, P pparam);

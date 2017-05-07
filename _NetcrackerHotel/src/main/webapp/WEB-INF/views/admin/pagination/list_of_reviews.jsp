@@ -4,6 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="pg" uri="http://pagination/pagination-spring3.tld" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
 <title>List of reviews</title>
@@ -23,6 +24,11 @@
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
 					<h4>List of reviews:</h4>
+					<span >Records per page:</span>
+                    <span ><a href="${contextPath}/admin/list_of_reviews/5">5</a></span>
+                    <span ><a href="${contextPath}/admin/list_of_reviews/10">10</a></span>
+                    <span ><a href="${contextPath}/admin/list_of_reviews/25">25</a></span>
+                    <span ><a href="${contextPath}/admin/list_of_reviews/50">50</a></span>
 						
 	<div style="padding-top:15px;padding-left:5px;padding-right:10px;">
         <c:url value="${paginationResult.pageLink}" var="pageLink"/>
@@ -60,7 +66,7 @@
     </div> 
 
 
-						<a href="admin_page">Back to admin page</a>
+						<a href="${contextPath}/admin/admin_page">Back to admin page</a>
 					</div>
 				</div>
 			</div>

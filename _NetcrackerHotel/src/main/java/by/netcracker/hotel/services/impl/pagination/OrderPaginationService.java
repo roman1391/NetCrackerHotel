@@ -91,4 +91,8 @@ public class OrderPaginationService extends PaginationServiceAbstract<OrderSearc
             }
         }
     }
+
+    public void setPageNum(int num) {
+        ((OrderPaginationDAO) orderPaginationDAO).setPageNum(num);
+    }
 }

@@ -4,6 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="pg" uri="http://pagination/pagination-spring3.tld" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>List of hotels</title>
@@ -28,6 +29,11 @@
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
 					<h4>List of hotels:</h4>
+					<span >Records per page:</span>
+                    <span ><a href="${contextPath}/admin/list_of_hotels/5">5</a></span>
+                    <span ><a href="${contextPath}/admin/list_of_hotels/10">10</a></span>
+                    <span ><a href="${contextPath}/admin/list_of_hotels/25">25</a></span>
+                    <span ><a href="${contextPath}/admin/list_of_hotels/50">50</a></span>
 
 	<div style="padding-top:15px;padding-left:5px;padding-right:10px;">
         <c:url value="${paginationResult.pageLink}" var="pageLink"/>
@@ -61,7 +67,7 @@
                  <jsp:attribute name="controlButton">
                      <div style="padding-top:10px;">
                         <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Delete</form:button></span>
-                        <span ><a href="hotel/add">Add new hotel</a></span>
+                        <span ><a href="${contextPath}/admin/hotel/add">Add new hotel</a></span>
                     </div>
                 </jsp:attribute>
 
@@ -70,7 +76,7 @@
     </div>
 
 
-						<a href="admin_page">Back to admin page</a>
+						<a href="${contextPath}/admin/admin_page">Back to admin page</a>
 					</div>
 				</div>
 			</div>

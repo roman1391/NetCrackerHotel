@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +42,16 @@ public class ReviewPaginationController extends PaginationControllerAbstract<Rev
 
     @RequestMapping(value = "/list_of_reviews", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineJsp(@ModelAttribute(PPARAM) ReviewSearchParam pparam, Model model) throws Exception {
+        Map<String, Object> map = assignModel(pparam, null, false);
+        model.addAllAttributes(map);
+        return "admin/pagination/list_of_reviews";
+    }
+
+    @RequestMapping(value = "/list_of_reviews/{num}", method = { RequestMethod.GET, RequestMethod.POST })
+    public String defineJsp(@ModelAttribute(PPARAM) ReviewSearchParam pparam, @PathVariable("num") int num, Model model)
+        throws Exception {
+        setDefaultRecordPerPage(num);
+        reviewPaginationService.setPageNum(num);
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
         return "admin/pagination/list_of_reviews";

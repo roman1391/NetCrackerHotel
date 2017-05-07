@@ -92,4 +92,8 @@ public class HotelPaginationService extends PaginationServiceAbstract<HotelSearc
             }
         }
     }
+
+    public void setPageNum(int num) {
+        ((HotelPaginationDAO) hotelPaginationDAO).setPageNum(num);
+    }
 }

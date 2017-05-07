@@ -97,4 +97,8 @@ public class ReviewPaginationService extends PaginationServiceAbstract<ReviewSea
         }
     }
 
+    public void setPageNum(int num) {
+        ((ReviewPaginationDAO) reviewPaginationDAO).setPageNum(num);
+    }
+
 }

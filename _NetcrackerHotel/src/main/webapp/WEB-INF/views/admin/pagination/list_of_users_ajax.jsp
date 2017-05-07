@@ -6,6 +6,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="pg" uri="http://pagination/pagination-spring3.tld" %>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <pg:pagination_ajax pparam="${pparam}" paginationResult="${paginationResult}">
     <jsp:attribute name="columnsContent">
@@ -13,7 +14,7 @@
                     <td class="cell"><span><c:out value="${bo.authority}"/></span></td>
                     <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.enabled}"/></span></td>
                     <td class="cell"><span><c:out value="${bo.email}"/></span></td> 
-                    <td class="cell"><span><a href="edit_form/${bo.username}">See profile</a> </span></td> 
+                    <td class="cell"><span><a href="${contextPath}/admin/edit_form/${bo.username}">See profile</a> </span></td> 
                 </jsp:attribute>
 </pg:pagination_ajax>
 <script>
