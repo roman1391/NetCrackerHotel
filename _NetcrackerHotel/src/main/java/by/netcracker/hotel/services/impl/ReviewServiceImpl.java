@@ -16,8 +16,10 @@ import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.UserService;
+import org.springframework.web.context.annotation.SessionScope;
 
 @Service("ReviewServiceImpl")
+@SessionScope
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewDAO reviewDAO;

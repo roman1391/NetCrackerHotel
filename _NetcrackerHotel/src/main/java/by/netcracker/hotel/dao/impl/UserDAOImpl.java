@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import by.netcracker.hotel.mapper.UserMapper;
  */
 
 @Repository
+@Singleton
 public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     private DataSource dataSource;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

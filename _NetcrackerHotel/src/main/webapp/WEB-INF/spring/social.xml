@@ -18,7 +18,7 @@
 
 
        <facebook:config app-id="${facebook.appId}" app-secret="${facebook.appSecret}"
-                        app-namespace="socialshowcase"  />
+                        app-namespace="socialshowcase" />
 
        <twitter:config app-id="${twitter.appId}" app-secret="${twitter.appSecret}" />
 

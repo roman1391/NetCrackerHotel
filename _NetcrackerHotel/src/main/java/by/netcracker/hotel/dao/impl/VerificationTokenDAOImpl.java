@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import by.netcracker.hotel.mapper.VerificationTokenMapper;
  * Created by slava on 15.04.17.
  */
 @Repository
+@Singleton
 public class VerificationTokenDAOImpl extends JdbcDaoSupport implements VerificationTokenDAO {
     private DataSource dataSource;
 

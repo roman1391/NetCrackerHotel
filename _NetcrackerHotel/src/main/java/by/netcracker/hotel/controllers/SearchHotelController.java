@@ -1,12 +1,15 @@
 package by.netcracker.hotel.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import by.netcracker.hotel.entities.Room;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.HotelService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class SearchHotelController {
@@ -54,6 +58,12 @@ public class SearchHotelController {
         }
         model.addAttribute("places", places);
         return "search_page";
+    }
+
+    @RequestMapping(value = "/hotel_discription_ajax", method = RequestMethod.GET)
+    public @ResponseBody List<String> ajaxHotelDiscription(){
+
+        return hotelService.getPlaces();
     }
 
 }

@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 import by.netcracker.hotel.dao.OrderDAO;
 import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.services.OrderService;
+import org.springframework.web.context.annotation.SessionScope;
 
 /**
  * Created by Alexander on 25.04.2017.
  */
 @Service("OrderServiceImpl")
+@SessionScope
 public class OrderServiceImpl implements OrderService {
 
     private final OrderDAO orderDAO;
