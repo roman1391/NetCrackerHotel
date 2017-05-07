@@ -63,11 +63,14 @@
                                 </form:select>
                             </td>
                             <td style="width:80px;">Username:</td>
-                            <td style="width:160px;"><form:select path="username" class="form-control" id="selectUser" multiple="multiple" cssStyle="width:150px;">
+                            <td style="width:160px;">
+                            <form:select path="username" class="form-control" id="selectUser" multiple="multiple" cssStyle="width:150px;">
                                 <form:options items="${usernames}"/>
                             </form:select></td>
-                            <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button"  >Search</form:button></span></td>
-                            <td style="width:75px;"><span class="button"><form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
+                            <td style="width:75px;"><span class="button">
+                            <form:button id="searchButton" name="buttonAction" value="searchButton" class="button"  >Search</form:button></span></td>
+                            <td style="width:75px;"><span class="button">
+                            <form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
                         </tr>
                     </table>
                 </jsp:attribute>
@@ -79,8 +82,7 @@
                 </jsp:attribute>
 
             </pg:pagination>
-        </form:form>
-        
+        </form:form>      
     </div>
 
                     <a href="${contextPath}/admin/admin_page">Back to admin page</a>
@@ -103,71 +105,3 @@ $('#clearButton').click(function() {
     $("#selectUser").val(null).trigger("change");
 });
 </script>
-
-<%-- 						<h3>List of administrators:</h3>
-						<div>
-							<table border="1">
-								<tr>
-									<th>Username</th>
-									<th>Profile</th>
-								</tr>
-								<c:forEach var="user" items="${users}">
-									<c:if test="${user.authority eq 'ADMIN'}">
-										<tr>
-											<td>${user.username}</td>
-											<td><form:form id="editUser" action="edit_form"
-													modelAttribute="user" method="post">
-													<form:input path="username" type="hidden" name="username"
-														value="${user.username}"></form:input>
-													<form:button type="submit">See profile</form:button>
-												</form:form></td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</table>
-						</div>
-
-						<h3>List of users:</h3>
-						<div>
-							<table border="1">
-								<tr>
-									<th>Username</th>
-									<th>Status</th>
-									<th>Profile</th>
-									<th>Block</th>
-								</tr>
-								<c:forEach var="user" items="${users}">
-									<c:if test="${user.authority ne 'ADMIN'}">
-										<tr>
-											<td>${user.username}</td>
-											<td>${user.authority}</td>
-											<td><form:form id="editUser" action="edit_form"
-													modelAttribute="user" method="post">
-													<form:input path="username" type="hidden" name="username"
-														value="${user.username}"></form:input>
-													<form:button type="submit">See profile</form:button>
-												</form:form></td>
-											<c:choose>
-												<c:when test="${user.authority ne 'BLOCKED' }">
-													<td><form:form id="blockUser" action="block_user"
-															modelAttribute="user" method="post">
-															<form:input path="username" type="hidden" name="username"
-																value="${user.username}"></form:input>
-															<form:button type="submit">Block</form:button>
-														</form:form></td>
-												</c:when>
-												<c:when test="${user.authority eq 'BLOCKED' }">
-													<td><form:form id="unblockUser" action="unblock_user"
-															modelAttribute="user" method="post">
-															<form:input path="username" type="hidden" name="username"
-																value="${user.username}"></form:input>
-															<form:button type="submit">Unblock</form:button>
-														</form:form></td>
-												</c:when>
-											</c:choose>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</table>
-							<a href="add_user_ref">Add new user</a>
-						</div> --%>

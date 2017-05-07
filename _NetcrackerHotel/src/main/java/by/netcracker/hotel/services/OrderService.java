@@ -1,8 +1,8 @@
 package by.netcracker.hotel.services;
 
-import by.netcracker.hotel.entities.Order;
-
 import java.util.List;
+
+import by.netcracker.hotel.entities.Order;
 
 /**
  * Created by Alexander on 25.04.2017.
