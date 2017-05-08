@@ -10,4 +10,5 @@ import java.util.List;
 public interface RoomService extends AbstractService<Room, Integer>  {
     void add (Room room);
     List<Room> getByHotelID (int hotelID);
+    List<Room> getFreeRoomsInHotelByDate(int hotelID, String start, String end);
 }
