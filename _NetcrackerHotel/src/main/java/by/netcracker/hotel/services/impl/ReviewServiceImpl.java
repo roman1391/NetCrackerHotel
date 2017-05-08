@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 import by.netcracker.hotel.dao.ReviewDAO;
 import by.netcracker.hotel.entities.Review;
@@ -16,19 +17,22 @@ import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.UserService;
-import org.springframework.web.context.annotation.SessionScope;
 
 @Service("ReviewServiceImpl")
 @SessionScope
 public class ReviewServiceImpl implements ReviewService {
 
-    private final ReviewDAO reviewDAO;
+    private ReviewDAO reviewDAO;
     private UserService userService;
 
     @Autowired
     public ReviewServiceImpl(ReviewDAO reviewDAO, UserService userService) {
         this.reviewDAO = reviewDAO;
         this.userService = userService;
+    }
+
+    public ReviewServiceImpl() {
+        super();
     }
 
     @Override
@@ -90,6 +94,23 @@ public class ReviewServiceImpl implements ReviewService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public ReviewDAO getReviewDAO() {
+        return reviewDAO;
+    }
+
+    public void setReviewDAO(ReviewDAO reviewDAO) {
+        this.reviewDAO = null;
+        this.reviewDAO = reviewDAO;
     }
 
 }

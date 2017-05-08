@@ -19,7 +19,7 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-	<tx:annotation-driven />   
+	<tx:annotation-driven  transaction-manager="transactionManager" />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving
 		up static resources in the ${webappRoot}/resources directory -->
@@ -44,6 +44,11 @@
 				class= "org.springframework.social.connect.web.ProviderSignInController" >
 		<beans:property name="applicationUrl" value="http://localhost:8080" />
 		<beans:property name="signInUrl" value="/" />
+	</beans:bean>
+	
+	<beans:bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 
 

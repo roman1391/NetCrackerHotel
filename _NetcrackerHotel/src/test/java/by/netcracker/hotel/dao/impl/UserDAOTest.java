@@ -1,10 +1,7 @@
-package by.netcracker.hotel;
+package by.netcracker.hotel.dao.impl;
 
-import by.netcracker.hotel.dao.UserDAO;
-import by.netcracker.hotel.dao.impl.UserDAOImpl;
-import by.netcracker.hotel.entities.EntityBuilder.EntityBuilder;
-import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.enums.ROLE;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,31 +13,31 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.List;
-
+import by.netcracker.hotel.dao.UserDAO;
+import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.entities.EntityBuilder.EntityBuilder;
+import by.netcracker.hotel.enums.ROLE;
 
 /**
  * Created by slava on 09.04.17.
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/spring-test/root-context.xml",
-        "/spring-test/mysql-datasource.xml",
-        "/spring-test/servlet-context.xml"})
+@ContextConfiguration(locations = { "/spring-test/root-context.xml", "/spring-test/mysql-datasource.xml",
+        "/spring-test/servlet-context.xml" })
 @WebAppConfiguration
 public class UserDAOTest {
 
     @Autowired
     private WebApplicationContext context;
+    @Autowired
     private UserDAO userDAO;
     private User expected;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Before
     public void setUp() {
-        userDAO = (UserDAOImpl) context.getBean("UserDAOJdbcImpl");
-        expected = EntityBuilder.buildUser("Test", "Test", "test",
-                "12345", "test@gmail.com", true, ROLE.USER);
+        expected = EntityBuilder.buildUser("Test", "Test", "test", "12345", "test@gmail.com", true, ROLE.USER);
     }
 
     @Test
@@ -68,8 +65,7 @@ public class UserDAOTest {
         List<User> expected = userDAO.getAll();
         int size = 10;
         for (int i = 0; i < size; i++) {
-            User user = EntityBuilder.buildUser("Test", "Test", "test" + i,
-                    "12345", "test@gmail.com", true, ROLE.USER);
+            User user = EntityBuilder.buildUser("Test", "Test", "test" + i, "12345", "test@gmail.com", true, ROLE.USER);
             expected.add(user);
             userDAO.add(user);
         }
@@ -93,8 +89,8 @@ public class UserDAOTest {
     public void testUpdate() throws Exception {
         userDAO.add(expected);
         expected = userDAO.getByUsername(expected.getUsername());
-        User changes = EntityBuilder.buildUser("update", "update", "update",
-                expected.getPassword(),"update@gmail.com", false, ROLE.ADMIN);
+        User changes = EntityBuilder.buildUser("update", "update", "update", expected.getPassword(), "update@gmail.com",
+            false, ROLE.ADMIN);
         changes.setId(expected.getId());
         userDAO.update(changes);
         User actual = userDAO.getByID(changes.getId());

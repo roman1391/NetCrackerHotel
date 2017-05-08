@@ -15,11 +15,14 @@ public class Review {
     public Review() {
     }
 
-    public Review(int id, int userId, int hotelId, String text, String status, String date, int rating) {
+    public Review(int id, int userId, int hotelId, String username, String hotelname, String text, String status,
+        String date, int rating) {
         super();
         this.id = id;
         this.userId = userId;
         this.hotelId = hotelId;
+        this.username = username;
+        this.hotelname = hotelname;
         this.text = text;
         this.status = status;
         this.date = date;
