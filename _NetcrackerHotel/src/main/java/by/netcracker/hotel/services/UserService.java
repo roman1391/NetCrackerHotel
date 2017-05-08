@@ -21,7 +21,7 @@ public interface UserService extends AbstractService<User, Integer> {
 
     User getUserByEmail(String email);
 
-    boolean update(User dto);
+    boolean update(User user);
 
     void blockUser(User user);
 

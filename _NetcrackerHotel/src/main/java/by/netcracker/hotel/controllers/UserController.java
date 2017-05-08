@@ -1,39 +1,22 @@
 package by.netcracker.hotel.controllers;
 
-import by.netcracker.hotel.dto.UserDTO;
-import by.netcracker.hotel.entities.Order;
-import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.entities.VerificationToken;
 import by.netcracker.hotel.enums.ROLE;
-import by.netcracker.hotel.events.ForgotPasswordEvent;
 import by.netcracker.hotel.exceptions.EmailExistException;
-import by.netcracker.hotel.exceptions.UserNotFoundException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
-import by.netcracker.hotel.services.OrderService;
 import by.netcracker.hotel.services.UserService;
 import by.netcracker.hotel.util.CloudinaryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
-import javax.validation.Valid;
-
-import java.util.Arrays;
-import java.util.Date;
 
 import static by.netcracker.hotel.util.CloudinaryUtil.saveFileToCloud;
 
@@ -51,21 +34,21 @@ public class UserController {
 
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String save(@ModelAttribute("currentUser") User dto, @RequestParam("file") MultipartFile file,Model model) {
-        dto.setAvatar(saveFileToCloud(file));
+    public String save(@ModelAttribute("currentUser") User user, @RequestParam("file") MultipartFile file,Model model) {
+        user.setAvatar(saveFileToCloud(file));
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(!userDetails.getUsername().equals(dto.getUsername())){
+        if(!userDetails.getUsername().equals(user.getUsername())){
            try{
-               userService.profileUpdate(dto);
+               userService.profileUpdate(user);
            } catch (UsernameExistException e){
-               model.addAttribute("error", "Account with username - " + dto.getUsername() + " are exist");
+               model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
                return "profile";
            } catch (EmailExistException e){
-               model.addAttribute("error", "Account with email - " + dto.getEmail() + " are exist");
+               model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
                return "profile";
            }
         } else {
-            userService.update(dto);
+            userService.update(user);
         }
         return "profile";
     }

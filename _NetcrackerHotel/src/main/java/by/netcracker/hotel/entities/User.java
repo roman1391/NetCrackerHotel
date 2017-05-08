@@ -1,17 +1,13 @@
 package by.netcracker.hotel.entities;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import by.netcracker.hotel.dto.UserDTO;
 import by.netcracker.hotel.enums.ROLE;
 
-public class User implements BusinessObject {
+public class User {
 
     public static User getUser() {
         User user = new User();
@@ -134,20 +130,6 @@ public class User implements BusinessObject {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    @Override
-    public UserDTO toDTO() {
-        UserDTO dto = new UserDTO();
-        dto.setId(getId());
-        dto.setUsername(getUsername());
-        dto.setFirstName(getFirstName());
-        dto.setLastName(getLastName());
-        dto.setEmail(getEmail());
-        dto.setAuthority(getAuthority());
-        dto.setEnabled(getEnabled());
-        dto.setAvatar(getAvatar());
-        return dto;
     }
 
     @Override
