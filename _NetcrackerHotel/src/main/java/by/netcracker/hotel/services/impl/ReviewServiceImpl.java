@@ -109,7 +109,6 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     public void setReviewDAO(ReviewDAO reviewDAO) {
-        this.reviewDAO = null;
         this.reviewDAO = reviewDAO;
     }
 

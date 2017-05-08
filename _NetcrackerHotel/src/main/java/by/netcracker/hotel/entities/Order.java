@@ -21,15 +21,29 @@ public class Order {
     public Order() {
     }
 
-    public Order(int id, int roomId, int userId, Date arrivalDate, Date leaveDate, int payValue, boolean isPaid,
-        String firstName, String lastName) {
+    public Order(int id, int roomId, int userId, Date arrivalDate, Date leaveDate, int payValue, String firstName,
+        String lastName, String username, String hotelname) {
+        super();
         this.id = id;
         this.roomId = roomId;
         this.userId = userId;
         this.arrivalDate = arrivalDate;
         this.leaveDate = leaveDate;
         this.payValue = payValue;
-        this.isPaid = isPaid;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.hotelname = hotelname;
+    }
+
+    public Order(int id, int roomId, int userId, Date arrivalDate, Date leaveDate, int payValue, String firstName,
+        String lastName) {
+        this.id = id;
+        this.roomId = roomId;
+        this.userId = userId;
+        this.arrivalDate = arrivalDate;
+        this.leaveDate = leaveDate;
+        this.payValue = payValue;
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -121,4 +135,55 @@ public class Order {
     public void setHotelname(String hotelname) {
         this.hotelname = hotelname;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Order other = (Order) obj;
+        if (arrivalDate == null) {
+            if (other.arrivalDate != null)
+                return false;
+        }
+        if (firstName == null) {
+            if (other.firstName != null)
+                return false;
+        } else if (!firstName.equals(other.firstName))
+            return false;
+        if (hotelname == null) {
+            if (other.hotelname != null)
+                return false;
+        } else if (!hotelname.equals(other.hotelname))
+            return false;
+        if (id != other.id)
+            return false;
+        if (isPaid != other.isPaid)
+            return false;
+        if (lastName == null) {
+            if (other.lastName != null)
+                return false;
+        } else if (!lastName.equals(other.lastName))
+            return false;
+        if (leaveDate == null) {
+            if (other.leaveDate != null)
+                return false;
+        }
+        if (payValue != other.payValue)
+            return false;
+        if (roomId != other.roomId)
+            return false;
+        if (userId != other.userId)
+            return false;
+        if (username == null) {
+            if (other.username != null)
+                return false;
+        } else if (!username.equals(other.username))
+            return false;
+        return true;
+    }
+
 }

@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.web.context.WebApplicationContext;
 
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.entities.User;
@@ -28,8 +27,6 @@ import by.netcracker.hotel.enums.ROLE;
 @WebAppConfiguration
 public class UserDAOTest {
 
-    @Autowired
-    private WebApplicationContext context;
     @Autowired
     private UserDAO userDAO;
     private User expected;
