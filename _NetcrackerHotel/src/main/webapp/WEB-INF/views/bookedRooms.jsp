@@ -32,7 +32,7 @@
                         <tbody>
                         <c:forEach items="${orders}" var="order">
                             <tr>
-                                Order Id: ${order.id}
+                                <br>Order Id: ${order.id}
                                 <form:form method="post" id="currentUser" action="${contextPath}/delete_order/${order.id}"
                                            modelAttribute="currentUser">
                                     <form:input path="id" type="hidden" name="id"

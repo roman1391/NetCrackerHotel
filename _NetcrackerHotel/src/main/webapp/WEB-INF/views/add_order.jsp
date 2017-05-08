@@ -32,6 +32,8 @@
         <p>Please enter additional information</p>
         <p>Room ID: ${roomId}</p>
         <p>Username: ${currentUser.username}</p>
+        <p>Arrival date: ${searchFilter.startDate}</p>
+        <p>Leave date: ${searchFilter.endDate}</p>
         <%@include file="../jsp_elements/addorderform.jsp"%>
     </div>
     <%@include file="../jsp_elements/_footer.jsp"%>

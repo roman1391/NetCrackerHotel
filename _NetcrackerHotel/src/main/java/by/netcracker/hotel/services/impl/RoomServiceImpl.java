@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,5 +40,17 @@ public class RoomServiceImpl implements RoomService{
     @Override
     public List<Room> getByHotelID(int hotelID) {
         return roomDAO.getByHotelID(hotelID);
+    }
+
+    @Override
+    public List<Room> getFreeRoomsInHotelByDate(int hotelID, String start, String end) {
+        List<Room> freeRooms = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            freeRooms = roomDAO.getFreeRoomsInHotelByDate(hotelID, dateFormat.parse(start), dateFormat.parse(end));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return freeRooms;
     }
 }

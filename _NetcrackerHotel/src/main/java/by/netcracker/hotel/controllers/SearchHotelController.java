@@ -12,16 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.HotelService;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@SessionAttributes("searchFilter")
 public class SearchHotelController {
     private final HotelService hotelService;
 
@@ -53,6 +51,7 @@ public class SearchHotelController {
             model.addAttribute("hotels", hotels);
             model.addAttribute("choosenHotel", new Hotel());
             model.addAttribute("search", chosenPlaces);
+            //model.addAttribute("searchFilter", searchFilter);
         } else {
             model.addAttribute("message", "Please, enter place for search!");
         }
