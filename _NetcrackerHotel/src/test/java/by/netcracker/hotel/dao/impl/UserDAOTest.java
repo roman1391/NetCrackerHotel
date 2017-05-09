@@ -78,7 +78,9 @@ public class UserDAOTest {
         }
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
         for (User user : actual) {
-            userDAO.deleteByID(user.getId());
+            if (user.getEmail().equals("test@gmail.com")) {
+                userDAO.deleteByUsername(user.getUsername());
+            }
         }
     }
 
