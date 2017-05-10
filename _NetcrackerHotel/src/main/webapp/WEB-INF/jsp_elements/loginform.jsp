@@ -31,7 +31,6 @@
         </div>
 
     </form>
-
     <div class="form-group" >
         <div class="d-inline-block">
             <form action="<c:url value="/signin/facebook" />" method="POST">

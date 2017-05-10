@@ -62,8 +62,7 @@
 					</div>
 					<div class="carousel-item ">
 						<div class="carousel-caption">
-							<a href="/registration" class="btn-link"><h1>Registration</h1></a>
-							<a href="/login" class="btn-link"><h1>Login</h1></a>
+							<h1>Enjoy it.</h1>
 						</div>
 						<img class="img-responsive" src="http://res.cloudinary.com/netcrackerhotel/image/upload/v1494365838/slide3.jpg" alt="Slide 3" />
 					</div>
