@@ -1,3 +1,5 @@
+@import "footer.css";
+
 #wrapper{
     margin-top: 15px;
 }
@@ -9,4 +11,7 @@
 footer {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+body {
 }

@@ -8,6 +8,7 @@
 	 ${error}
 </c:if>
 <div class="container">
+    <h1>Please Sign In</h1>
     <form style="margin-top: 20px" name='form_login' action="j_spring_security_check" method='POST'>
         <div class="input-group margin-bottom-sm">
             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
