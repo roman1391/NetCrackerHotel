@@ -9,21 +9,23 @@
 </c:if>
 <div class="container">
     <form style="margin-top: 20px" name='form_login' action="j_spring_security_check" method='POST'>
-        <div class="form-group">
+        <div class="input-group margin-bottom-sm">
+            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
             <input  type="text" name="user_login" class="form-control"
                     placeholder="Username" required="required" />
         </div>
-        <div class="form-group">
+        <div class="input-group ">
+            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
             <input  type="password" name="user_password" id="password" class="form-control"
                     placeholder="Password" required="required" />
         </div>
-        <div class="form-group">
+        <div class="button-group">
                 <label class="checkbox-inline">
                     <input style="margin-right: 5px" name="_spring_security_remember_me"
                            type="checkbox" class="checkAdmin">Remember me</label>
             <button style="margin-left:15px;" type="submit" class="btn btn-primary">Login</button>
         </div>
-        <div class="form-group">
+        <div class="button-group">
             <a href="/forgot_password" class="btn btn-link" >Forgot password ?</a>
             <a href="registration" class="btn btn-link">Register</a>
         </div>

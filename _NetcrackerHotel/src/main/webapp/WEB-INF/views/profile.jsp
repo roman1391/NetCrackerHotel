@@ -17,6 +17,12 @@
             background: transparent;
             border: none;
         }
+        img {
+            max-width: 200px;
+            max-height: 200px;
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
 
@@ -44,8 +50,7 @@
         <div class="d-inline-block form-group">
             <img class="img-responsive" src="<c:url value="${currentUser.avatar}"/>">
             <div class="form-group">
-                <input type="file" name="file" id="loadAvatar" onclick="onFileSelected(event)">
-                <form:input path="avatar" class="form-control" />
+                <input disabled="true" class="editable" type="file" name="file" id="loadAvatar" onclick="onFileSelected(event)">
             </div>
         </div>
         <div class="d-inline-block form-group">
@@ -75,7 +80,7 @@
             <div class="form-group">
                 <div class="btn-group">
                     <form:button id="save-btn" style="display: none" type="submit" class="btn btn-success">Save</form:button>
-                    <button style="margin-left: 5px; display: none" id="cancel-btn" onclick="onCancel()" class="btn btn-danger">Cancel</button>
+                    <button type="button" style="margin-left: 5px; display: none" id="cancel-btn" onclick="onCancel()" class="btn btn-danger">Cancel</button>
                 </div>
             </div>
 
