@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 /**
  * Created by slava on 15.04.17.
  */
-public class VerificationTokenMapper implements RowMapper<VerificationToken> {
+public class    VerificationTokenMapper implements RowMapper<VerificationToken> {
     @Override
     public VerificationToken mapRow(ResultSet resultSet, int i) throws SQLException {
         VerificationToken token = new VerificationToken();

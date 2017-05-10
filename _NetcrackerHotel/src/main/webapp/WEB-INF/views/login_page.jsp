@@ -19,7 +19,7 @@
             </div>
         </c:if>
         <div class="row row-offcanvas row-offcanvas-left">
-            <%@include file="../jsp_elements/_sidebar.jsp" %>
+            <%@include file="../jsp_elements/loginform.jsp" %>
         </div>
     </div>
 </div>

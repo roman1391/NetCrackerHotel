@@ -43,6 +43,8 @@
 
     </http>
 
+
+
     <beans:bean id = "socialRememberMe" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices" >
         <beans:property name="userDetailsService" ref="userDetailsManager" />
         <beans:property name="key" value="1535135124421" />
@@ -54,7 +56,6 @@
     <beans:bean id="tokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl" >
         <beans:property name="dataSource" ref="dataSource" />
     </beans:bean>
-
 
     <authentication-manager>
         <authentication-provider>
