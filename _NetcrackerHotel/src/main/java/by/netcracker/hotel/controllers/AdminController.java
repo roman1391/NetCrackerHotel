@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.WebApplicationContext;
 
 import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.entities.Review;
@@ -24,12 +25,16 @@ import by.netcracker.hotel.services.UserService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    private WebApplicationContext context;
     private final UserService userService;
     private final ReviewService reviewService;
     private final OrderService orderService;
 
     @Autowired
-    public AdminController(UserService userService, ReviewService reviewService, OrderService orderService) {
+    public AdminController(WebApplicationContext context, UserService userService, ReviewService reviewService,
+        OrderService orderService) {
+        this.context = context;
         this.userService = userService;
         this.reviewService = reviewService;
         this.orderService = orderService;
@@ -37,7 +42,7 @@ public class AdminController {
 
     @RequestMapping(value = "/add_user_ref", method = RequestMethod.GET)
     public String getAddUserForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", context.getBean("user"));
         return "admin/add_user";
     }
 
@@ -109,7 +114,7 @@ public class AdminController {
     public String orderPage(@Valid @PathVariable("id") int id, Model model) {
         Order order = orderService.getByID(id);
         model.addAttribute("order", order);
-        model.addAttribute("orderr", new Order());
+        model.addAttribute("orderr", context.getBean("order"));
         return "admin/order_page";
     }
 

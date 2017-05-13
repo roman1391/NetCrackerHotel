@@ -1,16 +1,23 @@
 package by.netcracker.hotel.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
-
-import by.netcracker.hotel.entities.User;
 
 @Controller
 public class RouterController {
+
+    private WebApplicationContext context;
+
+    @Autowired
+    public RouterController(WebApplicationContext context) {
+        this.context = context;
+    }
 
     @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
     public ModelAndView home(@RequestParam(value = "error", required = false) String error) {
@@ -27,7 +34,7 @@ public class RouterController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(Model model) {
-        model.addAttribute("activeUser", new User());
+        model.addAttribute("activeUser", context.getBean("user"));
         return "profile";
     }
 
@@ -46,7 +53,7 @@ public class RouterController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", context.getBean("user"));
         return "registration";
     }
 

@@ -1,15 +1,18 @@
 package by.netcracker.hotel.entities;
 
-
-import by.netcracker.hotel.cloud.CloudinaryConnector;
-import com.cloudinary.Transformation;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.cloudinary.Transformation;
+
+import by.netcracker.hotel.cloud.CloudinaryConnector;
 
 /**
  * Created by Varvara on 4/1/2017.
  */
+@Component
 public class Hotel {
 
     private int id;
@@ -34,7 +37,7 @@ public class Hotel {
         this.photos = photos;
     }
 
-    public static List<Room> getRooms(){
+    public static List<Room> getRooms() {
         List<Room> rooms = new ArrayList<>();
         rooms.add(new Room(1, 1, 1, 1));
         rooms.add(new Room(2, 2, 2, 2));
@@ -104,7 +107,9 @@ public class Hotel {
     }
 
     public void setMainPhoto(String mainPhoto) {
-        this.mainPhoto = CloudinaryConnector.getCloudinary().url().format("jpg").transformation(new Transformation().width(PHOTO_WIDTH).height(PHOTO_HEIGHT).crop("fit")).generate(mainPhoto);
+        this.mainPhoto = CloudinaryConnector.getCloudinary().url().format("jpg")
+            .transformation(new Transformation().width(PHOTO_WIDTH).height(PHOTO_HEIGHT).crop("fit"))
+            .generate(mainPhoto);
     }
 
     @Override
@@ -115,7 +120,8 @@ public class Hotel {
     }
 
     public void addPhoto(String photo) {
-        photos.add(CloudinaryConnector.getCloudinary().url().format("jpg").transformation(new Transformation().width(PHOTO_WIDTH).height(PHOTO_HEIGHT).crop("fill")).generate(photo));
+        photos.add(CloudinaryConnector.getCloudinary().url().format("jpg")
+            .transformation(new Transformation().width(PHOTO_WIDTH).height(PHOTO_HEIGHT).crop("fill")).generate(photo));
     }
 
     private static final int PHOTO_WIDTH = 600, PHOTO_HEIGHT = 300;

@@ -1,15 +1,17 @@
 package by.netcracker.hotel.entities;
 
-import org.springframework.data.annotation.Id;
-
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.stereotype.Component;
+
 /**
  * Created by slava on 15.04.17.
  */
+@Component
 public class VerificationToken {
     @Id
     private int id;
@@ -75,13 +77,13 @@ public class VerificationToken {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         VerificationToken that = (VerificationToken) o;
-        return getId() == that.getId() &&
-                getUserID() == that.getUserID() &&
-                Objects.equals(getToken(), that.getToken()) &&
-                Objects.equals(getDate(), that.getDate());
+        return getId() == that.getId() && getUserID() == that.getUserID() && Objects.equals(getToken(), that.getToken())
+            && Objects.equals(getDate(), that.getDate());
     }
 
     @Override

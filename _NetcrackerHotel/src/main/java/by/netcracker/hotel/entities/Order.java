@@ -2,9 +2,12 @@ package by.netcracker.hotel.entities;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by Alexander on 25.04.2017.
  */
+@Component
 public class Order {
     private int id;
     private int roomId;

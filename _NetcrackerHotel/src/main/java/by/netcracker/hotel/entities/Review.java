@@ -1,5 +1,8 @@
 package by.netcracker.hotel.entities;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Review {
 
     private int id;

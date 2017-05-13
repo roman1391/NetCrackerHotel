@@ -5,8 +5,13 @@ import java.util.Objects;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import by.netcracker.hotel.enums.ROLE;
 
+@Component
+@Scope("prototype")
 public class User {
 
     public static User getUser() {

@@ -6,27 +6,30 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.context.WebApplicationContext;
 
 import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.pagination.UserSearchParam;
-import by.netcracker.hotel.mapper.UserMapper;
 
 @Repository
 public class UserPaginationDAO extends AbstractPaginationJdbcDAO<User, UserSearchParam> {
 
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private WebApplicationContext context;
 
     @PostConstruct
     private void initialize() {
         setDataSource(dataSource);
     }
 
-    public UserPaginationDAO(DataSource dataSource) {
+    public UserPaginationDAO(WebApplicationContext context, DataSource dataSource) {
         super(dataSource);
-        setRowMapper(new UserMapper());
+        setRowMapper((RowMapper<User>) context.getBean("userMapper"));
         setTypeId(TypeName.USER.getType());
         setTypeName("user");
     }

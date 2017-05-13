@@ -8,18 +8,18 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.WebApplicationContext;
 
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.dao.constant.ColumnName;
 import by.netcracker.hotel.dao.constant.TypeName;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.SqlQuery;
-import by.netcracker.hotel.mapper.UserMapper;
 
 /**
  * Created by slava on 02.04.17.
@@ -28,7 +28,9 @@ import by.netcracker.hotel.mapper.UserMapper;
 @Repository
 @Singleton
 public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
+
     private DataSource dataSource;
+    private WebApplicationContext context;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @PostConstruct
@@ -37,11 +39,11 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     }
 
     @Autowired
-    public UserDAOImpl(DataSource dataSource) {
+    public UserDAOImpl(DataSource dataSource, WebApplicationContext context) {
         this.dataSource = dataSource;
+        this.context = context;
     }
 
-    @Transactional
     @Override
     public void add(User user) {
         getJdbcTemplate().update(SqlQuery.ADD_ENTITY_ID.getQuery(), TypeName.USER.name().toLowerCase());
@@ -58,7 +60,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     @Override
     public List<User> getAll() {
         return getJdbcTemplate().query(SqlQuery.GET_ALL.getQuery(), new Object[] { TypeName.USER.getType() },
-            new RowMapperResultSetExtractor<User>(new UserMapper()) {
+            new RowMapperResultSetExtractor<User>((RowMapper<User>) context.getBean("userMapper")) {
             });
     }
 
@@ -90,7 +92,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     public User getByID(Integer id) {
         try {
             return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
-                new UserMapper());
+                (RowMapper<User>) context.getBean("userMapper"));
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
@@ -100,7 +102,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     public User getByUsername(String username) {
         try {
             User user = (User) getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),
-                new Object[] { ColumnName.USER_USERNAME, username }, new UserMapper());
+                new Object[] { ColumnName.USER_USERNAME, username }, (RowMapper<User>) context.getBean("userMapper"));
             return user;
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -126,7 +128,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     public User getByEmail(String email) {
         try {
             return (User) getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),
-                new Object[] { ColumnName.USER_EMAIL, email }, new UserMapper());
+                new Object[] { ColumnName.USER_EMAIL, email }, (RowMapper<User>) context.getBean("userMapper"));
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
