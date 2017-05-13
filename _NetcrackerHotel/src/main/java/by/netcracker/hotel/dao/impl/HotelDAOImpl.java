@@ -3,12 +3,14 @@ package by.netcracker.hotel.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
+import by.netcracker.hotel.filter.SearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -130,16 +132,66 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
         }
     }
 
+    /*  @Override
+       public List<Hotel> findHotelsBySearchStrings(List<String> searchStrings) {
+           StringBuilder parametrs = new StringBuilder("value.attribute_value like '%" + searchStrings.get(0) + "%'");
+           for (int i = 1; i < searchStrings.size(); i++) {
+               parametrs.append("or value.attribute_value like '%" + searchStrings.get(i) + "%'");
+           }
+           String query = SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_BEGIN.getQuery() + " (" + parametrs.toString() + ")) ORDER BY entity_id";
+           return getJdbcTemplate().query(query,
+                   new RowMapperResultSetExtractor<Hotel>(new HotelMapper()) {
+                   });
+       }
+   */
     @Override
-    public List<Hotel> findHotelsBySearchStrings(List<String> searchStrings) {
-        StringBuilder parametrs = new StringBuilder("value.attribute_value like '%" + searchStrings.get(0) + "%'");
+    public List<Hotel> findHotelsBySearchStrings(List<String> searchStrings, SearchFilter searchFilter) {
+        StringBuilder query = new StringBuilder(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_BEGIN.getQuery());
+        List<Object> param = new ArrayList<>();
+        query.append(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_STRING_FIRST.getQuery());
         for (int i = 1; i < searchStrings.size(); i++) {
-            parametrs.append("or value.attribute_value like '%" + searchStrings.get(i) + "%'");
+            query.append(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_STRING.getQuery());
         }
-        String query = SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS.getQuery() + " (" + parametrs.toString() + ")) ORDER BY entity_id";
-        return getJdbcTemplate().query(query,
+        for (String searchString : searchStrings) {
+            param.add("%" + searchString + "%");
+        }
+        query.append(")) ");
+        if (searchFilter.getStars().length > 0) {
+            query.append(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_STAR_FIRST.getQuery());
+            for (int i = 1; i < searchFilter.getStars().length; i++) {
+                query.append(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_STAR.getQuery());
+            }
+            query.append(")))");
+            for (int star : searchFilter.getStars()) {
+                param.add(star);
+            }
+        }
+        if (searchFilter.getCapacity() != null || searchFilter.getMaxCost() != null || searchFilter.getMinCost() != null) {
+            query.append(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_ROOM.getQuery());
+            if (searchFilter.getCapacity() != null) {
+                query.append(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_CAPACITY.getQuery());
+                param.add(searchFilter.getCapacity());
+            }
+            if (searchFilter.getMaxCost() != null && searchFilter.getMinCost() != null) {
+                query.append(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_MIN_MAX_COST.getQuery());
+                param.add(searchFilter.getMinCost());
+                param.add(searchFilter.getMaxCost());
+            } else {
+                if (searchFilter.getMaxCost() != null) {
+                    query.append(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_MAX_COST.getQuery());
+                    param.add(searchFilter.getMaxCost());
+                }
+                if (searchFilter.getMinCost() != null) {
+                    query.append(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_MIN_COST.getQuery());
+                    param.add(searchFilter.getMinCost());
+                }
+            }
+            query.append("))");
+        }
+        return getJdbcTemplate().query(query.toString(), param.toArray(),
                 new RowMapperResultSetExtractor<Hotel>(new HotelMapper()) {
                 });
     }
-
 }
+
+

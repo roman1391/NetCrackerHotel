@@ -1,5 +1,8 @@
 package by.netcracker.hotel.dao.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
+import by.netcracker.hotel.filter.SearchFilter;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -56,8 +61,8 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
     @Override
     public Room getByID(Integer id) {
         try {
-            return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
-                new RoomMapper());
+            return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[]{id},
+                    new RoomMapper());
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
@@ -70,15 +75,55 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
 
     @Override
     public List<Room> getByHotelID(int hotelID) {
-        return getJdbcTemplate().query(SqlQuery.GET_ROOMS_BY_HOTEL_ID.getQuery(), new Object[] { hotelID },
-            new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
-            });
+        return getJdbcTemplate().query(SqlQuery.GET_ROOMS_BY_HOTEL_ID.getQuery(), new Object[]{hotelID},
+                new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
+                });
     }
 
     @Override
     public List<Room> getFreeRoomsInHotelByDate(int hotelID, Date start, Date end) {
         return getJdbcTemplate().query(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_BY_DATE.getQuery(),
-            new Object[] { hotelID, start, end }, new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
-            });
+                new Object[]{hotelID, start, end}, new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
+                });
+    }
+
+    @Override
+    public List<Room> getFreeRoomsInHotelByDate(SearchFilter searchFilter, int hotelID) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        StringBuilder query = new StringBuilder(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_BEGIN.getQuery());
+        List<Object> param = new ArrayList<>();
+        if (searchFilter.getCapacity() != null) {
+            query.append(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_CAPACITY.getQuery());
+            param.add(searchFilter.getCapacity());
+        }
+        if (searchFilter.getMinCost() != null && searchFilter.getMaxCost() != null) {
+            query.append(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_MIN_MAX_COST.getQuery());
+            param.add(searchFilter.getMinCost());
+            param.add(searchFilter.getMaxCost());
+        } else {
+            if (searchFilter.getMinCost() != null) {
+                query.append(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_MIN_COST.getQuery());
+                param.add(searchFilter.getMinCost());
+            }
+            if (searchFilter.getMaxCost() != null) {
+                query.append(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_MAX_COST.getQuery());
+                param.add(searchFilter.getMaxCost());
+            }
+        }
+        if (!StringUtils.isBlank(searchFilter.getStartDate()) && !StringUtils.isBlank(searchFilter.getEndDate())){
+            query.append(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_DATE.getQuery());
+            try {
+                param.add(dateFormat.parse(searchFilter.getStartDate()));
+                param.add(dateFormat.parse(searchFilter.getEndDate()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        query.append(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_END.getQuery());
+        param.add(hotelID);
+        return getJdbcTemplate().query(query.toString(),
+                param.toArray(),
+                new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
+                });
     }
 }

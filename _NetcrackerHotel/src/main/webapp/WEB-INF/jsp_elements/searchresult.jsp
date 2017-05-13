@@ -23,18 +23,32 @@
 
                         <c:if test="${not empty hotel.value}">
                             <p>
-                            Available rooms:
-                            <c:forEach var="room" items="${hotel.value}">
-                               ${room.capacity}
-                                <c:forEach var="i" begin="1" end="${room.capacity}">
-                                    <i class="fa fa-male"></i>
-                                </c:forEach>
-                                &nbsp &nbsp &nbsp
-                            </c:forEach>
+                                Available rooms:
+                            <table>
+                                <tr>
+                                    <c:forEach var="room" items="${hotel.value}">
+                                        <td>
+                                                ${room.capacity}
+                                            <c:forEach var="i" begin="1" end="${room.capacity}">
+                                                <i class="fa fa-male"></i>
+                                            </c:forEach>
+                                            &nbsp &nbsp &nbsp
+                                        </td>
+                                    </c:forEach>
+                                </tr>
+                                <tr>
+                                    <c:forEach var="room" items="${hotel.value}">
+                                        <td>
+                                                ${room.cost}
+                                            &nbsp &nbsp &nbsp
+                                        </td>
+                                    </c:forEach>
+                                </tr>
+                            </table>
                             </p>
                         </c:if>
                         <c:if test="${empty hotel.value}">
-                                <h5 style="color: rebeccapurple">There are no available rooms on your dates.</h5>
+                            <h5 style="color: rebeccapurple">There are no available rooms on your dates.</h5>
                         </c:if>
 
                     </div>
@@ -44,10 +58,10 @@
 
     </c:if>
     <c:if test="${empty hotels}">
-    <div class="form-group">
-        <p>
-            ${message}
-        </p>
-    </div>
+        <div class="form-group">
+            <p>
+                    ${message}
+            </p>
+        </div>
     </c:if>
 </div>

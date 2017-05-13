@@ -1,6 +1,7 @@
 package by.netcracker.hotel.dao;
 
 import by.netcracker.hotel.entities.Room;
+import by.netcracker.hotel.filter.SearchFilter;
 
 import java.util.Date;
 import java.util.List;
@@ -11,4 +12,5 @@ import java.util.List;
 public interface RoomDAO extends AbstractDAO<Room, Integer> {
     List<Room> getByHotelID(int hotelID);
     List<Room> getFreeRoomsInHotelByDate (int hotelID, Date start, Date end);
+    List<Room> getFreeRoomsInHotelByDate (SearchFilter searchFilter, int hotelID);
 }

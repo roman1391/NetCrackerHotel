@@ -4,6 +4,7 @@ import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.RoomDAO;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Room;
+import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.HotelService;
 
 import org.apache.commons.lang.StringUtils;
@@ -40,35 +41,34 @@ public class HotelServiceImpl implements HotelService {
         this.roomDAO = roomDAO;
     }
 
+    /* @Override
+     public Map<Hotel, List<Room>> findHotels(List<String> searchStrings, String start, String end) {
+         List<Hotel> hotels = hotelDAO.findHotelsBySearchStrings(searchStrings);
+         Map<Hotel, List<Room>> hotelsWithRooms = new HashMap<>();
+         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+         if (!StringUtils.isBlank(start) && !StringUtils.isBlank(end)) {
+             for (Hotel hotel : hotels) {
+                 try {
+                     hotelsWithRooms.put(hotel, roomDAO.getFreeRoomsInHotelByDate(hotel.getId(), dateFormat.parse(start),
+                             dateFormat.parse(end)));
+                 } catch (ParseException e) {
+                     return null;
+                 }
+             }
+         } else {
+             for (Hotel hotel : hotels) {
+                 hotelsWithRooms.put(hotel, roomDAO.getByHotelID(hotel.getId()));
+             }
+         }
+         return hotelsWithRooms;
+     }
+ */
     @Override
-    public Map<Hotel, List<Room>> findHotels(List<String> searchStrings, String start, String end) {
-        /*List<Hotel> hotels = new ArrayList<>();
-        if (!searchStrings.isEmpty()) {
-            List<Integer> ids = new ArrayList<>();
-            ids.addAll(hotelDAO.findIDsBySearchString(searchStrings.remove(0)));
-            for (String searchString : searchStrings) {
-                ids.retainAll(hotelDAO.findIDsBySearchString(searchString));
-            }
-            for (Integer id : ids) {
-                hotels.add(hotelDAO.getByID(id));
-            }
-        }*/
-        List<Hotel> hotels = hotelDAO.findHotelsBySearchStrings(searchStrings);
+    public Map<Hotel, List<Room>> findHotels(List<String> searchStrings, SearchFilter searchFilter) {
+        List<Hotel> hotels = hotelDAO.findHotelsBySearchStrings(searchStrings, searchFilter);
         Map<Hotel, List<Room>> hotelsWithRooms = new HashMap<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        if (!StringUtils.isBlank(start) && !StringUtils.isBlank(end)) {
-            for (Hotel hotel : hotels) {
-                try {
-                    hotelsWithRooms.put(hotel, roomDAO.getFreeRoomsInHotelByDate(hotel.getId(), dateFormat.parse(start),
-                            dateFormat.parse(end)));
-                } catch (ParseException e) {
-                    return null;
-                }
-            }
-        } else {
-            for (Hotel hotel : hotels) {
-                hotelsWithRooms.put(hotel, roomDAO.getByHotelID(hotel.getId()));
-            }
+        for (Hotel hotel : hotels) {
+            hotelsWithRooms.put(hotel, roomDAO.getFreeRoomsInHotelByDate(searchFilter, hotel.getId()));
         }
         return hotelsWithRooms;
     }
