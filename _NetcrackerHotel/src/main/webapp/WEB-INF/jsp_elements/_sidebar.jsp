@@ -15,8 +15,4 @@
      <sec:authorize access="!isAuthenticated()">
           <%@include file="loginform.jsp"%>
      </sec:authorize>
-     <sec:authorize access="isAuthenticated()" >
-          <%@include file="sideprofile.jsp"%>
-     </sec:authorize>
-
 </div>
