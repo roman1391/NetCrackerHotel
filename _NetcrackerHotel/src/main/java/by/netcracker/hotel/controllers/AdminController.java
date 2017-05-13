@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 
+import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
+import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.OrderService;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.UserService;
@@ -30,14 +32,16 @@ public class AdminController {
     private final UserService userService;
     private final ReviewService reviewService;
     private final OrderService orderService;
+    private final HotelService hotelService;
 
     @Autowired
     public AdminController(WebApplicationContext context, UserService userService, ReviewService reviewService,
-        OrderService orderService) {
+        OrderService orderService, HotelService hotelService) {
         this.context = context;
         this.userService = userService;
         this.reviewService = reviewService;
         this.orderService = orderService;
+        this.hotelService = hotelService;
     }
 
     @RequestMapping(value = "/add_user_ref", method = RequestMethod.GET)
@@ -139,6 +143,17 @@ public class AdminController {
             model.addAttribute("user", user);
         }
         return "admin/user_editing";
+    }
+
+    @RequestMapping(value = "/hotel_page/{id}", method = RequestMethod.GET)
+    public String hotelPageForAdmin(@Valid @PathVariable("id") int hotelID, Model model) {
+        Hotel hotel = hotelService.getByID(hotelID);
+        String reviewInfo = reviewService.checkReview(hotelID);
+        model.addAttribute("reviewInfo", reviewInfo);
+        model.addAttribute("choosenHotel", hotel);
+        model.addAttribute("review", context.getBean("review"));
+        model.addAttribute("order", context.getBean("order"));
+        return "hotel_page";
     }
 
 }
