@@ -33,7 +33,12 @@
 					status: ${review.status }<br>
 					<br>	
 					</c:forEach>
-					<a href="${contextPath}/hotel_page/${currentReviews[0].hotelId}">Back to hotel page </a>
+					<sec:authorize access="hasRole('ADMIN')">
+                    <a href="${contextPath}/admin/hotel_page/${currentReviews[0].hotelId}">Back to hotel page </a>
+           			 </sec:authorize>
+					<sec:authorize access="!hasRole('ADMIN')">
+                    <a href="${contextPath}/hotel_page/${currentReviews[0].hotelId}">Back to hotel page </a>
+           			 </sec:authorize>
 					</c:if>
 					
                 </div>
