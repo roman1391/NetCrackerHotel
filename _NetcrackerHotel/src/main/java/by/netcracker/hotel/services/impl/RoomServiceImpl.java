@@ -2,6 +2,7 @@ package by.netcracker.hotel.services.impl;
 
 import by.netcracker.hotel.dao.RoomDAO;
 import by.netcracker.hotel.entities.Room;
+import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.AbstractService;
 import by.netcracker.hotel.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,14 +44,12 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public List<Room> getFreeRoomsInHotelByDate(int hotelID, String start, String end) {
+    public List<Room> getFreeRoomsInHotelByDate(int hotelID, SearchFilter searchFilter/*String start, String end*/) {
         List<Room> freeRooms = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        try {
-            freeRooms = roomDAO.getFreeRoomsInHotelByDate(hotelID, dateFormat.parse(start), dateFormat.parse(end));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+            //freeRooms = roomDAO.getFreeRoomsInHotelByDate(hotelID, dateFormat.parse(start), dateFormat.parse(end));
+            freeRooms = roomDAO.getFreeRoomsInHotelByDate(searchFilter, hotelID );
+
         return freeRooms;
     }
 }

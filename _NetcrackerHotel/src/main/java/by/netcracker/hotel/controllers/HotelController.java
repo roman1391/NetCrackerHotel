@@ -49,7 +49,7 @@ public class HotelController {
         model.addAttribute("choosenHotel", hotel);
         model.addAttribute("review", context.getBean("review"));
         model.addAttribute("hotel_rooms",
-            roomService.getFreeRoomsInHotelByDate(hotelID, searchFilter.getStartDate(), searchFilter.getEndDate()));
+            roomService.getFreeRoomsInHotelByDate(hotelID, searchFilter/*.getStartDate(), searchFilter.getEndDate()*/));
         model.addAttribute("order", context.getBean("order"));
         return "hotel_page";
     }
