@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <form:form style="margin: 50px" method="post" action="find-hotels" modelAttribute="searchFilter">
-    <div class="row list-group-item">
-        <div class="col-4">
+    <div class="row list-group-item align-items-start">
+        <div class="col">
             <div class="form-group">
                 <form:label path="place">Enter country, city or hotel name:</form:label>
                 <form:select path="place" class="form-control" id="selectPlace" multiple="multiple">
@@ -19,12 +19,17 @@
                 <form:input class="form-control" path="endDate" placeholder="check-out" id="endDate" readonly="true"/>
             </div>
         </div>
-
-        <div class="col-4">
+        <div class="col">
             <div class="form-group">
                 <p>Cost for night:</p>
-                <form:input class="form-control" path="minCost" placeholder="from" id="minCost"></form:input>
-                <form:input class="form-control" path="maxCost" placeholder="to" id="maxCost"></form:input>
+                <div id="cost" class="row">
+                    <div class="col d-inline-block">
+                        <form:input class="form-control" path="minCost" placeholder="from" id="minCost"></form:input>
+                    </div>
+                    <div class="col d-inline-block">
+                        <form:input class="form-control" path="maxCost" placeholder="to" id="maxCost"></form:input>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <form:label path="capacity">Capacity <i class="fa fa-male"></i></form:label>
@@ -32,7 +37,7 @@
             </div>
         </div>
 
-        <div class="col-4">
+        <div class="col">
             <div>
                 <p>Stars:</p>
                 <div class="checkbox">
@@ -65,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Search</button>
+    <div style="margin-top: 15px;" class="btn-group pull-right">
+        <button type="submit" class="btn btn-primary ">Search</button>
     </div>
 </form:form>
