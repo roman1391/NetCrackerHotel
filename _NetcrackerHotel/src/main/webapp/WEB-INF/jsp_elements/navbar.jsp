@@ -23,7 +23,7 @@
                 </li>
             </sec:authorize>
             <sec:authorize access="hasAnyRole('ADMIN','USER',
-            'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER','BLOCKED')">
+            'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER')">
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/profile">Profile</a>
                 </li>

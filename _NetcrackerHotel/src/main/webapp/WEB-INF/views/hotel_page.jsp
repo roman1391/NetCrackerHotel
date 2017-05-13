@@ -44,10 +44,13 @@
                             </div>
                         </c:when>
                         <c:when test="${reviewInfo eq 'notExist'}">
+                         <sec:authorize access="hasAnyRole('ADMIN','USER',
+            				'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER')">
                             <form:form method="post" id="review" action="review_page" modelAttribute="choosenHotel">
                                 <form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
                                 <form:button type="submit">Leave review</form:button>
                             </form:form>
+                             </sec:authorize>
                         </c:when>
                         <c:when test="${reviewInfo eq 'exist'}">
                             <div style="margin: 10px" class="alert alert-success">
@@ -60,6 +63,9 @@
                         <form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
                         <form:button type="submit">See all reviews </form:button>
                     </form:form>
+                    
+                    <sec:authorize access="hasAnyRole('ADMIN','USER',
+            				'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER')">
                     <table>
                         <tbody>
                         <c:forEach items="${hotel_rooms}" var="room" varStatus="loop">
@@ -68,7 +74,7 @@
                                 <td>Cost: ${room.cost}  </td>
                                 <td>Capacity: ${room.capacity}  </td>
                                 <td>Hotel ID: ${room.hotelID}  </td>
-                                <c:if test="${currentUser.authority.toString() ne 'GUEST'}">
+                                <c:if test="${currentUser.authority.toString() ne 'GUEST' or currentUser.authority.toString() ne 'BLOCKED'}">
                                     <td>
                                         <form:form method="post" id="order" action="${contextPath}/book_page/${room.id}"
                                                    modelAttribute="order">
@@ -89,6 +95,7 @@
 
                         </tbody>
                     </table>
+                    </sec:authorize>
                 </div>
             </div>
 
