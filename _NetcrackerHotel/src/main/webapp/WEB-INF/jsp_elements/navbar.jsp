@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="authority" value="${currentUser.authority.toString()}"/>
 
-<nav class="navbar navbar-fixed-top navbar-toggleable-md navbar-light bg-faded">
+<nav class="navbar navbar-fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
