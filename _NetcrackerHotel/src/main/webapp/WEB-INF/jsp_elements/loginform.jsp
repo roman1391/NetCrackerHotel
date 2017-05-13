@@ -3,11 +3,11 @@
 
 
 <link type="text/css" rel="stylesheet" href="<c:url value="../../resources/font-awesome-4.7.0/css/font-awesome.min.css" />" />
-<link type="text/css" rel="stylesheet" href="<c:url value="../../resources/css/loginform.css" />" />
+
 <c:if test="${not empty error}">
 	 ${error}
 </c:if>
-<div class="container">
+<div id="loginwrapper">
     <h1>Please Sign In</h1>
     <form style="margin-top: 20px" name='form_login' action="j_spring_security_check" method='POST'>
         <div class="input-group margin-bottom-sm">

@@ -19,6 +19,8 @@
 				<a href="/">Home</a>
 				&#8226;
 				<a href="/about">About</a>
+				&#8226;
+				<a href="#">Contact</a>
 			</p>
 
 			<p class="footer-company-name">NetCracker &copy; 2017</p>

@@ -5,8 +5,7 @@
 <html>
 <head>
     <title>Log in</title>
-    <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
-    <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />" rel="stylesheet">
+    <link  type ="text/css" href="<c:url value="../../resources/css/loginform.css" />" rel="stylesheet" />
 </head>
 <body>
 <%@include file="../jsp_elements/_header.jsp" %>
@@ -18,10 +17,9 @@
                     ${message}
             </div>
         </c:if>
-        <div class="row row-offcanvas row-offcanvas-left">
-            <%@include file="../jsp_elements/loginform.jsp" %>
-        </div>
+        <%@include file="../jsp_elements/loginform.jsp" %>
     </div>
 </div>
+<%@include file="../jsp_elements/_footer.jsp"%>
 </body>
 </html>

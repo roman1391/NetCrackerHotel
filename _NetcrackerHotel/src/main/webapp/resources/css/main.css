@@ -4,14 +4,16 @@
     margin-top: 15px;
 }
 
-.sidebar-offcanvas{
-    left: -100px;
-}
-
-footer {
-    padding-left: 15px;
-    padding-right: 15px;
+#sidebar{
+    max-width: 330px;
+    padding: 15px;
 }
 
 body {
+    background-color: #FFFFFF;
+}
+
+.navbar {
+    background-color: #292c2f!important;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 }
