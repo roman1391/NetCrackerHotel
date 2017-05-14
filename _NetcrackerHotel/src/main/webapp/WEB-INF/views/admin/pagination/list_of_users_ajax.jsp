@@ -12,7 +12,7 @@
     <jsp:attribute name="columnsContent">
                 <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.username}"/></span></td>
                     <td class="cell"><span><c:out value="${bo.authority}"/></span></td>
-                    <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.enabled}"/></span></td>
+                    <td class="cell"><span ><c:out value="${bo.enabled}"/></span></td>
                     <td class="cell"><span><c:out value="${bo.email}"/></span></td> 
                     <td class="cell"><span><a href="${contextPath}/admin/edit_form/${bo.username}">See profile</a> </span></td> 
                 </jsp:attribute>

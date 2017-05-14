@@ -6,6 +6,7 @@ public class HotelSearchParam extends BoPaginationParam {
 
     private String name;
     private String city;
+    private String enabled;
     private String typeOfService;
 
     public String getName() {
@@ -30,6 +31,14 @@ public class HotelSearchParam extends BoPaginationParam {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(String enabled) {
+        this.enabled = enabled;
     }
 
 }

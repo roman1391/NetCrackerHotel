@@ -24,6 +24,7 @@ public class Hotel {
     private String description;
     private String mainPhoto;
     private List<String> photos;
+    private boolean enabled;
 
     public Hotel() {
         photos = new ArrayList<>();
@@ -100,6 +101,14 @@ public class Hotel {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getMainPhoto() {

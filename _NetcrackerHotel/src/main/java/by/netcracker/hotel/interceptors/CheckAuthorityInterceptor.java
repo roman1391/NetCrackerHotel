@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -19,10 +20,12 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
 
     private User user;
     private final UserService userService;
+    private WebApplicationContext context;
 
     @Autowired
-    public CheckAuthorityInterceptor(UserService userService) {
+    public CheckAuthorityInterceptor(UserService userService, WebApplicationContext context) {
         this.userService = userService;
+        this.context = context;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
         Object info = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (info instanceof String) {
             System.out.println("userInfo: " + info);
-            user = new User();
+            User user = (User) context.getBean("user");
             user.setUsername("GUEST");
             user.setAuthority(ROLE.GUEST);
         } else if (info instanceof UserDetails) {

@@ -53,6 +53,11 @@ public class HotelPaginationService extends PaginationServiceAbstract<HotelSearc
         columns.add(col);
 
         col = new BoPaginationColumn();
+        col.setColumnName("State");
+        col.setWidth(30);
+        columns.add(col);
+
+        col = new BoPaginationColumn();
         col.setColumnName("Country");
         col.setOrderColumns("country");
         col.setOrderDirections("desc");
@@ -80,6 +85,7 @@ public class HotelPaginationService extends PaginationServiceAbstract<HotelSearc
         bo.setHotelId(hotel.getId());
         bo.setName(hotel.getName());
         bo.setTypeOfService(String.valueOf(hotel.getTypeOfService()));
+        bo.setEnabled(hotel.getEnabled() ? "Enabled" : "Deactivated");
         bo.setCountry(hotel.getCountry());
         bo.setCity(hotel.getCity());
         return bo;

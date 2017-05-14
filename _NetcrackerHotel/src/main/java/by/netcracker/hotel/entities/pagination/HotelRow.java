@@ -7,6 +7,7 @@ public class HotelRow extends BoPaginationResultRow<Integer> {
     private int hotelId;
     private String name;
     private String typeOfService;
+    private String enabled;
     private String country;
     private String city;
 
@@ -53,6 +54,14 @@ public class HotelRow extends BoPaginationResultRow<Integer> {
 
     public void setTypeOfService(String typeOfService) {
         this.typeOfService = typeOfService;
+    }
+
+    public String getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(String enabled) {
+        this.enabled = enabled;
     }
 
 }

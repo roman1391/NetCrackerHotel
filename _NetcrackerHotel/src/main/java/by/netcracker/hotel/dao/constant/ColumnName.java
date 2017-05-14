@@ -23,6 +23,7 @@ public class ColumnName {
     public static final String HOTEL_ADDRESS = "address";
     public static final String HOTRL_CLASS = "class";
     public static final String HOTEL_NAME = "hotel_name";
+    public static final String HOTEL_ENABLED = "hotel_enabled";
     public static final String HOTEL_DESCRIPTION = "hotel_description";
     public static final String VERIFICATION_TOKEN_USER_ID = "token_user_id";
     public static final String VERIFICATION_TOKEN_TOKEN = "token";

@@ -53,6 +53,13 @@
                                <form:option value="5" label="5 stars"/>
                             </form:select>
                             </td>
+                            <td style="width:200px;">
+                                <form:select path="enabled">
+                                   	<form:option value="" label="-state-"/>
+                               		<form:option value="1" label="Enabled"/>
+                               		<form:option value="0" label="Deactivated"/>
+                                </form:select>
+                            </td>
                             <td style="width:200px;"></td>
                             <td style="width:80px;">Name:</td>
                             <td style="width:160px;">

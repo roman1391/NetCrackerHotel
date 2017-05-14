@@ -1,12 +1,12 @@
 package by.netcracker.hotel.mapper;
 
-import by.netcracker.hotel.cloud.CloudinaryConnector;
-import by.netcracker.hotel.dao.constant.ColumnName;
-import by.netcracker.hotel.entities.Hotel;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import by.netcracker.hotel.dao.constant.ColumnName;
+import by.netcracker.hotel.entities.Hotel;
 
 /**
  * Created by Varvara on 4/8/2017.
@@ -23,34 +23,42 @@ public class HotelMapper implements RowMapper<Hotel> {
                 break;
             }
             switch (resultSet.getString(2)) {
-                case ColumnName.HOTEL_COUNTRY: {
-                    hotel.setCountry(resultSet.getString(3));
-                    break;
+            case ColumnName.HOTEL_COUNTRY: {
+                hotel.setCountry(resultSet.getString(3));
+                break;
+            }
+            case ColumnName.HOTEL_CITY: {
+                hotel.setCity(resultSet.getString(3));
+                break;
+            }
+            case ColumnName.HOTEL_ADDRESS: {
+                hotel.setAddress(resultSet.getString(3));
+                break;
+            }
+            case ColumnName.HOTEL_NAME: {
+                hotel.setName(resultSet.getString(3));
+                break;
+            }
+            case ColumnName.HOTRL_CLASS: {
+                hotel.setTypeOfService(resultSet.getInt(3));
+                break;
+            }
+            case ColumnName.HOTEL_MAIN_PHOTO: {
+                hotel.setMainPhoto(resultSet.getString(3));
+                break;
+            }
+            case ColumnName.HOTEL_PHOTO: {
+                hotel.addPhoto(resultSet.getString(3));
+                break;
+            }
+            case ColumnName.HOTEL_ENABLED: {
+                if (Integer.parseInt(resultSet.getString(3)) == 1) {
+                    hotel.setEnabled(true);
+                } else {
+                    hotel.setEnabled(false);
                 }
-                case ColumnName.HOTEL_CITY: {
-                    hotel.setCity(resultSet.getString(3));
-                    break;
-                }
-                case ColumnName.HOTEL_ADDRESS: {
-                    hotel.setAddress(resultSet.getString(3));
-                    break;
-                }
-                case ColumnName.HOTEL_NAME: {
-                    hotel.setName(resultSet.getString(3));
-                    break;
-                }
-                case ColumnName.HOTRL_CLASS: {
-                    hotel.setTypeOfService(resultSet.getInt(3));
-                    break;
-                }
-                case ColumnName.HOTEL_MAIN_PHOTO: {
-                    hotel.setMainPhoto(resultSet.getString(3));
-                    break;
-                }
-                case ColumnName.HOTEL_PHOTO: {
-                    hotel.addPhoto(resultSet.getString(3));
-                    break;
-                }
+                break;
+            }
             }
         } while (resultSet.next());
         return hotel;
