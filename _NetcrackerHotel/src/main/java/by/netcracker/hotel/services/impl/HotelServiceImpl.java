@@ -60,6 +60,7 @@ public class HotelServiceImpl implements HotelService {
         return hotelsWithRooms;
     }
 
+
     @Override
     public List<Hotel> getAll() {
         return hotelDAO.getAll();

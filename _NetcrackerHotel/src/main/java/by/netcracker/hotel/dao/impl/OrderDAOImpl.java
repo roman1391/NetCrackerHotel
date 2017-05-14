@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
+import by.netcracker.hotel.filter.SearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -54,6 +55,25 @@ public class OrderDAOImpl extends JdbcDaoSupport implements OrderDAO {
     @Override
     public void update(Order entity) {
 
+    }
+
+    @Override
+    public void update(int id, SearchFilter searchFilter) {
+        update(searchFilter.getStartDate(), ColumnName.HOTEL_ARRIVAL_DATE, id);
+        update(searchFilter.getEndDate(), ColumnName.HOTEL_LEAVE_DATE, id);
+    }
+
+    private boolean update(Object value, Object column, Object id) {
+        try {
+            if (value == null) {
+                return false;
+            } else {
+                getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(), value, column, id);
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

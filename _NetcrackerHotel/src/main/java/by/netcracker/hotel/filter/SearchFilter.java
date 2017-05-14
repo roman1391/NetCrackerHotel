@@ -1,5 +1,10 @@
 package by.netcracker.hotel.filter;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Varvara on 3/30/2017.
  */
@@ -18,6 +23,14 @@ public class SearchFilter {
     private Integer maxCost;
 
     private Integer capacity;
+
+    public SearchFilter() {
+    }
+
+    public SearchFilter(String startDate, String endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
     public String getPlace() {
         return place;

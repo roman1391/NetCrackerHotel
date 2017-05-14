@@ -3,13 +3,11 @@ package by.netcracker.hotel.services.impl;
 import by.netcracker.hotel.dao.RoomDAO;
 import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.filter.SearchFilter;
-import by.netcracker.hotel.services.AbstractService;
 import by.netcracker.hotel.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,4 +50,11 @@ public class RoomServiceImpl implements RoomService{
 
         return freeRooms;
     }
+
+    @Override
+    public boolean isRoomFree(int roomId, SearchFilter searchFilter) {
+        return roomDAO.isRoomFree(roomId, searchFilter);
+    }
+
+
 }

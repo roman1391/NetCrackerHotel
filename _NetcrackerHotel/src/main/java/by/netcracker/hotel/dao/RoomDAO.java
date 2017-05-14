@@ -13,4 +13,6 @@ public interface RoomDAO extends AbstractDAO<Room, Integer> {
     List<Room> getByHotelID(int hotelID);
     List<Room> getFreeRoomsInHotelByDate (int hotelID, Date start, Date end);
     List<Room> getFreeRoomsInHotelByDate (SearchFilter searchFilter, int hotelID);
+
+    boolean isRoomFree(int roomId, SearchFilter searchFilter);
 }

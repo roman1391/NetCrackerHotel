@@ -24,4 +24,5 @@ public interface HotelService extends AbstractService<Hotel, Integer> {
     List<String> getHotelNames();
 
     void addPhoto(String photo, int hotelID);
+
 }

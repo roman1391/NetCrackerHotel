@@ -2,6 +2,7 @@ package by.netcracker.hotel.services.impl;
 
 import java.util.List;
 
+import by.netcracker.hotel.filter.SearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -42,6 +43,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteByOrderId(int orderId) {
         orderDAO.deleteByID(orderId);
+    }
+
+    @Override
+    public void update(int id, SearchFilter searchFilter) {
+        orderDAO.update(id, searchFilter);
     }
 
     public void findByUserId(Integer id) {

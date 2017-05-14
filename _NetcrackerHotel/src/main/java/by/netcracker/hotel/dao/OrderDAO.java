@@ -1,6 +1,7 @@
 package by.netcracker.hotel.dao;
 
 import by.netcracker.hotel.entities.Order;
+import by.netcracker.hotel.filter.SearchFilter;
 
 import java.util.List;
 
@@ -9,4 +10,6 @@ import java.util.List;
  */
 public interface OrderDAO extends AbstractDAO<Order, Integer> {
     List<Order> getByUserId(int userId);
+
+    void update(int id, SearchFilter searchFilter);
 }
