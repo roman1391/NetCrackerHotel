@@ -43,7 +43,7 @@ public class HotelPaginationDAO extends AbstractPaginationJdbcDAO<Hotel, HotelSe
         boToDbMap.put("class", "class");
         boToDbMap.put("city", "city");
         boToDbMap.put("name", "hotel_name");
-        boToDbMap.put("enabled", "enabled");
+        boToDbMap.put("enabled", "hotel_enabled");
         boToDbMap.put("country", "country");
     }
 

@@ -21,7 +21,7 @@ public class ColumnName {
     public static final String HOTEL_COUNTRY = "country";
     public static final String HOTEL_CITY = "city";
     public static final String HOTEL_ADDRESS = "address";
-    public static final String HOTRL_CLASS = "class";
+    public static final String HOTEL_CLASS = "class";
     public static final String HOTEL_NAME = "hotel_name";
     public static final String HOTEL_ENABLED = "hotel_enabled";
     public static final String HOTEL_DESCRIPTION = "hotel_description";

@@ -73,7 +73,7 @@
                 </jsp:attribute>
                  <jsp:attribute name="controlButton">
                      <div style="padding-top:10px;">
-                        <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Delete</form:button></span>
+                        <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Deactivate</form:button></span>
                         <span ><a href="${contextPath}/admin/hotel/add">Add new hotel</a></span>
                     </div>
                 </jsp:attribute>

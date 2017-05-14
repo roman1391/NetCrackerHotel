@@ -78,8 +78,26 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
     }
 
     @Override
-    public void update(Hotel entity) {
+    public void update(Hotel hotel) {
+        update(hotel.getAddress(), ColumnName.HOTEL_ADDRESS, hotel.getId());
+        update(hotel.getCity(), ColumnName.HOTEL_CITY, hotel.getId());
+        update(hotel.getCountry(), ColumnName.HOTEL_COUNTRY, hotel.getId());
+        update(hotel.getDescription(), ColumnName.HOTEL_DESCRIPTION, hotel.getId());
+        update(hotel.getEnabled(), ColumnName.HOTEL_ENABLED, hotel.getId());
+        update(hotel.getName(), ColumnName.HOTEL_NAME, hotel.getId());
+    }
 
+    private boolean update(Object value, Object column, Object id) {
+        try {
+            if (value == null) {
+                return false;
+            } else {
+                getJdbcTemplate().update(SqlQuery.UPDATE.getQuery(), value, column, id);
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

@@ -94,7 +94,9 @@ public class HotelPaginationService extends PaginationServiceAbstract<HotelSearc
     public void deleteButtonAction(HotelSearchParam pparam, String buttonAction) {
         if (buttonAction != null && buttonAction.equals("deleteButton")) {
             for (String id : pparam.getSelectedIds()) {
-                hotelDAO.deleteByID(Integer.parseInt(id));
+                Hotel hotel = hotelDAO.getByID(Integer.parseInt(id));
+                hotel.setEnabled(false);
+                hotelDAO.update(hotel);
             }
         }
     }

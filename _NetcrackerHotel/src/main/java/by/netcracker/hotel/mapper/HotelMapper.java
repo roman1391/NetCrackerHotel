@@ -39,7 +39,7 @@ public class HotelMapper implements RowMapper<Hotel> {
                 hotel.setName(resultSet.getString(3));
                 break;
             }
-            case ColumnName.HOTRL_CLASS: {
+            case ColumnName.HOTEL_CLASS: {
                 hotel.setTypeOfService(resultSet.getInt(3));
                 break;
             }
