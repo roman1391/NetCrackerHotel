@@ -1,3 +1,4 @@
+<%@ page import="by.netcracker.hotel.entities.User" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alexander
@@ -19,7 +20,9 @@
             href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
             rel="stylesheet">
 </head>
-
+<%
+		request.setAttribute("user", request.getSession().getAttribute("currentUser")) ;
+%>
 <body>
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
@@ -27,15 +30,15 @@
         <div class="row row-offcanvas row-offcanvas-left">
             <div class="col-xs-12 col-sm-9">
                 <div class="jumbotron">
-                    <h3>Booked rooms</h3>
+                    <h3>Booked rooms </h3>
                     <table>
                         <tbody>
                         <c:forEach items="${orders}" var="order">
-                            <tr>
+                            <tr><td>
                                 <br>Order Id: ${order.id}
-                                <form:form method="post" id="currentUser" action="${contextPath}/delete_order/${order.id}"
-                                           modelAttribute="currentUser">
-                                    <form:input path="id" type="hidden" name="id"
+                                <form:form method="post" id="user" action="${contextPath}/delete_order/${order.id}"
+                                           modelAttribute="user" >
+                                    <form:input path="id" type="hidden" name="orderId"
                                                 value="${currentUser.id}"></form:input>
                                     <form:button type="submit">Delete order</form:button>
 								</form:form>
@@ -47,9 +50,7 @@
                                 <br>Leave Date: ${order.leaveDate}
                                 <br>Pay Value: ${order.payValue}
                                 <br>Is Paid: ${order.isPaid()}
-
-                                <c:if test="${currentUser.authority.toString() ne 'GUEST'}"></c:if>
-                            </tr>
+                                </td></tr>
                         </c:forEach>
 
                         </tbody>

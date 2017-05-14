@@ -51,6 +51,6 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
                 modelAndView.addObject("blocked_user", isBlocked);
             }
         }
-        modelAndView.addObject("currentUser", user);
+        request.getSession().setAttribute("currentUser", user);
     }
 }

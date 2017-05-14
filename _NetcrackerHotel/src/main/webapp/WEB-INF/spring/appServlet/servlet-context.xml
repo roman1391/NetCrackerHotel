@@ -60,7 +60,8 @@
 
 	<interceptors>
 		<interceptor>
-			<mapping path="/**" />
+			<mapping path="/home" />
+			<mapping path="/admin/admin_page" />
 			<beans:bean class="by.netcracker.hotel.interceptors.CheckAuthorityInterceptor" />
 		</interceptor>
 	</interceptors>

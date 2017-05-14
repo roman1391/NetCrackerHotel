@@ -1,52 +1,54 @@
 package by.netcracker.hotel.controllers;
 
-import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.enums.ROLE;
-import by.netcracker.hotel.exceptions.EmailExistException;
-import by.netcracker.hotel.exceptions.UsernameExistException;
-import by.netcracker.hotel.services.UserService;
-import by.netcracker.hotel.util.CloudinaryUtil;
+import static by.netcracker.hotel.util.CloudinaryUtil.saveFileToCloud;
+
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletContext;
-
-import static by.netcracker.hotel.util.CloudinaryUtil.saveFileToCloud;
+import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.enums.ROLE;
+import by.netcracker.hotel.exceptions.EmailExistException;
+import by.netcracker.hotel.exceptions.UsernameExistException;
+import by.netcracker.hotel.services.UserService;
+import by.netcracker.hotel.util.CloudinaryUtil;
 
 @Controller
 public class UserController {
 
     @Autowired
-    public UserController(ServletContext context,ApplicationEventPublisher eventPublisher) {
+    public UserController(ServletContext context, ApplicationEventPublisher eventPublisher) {
         CloudinaryUtil.UPLOADED_FOLDER = context.getRealPath("/resources/img/");
     }
 
     @Autowired
     private UserService userService;
 
-
-
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String save(@ModelAttribute("currentUser") User user, @RequestParam("file") MultipartFile file,Model model) {
+    public String save(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file, Model model) {
         user.setAvatar(saveFileToCloud(file));
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(!userDetails.getUsername().equals(user.getUsername())){
-           try{
-               userService.profileUpdate(user);
-           } catch (UsernameExistException e){
-               model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
-               return "profile";
-           } catch (EmailExistException e){
-               model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
-               return "profile";
-           }
+        if (!userDetails.getUsername().equals(user.getUsername())) {
+            try {
+                userService.profileUpdate(user);
+            } catch (UsernameExistException e) {
+                model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
+                return "profile";
+            } catch (EmailExistException e) {
+                model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
+                return "profile";
+            }
         } else {
             userService.update(user);
         }

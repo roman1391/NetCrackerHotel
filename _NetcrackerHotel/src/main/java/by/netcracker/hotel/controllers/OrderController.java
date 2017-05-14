@@ -2,17 +2,21 @@ package by.netcracker.hotel.controllers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import by.netcracker.hotel.filter.SearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.entities.User;
+import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.OrderService;
 
 /**
@@ -27,11 +31,13 @@ public class OrderController {
 
     @RequestMapping(value = "/book_complete", method = RequestMethod.POST)
     public String bookComplete(@ModelAttribute("room") Room room, @ModelAttribute("order") Order order,
-                               @ModelAttribute("searchFilter") SearchFilter searchFilter, Model model) {
+        @ModelAttribute("searchFilter") SearchFilter searchFilter, Model model) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         try {
-            order.setArrivalDate(dateFormat.parse(searchFilter.getStartDate())); // временные костыли
-            order.setLeaveDate(dateFormat.parse(searchFilter.getEndDate())); // тоже самое
+            order.setArrivalDate(dateFormat.parse(searchFilter.getStartDate())); // временные
+                                                                                 // костыли
+            order.setLeaveDate(dateFormat.parse(searchFilter.getEndDate())); // тоже
+                                                                             // самое
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -43,7 +49,7 @@ public class OrderController {
 
     @RequestMapping(value = "/book_page/{id}", method = RequestMethod.POST)
     public String bookPage(@ModelAttribute("order") Order order, @PathVariable("id") int roomId,
-                           @ModelAttribute("searchFilter") SearchFilter searchFilter, Model model) {
+        @ModelAttribute("searchFilter") SearchFilter searchFilter, Model model) {
         model.addAttribute("order", order);
         model.addAttribute("roomId", roomId);
         return "add_order";
@@ -55,8 +61,8 @@ public class OrderController {
         return "bookedRooms";
     }
 
-    @RequestMapping(value = "/delete_order/{id}", method = RequestMethod.POST)
-    public String deleteOrder(@ModelAttribute("currentUser") User user, @PathVariable("id") int orderId, Model model) {
+    @RequestMapping(value = "/delete_order/{orderId}", method = RequestMethod.POST)
+    public String deleteOrder(@ModelAttribute("user") User user, @PathVariable("orderId") int orderId, Model model) {
 
         orderService.deleteByOrderId(orderId);
         return bookedRooms(String.valueOf(user.getId()), model);

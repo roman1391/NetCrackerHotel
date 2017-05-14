@@ -1,20 +1,21 @@
 package by.netcracker.hotel.controllers;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import by.netcracker.hotel.entities.Room;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import by.netcracker.hotel.entities.Hotel;
+import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.HotelService;
 
@@ -50,7 +51,7 @@ public class SearchHotelController {
             model.addAttribute("hotels", hotels);
             model.addAttribute("choosenHotel", new Hotel());
             model.addAttribute("search", chosenPlaces);
-            //model.addAttribute("searchFilter", searchFilter);
+            // model.addAttribute("searchFilter", searchFilter);
         } else {
             model.addAttribute("message", "Please, enter place for search!");
         }
@@ -59,7 +60,7 @@ public class SearchHotelController {
     }
 
     @RequestMapping(value = "/hotel_discription_ajax", method = RequestMethod.GET)
-    public @ResponseBody List<String> ajaxHotelDiscription(){
+    public @ResponseBody List<String> ajaxHotelDiscription() {
 
         return hotelService.getPlaces();
     }

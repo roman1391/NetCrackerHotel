@@ -28,9 +28,9 @@
 
 <body>
 <%
-    User curUser = (User) request.getAttribute("currentUser");
+    User curUser = (User) session.getAttribute("currentUser");
 %>
-
+<c:set var="user" scope="request" value="${currentUser}"/> 
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <div class="jumbotron">
@@ -45,7 +45,7 @@
             </div>
         </c:if>
       <div class="content">
-        <form:form id="updateForm" action="update" method="post" modelAttribute="currentUser"
+        <form:form id="updateForm" action="update" method="post"  modelAttribute="user"
                    enctype="multipart/form-data" >
         <div class="d-inline-block form-group">
             <img class="img-responsive" src="<c:url value="${currentUser.avatar}"/>">
