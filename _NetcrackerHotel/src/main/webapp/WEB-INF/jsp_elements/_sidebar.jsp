@@ -11,7 +11,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link  type ="text/css" href="<c:url value="../../resources/css/loginform.css" />" rel="stylesheet" />
 
-<div class="container col-md-3 id="sidebar">
+<div class="container col-md-3" id="sidebar" >
+     <sec:authorize access="isAuthenticated()">
+          <%@include file="sideprofile.jsp"%>
+     </sec:authorize>
      <sec:authorize access="!isAuthenticated()">
           <%@include file="loginform.jsp"%>
      </sec:authorize>

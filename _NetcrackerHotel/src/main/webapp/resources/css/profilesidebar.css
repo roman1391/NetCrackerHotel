@@ -1,0 +1,39 @@
+.profile-sidebar {
+    padding: 20px 0 10px 0;
+    max-height: 350px;
+    max-width: 250px;
+    background: #F7F6ED;
+}
+
+.profile-userpic img {
+    float: none;
+    margin-left: 65px;
+    max-width: 50%;
+    max-height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+}
+
+.profile-usertitle{
+    text-align: center;
+}
+
+.profile-usertitle-name{
+    color: #5cb3fd;
+    margin-top: 5px;
+    font-size: x-large;
+    font-family: sans-serif,Droid Sans;
+}
+
+
+.profile-usermenu li{
+   display: block;
+   margin-top: 5px;
+   font-size: x-large;
+   font-family: sans-serif;
+}
+
+a:hover {
+    text-decoration: none;
+}

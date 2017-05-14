@@ -73,4 +73,5 @@
     <div style="margin-top: 15px;" class="btn-group pull-right">
         <button type="submit" class="btn btn-primary ">Search</button>
     </div>
+    <div class="clearfix"></div>
 </form:form>
