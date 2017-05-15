@@ -19,7 +19,7 @@
 					<div style="margin: 10px" class="alert alert-danger">
 						Profile was blocked!</div>
 				</sec:authorize>
-     <sec:authorize access="!isAuthenticated()">
+     <sec:authorize access="!isAuthenticated() && !hasRole('CHANGE_PASSWORD_PRIVILEGE')">
           <%@include file="loginform.jsp"%>
      </sec:authorize>
 </div>

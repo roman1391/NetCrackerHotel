@@ -55,6 +55,13 @@ public class PasswordController {
             model.addAttribute("error", "Account with this email didn't exist.");
             return "forgot_password";
         } else {
+            String autority = user.getAuthority().name();
+            if(autority.equals("VKONTAKTE_USER") || autority.equals("TWITTER_USER") ||
+                    autority.equals("FACEBOOK_USER")){
+               model.addAttribute("error","Account create by " +
+                       "social provider can't change password");
+               return "forgot_password";
+            }
             String appUrl = request.getContextPath();
             eventPublisher.publishEvent(new ForgotPasswordEvent(user, appUrl));
             Authentication auth = new UsernamePasswordAuthenticationToken(user, null,
