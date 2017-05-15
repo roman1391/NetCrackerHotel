@@ -52,10 +52,11 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
     public String buildPageQuery(P pparam) {
         StringBuffer query = new StringBuffer();
         query.append(SqlQuery.MAKE_PAGE.getQuery()).append(buildFullQuery(pparam, mapFilters))
-            .append(" ) nn ) aaa limit ").append(pparam.getResultIndex())
-            // .append(" ,10 ) yyy on ooo.entity_id = yyy.entity_id order by num
-            // ");
-            .append(" ,").append(pageNum).append(" ) yyy on ooo.entity_id = yyy.entity_id order by num ");
+            .append(" ) nn ) aaa limit ")
+            .append(pparam.getResultIndex())
+            .append(" ,")
+            .append(pageNum)
+            .append(" ) yyy on ooo.entity_id = yyy.entity_id order by num ");
         return query.toString();
     }
 
@@ -86,29 +87,32 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
         }
         // filters
         if (hasAnyFilter(mapFilters)) {
-            if (isSorted) {
-                query.append(" ").append(SqlQuery.AFTER_SORTED_PART.getQuery());
-            } else {
-                query.append(SqlQuery.AFTER_ALL_PART.getQuery());
-            }
-            int cycle = 0; // counts number of cycles
-            for (Map.Entry<String, String> entry : mapFilters.entrySet()) {
-                if (entry.getValue() != null && !entry.getValue().equals("")) {
-                    ++cycle;
-                    paramsToQuery.add(entry.getKey());
-                    paramsToQuery.add(entry.getValue());
-                    query.append(cycle == 2 ? " where entity_id in " : "");
-                    query.append(cycle == 3 ? " and entity_id in " : "");
-                    query.append(SqlQuery.ADD_FILTER.getQuery()); // +2:атрибут+значение;
-                    query.append(cycle == 1 ? " xxx " : "");
-                }
-            }
-            query.append(" ) ");
-            query.append(isSorted ? " order by num" : " order by entity_id");
+            addFiltersToQuery(query);
         }
-
         isSorted = false;
         return query.toString();
+    }
+
+    private void addFiltersToQuery(StringBuffer query) {
+        if (isSorted) {
+            query.append(" ").append(SqlQuery.AFTER_SORTED_PART.getQuery());
+        } else {
+            query.append(SqlQuery.AFTER_ALL_PART.getQuery());
+        }
+        int cycle = 0; // counts number of cycles
+        for (Map.Entry<String, String> entry : mapFilters.entrySet()) {
+            if (entry.getValue() != null && !entry.getValue().equals("")) {
+                ++cycle;
+                paramsToQuery.add(entry.getKey());
+                paramsToQuery.add(entry.getValue());
+                query.append(cycle == 2 ? " where entity_id in " : "");
+                query.append(cycle == 3 ? " and entity_id in " : "");
+                query.append(SqlQuery.ADD_FILTER.getQuery()); // +2:атрибут+значение;
+                query.append(cycle == 1 ? " xxx " : "");
+            }
+        }
+        query.append(" ) ");
+        query.append(isSorted ? " order by num" : " order by entity_id");
     }
 
     private boolean hasAnyFilter(Map<String, String> map) {

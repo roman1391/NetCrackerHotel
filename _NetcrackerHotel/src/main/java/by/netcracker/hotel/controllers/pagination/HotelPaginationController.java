@@ -27,8 +27,6 @@ public class HotelPaginationController extends PaginationControllerAbstract<Hote
     private HotelService hotelService;
 
     public HotelPaginationController() {
-        setOptionDisplayCheckbox(true);
-        setOptionDisplaySerialNo(true);
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");

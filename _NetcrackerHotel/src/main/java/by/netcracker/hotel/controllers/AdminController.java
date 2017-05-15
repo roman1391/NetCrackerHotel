@@ -22,6 +22,7 @@ import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.OrderService;
 import by.netcracker.hotel.services.ReviewService;
+import by.netcracker.hotel.services.RoomService;
 import by.netcracker.hotel.services.UserService;
 
 @Controller
@@ -33,15 +34,17 @@ public class AdminController {
     private final ReviewService reviewService;
     private final OrderService orderService;
     private final HotelService hotelService;
+    private final RoomService roomService;
 
     @Autowired
     public AdminController(WebApplicationContext context, UserService userService, ReviewService reviewService,
-        OrderService orderService, HotelService hotelService) {
+        OrderService orderService, HotelService hotelService, RoomService roomService) {
         this.context = context;
         this.userService = userService;
         this.reviewService = reviewService;
         this.orderService = orderService;
         this.hotelService = hotelService;
+        this.roomService = roomService;
     }
 
     @RequestMapping(value = "/add_user_ref", method = RequestMethod.GET)
@@ -150,9 +153,10 @@ public class AdminController {
         String reviewInfo = reviewService.checkReview(hotelID);
         model.addAttribute("reviewInfo", reviewInfo);
         model.addAttribute("choosenHotel", hotel);
+        model.addAttribute("hotel_rooms", roomService.getByHotelID(hotelID));
         model.addAttribute("review", context.getBean("review"));
         model.addAttribute("order", context.getBean("order"));
-        return "hotel_page";
+        return "admin/edit_hotel_page";
     }
 
 }

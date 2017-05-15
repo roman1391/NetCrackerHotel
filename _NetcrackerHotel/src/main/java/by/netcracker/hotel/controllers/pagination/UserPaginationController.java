@@ -27,8 +27,6 @@ public class UserPaginationController extends PaginationControllerAbstract<UserS
     private UserService userService;
 
     public UserPaginationController() {
-        setOptionDisplayCheckbox(true);
-        setOptionDisplaySerialNo(true);
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");

@@ -25,8 +25,6 @@ public class ReviewPaginationController extends PaginationControllerAbstract<Rev
     private ReviewPaginationService reviewPaginationService;
 
     public ReviewPaginationController() {
-        setOptionDisplayCheckbox(true);
-        setOptionDisplaySerialNo(true);
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");

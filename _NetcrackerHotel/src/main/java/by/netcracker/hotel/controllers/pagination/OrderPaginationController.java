@@ -27,8 +27,6 @@ public class OrderPaginationController extends PaginationControllerAbstract<Orde
     private OrderService orderService;
 
     public OrderPaginationController() {
-        setOptionDisplayCheckbox(true);
-        setOptionDisplaySerialNo(true);
         setOptionWidth(750);
         setDefaultRecordPerPage(10);
         setDefaultSortAscDesc("d");
