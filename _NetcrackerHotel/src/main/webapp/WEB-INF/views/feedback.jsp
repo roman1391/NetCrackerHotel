@@ -25,7 +25,7 @@
                      ${success}
              </div>
          </c:if>
-         <form style="margin: auto" method="post" action="/feedback">
+         <form style="margin: auto" method="post" action="feedback">
              <div class="form-group">
                  <label>Email:</label>
                  <input name="sender" type="email" class="form-control" value="${currentUser.getEmail()}"
