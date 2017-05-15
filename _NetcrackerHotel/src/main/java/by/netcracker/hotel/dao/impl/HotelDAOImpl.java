@@ -85,6 +85,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
         update(hotel.getDescription(), ColumnName.HOTEL_DESCRIPTION, hotel.getId());
         update(hotel.getEnabled(), ColumnName.HOTEL_ENABLED, hotel.getId());
         update(hotel.getName(), ColumnName.HOTEL_NAME, hotel.getId());
+        update(hotel.getMainPhoto(), ColumnName.HOTEL_MAIN_PHOTO, hotel.getId());
     }
 
     private boolean update(Object value, Object column, Object id) {
@@ -211,4 +212,5 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
             new RowMapperResultSetExtractor<Hotel>(new HotelMapper()) {
             });
     }
+
 }

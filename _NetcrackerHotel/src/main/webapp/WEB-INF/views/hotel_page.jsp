@@ -95,6 +95,11 @@
                         </tbody>
                     </table>
                     </sec:authorize>
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <a href="${contextPath}/admin/hotel/${id}/edit_hotel" class = "btn btn-primary">Edit hotel</a>
+                        <a href="${contextPath}/admin/hotel/${id}/edit_photo" class = "btn btn-primary">Edit photos</a>
+                        <a href="${contextPath}/admin/hotel/${id}/edit_room" class = "btn btn-primary">Edit rooms</a>
+                    </sec:authorize>
                 </div>
             </div>
 

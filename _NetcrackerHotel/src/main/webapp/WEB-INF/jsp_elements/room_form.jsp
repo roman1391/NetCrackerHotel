@@ -22,7 +22,7 @@
 </form>
 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<form:form style="margin: 20px" action="${contextPath}/admin/hotel/${id}/room" method="post" modelAttribute="room">
+<form:form style="margin: 20px" action="${path}" method="post" modelAttribute="room">
     <div class="form-group">
         <form:label path="cost">Room cost</form:label>
         <form:input path="cost" type="number" class="form-control"
@@ -34,6 +34,6 @@
                     placeholder="Room capacity" required="required"/>
     </div>
     <div class="form-group">
-        <form:button type="submit" class="btn btn-primary">Add room</form:button>
+        <form:button type="submit" class="btn btn-primary">${button}</form:button>
     </div>
 </form:form>

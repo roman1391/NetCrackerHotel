@@ -22,4 +22,5 @@ public interface HotelDAO extends AbstractDAO<Hotel, Integer> {
     //List<Hotel> findHotelsBySearchStrings(List<String> searchStrings);
 
     List<Hotel> findHotelsBySearchStrings(List<String> searchStrings, SearchFilter searchFilter);
+
 }

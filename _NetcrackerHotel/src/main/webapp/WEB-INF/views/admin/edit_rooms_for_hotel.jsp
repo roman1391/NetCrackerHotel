@@ -21,10 +21,11 @@
 <%@include file="../../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-    <c:set var="path" value="${contextPath}/admin/hotel/${id}/room"/>
+    <c:set var="path" value="${contextPath}/admin/hotel/${id}/edit/room"/>
     <c:set var="button" value="Add room"/>
     <%@include file="../../jsp_elements/hotelMin.jsp" %>
     <%@include file="../../jsp_elements/room_form.jsp" %>
+    <a  class = "btn btn-primary" style="margin: 20px" href="${contextPath}/admin/hotel_page/${id}">Hotel page</a>
 </div>
 <%@include file="../../jsp_elements/_footer.jsp" %>
 <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>"

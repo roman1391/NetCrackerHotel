@@ -5,7 +5,6 @@
   Time: 9:28 PM
   To change this template use File | Settings | File Templates.
 --%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <form style="margin: 50px">
     <c:if test="${not empty hotel.photos}">
         <div class="row">
@@ -24,17 +23,13 @@
         <div class="row">${message}</div>
     </c:if>
 </form>
-<form style="margin: 20px" action="${contextPath}/admin/hotel/${id}/photo" method="post"
+<form style="margin: 20px" action="${path}" method="post"
       enctype="multipart/form-data" id="selectPhoto">
     <div class="form-group">
         <input type="file" name="files" multiple accept="image/*">
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Add photo</button>
+        <button type="submit" class="btn btn-primary">${button}</button>
     </div>
 </form>
-<form style="margin: 20px">
-    <div class="form-group">
-        <input class="btn btn-primary" type="button" onclick="location.href='${contextPath}/admin/hotel/${id}/room'" value=" Add rooms"/>
-    </div>
-</form>
+

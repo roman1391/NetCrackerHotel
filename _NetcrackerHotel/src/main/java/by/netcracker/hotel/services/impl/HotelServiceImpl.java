@@ -87,4 +87,9 @@ public class HotelServiceImpl implements HotelService {
         hotelDAO.addPhoto(photo, hotelID);
     }
 
+    @Override
+    public void editHotel(Hotel hotel) {
+        hotelDAO.update(hotel);
+    }
+
 }

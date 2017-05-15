@@ -8,7 +8,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<form:form style="margin: 20px" action="${contextPath}/admin/hotel/add" method="post" modelAttribute="hotel"
+<form:form style="margin: 20px" action="${path}" method="post" modelAttribute="hotel"
            enctype="multipart/form-data" id="selectPhoto">
     <div class="form-group">
         <input type="file" name="file" accept="image/*">
@@ -49,6 +49,6 @@
         </form:select>
     </div>
     <div class="form-group">
-        <form:button type="submit" class="btn btn-primary">Add hotel</form:button>
+        <form:button type="submit" class="btn btn-primary">${button}</form:button>
     </div>
 </form:form>

@@ -23,42 +23,46 @@ public class HotelMapper implements RowMapper<Hotel> {
                 break;
             }
             switch (resultSet.getString(2)) {
-            case ColumnName.HOTEL_COUNTRY: {
-                hotel.setCountry(resultSet.getString(3));
-                break;
-            }
-            case ColumnName.HOTEL_CITY: {
-                hotel.setCity(resultSet.getString(3));
-                break;
-            }
-            case ColumnName.HOTEL_ADDRESS: {
-                hotel.setAddress(resultSet.getString(3));
-                break;
-            }
-            case ColumnName.HOTEL_NAME: {
-                hotel.setName(resultSet.getString(3));
-                break;
-            }
-            case ColumnName.HOTEL_CLASS: {
-                hotel.setTypeOfService(resultSet.getInt(3));
-                break;
-            }
-            case ColumnName.HOTEL_MAIN_PHOTO: {
-                hotel.setMainPhoto(resultSet.getString(3));
-                break;
-            }
-            case ColumnName.HOTEL_PHOTO: {
-                hotel.addPhoto(resultSet.getString(3));
-                break;
-            }
-            case ColumnName.HOTEL_ENABLED: {
-                if (Integer.parseInt(resultSet.getString(3)) == 1) {
-                    hotel.setEnabled(true);
-                } else {
-                    hotel.setEnabled(false);
+                case ColumnName.HOTEL_COUNTRY: {
+                    hotel.setCountry(resultSet.getString(3));
+                    break;
                 }
-                break;
-            }
+                case ColumnName.HOTEL_CITY: {
+                    hotel.setCity(resultSet.getString(3));
+                    break;
+                }
+                case ColumnName.HOTEL_ADDRESS: {
+                    hotel.setAddress(resultSet.getString(3));
+                    break;
+                }
+                case ColumnName.HOTEL_NAME: {
+                    hotel.setName(resultSet.getString(3));
+                    break;
+                }
+                case ColumnName.HOTEL_CLASS: {
+                    hotel.setTypeOfService(resultSet.getInt(3));
+                    break;
+                }
+                case ColumnName.HOTEL_MAIN_PHOTO: {
+                    hotel.setMainPhoto(resultSet.getString(3));
+                    break;
+                }
+                case ColumnName.HOTEL_PHOTO: {
+                    hotel.addPhoto(resultSet.getString(3));
+                    break;
+                }
+                case ColumnName.HOTEL_DESCRIPTION: {
+                    hotel.setDescription(resultSet.getString(3));
+                    break;
+                }
+                case ColumnName.HOTEL_ENABLED: {
+                    if (Integer.parseInt(resultSet.getString(3)) == 1) {
+                        hotel.setEnabled(true);
+                    } else {
+                        hotel.setEnabled(false);
+                    }
+                    break;
+                }
             }
         } while (resultSet.next());
         return hotel;
