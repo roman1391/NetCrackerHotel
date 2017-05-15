@@ -19,7 +19,7 @@
             <port-mapping http="8080" https="8443" />
         </port-mappings> -->
 
-		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
+		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/> 
         <intercept-url pattern="/profile" access="hasAnyRole('USER','ADMIN','VKONTAKTE_USER',
                                                              'FACEBOOK_USER','TWITTER_USER')"/>
         <intercept-url pattern="/signup/**" access="permitAll" />
@@ -27,7 +27,7 @@
         <intercept-url pattern="/reset_password" access="hasRole('CHANGE_PASSWORD_PRIVILEGE')" />
         <intercept-url pattern="/change_password" access="hasAnyRole('ADMIN','USER')" />
         
-        <form-login login-page='/login_page'
+        <form-login login-page='/'
                     authentication-success-handler-ref="SuccessLoginHandler"
                     authentication-failure-url="/login?error=true"
                     username-parameter="user_login"
@@ -58,14 +58,14 @@
     </beans:bean>
 
     <authentication-manager>
-        <authentication-provider>
+        <authentication-provider >
             <password-encoder ref="bcrypt"/>
             <jdbc-user-service id="userDetailsManager" data-source-ref="dataSource"
                                users-by-username-query="${users-by-username-query}"
                                authorities-by-username-query="${authorities-by-username-query}"/>
         </authentication-provider>
-
     </authentication-manager>
+    
     <beans:bean id='bcrypt'
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <beans:constructor-arg name="strength" value='11'/>

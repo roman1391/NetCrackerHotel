@@ -16,10 +16,6 @@
 </head>
 
 <body>
-<%
-    User curUser = (User) request.getAttribute("user");
-%>
-
 <%@include file="../../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <div class="jumbotron">
@@ -34,24 +30,22 @@
             </div>
         </c:if>
       <div class="content">
-      		<h3>User editing:</h3>
-            <img class="img-responsive" src="<c:url value="${user.avatar}"/>">
+      	<h4>User editing:</h4>
+        <img class="img-responsive" src="<c:url value="${user.avatar}"/>">
 
         <form:form id="updateForm" action="update" method="post" modelAttribute="user"
                    enctype="multipart/form-data" >
         <div class="d-inline-block form-group">
-            <sec:authorize access="hasAnyRole('USER','ADMIN')" >
-                <div class="form-group">
-                  <form:label path="email" >Email:</form:label>
-                  <form:input disabled="true" path="email" id="email" value="${user.email}"
+        	<div class="form-group">
+            	<form:label path="email" >Email:</form:label>
+                <form:input disabled="true" path="email" id="email" value="${user.email}"
                              class="editable form-control"/>
-                </div>
-                <div class="form-group">
-                  <form:label path="username"  >Username:</form:label>
-                  <form:input disabled="true" path="username" id="username" value="${user.username}"
+            </div>
+            <div class="form-group">
+            	<form:label path="username"  >Username:</form:label>
+                <form:input disabled="true" path="username" id="username" value="${user.username}"
                             class="editable form-control" />
-                </div>
-            </sec:authorize>
+            </div>
             <div class="form-group">
                 <form:label path="firstName" >First name:</form:label>
                 <form:input disabled="true" path="firstName" id="firstName" value="${user.firstName}"
@@ -65,12 +59,12 @@
             <c:choose>
             	<c:when test="${currentUser.username eq user.username }">
             	<div class="form-group">
-                <form:label path="authority" >Authority:</form:label>
-				<form:select disabled="true" path="authority" id="authority" class="form-control">
-                    <form:option value="ADMIN" label="Admin"/>
-                    <form:option value="USER" label="User"/>
-                    <form:option value="BLOCKED" label="Blocked"/>
-                </form:select>
+                	<form:label path="authority" >Authority:</form:label>
+					<form:select disabled="true" path="authority" id="authority" class="form-control">
+                    	<form:option value="ADMIN" label="Admin"/>
+                    	<form:option value="USER" label="User"/>
+                    	<form:option value="BLOCKED" label="Blocked"/>
+                	</form:select>
             	</div>
             	<div class="form-group">
                 <form:label path="enabled" >State:</form:label>
@@ -106,17 +100,12 @@
                     <button style="margin-left: 5px; display: none" id="cancel-btn" onclick="onCancel()" class="btn btn-danger">Cancel</button>
                 </div>
             </div>
-
-        </form:form>
-          
+        </form:form>        
           <div class="btn-group">
-              <button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
-              
-<!--               <a style="margin-left: 5px" id ="changePassword" class="btn btn-warning" href="change_password">Change password</a> -->
-
+          	<button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
           </div>
-
        </div>
+       <p><a href="${contextPath}/admin/list_of_users">Back to user management</a></p>
     </div>
 </div>
 <%@include file="../../jsp_elements/_footer.jsp" %>
@@ -138,14 +127,14 @@
     }
 
     $("#updateForm").submit(function (eventObj) {
-        var userId = '<%=curUser.getId()%>';
+        var userId = '${user.id}';
         $('<input />').attr('type', 'hidden')
             .attr('name', "id")
             .attr('value', userId)
             .appendTo('#updateForm');
         $('<input />').attr('type', 'hidden')
             .attr('name', "authority")
-            .attr('value', '<%=curUser.getAuthority().toString()%>')
+            .attr('value', '${user.avatar}')
             .appendTo('#updateForm');
         $('<input />').attr('type', 'hidden')
             .attr('name', "enabled")

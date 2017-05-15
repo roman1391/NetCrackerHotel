@@ -21,15 +21,14 @@
 				Admin page! <br />
 				<div class="col-xs-12 col-sm-9">
 					<div class="jumbotron">
-						<h2>Admin page</h2>
-						<c:if test="${success!=null}">
-							<div style="margin: 50px" class="alert alert-success">
-								${success}</div>
-						</c:if>
-						<p><a href="${contextPath}/admin/list_of_users">User management</a></p>
-						<p><a href="${contextPath}/admin/list_of_hotels">Hotel management</a></p>
-						<p><a href="${contextPath}/admin/list_of_reviews">Review management</a></p>
-						<p><a href="${contextPath}/admin/list_of_orders">Order management</a></p>
+					<c:if test="${success!=null}">
+						<div style="margin: 10px;width:300px;" class="alert alert-success">${success}</div>
+					</c:if>
+						<h3>Admin page</h3>
+						<p><a href="${contextPath}/admin/list_of_users">Users management</a></p>
+						<p><a href="${contextPath}/admin/list_of_hotels">Hotels management</a></p>
+						<p><a href="${contextPath}/admin/list_of_reviews">Reviews management</a></p>
+						<p><a href="${contextPath}/admin/list_of_orders">Orders management</a></p>
 					</div>
 				</div>
 			</div>

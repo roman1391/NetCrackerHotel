@@ -19,17 +19,17 @@
     <div class="profile-usermenu">
         <ul >
             <li>
-                <a href="/profile">
+                <a href="profile">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>  Profile </a>
             </li>
             <li>
-                <a href="/booked_room?id=${currentUser.getId()}">
+                <a href="booked_room?id=${currentUser.getId()}">
                     <i class="fa fa-archive" aria-hidden="true"></i>
                      Booked room
                 </a>
             </li>
             <li>
-                <a href="/feedback">
+                <a href="feedback">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                     Feedback
                 </a>

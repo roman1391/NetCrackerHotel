@@ -100,7 +100,6 @@ public class AdminController {
     @RequestMapping(value = "/check_review/{id}", method = RequestMethod.GET)
     public String checkReview(@Valid @PathVariable("id") int id, Model model) {
         Review review = reviewService.getByID(id);
-        // reviewService.update(review);
         model.addAttribute("review", review);
         return "admin/check_review";
     }
