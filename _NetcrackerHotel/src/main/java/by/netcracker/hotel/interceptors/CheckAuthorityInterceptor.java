@@ -34,7 +34,6 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
         if (modelAndView == null) {
             return;
         }
-        // boolean isBlocked;
         Object userInfo = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (userInfo instanceof String) {
             System.out.println("userInfo: " + userInfo);
@@ -49,11 +48,7 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
             System.out.println("userInfo:");
             System.out.println("Username - " + userDetails.getUsername());
             System.out.println("Authority - " + userAuthority);
-            // modelAndView.addObject("role", ROLE.valueOf(userAuthority));
-            // if (userAuthority.equals("BLOCKED")) {
-            // isBlocked = true;
-            // modelAndView.addObject("blocked_user", isBlocked);
-            // }
+
         }
         request.getSession().setAttribute("currentUser", user);
     }
