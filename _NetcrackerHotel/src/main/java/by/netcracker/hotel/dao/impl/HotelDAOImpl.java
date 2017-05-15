@@ -208,6 +208,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
             }
             query.append("))");
         }
+        query.append(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_END.getQuery());
         return getJdbcTemplate().query(query.toString(), param.toArray(),
             new RowMapperResultSetExtractor<Hotel>(new HotelMapper()) {
             });
