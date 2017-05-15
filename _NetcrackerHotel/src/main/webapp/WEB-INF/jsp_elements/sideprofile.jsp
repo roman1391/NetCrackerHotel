@@ -28,6 +28,12 @@
                      Booked room
                 </a>
             </li>
+            <li>
+                <a href="/feedback">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    Feedback
+                </a>
+            </li>
         </ul>
     </div>
 </div>
