@@ -22,9 +22,9 @@
                     </div>
                 </div>
             </c:forEach>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Delete photo</button>
-            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Delete photo</button>
         </div>
     </form>
 </c:if>

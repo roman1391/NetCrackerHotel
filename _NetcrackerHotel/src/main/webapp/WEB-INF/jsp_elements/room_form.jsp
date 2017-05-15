@@ -6,20 +6,25 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<form style="margin: 50px">
-    <c:if test="${not empty rooms}">
+
+<c:if test="${not empty rooms}">
+    <form style="margin: 20px;" action="${pathDelete}" method="post" enctype="multipart/form-data">
         <div class="row">
+            <input type="checkbox" name="roomsToDelete" value="-1" checked="checked" style="opacity:0;
+            position:absolute; left:9999px;"/>
             <c:forEach var="room" items="${rooms}">
-                <div class="row list-group-item">
-                    <div class="col-12">
-                        <p>room capacity - ${room.capacity}</p>
-                        <p>room cost - ${room.cost}</p>
-                    </div>
-                </div>
+                <label style=" border: 1px solid #003eff; padding: 10px;">
+                    <input type="checkbox" name="roomsToDelete" value="${room.id}"/>
+                    <p>room capacity - ${room.capacity}</p>
+                    <p>room cost - ${room.cost}</p>
+                </label>
             </c:forEach>
         </div>
-    </c:if>
-</form>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Delete rooms</button>
+        </div>
+    </form>
+</c:if>
 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <form:form style="margin: 20px" action="${path}" method="post" modelAttribute="room">

@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service("RoomServiceImpl")
 @SessionScope
-public class RoomServiceImpl implements RoomService{
+public class RoomServiceImpl implements RoomService {
     private final RoomDAO roomDAO;
 
     @Autowired
@@ -45,8 +45,8 @@ public class RoomServiceImpl implements RoomService{
     public List<Room> getFreeRoomsInHotelByDate(int hotelID, SearchFilter searchFilter/*String start, String end*/) {
         List<Room> freeRooms = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-            //freeRooms = roomDAO.getFreeRoomsInHotelByDate(hotelID, dateFormat.parse(start), dateFormat.parse(end));
-            freeRooms = roomDAO.getFreeRoomsInHotelByDate(searchFilter, hotelID );
+        //freeRooms = roomDAO.getFreeRoomsInHotelByDate(hotelID, dateFormat.parse(start), dateFormat.parse(end));
+        freeRooms = roomDAO.getFreeRoomsInHotelByDate(searchFilter, hotelID);
 
         return freeRooms;
     }
@@ -54,6 +54,13 @@ public class RoomServiceImpl implements RoomService{
     @Override
     public boolean isRoomFree(int roomId, SearchFilter searchFilter) {
         return roomDAO.isRoomFree(roomId, searchFilter);
+    }
+
+    @Override
+    public void deleteRooms(List<Integer> roomsToDelete) {
+        for (int id : roomsToDelete) {
+            roomDAO.deleteByID(id);
+        }
     }
 
 

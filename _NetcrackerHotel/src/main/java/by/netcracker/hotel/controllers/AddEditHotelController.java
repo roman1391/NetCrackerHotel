@@ -45,7 +45,8 @@ public class AddEditHotelController {
     private final ReviewService reviewService;
 
     @Autowired
-    public AddEditHotelController(ServletContext context, HotelService hotelService, RoomService roomService, ReviewService reviewService) {
+    public AddEditHotelController(ServletContext context, HotelService hotelService, RoomService roomService,
+                                  ReviewService reviewService) {
         this.context = context;
         this.roomService = roomService;
         this.reviewService = reviewService;
@@ -82,7 +83,8 @@ public class AddEditHotelController {
     }
 
     @RequestMapping(value = "{id}/photo/delete", method = RequestMethod.POST)
-    public String deletePhoto(@PathVariable("id") int hotelID, @RequestParam(value = "photoToDelete") String[] photoToDelete, Model model) {
+    public String deletePhoto(@PathVariable("id") int hotelID,
+                              @RequestParam(value = "photoToDelete") String[] photoToDelete, Model model) {
         hotelService.deletePhoto(photoToDelete);
         model.addAttribute("hotel", hotelService.getByID(hotelID));
         return "admin/add_hotel_photo_and_description";
@@ -119,6 +121,16 @@ public class AddEditHotelController {
         room.setHotelID(hotelID);
         roomService.add(room);
         model.addAttribute("rooms", roomService.getByHotelID(hotelID));
+        return "admin/add_rooms_to_hotel";
+    }
+
+    @RequestMapping(value = "{id}/room/delete", method = RequestMethod.POST)
+    public String deleteRoom(@PathVariable("id") int hotelID,
+                             @RequestParam(value = "roomsToDelete") List<Integer> roomsToDelete, Model model) {
+        roomService.deleteRooms(roomsToDelete);
+        model.addAttribute("hotel", hotelService.getByID(hotelID));
+        model.addAttribute("rooms", roomService.getByHotelID(hotelID));
+        model.addAttribute("room", new Room());
         return "admin/add_rooms_to_hotel";
     }
 
@@ -167,13 +179,14 @@ public class AddEditHotelController {
     }
 
     @RequestMapping(value = "/{id}/edit/delete/photo", method = RequestMethod.POST)
-    public String editDeletePhoto(@PathVariable("id") int hotelID, @RequestParam(value = "photoToDelete") String[] photoToDelete, Model model) {
+    public String editDeletePhoto(@PathVariable("id") int hotelID,
+                                  @RequestParam(value = "photoToDelete") String[] photoToDelete, Model model) {
         hotelService.deletePhoto(photoToDelete);
         model.addAttribute("hotel", hotelService.getByID(hotelID));
         return "admin/edit_hotel_photo";
     }
 
-    @RequestMapping(value = "/{id}/edit_room")
+    @RequestMapping(value = "/{id}/edit_room", method = RequestMethod.GET)
     public String editRoom(@Valid @PathVariable("id") int hotelID, Model model) {
         model.addAttribute("hotel", hotelService.getByID(hotelID));
         model.addAttribute("rooms", roomService.getByHotelID(hotelID));
@@ -188,6 +201,16 @@ public class AddEditHotelController {
         roomService.add(room);
         model.addAttribute("hotel", hotelService.getByID(hotelID));
         model.addAttribute("rooms", roomService.getByHotelID(hotelID));
+        return "admin/edit_rooms_for_hotel";
+    }
+
+    @RequestMapping(value = "{id}/edit/room/delete", method = RequestMethod.POST)
+    public String editDeleteRoom(@PathVariable("id") int hotelID,
+                                 @RequestParam(value = "roomsToDelete") List<Integer> roomsToDelete, Model model) {
+        roomService.deleteRooms(roomsToDelete);
+        model.addAttribute("hotel", hotelService.getByID(hotelID));
+        model.addAttribute("rooms", roomService.getByHotelID(hotelID));
+        model.addAttribute("room", new Room());
         return "admin/edit_rooms_for_hotel";
     }
 }

@@ -14,4 +14,6 @@ public interface RoomService extends AbstractService<Room, Integer>  {
     List<Room> getFreeRoomsInHotelByDate(int hotelID, SearchFilter searchFilter/*String start, String end*/);
 
     boolean isRoomFree(int roomId, SearchFilter searchFilter); //TODO bad query
+
+    void deleteRooms(List<Integer> roomsToDelete);
 }

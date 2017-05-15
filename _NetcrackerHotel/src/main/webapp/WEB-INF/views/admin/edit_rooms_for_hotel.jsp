@@ -23,6 +23,7 @@
     <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
     <c:set var="path" value="${contextPath}/admin/hotel/${id}/edit/room"/>
     <c:set var="button" value="Add room"/>
+    <c:set var="pathDelete" value="${contextPath}/admin/hotel/${id}/edit/room/delete"/>
     <%@include file="../../jsp_elements/hotelMin.jsp" %>
     <%@include file="../../jsp_elements/room_form.jsp" %>
     <a  class = "btn btn-primary" style="margin: 20px" href="${contextPath}/admin/hotel_page/${id}">Hotel page</a>
