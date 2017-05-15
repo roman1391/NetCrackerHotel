@@ -23,10 +23,6 @@
 							${error}
 					</div>
 				</c:if>
-				<sec:authorize access="hasRole('BLOCKED')">
-					<div style="margin: 50px" class="alert alert-danger">
-						Profile was blocked!</div>
-				</sec:authorize>
 				<div id="carousel" class="carousel slide" data-ride="carousel">
 					<!-- Menu -->
 					<ol class="carousel-indicators">

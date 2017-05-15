@@ -31,28 +31,29 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
         ModelAndView modelAndView) throws Exception {
-        if (modelAndView == null)
+        if (modelAndView == null) {
             return;
-        boolean isBlocked;
-        Object info = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (info instanceof String) {
-            System.out.println("userInfo: " + info);
+        }
+        // boolean isBlocked;
+        Object userInfo = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (userInfo instanceof String) {
+            System.out.println("userInfo: " + userInfo);
             user = (User) context.getBean("user");
             user.setUsername("GUEST");
             user.setAuthority(ROLE.GUEST);
-        } else if (info instanceof UserDetails) {
-            UserDetails userDetails = (UserDetails) info;
+        } else if (userInfo instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) userInfo;
             user = (User) userService.getUserByUsername(userDetails.getUsername());
 
-            String auth = Arrays.asList(userDetails.getAuthorities().toArray()).get(0).toString();
+            String userAuthority = Arrays.asList(userDetails.getAuthorities().toArray()).get(0).toString();
             System.out.println("userInfo:");
             System.out.println("Username - " + userDetails.getUsername());
-            System.out.println("Authority - " + auth);
-            modelAndView.addObject("role", ROLE.valueOf(auth));
-            if (auth.equals("BLOCKED")) {
-                isBlocked = true;
-                modelAndView.addObject("blocked_user", isBlocked);
-            }
+            System.out.println("Authority - " + userAuthority);
+            // modelAndView.addObject("role", ROLE.valueOf(userAuthority));
+            // if (userAuthority.equals("BLOCKED")) {
+            // isBlocked = true;
+            // modelAndView.addObject("blocked_user", isBlocked);
+            // }
         }
         request.getSession().setAttribute("currentUser", user);
     }
