@@ -16,4 +16,5 @@ public interface OrderService extends AbstractService<Order, Integer> {
     void deleteByOrderId(int orderId);
 
     void update(int id, SearchFilter searchFilter);
+
 }

@@ -22,6 +22,12 @@
     <link href="<c:url value="/resources/css/search.css" />" rel="stylesheet">
     <link href="<c:url value="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>"
           rel="stylesheet"/>
+    <script type="text/javascript">
+        function calcAmount(payValue, startDate, endDate) {
+            var difference = endDate - startDate;
+            document.write((difference * payValue) / (24 * 60 * 60 * 1000));
+        }
+    </script>
 </head>
 <c:set var="user" scope="request" value="${currentUser}"/>
 <body>
@@ -49,7 +55,7 @@
                     </c:choose>
                     <table>
                         <tbody>
-                        <c:forEach items="${orders}" var="order" varStatus="loop">
+                        <c:forEach items="${orders}" var="order" varStatus="loop" >
                             <tr>
 
                                 <br>Order Id: ${order.id}
@@ -73,9 +79,7 @@
                                 <br>Last Name: ${order.lastName }
                                 <br>Arrival Date: ${order.arrivalDate}
                                 <br>Leave Date: ${order.leaveDate}
-                                <br>Pay Value: ${order.payValue}
-                                <br>Is Paid: ${order.isPaid()}
-
+                                <br >Total amount: <script>calcAmount(${order.payValue}, ${order.arrivalDate.getTime()}, ${order.leaveDate.getTime()})</script>
                             </tr>
                         </c:forEach>
 
@@ -88,5 +92,6 @@
     <%@include file="../jsp_elements/_footer.jsp" %>
 </div>
 <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
+
 </body>
 </html>

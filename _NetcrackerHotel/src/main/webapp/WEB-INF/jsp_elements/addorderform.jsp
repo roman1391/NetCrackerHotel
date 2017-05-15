@@ -37,6 +37,8 @@
                 value="${order.username}"></form:input>
      <form:input path="hotelname" type="hidden" name="hotelname"
                 value="${order.hotelname}"></form:input>
+    <form:input path="payValue" type="hidden" name="payValue"
+                value="${order.payValue}"></form:input>
     <div class="form-group">
         <form:button type="submit" class="btn btn-primary">Add new order</form:button>
     </div>

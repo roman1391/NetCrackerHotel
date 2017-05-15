@@ -1,5 +1,7 @@
 package by.netcracker.hotel.services.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import by.netcracker.hotel.filter.SearchFilter;
@@ -50,7 +52,4 @@ public class OrderServiceImpl implements OrderService {
         orderDAO.update(id, searchFilter);
     }
 
-    public void findByUserId(Integer id) {
-
-    }
 }

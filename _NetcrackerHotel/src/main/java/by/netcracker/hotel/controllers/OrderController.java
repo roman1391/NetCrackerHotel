@@ -61,6 +61,7 @@ public class OrderController {
     @RequestMapping(value = "/book_page/{id}", method = RequestMethod.POST)
     public String bookPage(@ModelAttribute("order") Order order, @PathVariable("id") int roomId,
         @ModelAttribute("searchFilter") SearchFilter searchFilter, Model model) {
+        order.setPayValue(roomService.getByID(roomId).getCost());
         model.addAttribute("order", order);
         model.addAttribute("roomId", roomId);
         return "add_order";
@@ -98,11 +99,13 @@ public class OrderController {
             orderService.update(order.getId(),searchFilter);
             model.addAttribute("orders", orderService.getByUserId(order.getUserId()));
             model.addAttribute("message", "success");
+            //model.addAttribute("payValue", orderService.calcPayValue(order.getId()));
             return "bookedRooms";
         }
 
             model.addAttribute("orders", orderService.getByUserId(order.getUserId()));
             model.addAttribute("message", "error");
+            //model.addAttribute("payValue", orderService.calcPayValue(order.getId()));
             return "bookedRooms";
     }
 }

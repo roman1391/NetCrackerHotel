@@ -27,8 +27,8 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public Room getByID(Integer integer) {
-        return null;
+    public Room getByID(Integer id) {
+        return roomDAO.getByID(id);
     }
 
     @Override
