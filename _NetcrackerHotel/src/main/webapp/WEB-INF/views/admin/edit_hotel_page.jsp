@@ -72,10 +72,9 @@
                         <a href="${contextPath}/admin/hotel/${id}/edit_hotel" class = "btn btn-primary">Edit hotel</a>
                         <a href="${contextPath}/admin/hotel/${id}/edit_photo" class = "btn btn-primary">Edit photos</a>
                         <a href="${contextPath}/admin/hotel/${id}/edit_room" class = "btn btn-primary">Edit rooms</a>
+                         <p><a href="${contextPath}/admin/list_of_hotels">Back to hotels management</a></p>
                 </div>
-            </div>
-
-
+            </div>         
         </div>
     </div>
     <%@include file="../../jsp_elements/_footer.jsp" %>
