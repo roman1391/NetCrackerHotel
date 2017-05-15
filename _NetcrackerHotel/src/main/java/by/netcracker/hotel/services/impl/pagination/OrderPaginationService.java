@@ -21,7 +21,6 @@ public class OrderPaginationService extends PaginationServiceAbstract<OrderSearc
 
     private static Logger log = Logger.getLogger(OrderPaginationService.class);
 
-    @SuppressWarnings("unused")
     private PaginationDao<Order, OrderSearchParam> orderPaginationDAO;
     private OrderDAO orderDAO;
 

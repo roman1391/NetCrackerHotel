@@ -62,7 +62,7 @@
 
                                 <div class="btn-group">
                                     <button style="margin: 0 15px 0 15px" id="edit-btn"
-                                            onclick="location.href='/edit_order/${order.id}'"
+                                            onclick="location.href='edit_order/${order.id}'"
                                             class="btn btn-primary">Edit
                                     </button>
                                 </div>

@@ -23,7 +23,6 @@ public class ReviewPaginationService extends PaginationServiceAbstract<ReviewSea
 
     private static Logger log = Logger.getLogger(UserPaginationService.class);
 
-    @SuppressWarnings("unused")
     private PaginationDao<Review, ReviewSearchParam> reviewPaginationDAO;
     private ReviewDAO reviewDAO;
     private HotelDAO hotelDAO;

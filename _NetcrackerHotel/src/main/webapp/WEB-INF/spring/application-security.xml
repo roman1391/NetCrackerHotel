@@ -33,14 +33,12 @@
                     username-parameter="user_login"
                     password-parameter="user_password"/>
 
-
         <logout logout-success-url="/home"/>
 
         <remember-me  data-source-ref="dataSource"
                       token-validity-seconds="86400" />
         <security:remember-me data-source-ref="dataSource"
                      services-ref="socialRememberMe" />
-
     </http>
 
 

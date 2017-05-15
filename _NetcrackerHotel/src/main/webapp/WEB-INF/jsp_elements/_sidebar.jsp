@@ -12,9 +12,13 @@
 <link  type ="text/css" href="<c:url value="../../resources/css/loginform.css" />" rel="stylesheet" />
 
 <div class="container col-md-3" id="sidebar" >
-     <sec:authorize access="isAuthenticated()">
+     <sec:authorize access="hasAnyRole('ADMIN','USER','TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER')">
           <%@include file="sideprofile.jsp"%>
      </sec:authorize>
+     <sec:authorize access="hasRole('BLOCKED')">
+					<div style="margin: 10px" class="alert alert-danger">
+						Profile was blocked!</div>
+				</sec:authorize>
      <sec:authorize access="!isAuthenticated()">
           <%@include file="loginform.jsp"%>
      </sec:authorize>
