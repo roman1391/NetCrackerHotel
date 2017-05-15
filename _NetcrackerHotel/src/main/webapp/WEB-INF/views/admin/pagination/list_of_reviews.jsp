@@ -18,10 +18,12 @@
 <body>
 	<jsp:include page="/WEB-INF/jsp_elements/_header.jsp"></jsp:include>
 	<div id="wrapper">
-		<div class="container">
-			<div class="row row-offcanvas row-offcanvas-left">
-				Admin page! <br>
-				<div class="col-xs-12 col-sm-9">
+		<div class="container-fluid">
+			<div class="row">
+                <div class="col-2">
+                    <jsp:include page="/WEB-INF/jsp_elements/adminnav.jsp" />
+                </div>
+                <div style="margin: 0 auto" class="col-9">
 					<div class="jumbotron">
 					<h4>List of reviews:</h4>
 					<span >Records per page:</span>

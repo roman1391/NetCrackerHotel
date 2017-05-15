@@ -9,7 +9,7 @@
 <link  type ="text/css" href="<c:url value="../../resources/css/profilesidebar.css" />" rel="stylesheet" />
 <div class="profile-sidebar">
     <div class="profile-userpic">
-        <img src="${currentUser.getAvatar()}" class="img-responsive" alt="">
+        <img src="${currentUser.getAvatar()}" class="img-responsive" alt="image">
     </div>
     <div class="profile-usertitle">
         <div class="profile-usertitle-name">
@@ -18,6 +18,13 @@
     </div>
     <div class="profile-usermenu">
         <ul >
+            <sec:authorize access="hasRole('ADMIN')">
+                <li>
+                   <a href="/admin/admin_page">
+                       <i class="fa fa-cog" aria-hidden="true"></i>  Admin page
+                   </a>
+                </li>
+            </sec:authorize>
             <li>
                 <a href="profile">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>  Profile </a>

@@ -29,11 +29,9 @@ public class FeedbackController {
     }
 
     @RequestMapping(value = "/feedback", method = RequestMethod.POST)
-    public String feedbackPost(@RequestParam("sender") String sender,
-                               @RequestParam("subject") String subject,
+    public String feedbackPost(@RequestParam("subject") String subject,
                                @RequestParam("message") String message, Model model){
         SimpleMailMessage email = new SimpleMailMessage();
-        email.setFrom(sender);
         email.setTo(recipient);
         email.setSubject(subject);
         email.setText(message);

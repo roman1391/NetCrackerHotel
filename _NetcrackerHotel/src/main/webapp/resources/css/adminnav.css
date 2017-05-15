@@ -1,0 +1,15 @@
+#adminNav a {
+    font-size: 14pt;
+}
+
+.sidenav-outer {
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .sidenav {
+        position: fixed;
+        padding: 20px 0 10px 0;
+        background: #F7F6ED;
+    }
+}

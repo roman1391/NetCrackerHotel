@@ -29,7 +29,7 @@ public class RouterController {
 
     @RequestMapping(value = "/admin/admin_page", method = RequestMethod.GET)
     public String adminPage() {
-        return "admin/admin_page";
+        return "admin/pagination/list_of_users";
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)

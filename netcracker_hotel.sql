@@ -120,10 +120,10 @@ UNLOCK TABLES;
 -- Table structure for table `userconnection`
 --
 
-DROP TABLE IF EXISTS `userconnection`;
+DROP TABLE IF EXISTS `UserConnection`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `userconnection` (
+CREATE TABLE `UserConnection` (
   `userId` varchar(255) NOT NULL,
   `providerId` varchar(255) NOT NULL,
   `providerUserId` varchar(255) NOT NULL,
@@ -144,9 +144,9 @@ CREATE TABLE `userconnection` (
 -- Dumping data for table `userconnection`
 --
 
-LOCK TABLES `userconnection` WRITE;
-/*!40000 ALTER TABLE `userconnection` DISABLE KEYS */;
-/*!40000 ALTER TABLE `userconnection` ENABLE KEYS */;
+LOCK TABLES `UserConnection` WRITE;
+/*!40000 ALTER TABLE `UserConnection` DISABLE KEYS */;
+/*!40000 ALTER TABLE `UserConnection` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -183,10 +183,10 @@ DROP TABLE IF EXISTS `xx`;
 /*!50001 DROP VIEW IF EXISTS `xx`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `xx` AS SELECT 
- 1 AS `entity_id`,
- 1 AS `attribute_name`,
- 1 AS `attribute_value`*/;
+/*!50001 CREATE VIEW `xx` AS SELECT
+                               1 AS `entity_id`,
+                               1 AS `attribute_name`,
+                               1 AS `attribute_value`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -201,8 +201,8 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `xx` AS (select `ooo`.`entity_id` AS `entity_id`,`attribute`.`attribute_name` AS `attribute_name`,`ooo`.`attribute_value` AS `attribute_value` from (`value` `ooo` join `attribute` on((`ooo`.`attribute_id` = `attribute`.`attribute_id`))) where `ooo`.`entity_id` in (select `entity`.`entity_id` from (`entity` join `type` on((`entity`.`type_id` = `type`.`type_id`))) where (`type`.`type_id` = '2')) order by `ooo`.`entity_id`) */;
+  /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+  /*!50001 VIEW `xx` AS (select `ooo`.`entity_id` AS `entity_id`,`attribute`.`attribute_name` AS `attribute_name`,`ooo`.`attribute_value` AS `attribute_value` from (`value` `ooo` join `attribute` on((`ooo`.`attribute_id` = `attribute`.`attribute_id`))) where `ooo`.`entity_id` in (select `entity`.`entity_id` from (`entity` join `type` on((`entity`.`type_id` = `type`.`type_id`))) where (`type`.`type_id` = '2')) order by `ooo`.`entity_id`) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;

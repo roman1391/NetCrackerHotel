@@ -69,7 +69,7 @@ public class AdminController {
             return "add_user";
         }
         model.addAttribute("success", "User - " + user.getUsername() + " was added.");
-        return "admin/admin_page";
+        return "admin/pagination/list_of_users";
     }
 
     @RequestMapping(value = "/edit_form/{username}", method = RequestMethod.GET)
@@ -90,14 +90,14 @@ public class AdminController {
     public String unblockUser(@Valid @ModelAttribute("user") User user, Model model) {
         userService.unblockUser(user);
         model.addAttribute("users", userService.getAll());
-        return "admin/list_of_users";
+        return "admin/pagination/list_of_users";
     }
 
     @RequestMapping(value = "/delete_user", method = RequestMethod.POST)
     public String deleteUser(@Valid @ModelAttribute("user") User user, Model model) {
         userService.deleteUserByUsername(user.getUsername());
         model.addAttribute("success", "User - " + user.getUsername() + " was successfully deleted.");
-        return "admin/admin_page";
+        return "admin/list_of_users";
     }
 
     @RequestMapping(value = "/check_review/{id}", method = RequestMethod.GET)
@@ -127,7 +127,7 @@ public class AdminController {
     @RequestMapping(value = "/order_deleted/{id}", method = RequestMethod.POST)
     public String deleteOrder(@Valid @PathVariable("id") int id, @ModelAttribute("order") Order order, Model model) {
         orderService.deleteByOrderId(id);
-        return "admin/admin_page";
+        return "admin/pagination/list_of_orders";
     }
 
     @RequestMapping(value = "/edit_form/update", method = RequestMethod.POST)

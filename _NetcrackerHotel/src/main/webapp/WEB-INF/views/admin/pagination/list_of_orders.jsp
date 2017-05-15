@@ -28,10 +28,12 @@
     <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 	<div id="wrapper">
-		<div class="container">
-			<div class="row row-offcanvas row-offcanvas-left">
-				Admin page! <br>
-				<div class="col-xs-12 col-sm-9">
+		<div class="container-fluid">
+			<div class="row">
+                <div class="col-2">
+                    <jsp:include page="/WEB-INF/jsp_elements/adminnav.jsp" />
+                </div>
+				<div style="margin: 0 auto" class="col-9">
 					<div class="jumbotron">
 					<h4>List of orders:</h4>
 					<span >Records per page:</span>

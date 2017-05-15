@@ -36,7 +36,7 @@
         <logout logout-success-url="/home"/>
 
         <remember-me  data-source-ref="dataSource"
-                      token-validity-seconds="86400" />
+                      token-validity-seconds="259200" />
         <security:remember-me data-source-ref="dataSource"
                      services-ref="socialRememberMe" />
     </http>
@@ -47,7 +47,7 @@
         <beans:property name="userDetailsService" ref="userDetailsManager" />
         <beans:property name="key" value="1535135124421" />
         <beans:property name="alwaysRemember" value="true"/>
-        <beans:property name="tokenValiditySeconds" value="86400" />
+        <beans:property name="tokenValiditySeconds" value="259200" />
         <beans:property name="tokenRepository" ref="tokenRepository" />
     </beans:bean>
 
