@@ -8,8 +8,8 @@
 .profile-userpic img {
     float: none;
     margin-left: 65px;
-    max-width: 50%;
-    max-height: 50%;
+    max-width: 125px;
+    max-height: 125px;
     -webkit-border-radius: 50% !important;
     -moz-border-radius: 50% !important;
     border-radius: 50% !important;
