@@ -27,19 +27,26 @@
             <div class="col-xs-12 col-sm-9">
                 <div class="jumbotron">
                     <h3>Order page</h3>
-
-                    <c:if test="${success!=null}">
-                        <div style="margin: 50px" class="alert alert-success">
-                                ${success}</div>
-                    </c:if>
-                    roomId: ${order.roomId }<br>
-                    UserId: ${order.userId }<br>
-                    First Name: ${order.firstName }<br>
-                    Last Name: ${order.lastName }<br>
-                    ArrivalDate: ${order.arrivalDate }<br>
-                    LeaveDate: ${order.leaveDate }<br>
-                    PayValue: ${order.payValue}<br>
-                    IsPaid: ${order.isPaid()}<br>
+                    <c:choose>
+                        <c:when test="${message eq null}">
+                            <div style="margin: 50px" class="alert alert-success">
+                                The booking was successful
+                            </div>
+                            roomId: ${order.roomId }<br>
+                            UserId: ${order.userId }<br>
+                            First Name: ${order.firstName }<br>
+                            Last Name: ${order.lastName }<br>
+                            ArrivalDate: ${order.arrivalDate }<br>
+                            LeaveDate: ${order.leaveDate }<br>
+                            PayValue: ${order.payValue}<br>
+                            IsPaid: ${order.isPaid()}<br>
+                        </c:when>
+                        <c:otherwise>
+                            <div style="margin: 50px" class="alert alert-danger">
+                                This time is not available for booking
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>

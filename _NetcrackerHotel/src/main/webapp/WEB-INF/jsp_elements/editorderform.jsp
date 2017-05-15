@@ -11,8 +11,8 @@
            method="post" modelAttribute="activeOrder">
     <div class="form-group">
         <form:label path="arrivalDate">Arrival date</form:label>
-        <form:input path="arrivalDate"  class="form-control" id="startDate"
-                    placeholder="check-in" required="required" readonly="true" value="${''}"
+        <form:input path="arrivalDate" type="text" class="form-control" id="startDate"
+                    placeholder="check-in" required="required" readonly="true"
         />
         <form:errors path="arrivalDate" cssClass="ui-state-error-text"/>
     </div>
