@@ -214,4 +214,10 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
             });
     }
 
+    @Override
+    public void deletePhoto(String photo) {
+            getJdbcTemplate().update(SqlQuery.DELETE_PHOTO.getQuery(), photo);
+
+    }
+
 }

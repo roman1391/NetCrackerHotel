@@ -92,4 +92,13 @@ public class HotelServiceImpl implements HotelService {
         hotelDAO.update(hotel);
     }
 
+    @Override
+    public void deletePhoto(String[] photo) {
+        for (int i = 1; i < photo.length; i++) {
+            int n = photo[i].split("/").length - 1;
+            String photoName = photo[i].split("/")[n];
+            hotelDAO.deletePhoto(photoName.substring(0, photoName.length() - 4));
+        }
+    }
+
 }

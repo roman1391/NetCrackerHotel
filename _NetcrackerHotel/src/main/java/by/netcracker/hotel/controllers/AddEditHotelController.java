@@ -2,6 +2,7 @@ package by.netcracker.hotel.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -80,6 +81,13 @@ public class AddEditHotelController {
         return "admin/add_hotel_photo_and_description";
     }
 
+    @RequestMapping(value = "{id}/photo/delete", method = RequestMethod.POST)
+    public String deletePhoto(@PathVariable("id") int hotelID, @RequestParam(value = "photoToDelete") String[] photoToDelete, Model model) {
+        hotelService.deletePhoto(photoToDelete);
+        model.addAttribute("hotel", hotelService.getByID(hotelID));
+        return "admin/add_hotel_photo_and_description";
+    }
+
     private void addPhotos(int hotelID, List<MultipartFile> files, Model model) {
         Hotel hotel = hotelService.getByID(hotelID);
         if (!files.get(0).isEmpty()) {
@@ -155,6 +163,13 @@ public class AddEditHotelController {
     public String editPhoto(@PathVariable("id") int hotelID, @RequestParam("files") List<MultipartFile> files,
                             Model model) {
         addPhotos(hotelID, files, model);
+        return "admin/edit_hotel_photo";
+    }
+
+    @RequestMapping(value = "/{id}/edit/delete/photo", method = RequestMethod.POST)
+    public String editDeletePhoto(@PathVariable("id") int hotelID, @RequestParam(value = "photoToDelete") String[] photoToDelete, Model model) {
+        hotelService.deletePhoto(photoToDelete);
+        model.addAttribute("hotel", hotelService.getByID(hotelID));
         return "admin/edit_hotel_photo";
     }
 

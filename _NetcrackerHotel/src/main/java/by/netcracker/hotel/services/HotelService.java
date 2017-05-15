@@ -26,4 +26,6 @@ public interface HotelService extends AbstractService<Hotel, Integer> {
     void addPhoto(String photo, int hotelID);
 
     void editHotel(Hotel hotel);
+
+    void deletePhoto(String[] photo);
 }

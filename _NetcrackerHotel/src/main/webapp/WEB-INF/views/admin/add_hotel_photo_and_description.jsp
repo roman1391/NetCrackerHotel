@@ -16,6 +16,7 @@
 <div id="wrapper">
     <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
     <c:set var="path" value="${contextPath}/admin/hotel/${id}/photo"/>
+    <c:set var="pathDelete" value="${contextPath}/admin/hotel/${id}/photo/delete"/>
     <c:set var="button" value="Add photos"/>
     <%@include file="../../jsp_elements/hotelMin.jsp" %>
     <%@include file="../../jsp_elements/photo_form.jsp" %>

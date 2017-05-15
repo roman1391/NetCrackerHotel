@@ -5,24 +5,34 @@
   Time: 9:28 PM
   To change this template use File | Settings | File Templates.
 --%>
-<form style="margin: 50px">
-    <c:if test="${not empty hotel.photos}">
+<c:if test="${not empty hotel.photos}">
+    <form style="margin: 20px;" action="${pathDelete}" method="post" enctype="multipart/form-data">
         <div class="row">
+            <input type="checkbox" name="photoToDelete" value="0" checked="checked" style="opacity:0;
+            position:absolute; left:9999px;"/>
             <c:forEach var="photo" items="${hotel.photos}">
                 <div class="col-md-2">
                     <div class="thumbnail">
-                        <a href="${photo}">
-                            <img src="${photo}" style="width:100%">
-                        </a>
+                        <label>
+                            <input type="checkbox" name="photoToDelete" value=${photo}/>
+                            <a href="${photo}">
+                                <img src="${photo}" style="width:100%">
+                            </a>
+                        </label>
                     </div>
                 </div>
             </c:forEach>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Delete photo</button>
+            </div>
         </div>
-    </c:if>
-    <c:if test="${not empty message}">
-        <div class="row">${message}</div>
-    </c:if>
-</form>
+    </form>
+</c:if>
+<c:if test="${not empty message}">
+    <form>
+        <div style="margin: 20px" class="row">${message}</div>
+    </form>
+</c:if>
 <form style="margin: 20px" action="${path}" method="post"
       enctype="multipart/form-data" id="selectPhoto">
     <div class="form-group">
