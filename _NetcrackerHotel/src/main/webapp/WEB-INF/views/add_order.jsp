@@ -19,10 +19,15 @@
           rel="stylesheet">
     <link href="<c:url value="/resources/jQuery-Form-Validator/form-validator/theme-default.min.css"/>"
           rel="stylesheet" type="text/css" />
+    <link href="<c:url value ="/resources/jquery-ui-1.12.1.custom/jquery-ui.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/search.css" />" rel="stylesheet">
+    <link href="<c:url value="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>" rel="stylesheet"/>
 </head>
 <body>
 <%@include file="../jsp_elements/_header.jsp"%>
 <div id="wrapper">
+    <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <c:if test="${error!=null}">
         <div style="margin: 50px" class="alert alert-danger" >
                 ${error}
@@ -38,11 +43,10 @@
     </div>
     <%@include file="../jsp_elements/_footer.jsp"%>
 </div>
-<script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery.js"/>"
-        type="text/javascript"></script>
 <script src="<c:url value="/resources/jQuery-Form-Validator/form-validator/jquery.form-validator.min.js"/>"
         type="text/javascript"></script>
 <script src="<c:url value="/resources/js/validator_property.js"/>"
         type="text/javascript"></script>
+<script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
 </body>
 </html>
