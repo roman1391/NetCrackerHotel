@@ -51,7 +51,7 @@
             </div>
     </div>
 </div>
-</body
+</body>
 <%@include file="../jsp_elements/_footer.jsp" %>
 </html>
 <script src="<c:url value="/resources/jQuery-Form-Validator/form-validator/jquery.form-validator.min.js"/>"

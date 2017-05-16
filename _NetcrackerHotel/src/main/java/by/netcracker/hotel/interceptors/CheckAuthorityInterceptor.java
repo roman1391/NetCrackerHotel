@@ -44,10 +44,10 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
             UserDetails userDetails = (UserDetails) userInfo;
             user = (User) userService.getUserByUsername(userDetails.getUsername());
 
-            String userAuthority = Arrays.asList(userDetails.getAuthorities().toArray()).get(0).toString();
+/*            String userAuthority = Arrays.asList(userDetails.getAuthorities().toArray()).get(0).toString();
             System.out.println("userInfo:");
             System.out.println("Username - " + userDetails.getUsername());
-            System.out.println("Authority - " + userAuthority);
+            System.out.println("Authority - " + userAuthority);*/
 
         }
         request.getSession().setAttribute("currentUser", user);

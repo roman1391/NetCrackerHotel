@@ -66,9 +66,12 @@
                                 <form:button class="btn btn-edit" type="submit">See all reviews </form:button>
                             </form:form>
                         </div>
+                        <sec:authorize access="hasAnyRole('ADMIN','USER',
+            				'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER')">
                         <div style="margin-left: 10px" class="d-inline-block">
-                            <a href="${contextPath}/rooms?id=${choosenHotel.id}" class="btn btn-warning" >Booked room</a>
+                            <a href="${contextPath}/rooms?id=${choosenHotel.id}" class="btn btn-warning" >Book room</a>
                         </div>
+                        </sec:authorize>
                     </div>
                     <div class="clearfix"></div>
 

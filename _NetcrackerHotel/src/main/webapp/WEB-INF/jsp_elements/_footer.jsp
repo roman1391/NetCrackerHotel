@@ -2,12 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="credits text-center">
-	<p >
+<%-- 	<p >
 		debug info <br>
 		${currentUser} <br>
 		${choosenHotel} <br>
 		${review} <br>
-	</p>
+	</p> --%>
 </div>
 
 <footer class="footer-distributed">
