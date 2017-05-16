@@ -1,3 +1,7 @@
 .rounded {
     border-radius: 0.50rem;
 }
+
+a:hover {
+    text-decoration: none;
+}

@@ -5,7 +5,7 @@
     <c:if test="${not empty hotels}">
 
         <c:forEach var="hotel" items="${hotels}">
-            <a href="hotel_page/${hotel.key.id}">
+            <a target="_blank" class="nav-link" href="hotel_page/${hotel.key.id}">
 
                 <div class="row list-group-item">
                     <div class="col-4">
