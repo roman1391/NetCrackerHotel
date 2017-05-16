@@ -28,15 +28,28 @@
             document.write((difference * payValue) / (24 * 60 * 60 * 1000));
         }
     </script>
+    <style>
+        .rounded{
+            background: #F7F6ED;
+        }
+        .rounded ul{
+            font-size: x-large;
+            color: #1d1e1f;
+            list-style: none;
+        }
+        .rounded ul span{
+            color: #2a62bc;
+        }
+    </style>
 </head>
 <c:set var="user" scope="request" value="${currentUser}"/>
 <body>
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
-    <div class="container">
-        <div class="row row-offcanvas row-offcanvas-left">
-            <div class="col-xs-12 col-sm-9">
-                <div class="jumbotron">
+    <div class="container-flued">
+        <div class="row">
+            <div style="margin: 0 auto" class="col-9">
+                <div class="wrap">
                     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>"
                             type="text/javascript"></script>
                     <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
@@ -53,38 +66,63 @@
                             </div>
                         </c:when>
                     </c:choose>
-                    <table>
-                        <tbody>
+                    <div class="rounded">
                         <c:forEach items="${orders}" var="order" varStatus="loop" >
-                            <tr>
-
-                                <br>Order Id: ${order.id}
-                                <form:form method="post" id="user" action="${contextPath}/delete_order/${order.id}"
-                                           modelAttribute="user" >
-                                    <form:input path="id" type="hidden" name="orderId"
-                                                value="${currentUser.id}"></form:input>
-                                    <form:button type="submit" id="edit-btn" class="btn btn-danger">Delete order</form:button>
-                                </form:form>
-
-                                <div class="btn-group">
-                                    <button style="margin: 0 15px 0 15px" id="edit-btn"
-                                            onclick="location.href='edit_order/${order.id}'"
-                                            class="btn btn-primary">Edit
-                                    </button>
+                            <div class="row">
+                                <div class="col-3">
+                                    <ul class="order">
+                                        <li class="active">
+                                            Order Id: <span>${order.id}</span>
+                                        </li>
+                                        <li class="active">
+                                            Room Id: <span>${order.roomId}</span>
+                                        </li>
+                                        <li class="active">
+                                            User Id: <span>${order.userId}</span>
+                                        </li>
+                                    </ul>
                                 </div>
+                                <div class="col-3">
+                                    <ul class="order">
+                                        <li class="active">
+                                            First Name: <span>${order.firstName}</span>
+                                        </li>
+                                        <li class="active">
+                                            Last Name: <span>${order.lastName}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-3">
+                                    <ul class="order">
+                                        <li class="active">
+                                            Arrival Date: <span>${order.arrivalDate}</span>
+                                        </li>
+                                        <li class="active">
+                                            Leave Date: <span>${order.leaveDate}</span>
+                                        </li>
+                                        <li class="active">
+                                            Total amount: <span><script>calcAmount(${order.payValue}, ${order.arrivalDate.getTime()}, ${order.leaveDate.getTime()})</script></span>
+                                        </li>
+                                    </ul>
+                                    <div class="btn-group">
+                                        <form:form method="post" id="user" action="${contextPath}/delete_order/${order.id}"
+                                                   modelAttribute="user" >
+                                            <form:input path="id" type="hidden" name="orderId"
+                                                        value="${currentUser.id}" />
+                                            <form:button type="submit" id="edit-btn" class="btn btn-danger">Delete order</form:button>
+                                        </form:form>
+                                        <div style="margin-left:15px" class="d-inline-block">
+                                            <button style="margin: 0 15px 0 15px" id="edit-btn"
+                                                    onclick="location.href='edit_order/${order.id}'"
+                                                    class="btn btn-primary">Edit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <br>Room Id: ${order.roomId}
-                                <br>User Id: ${order.userId}
-                                <br>First Name: ${order.firstName }
-                                <br>Last Name: ${order.lastName }
-                                <br>Arrival Date: ${order.arrivalDate}
-                                <br>Leave Date: ${order.leaveDate}
-                                <br >Total amount: <script>calcAmount(${order.payValue}, ${order.arrivalDate.getTime()}, ${order.leaveDate.getTime()})</script>
-                            </tr>
                         </c:forEach>
-
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
         </div>
