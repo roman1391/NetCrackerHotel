@@ -61,7 +61,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/home" />
-			<mapping path="/admin/admin_page" />
+			<mapping path="/admin/list_of_users" />
 			<beans:bean class="by.netcracker.hotel.interceptors.CheckAuthorityInterceptor" />
 		</interceptor>
 	</interceptors>
