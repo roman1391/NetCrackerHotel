@@ -67,7 +67,7 @@
                             </form:form>
                         </div>
                         <div style="margin-left: 10px" class="d-inline-block">
-                            <a href="${contextPath}/rooms?${choosenHotel.id}" class="btn btn-warning" >Booked room</a>
+                            <a href="${contextPath}/rooms?id=${choosenHotel.id}" class="btn btn-warning" >Booked room</a>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -76,30 +76,6 @@
             				'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER')">
                     <table>
                         <tbody>
-                        <c:forEach items="${hotel_rooms}" var="room" varStatus="loop">
-                            <tr>
-                                <td>Room ID: ${room.id}  </td>
-                                <td>Cost: ${room.cost}  </td>
-                                <td>Capacity: ${room.capacity}  </td>
-                                <td>Hotel ID: ${room.hotelID}  </td>
-                                <c:if test="${currentUser.authority.toString() ne 'GUEST' or currentUser.authority.toString() ne 'BLOCKED'}">
-                                    <td>
-                                        <form:form method="post" id="order" action="${contextPath}/book_page/${room.id}"
-                                                   modelAttribute="order">
-                                            <form:input path="userId" type="hidden" name="userId"
-                                                        value="${currentUser.id}"></form:input>
-											<form:input path="username" type="hidden" name="username"
-                                                        value="${currentUser.username}"></form:input>
-                                            <form:input path="roomId" type="hidden" name="roomId"
-                                                        value="${room.id}"></form:input>
-                                            <form:input path="hotelname" type="hidden" name="hotelname"
-                                                        value="${choosenHotel.name}"></form:input>
-                                            <form:button type="submit">Book</form:button>
-                                        </form:form>
-                                    </td>
-                                </c:if>
-                            </tr>
-                        </c:forEach>
 
                         </tbody>
                     </table>

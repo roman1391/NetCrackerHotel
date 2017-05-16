@@ -4,12 +4,14 @@ import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.filter.SearchFilter;
+import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.OrderService;
 import by.netcracker.hotel.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +29,19 @@ public class OrderController {
     @Autowired
     private RoomService roomService;
 
+    @Autowired
+    private WebApplicationContext context;
+
+    @Autowired
+    private HotelService hotelService;
+
+    @RequestMapping(value = "/rooms", method = RequestMethod.GET)
+    public String rooms(@RequestParam("id") int id,
+                        @ModelAttribute("searchFilter") SearchFilter searchFilter, Model model){
+       model.addAttribute("hotel_rooms",roomService.getFreeRoomsInHotelByDate(id,searchFilter));
+       model.addAttribute("order",context.getBean("order"));
+       return "rooms";
+    }
 
     @RequestMapping(value = "/book_complete", method = RequestMethod.POST)
     public String bookComplete(@ModelAttribute("room") Room room, @ModelAttribute("order") Order order,

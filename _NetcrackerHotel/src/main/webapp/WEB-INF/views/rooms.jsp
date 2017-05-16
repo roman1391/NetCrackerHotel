@@ -5,14 +5,71 @@
   Time: 4:55
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Available rooms</title>
 </head>
+<style>
+    #rooms{
+        font-size: x-large;
+        color: #1d1e1f;
+        list-style: none;
+    }
+    #rooms span{
+        color: #2a62bc;
+    }
+</style>
 <%@include file="../jsp_elements/_header.jsp"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <body>
-       
+<div id="wrapper">
+    <div class="container-fluid">
+        <div class="container">
+            <c:forEach items="${hotel_rooms}" var="room" varStatus="loop">
+            <div style="margin:0 auto" class="row">
+                <div class="col-4"></div>
+                <div class="col-3">
+                    <ul id="rooms">
+                        <li class="item">
+                            Room ID: <span>${room.id}</span>
+                        </li>
+                        <li class="item">
+                            Cost: <span><i class="fa fa-usd" aria-hidden="true"></i>${room.cost}</span>
+                        </li>
+                        <li class="item">
+                            Capacity: <span><i class="fa fa-users" aria-hidden="true"></i> ${room.capacity}</span>
+                        </li>
+                        <li class="item">
+                            Hotel ID: <span>${room.hotelID}</span>
+                        </li>
+                    </ul>
+                    <c:if test="${currentUser.authority.toString() ne 'GUEST' or currentUser.authority.toString() ne 'BLOCKED'}">
+                        <div class="form-group">
+                            <form:form method="post" id="order" action="${contextPath}/book_page/${room.id}"
+                                       modelAttribute="order">
+                                <div class="input-group">
+                                    <form:input path="userId" type="hidden" name="userId"
+                                                value="${currentUser.id}" />
+                                    <form:input path="username" type="hidden" name="username"
+                                                value="${currentUser.username}" />
+                                    <form:input path="roomId" type="hidden" name="roomId"
+                                                value="${room.id}" />
+                                    <form:input path="hotelname" type="hidden" name="hotelname"
+                                                value="${choosenHotel.name}" />
+                                </div>
+                                <div class="btn-group">
+                                    <form:button class="btn btn-success" type="submit">Book</form:button>
+                                </div>
+                            </form:form>
+                        </div>
+                    </c:if>
+                </div>
+            </div>
+            </c:forEach>
+        </div>
+
+    </div>
+</div>
 </body>
 <%@include file="../jsp_elements/_footer.jsp"%>
 </html>
