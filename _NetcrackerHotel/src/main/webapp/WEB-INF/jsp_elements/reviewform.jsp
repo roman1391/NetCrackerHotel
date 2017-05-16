@@ -4,11 +4,11 @@
 
     <div class="form-group">
         <form:label path="review_text">Last name</form:label>
-        <form:input path="review_text" type="text" class="form-control"
+        <form:textarea path="review_text" type="text" class="form-control"
                     placeholder="Text" required="required"
-                    data-validation="length alphanumeric"
+                    data-validation="length"
                     data-validation-length="20-2000"
-                    data-validation-error-msg="Last name has to be an alphanumeric value (5-15 chars)"
+                    data-validation-error-msg="Reviewe has been length 20-2000 chars"
         />
         <form:errors path="review_text" cssClass="ui-state-error-text"/>
     </div>

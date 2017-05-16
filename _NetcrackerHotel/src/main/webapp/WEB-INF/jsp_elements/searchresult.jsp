@@ -39,7 +39,7 @@
                                 <tr>
                                     <c:forEach var="room" items="${hotel.value}">
                                         <td>
-                                                ${room.cost}
+                                            <i class="fa fa-usd" aria-hidden="true"></i>${room.cost}
                                             &nbsp &nbsp &nbsp
                                         </td>
                                     </c:forEach>

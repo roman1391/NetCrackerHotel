@@ -18,3 +18,9 @@ html, body, #map-canvas  {
     width:800px;
     height:400px;
 }
+
+#description p{
+    font-size: xx-large;
+    font-family: sans-serif,FontAwesome,"Droid Sans";
+    color: #001f3f;
+}

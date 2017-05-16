@@ -14,10 +14,10 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
-    <div class="container">
-        <div class="row row-offcanvas row-offcanvas-left">
-            <div class="col-xs-12 col-sm-9">
-                <div class="jumbotron">
+    <div class="container-fluid">
+        <div class="row">
+            <div style="margin: 0 auto" class="col-10">
+                <div class="hotelwrap">
                     <h4 style="text-align: center">${choosenHotel.name }
                     <c:forEach var="i" begin="1" end="${choosenHotel.typeOfService}">
                         <i class="fa fa-star"></i>
@@ -33,36 +33,45 @@
 
                     <%@include file="../jsp_elements/photoCarousel.jsp" %>
 
+                    <div style="margin-top: 10px;" id="description" class="container">
+                        <h1 style="color: #2b2b2b">Description:</h1>
+                        <p>${choosenHotel.description}</p>
+                    </div>
 
-                    Description: ${choosenHotel.description }<br>
-
-                    <c:choose>
-                        <c:when test="${reviewInfo eq 'forbidden'}">
-                            <div style="margin: 10px" class="alert alert-danger">
-                                To leave a review please log in
-                            </div>
-                        </c:when>
-                        <c:when test="${reviewInfo eq 'notExist'}">
-                         <sec:authorize access="hasAnyRole('ADMIN','USER',
+                    <div style="float:right" class="btn-group">
+                        <c:choose>
+                            <c:when test="${reviewInfo eq 'forbidden'}">
+                                <div style="margin: 10px" class="alert alert-danger">
+                                    To leave a review please log in
+                                </div>
+                            </c:when>
+                                <c:when test="${reviewInfo eq 'notExist'}">
+                                    <sec:authorize access="hasAnyRole('ADMIN','USER',
             				'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER')">
-                            <form:form method="post" id="review" action="review_page" modelAttribute="choosenHotel">
+                                        <form:form method="post" id="review" action="review_page" modelAttribute="choosenHotel">
+                                            <form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
+                                            <form:button class="btn btn-primary" type="submit">Leave review</form:button>
+                                        </form:form>
+                                    </sec:authorize>
+                                </c:when>
+                            <c:when test="${reviewInfo eq 'exist'}">
+                                <div style="margin: 10px" class="alert alert-success">
+                                    You have already left review
+                                </div>
+                            </c:when>
+                        </c:choose>
+                        <div style="margin-left: 10px" class="d-inline-block">
+                            <form:form method="post" id="review" action="${contextPath}/hotel_page/all_reviews" modelAttribute="choosenHotel">
                                 <form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
-                                <form:button type="submit">Leave review</form:button>
+                                <form:button class="btn btn-edit" type="submit">See all reviews </form:button>
                             </form:form>
-                             </sec:authorize>
-                        </c:when>
-                        <c:when test="${reviewInfo eq 'exist'}">
-                            <div style="margin: 10px" class="alert alert-success">
-                                You have already left review
-                            </div>
-                        </c:when>                          
-                    </c:choose>
-                    
-                    <form:form method="post" id="review" action="${contextPath}/hotel_page/all_reviews" modelAttribute="choosenHotel">
-                        <form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
-                        <form:button type="submit">See all reviews </form:button>
-                    </form:form>
-                    
+                        </div>
+                        <div style="margin-left: 10px" class="d-inline-block">
+                            <a href="${contextPath}/rooms?${choosenHotel.id}" class="btn btn-warning" >Booked room</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
                     <sec:authorize access="hasAnyRole('ADMIN','USER',
             				'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER')">
                     <table>
