@@ -34,7 +34,7 @@
                     ${error}
             </div>
         </c:if>
-      <div class="formwrap">
+      <div style="margin:auto" class="container">
         <form:form id="updateForm" action="update" method="post"  modelAttribute="user"
                    enctype="multipart/form-data" >
         <div class="row" >

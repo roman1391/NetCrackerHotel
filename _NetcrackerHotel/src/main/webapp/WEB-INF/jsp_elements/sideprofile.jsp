@@ -45,8 +45,8 @@
             <sec:authorize access="isAuthenticated()">
                 <li>
                     <a href="${contextPath}/j_spring_security_logout">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                        Feedback
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        Logout
                     </a>
                 </li>
             </sec:authorize>

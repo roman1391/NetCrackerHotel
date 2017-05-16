@@ -14,11 +14,21 @@
 	rel="stylesheet">
 
 </head>
-
+<style>
+    img {
+        float: none;
+        max-width: 200px;
+        max-height: 200px;
+        -webkit-border-radius: 50% !important;
+        -moz-border-radius: 50% !important;
+        border-radius: 50% !important;
+        margin-bottom: 10px;
+    }
+</style>
 <body>
 <%@include file="../../jsp_elements/_header.jsp" %>
 <div id="wrapper">
-    <div class="jumbotron">
+    <div class="container-fluid">
         <c:if test="${message!=null}">
             <div style="margin: 50px" class="alert alert-success" >
                     ${message}
@@ -29,83 +39,92 @@
                     ${error}
             </div>
         </c:if>
-      <div class="content">
-      	<h4>User editing:</h4>
-        <img class="img-responsive" src="<c:url value="${user.avatar}"/>">
+      <div  style="margin:auto" class="container">
+          <p><a href="${contextPath}/admin/list_of_users">Back to user management</a></p>
+          <h4 style="margin: auto">User editing:</h4>
 
-        <form:form id="updateForm" action="update" method="post" modelAttribute="user"
-                   enctype="multipart/form-data" >
-        <div class="d-inline-block form-group">
-        	<div class="form-group">
-            	<form:label path="email" >Email:</form:label>
-                <form:input disabled="true" path="email" id="email" value="${user.email}"
-                             class="editable form-control"/>
+        <div class="row">
+            <div class="col-4">
+                <img class="img-responsive" src="<c:url value="${user.avatar}"/>">
             </div>
-            <div class="form-group">
-            	<form:label path="username"  >Username:</form:label>
-                <form:input disabled="true" path="username" id="username" value="${user.username}"
-                            class="editable form-control" />
-            </div>
-            <div class="form-group">
-                <form:label path="firstName" >First name:</form:label>
-                <form:input disabled="true" path="firstName" id="firstName" value="${user.firstName}"
-                            class="editable form-control"/>
-            </div>
-            <div class="form-group">
-                <form:label path="lastName" >Last name:</form:label>
-                <form:input disabled="true" path="lastName" id="lastName" value="${user.lastName}"
-                            class="editable form-control"/>
-            </div>
-            <c:choose>
-            	<c:when test="${currentUser.username eq user.username }">
-            	<div class="form-group">
-                	<form:label path="authority" >Authority:</form:label>
-					<form:select disabled="true" path="authority" id="authority" class="form-control">
-                    	<form:option value="ADMIN" label="Admin"/>
-                    	<form:option value="USER" label="User"/>
-                    	<form:option value="BLOCKED" label="Blocked"/>
-                	</form:select>
-            	</div>
-            	<div class="form-group">
-                <form:label path="enabled" >State:</form:label>
-				<form:select disabled="true" path="enabled" id="enabled" class="form-control" >
-                    <form:option value="true" label="Enabled"/>
-                    <form:option value="false" label="Deactivated"/>
-                </form:select>
-            	</div>
-            	</c:when>
-            	<c:when test="${currentUser.username ne user.username }">
-            	<div class="form-group">
-                <form:label path="authority" >Authority:</form:label>
-				<form:select disabled="true" path="authority" id="authority" class="editable form-control">
-                    <form:option value="ADMIN" label="Admin"/>
-                    <form:option value="USER" label="User"/>
-                    <form:option value="BLOCKED" label="Blocked"/>
-                </form:select>
-            	</div>
-            	<div class="form-group">
-                <form:label path="enabled" >State:</form:label>
-				<form:select disabled="true" path="enabled" id="enabled" class="editable form-control">
-                    <form:option value="true" label="Enabled"/>
-                    <form:option value="false" label="Deactivated"/>
-                </form:select>
-           		 </div>
-            	</c:when>
-            </c:choose>
-            
-        </div>
-            <div class="form-group">
+            <div class="col-3">
+                <form:form id="updateForm" action="update" method="post" modelAttribute="user"
+                           enctype="multipart/form-data" >
+                    <div class="d-inline-block form-group">
+                        <div class="form-group">
+                            <form:label path="email" >Email:</form:label>
+                            <form:input disabled="true" path="email" id="email" value="${user.email}"
+                                        class="editable form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="username"  >Username:</form:label>
+                            <form:input disabled="true" path="username" id="username" value="${user.username}"
+                                        class="editable form-control" />
+                        </div>
+                        <div class="form-group">
+                            <form:label path="firstName" >First name:</form:label>
+                            <form:input disabled="true" path="firstName" id="firstName" value="${user.firstName}"
+                                        class="editable form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="lastName" >Last name:</form:label>
+                            <form:input disabled="true" path="lastName" id="lastName" value="${user.lastName}"
+                                        class="editable form-control"/>
+                        </div>
+                        <c:choose>
+                            <c:when test="${currentUser.username eq user.username }">
+                                <div class="form-group">
+                                    <form:label path="authority" >Authority:</form:label>
+                                    <form:select disabled="true" path="authority" id="authority" class="form-control">
+                                        <form:option value="ADMIN" label="Admin"/>
+                                        <form:option value="USER" label="User"/>
+                                        <form:option value="BLOCKED" label="Blocked"/>
+                                    </form:select>
+                                </div>
+                                <div class="form-group">
+                                    <form:label path="enabled" >State:</form:label>
+                                    <form:select disabled="true" path="enabled" id="enabled" class="form-control" >
+                                        <form:option value="true" label="Enabled"/>
+                                        <form:option value="false" label="Deactivated"/>
+                                    </form:select>
+                                </div>
+                            </c:when>
+                            <c:when test="${currentUser.username ne user.username }">
+                                <div class="form-group">
+                                    <form:label path="authority" >Authority:</form:label>
+                                    <form:select disabled="true" path="authority" id="authority" class="editable form-control">
+                                        <form:option value="ADMIN" label="Admin"/>
+                                        <form:option value="USER" label="User"/>
+                                        <form:option value="BLOCKED" label="Blocked"/>
+                                    </form:select>
+                                </div>
+                                <div class="form-group">
+                                    <form:label path="enabled" >State:</form:label>
+                                    <form:select disabled="true" path="enabled" id="enabled" class="editable form-control">
+                                        <form:option value="true" label="Enabled"/>
+                                        <form:option value="false" label="Deactivated"/>
+                                    </form:select>
+                                </div>
+                            </c:when>
+                        </c:choose>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <form:button id="save-btn" style="display: none" type="submit" class="btn btn-success">Save</form:button>
+                            <button style="margin-left: 5px; display: none" id="cancel-btn" onclick="onCancel()" class="btn btn-danger">Cancel</button>
+                        </div>
+                    </div>
+                </form:form>
                 <div class="btn-group">
-                    <form:button id="save-btn" style="display: none" type="submit" class="btn btn-success">Save</form:button>
-                    <button style="margin-left: 5px; display: none" id="cancel-btn" onclick="onCancel()" class="btn btn-danger">Cancel</button>
+                    <button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
                 </div>
             </div>
-        </form:form>        
-          <div class="btn-group">
-          	<button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
-          </div>
+        </div>
+
+
+
        </div>
-       <p><a href="${contextPath}/admin/list_of_users">Back to user management</a></p>
     </div>
 </div>
 <%@include file="../../jsp_elements/_footer.jsp" %>
