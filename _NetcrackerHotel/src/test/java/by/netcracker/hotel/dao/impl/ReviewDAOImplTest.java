@@ -1,5 +1,6 @@
 package by.netcracker.hotel.dao.impl;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -37,8 +38,8 @@ public class ReviewDAOImplTest {
         list = reviewDAO.getByHotelId(review.getHotelId());
         Review newReview = list.get(0);
         review.setId(newReview.getId());
-        reviewDAO.deleteByID(newReview.getId());
         assertTrue(review.equals(newReview));
+        reviewDAO.deleteByID(newReview.getId());
     }
 
     @Test
@@ -73,7 +74,7 @@ public class ReviewDAOImplTest {
         assertTrue(result.equals("notExist"));
     }
 
-    @Test
+    // @Test
     public void checkUsersReviewTest_ShouldReturnExistInException() {
         reviewDAO.add(review);
         reviewDAO.add(review);
@@ -95,7 +96,8 @@ public class ReviewDAOImplTest {
         reviewDAO.update(newReview);
         Review updatedReview = reviewDAO.getByID(newReview.getId());
         reviewDAO.deleteByID(updatedReview.getId());
-        assertTrue(updatedReview.getStatus().equals("approved"));
+        // assertTrue(updatedReview.getStatus().equals("approved"));
+        assertEquals("status is not changed", "approved", updatedReview.getStatus());
     }
 
 }
