@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <link  type ="text/css" href="<c:url value="../../resources/css/profilesidebar.css" />" rel="stylesheet" />
 <div class="profile-sidebar">
     <div class="profile-userpic">
@@ -20,27 +21,35 @@
         <ul >
             <sec:authorize access="hasRole('ADMIN')">
                 <li>
-                   <a href="/admin/admin_page">
+                   <a href="${contextPath}admin/list_of_users">
                        <i class="fa fa-cog" aria-hidden="true"></i>  Admin page
                    </a>
                 </li>
             </sec:authorize>
             <li>
-                <a href="profile">
+                <a href="${contextPath}/profile">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>  Profile </a>
             </li>
             <li>
-                <a href="booked_room?id=${currentUser.getId()}">
+                <a href="${contextPath}/booked_room?id=${currentUser.getId()}">
                     <i class="fa fa-archive" aria-hidden="true"></i>
                      Booked room
                 </a>
             </li>
             <li>
-                <a href="feedback">
+                <a href="${contextPath}/feedback">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                     Feedback
                 </a>
             </li>
+            <sec:authorize access="isAuthenticated()">
+                <li>
+                    <a href="${contextPath}/j_spring_security_logout">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        Feedback
+                    </a>
+                </li>
+            </sec:authorize>
         </ul>
     </div>
 </div>

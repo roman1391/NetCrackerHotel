@@ -27,11 +27,6 @@ public class RouterController {
         return model;
     }
 
-    @RequestMapping(value = "/admin/admin_page", method = RequestMethod.GET)
-    public String adminPage() {
-        return "admin/pagination/list_of_users";
-    }
-
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(Model model) {
         model.addAttribute("activeUser", context.getBean("user"));
