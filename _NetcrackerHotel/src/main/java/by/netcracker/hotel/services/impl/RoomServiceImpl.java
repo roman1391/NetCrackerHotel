@@ -52,8 +52,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public boolean isRoomFree(int roomId, SearchFilter searchFilter) {
-        return roomDAO.isRoomFree(roomId, searchFilter);
+    public boolean isRoomFree(int roomId, int orderId, SearchFilter searchFilter) {
+        return roomDAO.isRoomFree(roomId, orderId, searchFilter);
     }
 
     @Override

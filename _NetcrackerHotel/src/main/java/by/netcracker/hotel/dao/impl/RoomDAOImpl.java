@@ -128,10 +128,10 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
     }
 
     @Override
-    public boolean isRoomFree(int roomId, SearchFilter searchFilter) {
+    public boolean isRoomFree(int roomId, int orderId, SearchFilter searchFilter) {
         try {
              getJdbcTemplate().queryForObject(SqlQuery.GET_ISFREE_IN_HOTEL_END.getQuery(),
-                    new Object[]{searchFilter.getStartDate(), searchFilter.getEndDate(), roomId},
+                    new Object[]{orderId, searchFilter.getStartDate(), searchFilter.getEndDate(), roomId},
                     new RoomMapper());
              return true;
         } catch (EmptyResultDataAccessException ex){

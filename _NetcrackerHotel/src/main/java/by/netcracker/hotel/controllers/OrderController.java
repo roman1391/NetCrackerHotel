@@ -57,7 +57,7 @@ public class OrderController {
                 e.printStackTrace();
             }
         }
-        if (roomService.isRoomFree(order.getRoomId(), new SearchFilter(dateFormat.format(order.getArrivalDate()),
+        if (roomService.isRoomFree(order.getRoomId(), order.getId(), new SearchFilter(dateFormat.format(order.getArrivalDate()),
                 dateFormat.format(order.getLeaveDate())))) {
             orderService.addOrder(order);// TODO
             model.addAttribute("order", order);
@@ -104,7 +104,7 @@ public class OrderController {
         SearchFilter searchFilter = new SearchFilter(dateFormat.format(order.getArrivalDate()),
                 dateFormat.format(order.getLeaveDate()));
 
-        if (roomService.isRoomFree(order.getRoomId(), searchFilter)) {
+        if (roomService.isRoomFree(order.getRoomId(), order.getId(), searchFilter)) {
             orderService.update(order.getId(), searchFilter);
             model.addAttribute("orders", orderService.getByUserId(order.getUserId()));
             model.addAttribute("message", "success");
