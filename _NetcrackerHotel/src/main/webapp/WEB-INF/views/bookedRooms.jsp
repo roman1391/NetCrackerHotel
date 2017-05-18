@@ -75,10 +75,7 @@
                                             Order Id: <span>${order.id}</span>
                                         </li>
                                         <li class="active">
-                                            Room Id: <span>${order.roomId}</span>
-                                        </li>
-                                        <li class="active">
-                                            User Id: <span>${order.userId}</span>
+                                            Room №": <span>${order.roomId}</span>
                                         </li>
                                     </ul>
                                 </div>

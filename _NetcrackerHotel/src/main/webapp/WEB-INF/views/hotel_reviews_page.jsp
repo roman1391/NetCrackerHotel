@@ -60,9 +60,6 @@
                                 <li class="item">
                                     Username: <span>${review.username }</span>
                                 </li>
-                                <li class="item">
-                                    Hotel Id: <span>${review.hotelId }</span>
-                                </li>
                             </ul>
 
                         </div>
@@ -86,7 +83,6 @@
         </div>
     </div>
     <%@include file="../jsp_elements/_footer.jsp" %>
-</div>
 <script src="<c:url value="/resources/bootstrap-4.0.0-alpha.6-dist/js/bootstrap.js"/>"></script>
 <script src="<c:url value="/resources/js/hotel.js"/>" type="text/javascript"></script>
 </body>
