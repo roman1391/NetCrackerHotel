@@ -2,14 +2,22 @@
 
 #wrapper{
     margin-top: 15px;
+    flex: 1;
 }
 
 #sidebar{
     max-width: 330px;
 }
 
+html {
+    min-height: 100%;
+}
+
 body {
+    display: flex;
     background-color: #FFFFFF;
+    min-height: 100%;
+    flex-direction: column;
 }
 
 .navbar {

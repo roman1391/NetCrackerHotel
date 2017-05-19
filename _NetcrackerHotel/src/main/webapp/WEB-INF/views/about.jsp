@@ -12,19 +12,15 @@
 <html>
 <head>
     <title>About</title>
-    <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
-          rel="stylesheet">
-    <link href="<c:url value="/resources/css/main.css" />"
-          rel="stylesheet" />
 </head>
+<%@include file="../jsp_elements/_header.jsp"%>
 <body>
-   <%@include file="../jsp_elements/_header.jsp"%>
    <div id="wrapper">
       <div >
          <h1 style="margin-left: auto">About project</h1>
          <p style="font-size: large">Netcracker project</p>
       </div>
    </div>
-   <%@include file="../jsp_elements/_footer.jsp"%>
 </body>
+<%@include file="../jsp_elements/_footer.jsp"%>
 </html>

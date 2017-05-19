@@ -1,17 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="credits text-center">
-<%-- 	<p >
-		debug info <br>
-		${currentUser} <br>
-		${choosenHotel} <br>
-		${review} <br>
-	</p> --%>
-</div>
-
-<footer class="footer-distributed">
-	<div class="footer-left">
+<footer class="footer-distributed ">
+		<div class="footer-left">
 
 			<h3>NetCracker</h3>
 

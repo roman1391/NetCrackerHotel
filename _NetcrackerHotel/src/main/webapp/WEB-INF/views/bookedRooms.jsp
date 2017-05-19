@@ -43,8 +43,8 @@
     </style>
 </head>
 <c:set var="user" scope="request" value="${currentUser}"/>
-<body>
 <%@include file="../jsp_elements/_header.jsp" %>
+<body>
 <div id="wrapper">
     <div class="container-flued">
         <div class="row">
@@ -124,9 +124,8 @@
             </div>
         </div>
     </div>
-    <%@include file="../jsp_elements/_footer.jsp" %>
 </div>
 <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
-
 </body>
+<%@include file="../jsp_elements/_footer.jsp" %>
 </html>
