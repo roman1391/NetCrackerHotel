@@ -15,12 +15,11 @@
     <title>Profile</title>
     <link rel="stylesheet" href="<c:url value="../../resources/css/profile.css"/>" />
 </head>
-
 <body>
 <%
     User curUser = (User) session.getAttribute("currentUser");
 %>
-<c:set var="user" scope="request" value="${currentUser}"/> 
+<c:set var="user" scope="request" value="${currentUser}"/>
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <div class="container-fluid">
@@ -120,6 +119,10 @@
         $('<input />').attr('type', 'hidden')
             .attr('name', "enabled")
             .attr('value', 'true')
+            .appendTo('#updateForm');
+        $('<input />').attr('type', 'hidden')
+            .attr('name', "avatar")
+            .attr('value', '<%=curUser.getAvatar()%>')
             .appendTo('#updateForm');
         return true;
     });

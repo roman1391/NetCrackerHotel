@@ -16,9 +16,9 @@
 <%@include file="../jsp_elements/_header.jsp"%>
 <body>
    <div id="wrapper">
-      <div >
-         <h1 style="margin-left: auto">About project</h1>
-         <p style="font-size: large">Netcracker project</p>
+      <div class="container">
+         <h1>About project</h1>
+         <p>Netcracker project</p>
       </div>
    </div>
 </body>

@@ -10,10 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +23,8 @@ import by.netcracker.hotel.services.UserService;
 import by.netcracker.hotel.util.CloudinaryUtil;
 
 @Controller
+@SessionScope
+@SessionAttributes("currentUser")
 public class UserController {
 
     @Autowired
@@ -36,8 +36,11 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String save(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file, Model model) {
-        user.setAvatar(saveFileToCloud(file));
+    public String save(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file,
+                       Model model) {
+        if(!file.getOriginalFilename().isEmpty()){
+            user.setAvatar(saveFileToCloud(file));
+        }
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (!userDetails.getUsername().equals(user.getUsername())) {
             try {
