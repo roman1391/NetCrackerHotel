@@ -12,14 +12,18 @@
     <div class="form-group">
         <form:label path="arrivalDate">Arrival date</form:label>
         <form:input path="arrivalDate" type="text" class="form-control" id="startDate"
-                    placeholder="check-in" required="required" readonly="true"
+                    placeholder="check-in" readonly="true"
+                    data-validation="required"
+                    data-validation-error-msg="Arrival date is required."
         />
         <form:errors path="arrivalDate" cssClass="ui-state-error-text"/>
     </div>
     <div class="form-group">
         <form:label path="leaveDate">Leave date</form:label>
         <form:input path="leaveDate" type="text" class="form-control" id="endDate"
-                    placeholder="check-out" required="required" readonly="true"
+                    placeholder="check-out" readonly="true"
+                    data-validation="required"
+                    data-validation-error-msg="Leave date is required."
         />
         <form:errors path="leaveDate" cssClass="ui-state-error-text"/>
     </div>
@@ -37,3 +41,7 @@
         <form:button type="submit" class="btn btn-primary" >Edit order</form:button>
     </div>
 </form:form>
+<script src="<c:url value="/resources/jQuery-Form-Validator/form-validator/jquery.form-validator.min.js"/>"
+        type="text/javascript"></script>
+<script src="<c:url value="/resources/js/validator_property.js"/>"
+        type="text/javascript"></script>
