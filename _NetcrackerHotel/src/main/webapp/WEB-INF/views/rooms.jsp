@@ -21,14 +21,20 @@
 </style>
 <%@include file="../jsp_elements/_header.jsp"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<style>
+    .rounded{
+        margin-bottom: 10px;
+        border-radius: 0.50rem;
+        border: solid thin #8f9296;
+    }
+</style>
 <body>
 <div id="wrapper">
     <div class="container-fluid">
         <div class="container">
             <c:forEach items="${hotel_rooms}" var="room" varStatus="loop">
             <div style="margin:0 auto" class="row">
-                <div class="col-4"></div>
-                <div class="col-3">
+                <div class="col-4 rounded">
                     <ul id="rooms">
                         <li class="item">
                             Room ID: <span>${room.id}</span>
@@ -57,7 +63,7 @@
                                     <form:input path="hotelname" type="hidden" name="hotelname"
                                                 value="${choosenHotel.name}" />
                                 </div>
-                                <div class="btn-group">
+                                <div style="margin-bottom: 5px" class="btn-group pull-right">
                                     <form:button class="btn btn-success" type="submit">Book</form:button>
                                 </div>
                             </form:form>
