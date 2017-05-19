@@ -13,14 +13,19 @@
         <div class="form-group">
             <form:label path="arrivalDate">Arrival date</form:label>
             <form:input path="arrivalDate" type="text" class="form-control" id="startDate"
-                        placeholder="check-in" required="required" readonly="true"
+                        placeholder="check-in" readonly="true"
+                        data-validation="required"
+                        data-validation-error-msg="Arrival date is required."
             />
             <form:errors path="arrivalDate" cssClass="ui-state-error-text"/>
         </div>
         <div class="form-group">
             <form:label path="leaveDate">Leave date</form:label>
             <form:input path="leaveDate" type="text" class="form-control" id="endDate"
-                        placeholder="check-out" required="required" readonly="true"
+                        placeholder="check-out"
+                        data-validation="required"
+                        data-validation-error-msg="Leave date is required."
+                        readonly="true"
             />
             <form:errors path="leaveDate" cssClass="ui-state-error-text"/>
         </div>
