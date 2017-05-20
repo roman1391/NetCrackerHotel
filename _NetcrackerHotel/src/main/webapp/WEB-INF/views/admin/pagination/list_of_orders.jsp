@@ -26,7 +26,7 @@
 
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+    <script src="cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 	<div id="wrapper">
 		<div class="container-fluid">
 			<div class="row">
