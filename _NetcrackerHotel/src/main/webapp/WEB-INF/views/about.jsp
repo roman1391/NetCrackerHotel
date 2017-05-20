@@ -17,8 +17,20 @@
 <body>
    <div id="wrapper">
       <div class="container">
-         <h1>About project</h1>
-         <p>Netcracker project</p>
+         <h3>About project</h3><br>
+         
+         It's a training project, imitating hotel booking site. <br>
+         As user you can book some hotels, leave a review, change your profile information <br>
+         As admin you can manage all the entities in program : users, hotels, reviews, orders.<br> <br>
+         Developed by 4 students : <br>
+         Roman Rodevich<br>
+         Viacheslav Hotko<br>
+         Varvara Kuzmickaja<br>
+         Alexander Bunta<br>
+         <br>
+         Best regards <br>
+         May 2017
+
       </div>
    </div>
 </body>

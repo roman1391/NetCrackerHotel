@@ -15,6 +15,8 @@ import by.netcracker.hotel.dao.ReviewDAO;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
+import by.netcracker.hotel.enums.ReviewInfo;
+import by.netcracker.hotel.enums.ReviewStatus;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.UserService;
 
@@ -43,7 +45,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void addReview(Review review) {
         review.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
-        review.setStatus("pending");
+        review.setStatus(ReviewStatus.PENDING.getReviewInfo());
         reviewDAO.add(review);
     }
 
@@ -52,17 +54,18 @@ public class ReviewServiceImpl implements ReviewService {
         String reviewInfo;
         Object info = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (info instanceof String) {
-            reviewInfo = "forbidden";
+            reviewInfo = ReviewInfo.FORBIDDEN.getReviewInfo();
         } else if (info instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) info;
             User user = (User) userService.getUserByUsername(userDetails.getUsername());
             if (user.getAuthority().equals(ROLE.ADMIN)) {
-                reviewInfo = "moderate";
+                reviewInfo = ReviewInfo.MODERATE.getReviewInfo();
             } else {
-                reviewInfo = reviewDAO.checkUsersReview(hotelId, user.getId());
+                reviewInfo = (reviewDAO.checkUsersReview(hotelId, user.getId()) ? ReviewInfo.EXIST.getReviewInfo()
+                    : ReviewInfo.NOT_EXIST.getReviewInfo());
             }
         } else {
-            reviewInfo = "no";
+            reviewInfo = ReviewInfo.EXIST.getReviewInfo();
         }
         return reviewInfo;
     }
@@ -77,7 +80,7 @@ public class ReviewServiceImpl implements ReviewService {
         List<Review> allReviews = reviewDAO.getByHotelId(hotelId);
         List<Review> approvedReviews = new ArrayList<Review>();
         for (Review review : allReviews) {
-            if (review.getStatus().equals("approved")) {
+            if (review.getStatus().equals(ReviewStatus.APPROVED.getReviewInfo())) {
                 approvedReviews.add(review);
             }
         }

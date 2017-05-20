@@ -90,7 +90,6 @@
                         </form:form>
                     </div>
 
-                    <a href="${contextPath}/admin/admin_page">Back to admin page</a>
                 </div>
             </div>
         </div>

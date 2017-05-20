@@ -36,7 +36,7 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
         }
         Object userInfo = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (userInfo instanceof String) {
-            System.out.println("userInfo: " + userInfo);
+/*            System.out.println("userInfo: " + userInfo);*/
             user = (User) context.getBean("user");
             user.setUsername("GUEST");
             user.setAuthority(ROLE.GUEST);

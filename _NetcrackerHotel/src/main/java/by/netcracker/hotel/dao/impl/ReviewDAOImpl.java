@@ -84,9 +84,9 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
     }
 
     @Override
-    public String checkUsersReview(int hotelId, int userId) {
+    public boolean checkUsersReview(int hotelId, int userId) {
         String reviewStatus;
-        String reviewinfo;
+        boolean reviewExist;
         try {
             reviewStatus = getJdbcTemplate().queryForObject(SqlQuery.CHECK_REVIEW.getQuery(), String.class,
                 new Object[] { userId, hotelId });
@@ -95,16 +95,16 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
         }
         switch (reviewStatus) {
         case "1":
-            reviewinfo = "exist";
+            reviewExist = true;
             break;
         case "0":
-            reviewinfo = "notExist";
+            reviewExist = false;
             break;
         default:
-            reviewinfo = "exist";
+            reviewExist = true;
             break;
         }
-        return reviewinfo;
+        return reviewExist;
     }
 
     @Override

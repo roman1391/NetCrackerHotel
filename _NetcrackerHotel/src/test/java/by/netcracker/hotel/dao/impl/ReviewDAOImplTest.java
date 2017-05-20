@@ -59,9 +59,9 @@ public class ReviewDAOImplTest {
         list = reviewDAO.getByHotelId(review.getHotelId());
         Review newReview = list.get(0);
         review.setId(newReview.getId());
-        String result = reviewDAO.checkUsersReview(review.getHotelId(), review.getUserId());
+        boolean reviewExist = reviewDAO.checkUsersReview(review.getHotelId(), review.getUserId());
         reviewDAO.deleteByID(newReview.getId());
-        assertTrue(result.equals("exist"));
+        assertTrue(reviewExist);
     }
 
     @Test
@@ -70,8 +70,8 @@ public class ReviewDAOImplTest {
         list = reviewDAO.getByHotelId(review.getHotelId());
         Review newReview = list.get(0);
         reviewDAO.deleteByID(newReview.getId());
-        String result = reviewDAO.checkUsersReview(review.getHotelId(), review.getUserId());
-        assertTrue(result.equals("notExist"));
+        boolean reviewExist = reviewDAO.checkUsersReview(review.getHotelId(), review.getUserId());
+        assertTrue(!reviewExist);
     }
 
     // @Test
@@ -81,10 +81,10 @@ public class ReviewDAOImplTest {
         list = reviewDAO.getByHotelId(review.getHotelId());
         Review newReview1 = list.get(0);
         Review newReview2 = list.get(1);
-        String result = reviewDAO.checkUsersReview(review.getHotelId(), review.getUserId());
+        boolean reviewExist = reviewDAO.checkUsersReview(review.getHotelId(), review.getUserId());
         reviewDAO.deleteByID(newReview1.getId());
         reviewDAO.deleteByID(newReview2.getId());
-        assertTrue(result.equals("exist"));
+        assertTrue(reviewExist);
     }
 
     @Test
