@@ -40,7 +40,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="${contextPath}/about">About</a>
             </li>
-            <sec:authorize access="!isAuthenticated()">
+            <sec:authorize access="!isAuthenticated() || hasRole('CHANGE_PASSWORD_PRIVILEGE')">
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/login">Log in</a>
                 </li>
@@ -48,7 +48,7 @@
                     <a class="nav-link" href="${contextPath}/registration">Sign up</a>
                 </li>
              </sec:authorize>
-             <sec:authorize access="isAuthenticated()">
+             <sec:authorize access="isAuthenticated() && !hasRole('CHANGE_PASSWORD_PRIVILEGE')">
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/j_spring_security_logout">Logout</a>
                 </li>

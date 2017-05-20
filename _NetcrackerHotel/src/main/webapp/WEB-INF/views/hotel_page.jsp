@@ -55,7 +55,7 @@
                                     </sec:authorize>
                                 </c:when>
                             <c:when test="${reviewInfo eq 'exist'}">
-                                <div style="margin: 10px" class="alert alert-success">
+                                <div class="alert alert-success">
                                     You have already left review
                                 </div>
                             </c:when>

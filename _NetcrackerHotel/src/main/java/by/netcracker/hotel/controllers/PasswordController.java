@@ -80,6 +80,7 @@ public class PasswordController {
             return new ModelAndView("reset_password", "error",
                 "Verification token not found. Try reset password again.");
         } else {
+            userService.deleteVerificationToken(verificationToken.getId());
             return new ModelAndView("reset_password");
         }
     }

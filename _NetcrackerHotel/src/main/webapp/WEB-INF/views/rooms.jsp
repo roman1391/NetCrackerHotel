@@ -27,11 +27,17 @@
         border-radius: 0.50rem;
         border: solid thin #8f9296;
     }
+
+    a:hover {
+        text-decoration: none;
+    }
 </style>
 <body>
 <div id="wrapper">
     <div class="container-fluid">
         <div class="container">
+            <p><a style="font-size: x-large" href="${contextPath}/hotel_page/${choosenHotel.id}">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to hotel</a></p>
             <c:forEach items="${hotel_rooms}" var="room" varStatus="loop">
             <div style="margin:0 auto" class="row">
                 <div class="col-4 rounded">
@@ -73,7 +79,6 @@
                 </div>
             </div>
             </c:forEach>
-             <p><a href="${contextPath}/hotel_page/${choosenHotel.id}">Back to hotel</a></p>
         </div>
 
     </div>
