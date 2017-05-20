@@ -19,7 +19,7 @@
 <%
     User curUser = (User) session.getAttribute("currentUser");
 %>
-<c:set var="user" scope="request" value="${currentUser}"/>
+<c:set var="edited_user" scope="request" value="${currentUser}"/>
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <div class="container-fluid">
@@ -34,7 +34,7 @@
             </div>
         </c:if>
       <div style="margin:auto" class="container">
-        <form:form id="updateForm" action="update" method="post"  modelAttribute="user"
+        <form:form id="updateForm" action="update" method="post"  modelAttribute="edited_user"
                    enctype="multipart/form-data" >
         <div class="row" >
             <div class="col-4 form-group">

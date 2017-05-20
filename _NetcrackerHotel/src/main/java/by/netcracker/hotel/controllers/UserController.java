@@ -36,7 +36,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String save(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file,
+    public String save(@ModelAttribute("edited_user") User user, @RequestParam("file") MultipartFile file,
                        Model model) {
         if(!file.getOriginalFilename().isEmpty()){
             user.setAvatar(saveFileToCloud(file));

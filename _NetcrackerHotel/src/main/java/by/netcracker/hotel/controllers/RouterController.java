@@ -29,7 +29,6 @@ public class RouterController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(Model model) {
-        model.addAttribute("activeUser", context.getBean("user"));
         return "profile";
     }
 
