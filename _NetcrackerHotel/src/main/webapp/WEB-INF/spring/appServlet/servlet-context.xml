@@ -67,5 +67,6 @@
 	</interceptors>
 	
 	<security:global-method-security  secured-annotations="enabled" pre-post-annotations="enabled" jsr250-annotations="enabled"/>
+	
 
 </beans:beans>

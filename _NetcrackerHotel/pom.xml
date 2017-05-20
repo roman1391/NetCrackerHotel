@@ -48,9 +48,9 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
-   			 <groupId>org.springframework</groupId>
-   			 <artifactId>spring-aop</artifactId>
-   			 <version>${org.springframework-version}</version>
+    		<groupId>org.springframework</groupId>
+   		 	<artifactId>spring-aspects</artifactId>
+    		<version>${org.springframework-version}</version>
 		</dependency>
 		<!-- Spring Security. -->
 		<dependency>
@@ -189,7 +189,7 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
+			<version>1.2.17</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.mail</groupId>

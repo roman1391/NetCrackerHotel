@@ -69,7 +69,7 @@ public class AdminController {
             return "add_user";
         }
         model.addAttribute("success", "User - " + user.getUsername() + " was added.");
-        return "admin/pagination/list_of_users";
+        return "redirect:" + "list_of_users";
     }
 
     @RequestMapping(value = "/edit_form/{username}", method = RequestMethod.GET)

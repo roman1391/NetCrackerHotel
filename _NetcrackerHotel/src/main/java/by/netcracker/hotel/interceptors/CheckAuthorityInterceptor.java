@@ -1,7 +1,5 @@
 package by.netcracker.hotel.interceptors;
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,7 +34,7 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
         }
         Object userInfo = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (userInfo instanceof String) {
-/*            System.out.println("userInfo: " + userInfo);*/
+            /* System.out.println("userInfo: " + userInfo); */
             user = (User) context.getBean("user");
             user.setUsername("GUEST");
             user.setAuthority(ROLE.GUEST);
@@ -44,10 +42,13 @@ public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
             UserDetails userDetails = (UserDetails) userInfo;
             user = (User) userService.getUserByUsername(userDetails.getUsername());
 
-/*            String userAuthority = Arrays.asList(userDetails.getAuthorities().toArray()).get(0).toString();
-            System.out.println("userInfo:");
-            System.out.println("Username - " + userDetails.getUsername());
-            System.out.println("Authority - " + userAuthority);*/
+            /*
+             * String userAuthority =
+             * Arrays.asList(userDetails.getAuthorities().toArray()).get(0).
+             * toString(); System.out.println("userInfo:");
+             * System.out.println("Username - " + userDetails.getUsername());
+             * System.out.println("Authority - " + userAuthority);
+             */
 
         }
         request.getSession().setAttribute("currentUser", user);
