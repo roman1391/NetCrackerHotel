@@ -62,16 +62,18 @@
                                                 value="${room.id}" />
                                     <form:input path="hotelname" type="hidden" name="hotelname"
                                                 value="${choosenHotel.name}" />
+                                                
                                 </div>
                                 <div style="margin-bottom: 5px" class="btn-group pull-right">
                                     <form:button class="btn btn-success" type="submit">Book</form:button>
                                 </div>
-                            </form:form>
+                            </form:form>     
                         </div>
                     </c:if>
                 </div>
             </div>
             </c:forEach>
+             <p><a href="${contextPath}/hotel_page/${choosenHotel.id}">Back to hotel</a></p>
         </div>
 
     </div>

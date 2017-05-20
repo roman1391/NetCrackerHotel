@@ -39,10 +39,9 @@
                             ArrivalDate: ${order.arrivalDate }<br>
                             LeaveDate: ${order.leaveDate }<br>
                             PayValue: ${order.payValue}<br>
-                            IsPaid: ${order.isPaid()}<br>
                         </c:when>
                         <c:otherwise>
-                            <div style="margin: 50px" class="alert alert-danger">
+                            <div style="margin: 10px" class="alert alert-danger">
                                 This time is not available for booking
                             </div>
                         </c:otherwise>

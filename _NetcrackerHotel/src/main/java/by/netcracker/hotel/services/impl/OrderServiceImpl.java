@@ -1,16 +1,15 @@
 package by.netcracker.hotel.services.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import by.netcracker.hotel.filter.SearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.OrderDAO;
 import by.netcracker.hotel.entities.Order;
+import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.OrderService;
 
 /**
@@ -21,10 +20,12 @@ import by.netcracker.hotel.services.OrderService;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderDAO orderDAO;
+    private final HotelDAO hotelDAO;
 
     @Autowired
-    public OrderServiceImpl(OrderDAO orderDAO) {
+    public OrderServiceImpl(OrderDAO orderDAO, HotelDAO hotelDAO) {
         this.orderDAO = orderDAO;
+        this.hotelDAO = hotelDAO;
     }
 
     @Override
