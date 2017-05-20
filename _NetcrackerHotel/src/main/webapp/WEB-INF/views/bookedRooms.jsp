@@ -101,19 +101,22 @@
                                             Total amount: <span><script>calcAmount(${order.payValue}, ${order.arrivalDate.getTime()}, ${order.leaveDate.getTime()})</script></span>
                                         </li>
                                     </ul>
-                                    <div class="btn-group">
+                                </div>
+                                <div class="col-3">
+                                    <div style="margin-top: 5px; margin-right: 5px"
+                                         class="btn-group pull-right">
+                                        <div style="margin-left:15px" class="d-inline-block">
+                                            <button style="margin: 0 15px 0 15px" id="edit-btn"
+                                                    onclick="location.href='edit_order/${order.id}'"
+                                                        class="btn btn-primary"><i class="fa fa-cog" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
                                         <form:form method="post" id="user" action="${contextPath}/delete_order/${order.id}"
                                                    modelAttribute="user" >
                                             <form:input path="id" type="hidden" name="orderId"
                                                         value="${currentUser.id}" />
-                                            <form:button type="submit" id="edit-btn" class="btn btn-danger">Delete order</form:button>
+                                            <form:button type="submit" id="edit-btn" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></form:button>
                                         </form:form>
-                                        <div style="margin-left:15px" class="d-inline-block">
-                                            <button style="margin: 0 15px 0 15px" id="edit-btn"
-                                                    onclick="location.href='edit_order/${order.id}'"
-                                                    class="btn btn-primary">Edit
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
