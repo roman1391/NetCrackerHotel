@@ -151,18 +151,6 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
         }
     }
 
-    /*
-     * @Override public List<Hotel> findHotelsBySearchStrings(List<String>
-     * searchStrings) { StringBuilder parametrs = new
-     * StringBuilder("value.attribute_value like '%" + searchStrings.get(0) +
-     * "%'"); for (int i = 1; i < searchStrings.size(); i++) {
-     * parametrs.append("or value.attribute_value like '%" +
-     * searchStrings.get(i) + "%'"); } String query =
-     * SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_BEGIN.getQuery() + " (" +
-     * parametrs.toString() + ")) ORDER BY entity_id"; return
-     * getJdbcTemplate().query(query, new RowMapperResultSetExtractor<Hotel>(new
-     * HotelMapper()) { }); }
-     */
     @Override
     public List<Hotel> findHotelsBySearchStrings(List<String> searchStrings, SearchFilter searchFilter) {
         StringBuilder query = new StringBuilder(SqlQuery.FIND_HOTELS_BY_SEARCH_STRINGS_BEGIN.getQuery());
@@ -216,7 +204,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
     @Override
     public void deletePhoto(String photo) {
-            getJdbcTemplate().update(SqlQuery.DELETE_PHOTO.getQuery(), photo);
+        getJdbcTemplate().update(SqlQuery.DELETE_PHOTO.getQuery(), photo);
 
     }
 
