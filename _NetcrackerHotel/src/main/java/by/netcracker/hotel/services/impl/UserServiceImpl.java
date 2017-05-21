@@ -29,6 +29,10 @@ public class UserServiceImpl implements UserService {
         this.tokenDAO = tokenDAO;
     }
 
+    public UserServiceImpl() {
+        super();
+    }
+
     @Override
     public User registerUser(User user) throws UsernameExistException, EmailExistException {
         if (usernameExist(user.getUsername())) {
@@ -175,5 +179,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changeUserPassword(User user, String password) {
         userDAO.userPasswordUpdate(user, password);
+    }
+
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+
     }
 }
