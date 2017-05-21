@@ -1,11 +1,13 @@
 package by.netcracker.hotel.dao.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import by.netcracker.hotel.entities.Review;
+import by.netcracker.hotel.enums.ReviewStatus;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/spring-test/root-context.xml", "/spring-test/mysql-datasource.xml",
@@ -25,79 +28,86 @@ public class ReviewDAOImplTest {
     @Autowired
     private ReviewDAOImpl reviewDAO;
     private List<Review> list;
-    private Review review;
+    private Review testReview;
+    Review retrievedReview;
+    Review retrievedReview2;
 
     @Before
     public void setup() {
-        review = new Review(7777, 8888, 9999, "testUser", "testHotel", "testText", "testStatus", "testDate", 5);
+        testReview = new Review(7777, 8888, 9999, "testUser", "testHotel", "testText",
+            ReviewStatus.PENDING.getReviewInfo(), "testDate", 5);
+    }
+
+    @After
+    public void end() {
+        if (retrievedReview != null) {
+            reviewDAO.deleteByID(retrievedReview.getId());
+        }
+        if (retrievedReview2 != null) {
+            reviewDAO.deleteByID(retrievedReview2.getId());
+        }
+    }
+
+    // adding testReview to db and getting back to new variable
+    private Review getAddedReview(Review review) {
+        reviewDAO.add(review);
+        list = reviewDAO.getByHotelId(review.getHotelId());
+        Review retrievedReview = list.get(0);
+        return retrievedReview;
     }
 
     @Test
     public void addTest() {
-        reviewDAO.add(review);
-        list = reviewDAO.getByHotelId(review.getHotelId());
-        Review newReview = list.get(0);
-        review.setId(newReview.getId());
-        assertTrue(review.equals(newReview));
-        reviewDAO.deleteByID(newReview.getId());
+        list = reviewDAO.getByHotelId(testReview.getHotelId());
+        assertTrue("database contains testing review", list.size() == 0);
+        retrievedReview = getAddedReview(testReview);
+        testReview.setId(retrievedReview.getId()); // testReview doesn't
+                                                   // contains id by default
+        assertEquals("Reviews are not equal while adding review!", testReview, retrievedReview);
     }
 
     @Test
     public void deleteByIDTest() {
-        reviewDAO.add(review);
-        list = reviewDAO.getByHotelId(review.getHotelId());
-        Review newReview = list.get(0);
-        review.setId(newReview.getId());
-        reviewDAO.deleteByID(newReview.getId());
-        newReview = reviewDAO.getByID(newReview.getId());
-        assertNull(newReview);
+        retrievedReview = getAddedReview(testReview);
+        testReview.setId(retrievedReview.getId());
+        assertEquals("Reviews are not equal while adding review!", testReview, retrievedReview);
+        reviewDAO.deleteByID(retrievedReview.getId());
+        retrievedReview = reviewDAO.getByID(retrievedReview.getId());
+        assertNull(retrievedReview);
     }
 
     @Test
-    public void checkUsersReviewTest_ShouldReturnExist() {
-        reviewDAO.add(review);
-        list = reviewDAO.getByHotelId(review.getHotelId());
-        Review newReview = list.get(0);
-        review.setId(newReview.getId());
-        boolean reviewExist = reviewDAO.checkUsersReview(review.getHotelId(), review.getUserId());
-        reviewDAO.deleteByID(newReview.getId());
+    public void checkUsersReviewTest_Exist_Case() {
+        retrievedReview = getAddedReview(testReview);
+        boolean reviewExist = reviewDAO.checkUsersReview(testReview.getHotelId(), testReview.getUserId());
         assertTrue(reviewExist);
     }
 
     @Test
-    public void checkUsersReviewTest_ShouldReturnNotExist() {
-        reviewDAO.add(review);
-        list = reviewDAO.getByHotelId(review.getHotelId());
-        Review newReview = list.get(0);
-        reviewDAO.deleteByID(newReview.getId());
-        boolean reviewExist = reviewDAO.checkUsersReview(review.getHotelId(), review.getUserId());
-        assertTrue(!reviewExist);
+    public void checkUsersReviewTest_NotExist_Case() {
+        retrievedReview = getAddedReview(testReview);
+        reviewDAO.deleteByID(retrievedReview.getId());
+        boolean reviewExist = reviewDAO.checkUsersReview(testReview.getHotelId(), testReview.getUserId());
+        assertFalse(reviewExist);
     }
 
     // @Test
-    public void checkUsersReviewTest_ShouldReturnExistInException() {
-        reviewDAO.add(review);
-        reviewDAO.add(review);
-        list = reviewDAO.getByHotelId(review.getHotelId());
-        Review newReview1 = list.get(0);
-        Review newReview2 = list.get(1);
-        boolean reviewExist = reviewDAO.checkUsersReview(review.getHotelId(), review.getUserId());
-        reviewDAO.deleteByID(newReview1.getId());
-        reviewDAO.deleteByID(newReview2.getId());
+    public void checkUsersReviewTest_ExistInException_Case() {
+        reviewDAO.add(testReview);
+        retrievedReview = getAddedReview(testReview);
+        boolean reviewExist = reviewDAO.checkUsersReview(testReview.getHotelId(), testReview.getUserId());
         assertTrue(reviewExist);
     }
 
     @Test
     public void updateTest() {
-        reviewDAO.add(review);
-        list = reviewDAO.getByHotelId(review.getHotelId());
-        Review newReview = list.get(0);
-        newReview.setStatus("approved");
-        reviewDAO.update(newReview);
-        Review updatedReview = reviewDAO.getByID(newReview.getId());
-        reviewDAO.deleteByID(updatedReview.getId());
-        // assertTrue(updatedReview.getStatus().equals("approved"));
-        assertEquals("status is not changed", "approved", updatedReview.getStatus());
+        retrievedReview = getAddedReview(testReview);
+        assertEquals("retrievedReview has wrong status", retrievedReview.getStatus(),
+            ReviewStatus.PENDING.getReviewInfo());
+        retrievedReview.setStatus(ReviewStatus.APPROVED.getReviewInfo());
+        reviewDAO.update(retrievedReview);
+        Review retrievedReview2 = reviewDAO.getByID(retrievedReview.getId());
+        assertEquals("status is not changed", "approved", retrievedReview2.getStatus());
     }
 
 }
