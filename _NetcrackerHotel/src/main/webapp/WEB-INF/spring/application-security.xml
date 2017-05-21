@@ -14,10 +14,10 @@
     <http use-expressions="true">
 
         <!-- Uncomment after configuring tomcat for ssl -->
-     <intercept-url pattern="/**" requires-channel="https" />
+<!--      <intercept-url pattern="/**" requires-channel="https" />
         <port-mappings>
             <port-mapping http="8080" https="8443" />
-        </port-mappings>
+        </port-mappings> -->
 
 		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/> 
         <intercept-url pattern="/profile" access="hasAnyRole('USER','ADMIN','VKONTAKTE_USER',
