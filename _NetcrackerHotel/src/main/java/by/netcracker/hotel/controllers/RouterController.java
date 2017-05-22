@@ -1,5 +1,6 @@
 package by.netcracker.hotel.controllers;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RouterController {
+
+    private static Logger log = Logger.getLogger(RouterController.class);
 
     private WebApplicationContext context;
 
@@ -40,6 +43,7 @@ public class RouterController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(@RequestParam(value = "error", required = false) String error, Model model) {
         if (error != null) {
+            log.info("Invalid username or password while authentication");
             model.addAttribute("error", "Invalid username or password!");
         }
         return "login_page";

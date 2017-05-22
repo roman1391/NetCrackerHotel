@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -28,6 +29,8 @@ import by.netcracker.hotel.enums.SqlQuery;
 @Repository
 @Singleton
 public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
+
+    private static Logger log = Logger.getLogger(UserDAOImpl.class);
 
     private DataSource dataSource;
     private WebApplicationContext context;
@@ -84,6 +87,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
                 return true;
             }
         } catch (Exception e) {
+            log.warn("Exception in userDAO while user updating", e);
             return false;
         }
     }
@@ -94,6 +98,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
             return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 (RowMapper<User>) context.getBean("userMapper"));
         } catch (EmptyResultDataAccessException e) {
+            log.warn("EmptyResultDataAccessException in userDAO while getting by id ", e);
             return null;
         }
     }
@@ -105,6 +110,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
                 new Object[] { ColumnName.USER_USERNAME, username }, (RowMapper<User>) context.getBean("userMapper"));
             return user;
         } catch (EmptyResultDataAccessException e) {
+            log.warn("EmptyResultDataAccessException in userDAO while getting by username ", e);
             return null;
         }
     }
@@ -130,6 +136,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
             return (User) getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),
                 new Object[] { ColumnName.USER_EMAIL, email }, (RowMapper<User>) context.getBean("userMapper"));
         } catch (EmptyResultDataAccessException e) {
+            log.warn("EmptyResultDataAccessException in userDAO while getting by email ", e);
             return null;
         }
     }

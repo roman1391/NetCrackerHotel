@@ -37,19 +37,6 @@ public class HotelServiceImpl implements HotelService {
         this.roomDAO = roomDAO;
     }
 
-    /*
-     * @Override public Map<Hotel, List<Room>> findHotels(List<String>
-     * searchStrings, String start, String end) { List<Hotel> hotels =
-     * hotelDAO.findHotelsBySearchStrings(searchStrings); Map<Hotel, List<Room>>
-     * hotelsWithRooms = new HashMap<>(); SimpleDateFormat dateFormat = new
-     * SimpleDateFormat("MM/dd/yyyy"); if (!StringUtils.isBlank(start) &&
-     * !StringUtils.isBlank(end)) { for (Hotel hotel : hotels) { try {
-     * hotelsWithRooms.put(hotel,
-     * roomDAO.getFreeRoomsInHotelByDate(hotel.getId(), dateFormat.parse(start),
-     * dateFormat.parse(end))); } catch (ParseException e) { return null; } } }
-     * else { for (Hotel hotel : hotels) { hotelsWithRooms.put(hotel,
-     * roomDAO.getByHotelID(hotel.getId())); } } return hotelsWithRooms; }
-     */
     @Override
     public Map<Hotel, List<Room>> findHotels(List<String> searchStrings, SearchFilter searchFilter) {
         List<Hotel> hotels = hotelDAO.findHotelsBySearchStrings(searchStrings, searchFilter);
@@ -59,7 +46,6 @@ public class HotelServiceImpl implements HotelService {
         }
         return hotelsWithRooms;
     }
-
 
     @Override
     public List<Hotel> getAll() {

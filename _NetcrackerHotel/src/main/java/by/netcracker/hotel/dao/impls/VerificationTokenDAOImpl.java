@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -26,6 +27,8 @@ import by.netcracker.hotel.mappers.VerificationTokenMapper;
 @Repository
 @Singleton
 public class VerificationTokenDAOImpl extends JdbcDaoSupport implements VerificationTokenDAO {
+
+    private static Logger log = Logger.getLogger(VerificationTokenDAOImpl.class);
     private DataSource dataSource;
 
     @PostConstruct
@@ -61,6 +64,7 @@ public class VerificationTokenDAOImpl extends JdbcDaoSupport implements Verifica
             return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new VerificationTokenMapper());
         } catch (EmptyResultDataAccessException e) {
+            log.warn("Exception in verificationTokenDAO while getting by id", e);
             return null;
         }
     }
@@ -81,6 +85,7 @@ public class VerificationTokenDAOImpl extends JdbcDaoSupport implements Verifica
                 new VerificationTokenMapper());
             return verificationToken;
         } catch (EmptyResultDataAccessException e) {
+            log.warn("EmptyResultDataAccessException in verificationTokenDAO while getting by token", e);
             return null;
         }
     }
@@ -93,6 +98,7 @@ public class VerificationTokenDAOImpl extends JdbcDaoSupport implements Verifica
                 new VerificationTokenMapper());
             return verificationToken;
         } catch (EmptyResultDataAccessException e) {
+            log.warn("EmptyResultDataAccessException in verificationTokenDAO while getting by user id", e);
             return null;
         }
     }

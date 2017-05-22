@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -27,6 +28,7 @@ import by.netcracker.hotel.utils.SearchFilter;
 @Singleton
 public class OrderDAOImpl extends JdbcDaoSupport implements OrderDAO {
 
+    private static Logger log = Logger.getLogger(OrderDAOImpl.class);
     private DataSource dataSource;
 
     @PostConstruct
@@ -72,6 +74,7 @@ public class OrderDAOImpl extends JdbcDaoSupport implements OrderDAO {
                 return true;
             }
         } catch (Exception e) {
+            log.warn("Exception in orderDAO while updating", e);
             return false;
         }
     }
@@ -82,6 +85,7 @@ public class OrderDAOImpl extends JdbcDaoSupport implements OrderDAO {
             return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new OrderMapper());
         } catch (EmptyResultDataAccessException e) {
+            log.warn("EmptyResultDataAccessException in orderDAO while getting by id", e);
             return null;
         }
     }

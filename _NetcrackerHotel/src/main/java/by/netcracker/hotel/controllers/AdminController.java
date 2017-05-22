@@ -2,6 +2,7 @@ package by.netcracker.hotel.controllers;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,8 @@ import by.netcracker.hotel.services.UserService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    private static Logger log = Logger.getLogger(AdminController.class);
 
     private WebApplicationContext context;
     private final UserService userService;
@@ -62,9 +65,11 @@ public class AdminController {
             user.setAuthority(ROLE.USER);
             User added = (User) userService.addEnabledUser(user);
         } catch (UsernameExistException e) {
+            log.info("UsernameExistException in adminController while adding user", e);
             model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
             return "add_user";
         } catch (EmailExistException e) {
+            log.info("EmailExistException in adminController while adding user", e);
             model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
             return "add_user";
         }
@@ -135,9 +140,11 @@ public class AdminController {
         try {
             userService.fullUpdate(user);
         } catch (UsernameExistException e) {
+            log.info("UsernameExistException in adminController while saving user", e);
             model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
             return "admin/user_editing";
         } catch (EmailExistException e) {
+            log.info("EmailExistException in adminController while saving user", e);
             model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
             return "admin/user_editing";
         } finally {

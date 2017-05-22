@@ -3,6 +3,7 @@ package by.netcracker.hotel.controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,8 @@ import by.netcracker.hotel.utils.SearchFilter;
 @Controller
 @SessionAttributes("searchFilter")
 public class OrderController {
+
+    private static Logger log = Logger.getLogger(OrderController.class);
 
     @Autowired
     private OrderService orderService;
@@ -61,7 +64,7 @@ public class OrderController {
                 order.setArrivalDate(dateFormatParse.parse(searchFilter.getStartDate()));
                 order.setLeaveDate(dateFormatParse.parse(searchFilter.getEndDate()));
             } catch (ParseException e) {
-                e.printStackTrace();
+                log.warn("ParseException in orderController while booking", e);
             }
         }
         if (roomService.isRoomFree(order.getRoomId(), order.getId(),

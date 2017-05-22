@@ -1,17 +1,17 @@
 package by.netcracker.hotel.services.impl;
 
-import by.netcracker.hotel.dao.RoomDAO;
-import by.netcracker.hotel.entities.Room;
-import by.netcracker.hotel.services.RoomService;
-import by.netcracker.hotel.utils.SearchFilter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import by.netcracker.hotel.dao.RoomDAO;
+import by.netcracker.hotel.entities.Room;
+import by.netcracker.hotel.services.RoomService;
+import by.netcracker.hotel.utils.SearchFilter;
 
 /**
  * Created by Varvara on 4/25/2017.
@@ -43,10 +43,12 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> getFreeRoomsInHotelByDate(int hotelID, SearchFilter searchFilter/*String start, String end*/) {
+    public List<Room> getFreeRoomsInHotelByDate(int hotelID,
+        SearchFilter searchFilter/* String start, String end */) {
         List<Room> freeRooms = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        //freeRooms = roomDAO.getFreeRoomsInHotelByDate(hotelID, dateFormat.parse(start), dateFormat.parse(end));
+        // freeRooms = roomDAO.getFreeRoomsInHotelByDate(hotelID,
+        // dateFormat.parse(start), dateFormat.parse(end));
         freeRooms = roomDAO.getFreeRoomsInHotelByDate(searchFilter, hotelID);
 
         return freeRooms;
@@ -63,6 +65,5 @@ public class RoomServiceImpl implements RoomService {
             roomDAO.deleteByID(id);
         }
     }
-
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,8 @@ import by.netcracker.hotel.services.UserService;
 @Service("ReviewServiceImpl")
 @SessionScope
 public class ReviewServiceImpl implements ReviewService {
+
+    private static Logger log = Logger.getLogger(ReviewServiceImpl.class);
 
     private ReviewDAO reviewDAO;
     private UserService userService;
@@ -94,7 +97,7 @@ public class ReviewServiceImpl implements ReviewService {
             return true;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warn("Exception in reviewService while review updating", e);
             return false;
         }
     }

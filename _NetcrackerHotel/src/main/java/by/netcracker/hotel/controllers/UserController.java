@@ -4,13 +4,18 @@ import static by.netcracker.hotel.utils.CloudinaryUtil.saveFileToCloud;
 
 import javax.servlet.ServletContext;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,6 +32,8 @@ import by.netcracker.hotel.utils.CloudinaryUtil;
 @SessionAttributes("currentUser")
 public class UserController {
 
+    private static Logger log = Logger.getLogger(UserController.class);
+
     @Autowired
     public UserController(ServletContext context, ApplicationEventPublisher eventPublisher) {
         CloudinaryUtil.UPLOADED_FOLDER = context.getRealPath("/resources/img/");
@@ -37,8 +44,8 @@ public class UserController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String save(@ModelAttribute("edited_user") User user, @RequestParam("file") MultipartFile file,
-                       Model model) {
-        if(!file.getOriginalFilename().isEmpty()){
+        Model model) {
+        if (!file.getOriginalFilename().isEmpty()) {
             user.setAvatar(saveFileToCloud(file));
         }
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -46,9 +53,11 @@ public class UserController {
             try {
                 userService.profileUpdate(user);
             } catch (UsernameExistException e) {
+                log.info("UsernameExistException in userController while updating user", e);
                 model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
                 return "profile";
             } catch (EmailExistException e) {
+                log.info("EmailExistException in userController while updating user", e);
                 model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
                 return "profile";
             }
@@ -65,6 +74,5 @@ public class UserController {
         model.setViewName("about");
         return model;
     }
-
 
 }

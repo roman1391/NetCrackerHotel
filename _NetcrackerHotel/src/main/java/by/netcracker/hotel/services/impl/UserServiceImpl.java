@@ -3,6 +3,7 @@ package by.netcracker.hotel.services.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -19,6 +20,8 @@ import by.netcracker.hotel.services.UserService;
 @Service("UserServiceImpl")
 @SessionScope
 public class UserServiceImpl implements UserService {
+
+    private static Logger log = Logger.getLogger(UserServiceImpl.class);
 
     private UserDAO userDAO;
     private VerificationTokenDAO tokenDAO;
@@ -94,7 +97,6 @@ public class UserServiceImpl implements UserService {
         // if (user.getUsername() == null)
         // return;
         if (!user.getUsername().equals(oldUser.getUsername()) && usernameExist(user.getUsername())) {
-            System.out.println("exist!");
             throw new UsernameExistException();
         } else if (!user.getEmail().equals(oldUser.getEmail()) && emailExist(user.getEmail())) {
             throw new EmailExistException();
@@ -121,7 +123,7 @@ public class UserServiceImpl implements UserService {
             return true;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.warn("Exception in userService while user updating", e);
             return false;
         }
     }

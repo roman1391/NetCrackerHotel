@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -22,6 +23,8 @@ import by.netcracker.hotel.mappers.ReviewMapper;
 @Repository
 @Singleton
 public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
+
+    private static Logger log = Logger.getLogger(ReviewDAOImpl.class);
     private DataSource dataSource;
 
     @PostConstruct
@@ -62,6 +65,7 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
                 return true;
             }
         } catch (Exception e) {
+            log.warn("Exception in reviewDAO while updating", e);
             return false;
         }
     }
@@ -72,6 +76,7 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
             return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new ReviewMapper());
         } catch (EmptyResultDataAccessException e) {
+            log.warn("EmptyResultDataAccessException in reviewDAO while getting by id", e);
             return null;
         }
     }
@@ -91,6 +96,7 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
             reviewStatus = getJdbcTemplate().queryForObject(SqlQuery.CHECK_REVIEW.getQuery(), String.class,
                 new Object[] { userId, hotelId });
         } catch (Exception e) {
+            log.warn("Exception in reviewDAO while checking review for user", e);
             reviewStatus = "1";
         }
         switch (reviewStatus) {

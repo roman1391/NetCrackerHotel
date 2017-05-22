@@ -11,6 +11,7 @@ import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -30,6 +31,8 @@ import by.netcracker.hotel.utils.SearchFilter;
 @Repository
 @Singleton
 public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
+
+    private static Logger log = Logger.getLogger(RoomDAOImpl.class);
     private DataSource dataSource;
 
     @PostConstruct
@@ -61,9 +64,10 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
     @Override
     public Room getByID(Integer id) {
         try {
-            return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[]{id},
-                    new RoomMapper());
+            return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
+                new RoomMapper());
         } catch (EmptyResultDataAccessException e) {
+            log.warn("EmptyResultDataAccessException in roomDAO while getting by id", e);
             return null;
         }
     }
@@ -75,16 +79,16 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
 
     @Override
     public List<Room> getByHotelID(int hotelID) {
-        return getJdbcTemplate().query(SqlQuery.GET_ROOMS_BY_HOTEL_ID.getQuery(), new Object[]{hotelID},
-                new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
-                });
+        return getJdbcTemplate().query(SqlQuery.GET_ROOMS_BY_HOTEL_ID.getQuery(), new Object[] { hotelID },
+            new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
+            });
     }
 
     @Override
     public List<Room> getFreeRoomsInHotelByDate(int hotelID, Date start, Date end) {
         return getJdbcTemplate().query(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_BY_DATE.getQuery(),
-                new Object[]{hotelID, start, end}, new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
-                });
+            new Object[] { hotelID, start, end }, new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
+            });
     }
 
     @Override
@@ -110,31 +114,31 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
                 param.add(searchFilter.getMaxCost());
             }
         }
-        if (!StringUtils.isBlank(searchFilter.getStartDate()) && !StringUtils.isBlank(searchFilter.getEndDate())){
+        if (!StringUtils.isBlank(searchFilter.getStartDate()) && !StringUtils.isBlank(searchFilter.getEndDate())) {
             query.append(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_DATE.getQuery());
             try {
                 param.add(dateFormat.parse(searchFilter.getStartDate()));
                 param.add(dateFormat.parse(searchFilter.getEndDate()));
             } catch (ParseException e) {
-                e.printStackTrace();
+                log.warn("ParseException in roomDAO while getting free rooms", e);
             }
         }
         query.append(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_END.getQuery());
         param.add(hotelID);
-        return getJdbcTemplate().query(query.toString(),
-                param.toArray(),
-                new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
-                });
+        return getJdbcTemplate().query(query.toString(), param.toArray(),
+            new RowMapperResultSetExtractor<Room>(new RoomMapper()) {
+            });
     }
 
     @Override
     public boolean isRoomFree(int roomId, int orderId, SearchFilter searchFilter) {
         try {
-             getJdbcTemplate().queryForObject(SqlQuery.GET_ISFREE_IN_HOTEL_END.getQuery(),
-                    new Object[]{orderId, searchFilter.getStartDate(), searchFilter.getEndDate(), roomId},
-                    new RoomMapper());
-             return true;
-        } catch (EmptyResultDataAccessException ex){
+            getJdbcTemplate().queryForObject(SqlQuery.GET_ISFREE_IN_HOTEL_END.getQuery(),
+                new Object[] { orderId, searchFilter.getStartDate(), searchFilter.getEndDate(), roomId },
+                new RoomMapper());
+            return true;
+        } catch (EmptyResultDataAccessException ex) {
+            log.warn("EmptyResultDataAccessException in roomDAO while getting free rooms", ex);
             return false;
         }
     }

@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -34,6 +35,7 @@ import by.netcracker.hotel.utils.SearchFilter;
 @Singleton
 public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
 
+    private static Logger log = Logger.getLogger(HotelDAOImpl.class);
     private DataSource dataSource;
 
     @PostConstruct
@@ -97,6 +99,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
                 return true;
             }
         } catch (Exception e) {
+            log.warn("Exception in hotelDAO while updating", e);
             return false;
         }
     }
@@ -108,6 +111,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
             hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new HotelMapper());
         } catch (EmptyResultDataAccessException e) {
+            log.warn("Exception in hotelDAO while getting by id", e);
         }
         return hotel;
     }
@@ -147,6 +151,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
             return (Hotel) getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),
                 new Object[] { ColumnName.HOTEL_NAME, name }, new HotelMapper());
         } catch (EmptyResultDataAccessException e) {
+            log.warn("EmptyResultDataAccessException in hotelDAO while getting by name", e);
             return null;
         }
     }
