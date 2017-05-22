@@ -116,12 +116,12 @@ public class OrderController {
 
         if (roomService.isRoomFree(order.getRoomId(), order.getId(), searchFilter)) {
             orderService.update(order.getId(), searchFilter);
-            model.addAttribute("orders", orderService.getByUserId(order.getUserId()));
+
             model.addAttribute("message", "success");
         } else {
-            model.addAttribute("orders", orderService.getByUserId(order.getUserId()));
             model.addAttribute("message", "error");
         }
+        model.addAttribute("orders", orderService.getByUserId(order.getUserId()));
         return "bookedRooms";
     }
 }

@@ -5,6 +5,8 @@
   Time: 4:55
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Available rooms</title>
@@ -43,16 +45,13 @@
                 <div class="col-4 rounded">
                     <ul id="rooms">
                         <li class="item">
-                            Room ID: <span>${room.id}</span>
+                            Room №: <span>${room.id}</span>
                         </li>
                         <li class="item">
                             Cost: <span><i class="fa fa-usd" aria-hidden="true"></i>${room.cost}</span>
                         </li>
                         <li class="item">
                             Capacity: <span><i class="fa fa-users" aria-hidden="true"></i> ${room.capacity}</span>
-                        </li>
-                        <li class="item">
-                            Hotel ID: <span>${room.hotelID}</span>
                         </li>
                     </ul>
                     <c:if test="${currentUser.authority.toString() ne 'GUEST' or currentUser.authority.toString() ne 'BLOCKED'}">

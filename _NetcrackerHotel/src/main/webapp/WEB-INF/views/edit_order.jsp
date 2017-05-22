@@ -28,7 +28,7 @@
         </div>
     </c:if>
     <div class="content" style="margin-left: 10px">
-        <p>Room ID: ${order.roomId}</p>
+        <p>Room №: ${order.roomId}</p>
         <p>Username: ${order.username}</p>
         <p>Arrival date: ${order.arrivalDate}</p>
         <p>Leave date: ${order.leaveDate}</p>
