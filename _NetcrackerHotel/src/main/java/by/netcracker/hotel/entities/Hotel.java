@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.cloudinary.Transformation;
 
-import by.netcracker.hotel.cloud.CloudinaryConnector;
+import by.netcracker.hotel.utils.CloudinaryConnector;
 
 /**
  * Created by Varvara on 4/1/2017.

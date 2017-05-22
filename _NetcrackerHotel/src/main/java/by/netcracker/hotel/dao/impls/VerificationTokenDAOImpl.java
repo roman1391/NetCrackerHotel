@@ -1,4 +1,4 @@
-package by.netcracker.hotel.dao.impl;
+package by.netcracker.hotel.dao.impls;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,11 +14,11 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import by.netcracker.hotel.dao.VerificationTokenDAO;
-import by.netcracker.hotel.dao.constant.ColumnName;
-import by.netcracker.hotel.dao.constant.TypeName;
+import by.netcracker.hotel.dao.constants.ColumnName;
+import by.netcracker.hotel.dao.constants.TypeName;
 import by.netcracker.hotel.entities.VerificationToken;
 import by.netcracker.hotel.enums.SqlQuery;
-import by.netcracker.hotel.mapper.VerificationTokenMapper;
+import by.netcracker.hotel.mappers.VerificationTokenMapper;
 
 /**
  * Created by slava on 15.04.17.

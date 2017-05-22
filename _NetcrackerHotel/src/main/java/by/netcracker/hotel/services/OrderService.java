@@ -3,7 +3,7 @@ package by.netcracker.hotel.services;
 import java.util.List;
 
 import by.netcracker.hotel.entities.Order;
-import by.netcracker.hotel.filter.SearchFilter;
+import by.netcracker.hotel.utils.SearchFilter;
 
 /**
  * Created by Alexander on 25.04.2017.

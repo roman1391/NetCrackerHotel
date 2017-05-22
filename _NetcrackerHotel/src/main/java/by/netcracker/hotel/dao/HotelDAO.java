@@ -3,7 +3,7 @@ package by.netcracker.hotel.dao;
 import java.util.List;
 
 import by.netcracker.hotel.entities.Hotel;
-import by.netcracker.hotel.filter.SearchFilter;
+import by.netcracker.hotel.utils.SearchFilter;
 
 /**
  * Created by Varvara on 4/4/2017.

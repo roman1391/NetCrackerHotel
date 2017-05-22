@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import by.netcracker.hotel.cloud.CloudinaryConnector;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.RoomService;
-import by.netcracker.hotel.util.CloudinaryUtil;
+import by.netcracker.hotel.utils.CloudinaryConnector;
+import by.netcracker.hotel.utils.CloudinaryUtil;
 
 /**
  * Created by Varvara on 4/11/2017.

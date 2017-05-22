@@ -1,4 +1,4 @@
-package by.netcracker.hotel.filter;
+package by.netcracker.hotel.utils;
 
 import java.text.DateFormat;
 import java.text.ParseException;

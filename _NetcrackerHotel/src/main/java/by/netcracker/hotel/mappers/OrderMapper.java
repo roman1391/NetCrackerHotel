@@ -1,11 +1,11 @@
-package by.netcracker.hotel.mapper;
+package by.netcracker.hotel.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import by.netcracker.hotel.dao.constant.ColumnName;
+import by.netcracker.hotel.dao.constants.ColumnName;
 import by.netcracker.hotel.entities.Order;
 
 /**

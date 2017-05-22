@@ -39,7 +39,6 @@
 						</form:form>
 						
 						<a href="${contextPath}/admin/list_of_orders">Back to list of orders</a> <br> 
-						<a href="${contextPath}/admin/admin_page">To admin page</a>
 					</div>
 				</div>
 			</div>

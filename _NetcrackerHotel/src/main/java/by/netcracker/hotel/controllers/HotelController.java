@@ -16,10 +16,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Review;
-import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.RoomService;
+import by.netcracker.hotel.utils.SearchFilter;
 
 @Controller
 @RequestMapping("/hotel_page")

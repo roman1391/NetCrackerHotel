@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import by.netcracker.hotel.dao.HotelDAO;
-import by.netcracker.hotel.dao.constant.TypeName;
+import by.netcracker.hotel.dao.constants.TypeName;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.pagination.ReviewSearchParam;
-import by.netcracker.hotel.mapper.ReviewMapper;
+import by.netcracker.hotel.mappers.ReviewMapper;
 
 @Repository
 public class ReviewPaginationDAO extends AbstractPaginationJdbcDAO<Review, ReviewSearchParam> {

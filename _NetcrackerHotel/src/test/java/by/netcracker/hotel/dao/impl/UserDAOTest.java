@@ -14,7 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import by.netcracker.hotel.dao.UserDAO;
 import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.entities.EntityBuilder.EntityBuilder;
+import by.netcracker.hotel.entities.entityBuilder.EntityBuilder;
 import by.netcracker.hotel.enums.ROLE;
 
 /**

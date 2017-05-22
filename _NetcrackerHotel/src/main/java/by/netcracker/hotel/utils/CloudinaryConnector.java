@@ -1,4 +1,4 @@
-package by.netcracker.hotel.cloud;
+package by.netcracker.hotel.utils;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;

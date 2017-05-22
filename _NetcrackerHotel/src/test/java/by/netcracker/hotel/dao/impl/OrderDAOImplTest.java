@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import by.netcracker.hotel.dao.impls.OrderDAOImpl;
 import by.netcracker.hotel.entities.Order;
 
 @RunWith(SpringJUnit4ClassRunner.class)

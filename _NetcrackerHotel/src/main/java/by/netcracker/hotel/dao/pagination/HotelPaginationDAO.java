@@ -8,10 +8,10 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import by.netcracker.hotel.dao.constant.TypeName;
+import by.netcracker.hotel.dao.constants.TypeName;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.pagination.HotelSearchParam;
-import by.netcracker.hotel.mapper.HotelMapper;
+import by.netcracker.hotel.mappers.HotelMapper;
 
 @Repository
 public class HotelPaginationDAO extends AbstractPaginationJdbcDAO<Hotel, HotelSearchParam> {

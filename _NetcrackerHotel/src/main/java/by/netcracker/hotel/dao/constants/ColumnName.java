@@ -1,4 +1,4 @@
-package by.netcracker.hotel.dao.constant;
+package by.netcracker.hotel.dao.constants;
 
 /**
  * Created by slava on 07.04.17.

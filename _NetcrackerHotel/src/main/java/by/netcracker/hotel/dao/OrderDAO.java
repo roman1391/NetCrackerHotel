@@ -1,7 +1,7 @@
 package by.netcracker.hotel.dao;
 
 import by.netcracker.hotel.entities.Order;
-import by.netcracker.hotel.filter.SearchFilter;
+import by.netcracker.hotel.utils.SearchFilter;
 
 import java.util.List;
 

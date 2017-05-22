@@ -9,8 +9,8 @@ import org.springframework.web.context.annotation.SessionScope;
 import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.OrderDAO;
 import by.netcracker.hotel.entities.Order;
-import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.OrderService;
+import by.netcracker.hotel.utils.SearchFilter;
 
 /**
  * Created by Alexander on 25.04.2017.

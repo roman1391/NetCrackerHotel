@@ -2,8 +2,9 @@ package by.netcracker.hotel.services.impl;
 
 import by.netcracker.hotel.dao.RoomDAO;
 import by.netcracker.hotel.entities.Room;
-import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.RoomService;
+import by.netcracker.hotel.utils.SearchFilter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;

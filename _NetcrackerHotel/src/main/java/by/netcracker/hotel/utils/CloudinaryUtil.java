@@ -1,4 +1,4 @@
-package by.netcracker.hotel.util;
+package by.netcracker.hotel.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
-
-import by.netcracker.hotel.cloud.CloudinaryConnector;
 
 /**
  * Created by Alexander on 18.04.2017.

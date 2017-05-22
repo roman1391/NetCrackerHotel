@@ -1,6 +1,6 @@
-package by.netcracker.hotel.mapper;
+package by.netcracker.hotel.mappers;
 
-import by.netcracker.hotel.dao.constant.ColumnName;
+import by.netcracker.hotel.dao.constants.ColumnName;
 import by.netcracker.hotel.entities.Room;
 import org.springframework.jdbc.core.RowMapper;
 

@@ -1,7 +1,7 @@
 package by.netcracker.hotel.services;
 
 import by.netcracker.hotel.entities.Room;
-import by.netcracker.hotel.filter.SearchFilter;
+import by.netcracker.hotel.utils.SearchFilter;
 
 import java.util.List;
 

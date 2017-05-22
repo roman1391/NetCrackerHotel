@@ -17,10 +17,10 @@ import org.springframework.web.context.WebApplicationContext;
 import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.HotelService;
 import by.netcracker.hotel.services.OrderService;
 import by.netcracker.hotel.services.RoomService;
+import by.netcracker.hotel.utils.SearchFilter;
 
 /**
  * Created by Alexander on 26.04.2017.

@@ -1,4 +1,4 @@
-package by.netcracker.hotel.dao.impl;
+package by.netcracker.hotel.dao.impls;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.context.WebApplicationContext;
 
 import by.netcracker.hotel.dao.UserDAO;
-import by.netcracker.hotel.dao.constant.ColumnName;
-import by.netcracker.hotel.dao.constant.TypeName;
+import by.netcracker.hotel.dao.constants.ColumnName;
+import by.netcracker.hotel.dao.constants.TypeName;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.SqlQuery;
 

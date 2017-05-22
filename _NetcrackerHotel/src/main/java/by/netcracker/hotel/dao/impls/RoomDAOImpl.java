@@ -1,4 +1,4 @@
-package by.netcracker.hotel.dao.impl;
+package by.netcracker.hotel.dao.impls;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
-import by.netcracker.hotel.filter.SearchFilter;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,10 +18,11 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import by.netcracker.hotel.dao.RoomDAO;
-import by.netcracker.hotel.dao.constant.TypeName;
+import by.netcracker.hotel.dao.constants.TypeName;
 import by.netcracker.hotel.entities.Room;
 import by.netcracker.hotel.enums.SqlQuery;
-import by.netcracker.hotel.mapper.RoomMapper;
+import by.netcracker.hotel.mappers.RoomMapper;
+import by.netcracker.hotel.utils.SearchFilter;
 
 /**
  * Created by Varvara on 4/25/2017.

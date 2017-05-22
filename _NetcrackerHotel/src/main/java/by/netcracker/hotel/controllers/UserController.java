@@ -1,6 +1,6 @@
 package by.netcracker.hotel.controllers;
 
-import static by.netcracker.hotel.util.CloudinaryUtil.saveFileToCloud;
+import static by.netcracker.hotel.utils.CloudinaryUtil.saveFileToCloud;
 
 import javax.servlet.ServletContext;
 
@@ -20,7 +20,7 @@ import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.UserService;
-import by.netcracker.hotel.util.CloudinaryUtil;
+import by.netcracker.hotel.utils.CloudinaryUtil;
 
 @Controller
 @SessionScope

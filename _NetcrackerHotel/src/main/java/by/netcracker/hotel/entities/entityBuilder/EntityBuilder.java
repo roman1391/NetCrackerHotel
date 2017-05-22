@@ -1,4 +1,4 @@
-package by.netcracker.hotel.entities.EntityBuilder;
+package by.netcracker.hotel.entities.entityBuilder;
 
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;

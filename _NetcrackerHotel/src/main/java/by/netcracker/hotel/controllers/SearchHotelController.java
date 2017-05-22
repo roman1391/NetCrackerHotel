@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Room;
-import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.HotelService;
+import by.netcracker.hotel.utils.SearchFilter;
 
 @Controller
 @SessionAttributes("searchFilter")

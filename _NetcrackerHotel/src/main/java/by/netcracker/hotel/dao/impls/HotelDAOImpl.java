@@ -1,4 +1,4 @@
-package by.netcracker.hotel.dao.impl;
+package by.netcracker.hotel.dao.impls;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,12 +20,12 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import by.netcracker.hotel.dao.HotelDAO;
-import by.netcracker.hotel.dao.constant.ColumnName;
-import by.netcracker.hotel.dao.constant.TypeName;
+import by.netcracker.hotel.dao.constants.ColumnName;
+import by.netcracker.hotel.dao.constants.TypeName;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.enums.SqlQuery;
-import by.netcracker.hotel.filter.SearchFilter;
-import by.netcracker.hotel.mapper.HotelMapper;
+import by.netcracker.hotel.mappers.HotelMapper;
+import by.netcracker.hotel.utils.SearchFilter;
 
 /**
  * Created by Varvara on 4/4/2017.

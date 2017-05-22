@@ -1,4 +1,4 @@
-package by.netcracker.hotel.dao.impl;
+package by.netcracker.hotel.dao.impls;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
-import by.netcracker.hotel.filter.SearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -14,11 +13,12 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import by.netcracker.hotel.dao.OrderDAO;
-import by.netcracker.hotel.dao.constant.ColumnName;
-import by.netcracker.hotel.dao.constant.TypeName;
+import by.netcracker.hotel.dao.constants.ColumnName;
+import by.netcracker.hotel.dao.constants.TypeName;
 import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.enums.SqlQuery;
-import by.netcracker.hotel.mapper.OrderMapper;
+import by.netcracker.hotel.mappers.OrderMapper;
+import by.netcracker.hotel.utils.SearchFilter;
 
 /**
  * Created by Alexander on 25.04.2017.

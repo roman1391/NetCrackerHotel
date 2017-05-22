@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.context.WebApplicationContext;
 
-import by.netcracker.hotel.dao.constant.TypeName;
+import by.netcracker.hotel.dao.constants.TypeName;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.entities.pagination.UserSearchParam;
 

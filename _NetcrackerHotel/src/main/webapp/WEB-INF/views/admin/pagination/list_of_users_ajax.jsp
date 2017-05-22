@@ -14,7 +14,7 @@
                     <td class="cell"><span><c:out value="${bo.authority}"/></span></td>
                     <td class="cell"><span ><c:out value="${bo.enabled}"/></span></td>
                     <td class="cell"><span><c:out value="${bo.email}"/></span></td> 
-                    <td class="cell"><span><a href="${contextPath}/admin/edit_form/${bo.username}">See profile</a> </span></td> 
+                    <td class="cell"><span><a href="${contextPath}/admin/edit_form/${bo.username}">profile</a> </span></td> 
                 </jsp:attribute>
 </pg:pagination_ajax>
 <script>

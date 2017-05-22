@@ -5,7 +5,7 @@ import java.util.Map;
 
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Room;
-import by.netcracker.hotel.filter.SearchFilter;
+import by.netcracker.hotel.utils.SearchFilter;
 
 /**
  * Created by Varvara on 4/8/2017.

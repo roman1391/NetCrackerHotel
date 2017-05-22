@@ -1,4 +1,4 @@
-package by.netcracker.hotel.mapper;
+package by.netcracker.hotel.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-import by.netcracker.hotel.dao.constant.ColumnName;
+import by.netcracker.hotel.dao.constants.ColumnName;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
 

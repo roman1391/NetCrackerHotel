@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import by.netcracker.hotel.dao.impls.ReviewDAOImpl;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.enums.ReviewStatus;
 

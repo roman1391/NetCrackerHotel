@@ -1,4 +1,4 @@
-package by.netcracker.hotel.dao.impl;
+package by.netcracker.hotel.dao.impls;
 
 import java.util.List;
 
@@ -13,11 +13,11 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import by.netcracker.hotel.dao.ReviewDAO;
-import by.netcracker.hotel.dao.constant.ColumnName;
-import by.netcracker.hotel.dao.constant.TypeName;
+import by.netcracker.hotel.dao.constants.ColumnName;
+import by.netcracker.hotel.dao.constants.TypeName;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.enums.SqlQuery;
-import by.netcracker.hotel.mapper.ReviewMapper;
+import by.netcracker.hotel.mappers.ReviewMapper;
 
 @Repository
 @Singleton

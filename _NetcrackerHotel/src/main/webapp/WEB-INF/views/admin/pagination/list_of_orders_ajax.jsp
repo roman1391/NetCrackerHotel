@@ -14,7 +14,7 @@
                     <td class="cell"><span><c:out value="${bo.hotelname}"/></span></td>
                     <td class="cell"><span style="white-space:nowrap;"><c:out value="${bo.arrivalDate}"/></span></td>
                     <td class="cell"><span><c:out value="${bo.leaveDate}"/></span></td> 
-                    <td class="cell"><span><a href="${contextPath}/admin/order_page/${bo.orderId}">See </a> </span></td> 
+                    <td class="cell"><span><a href="${contextPath}/admin/order_page/${bo.orderId}">order</a> </span></td> 
                 </jsp:attribute>
 </pg:pagination_ajax>
 <script>

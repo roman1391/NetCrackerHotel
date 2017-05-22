@@ -12,8 +12,8 @@ import by.netcracker.hotel.dao.HotelDAO;
 import by.netcracker.hotel.dao.RoomDAO;
 import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Room;
-import by.netcracker.hotel.filter.SearchFilter;
 import by.netcracker.hotel.services.HotelService;
+import by.netcracker.hotel.utils.SearchFilter;
 
 /**
  * Created by Varvara on 4/8/2017.
