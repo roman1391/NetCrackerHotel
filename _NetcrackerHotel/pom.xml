@@ -163,9 +163,9 @@
 
 		<!-- AspectJ -->
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
+    		<groupId>org.aspectj</groupId>
+    		<artifactId>aspectjrt</artifactId>
+   		 	<version>1.7.3</version>
 		</dependency>
 
 		<!-- Logging -->
@@ -302,6 +302,8 @@
 			<artifactId>pagination-taglibs</artifactId>
 			<version>1.0.3</version>
 		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>

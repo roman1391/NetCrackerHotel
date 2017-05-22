@@ -68,5 +68,10 @@
 	
 	<security:global-method-security  secured-annotations="enabled" pre-post-annotations="enabled" jsr250-annotations="enabled"/>
 	
+	<aop:config>
+		<aop:aspect id="log" ref="applicationLogger">
+			<aop:around pointcut="execution(* by.netcracker.hotel.controllers..*.*(..))" method="controllerLogging" />
+		</aop:aspect>
+	</aop:config>
 
 </beans:beans>
