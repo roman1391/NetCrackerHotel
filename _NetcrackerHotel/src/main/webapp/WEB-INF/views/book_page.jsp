@@ -17,6 +17,12 @@
     <link
             href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
             rel="stylesheet">
+    <script type="text/javascript">
+        function calcAmount(payValue, startDate, endDate) {
+            var difference = endDate - startDate;
+            document.write((difference * payValue) / (24 * 60 * 60 * 1000));
+        }
+    </script>
 </head>
 
 <body>
@@ -32,13 +38,12 @@
                             <div style="margin: 50px" class="alert alert-success">
                                 The booking was successful
                             </div>
-                            roomId: ${order.roomId }<br>
-                            UserId: ${order.userId }<br>
+                            Room №: ${order.roomId }<br>
                             First Name: ${order.firstName }<br>
                             Last Name: ${order.lastName }<br>
-                            ArrivalDate: ${order.arrivalDate }<br>
-                            LeaveDate: ${order.leaveDate }<br>
-                            PayValue: ${order.payValue}<br>
+                            Arrival Date: ${order.arrivalDate }<br>
+                            Leave Date: ${order.leaveDate }<br>
+                            Total amount: <script>calcAmount(${order.payValue}, ${order.arrivalDate.getTime()}, ${order.leaveDate.getTime()})</script><br>
                         </c:when>
                         <c:otherwise>
                             <div style="margin: 10px" class="alert alert-danger">

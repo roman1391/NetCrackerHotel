@@ -35,7 +35,7 @@
     </c:if>
     <div class="content">
         <p>Please enter additional information</p>
-        <p>Room ID: ${roomId}</p>
+        <p>Room №: ${roomId}</p>
         <p>Username: ${currentUser.username}</p>
         <p>Arrival date: ${searchFilter.startDate}</p>
         <p>Leave date: ${searchFilter.endDate}</p>

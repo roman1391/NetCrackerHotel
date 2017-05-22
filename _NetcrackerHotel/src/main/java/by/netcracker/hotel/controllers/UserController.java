@@ -1,6 +1,6 @@
 package by.netcracker.hotel.controllers;
 
-import static by.netcracker.hotel.utils.CloudinaryUtil.saveFileToCloud;
+import static by.netcracker.hotel.utils.CloudinaryUtil.saveAvatarToCloud;
 
 import javax.servlet.ServletContext;
 
@@ -44,9 +44,9 @@ public class UserController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String save(@ModelAttribute("edited_user") User user, @RequestParam("file") MultipartFile file,
-        Model model) {
-        if (!file.getOriginalFilename().isEmpty()) {
-            user.setAvatar(saveFileToCloud(file));
+                       Model model) {
+        if(!file.getOriginalFilename().isEmpty()){
+            user.setAvatar(saveAvatarToCloud(file));
         }
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (!userDetails.getUsername().equals(user.getUsername())) {

@@ -72,7 +72,10 @@
                                 <div class="col-3">
                                     <ul class="order">
                                         <li class="active">
-                                            Order Id: <span>${order.id}</span>
+                                            Order №: <span>${order.id}</span>
+                                        </li>
+                                        <li class="active">
+                                            Hotel name: <span>${order.hotelname}</span>
                                         </li>
                                         <li class="active">
                                             Room №": <span>${order.roomId}</span>
