@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -64,8 +65,8 @@ public class ReviewServiceImpl implements ReviewService {
             if (user.getAuthority().equals(ROLE.ADMIN)) {
                 reviewInfo = ReviewInformation.MODERATE.getReviewInfo();
             } else {
-                reviewInfo = (reviewDAO.checkUsersReview(hotelId, user.getId()) ? ReviewInformation.EXIST.getReviewInfo()
-                    : ReviewInformation.NOT_EXIST.getReviewInfo());
+                reviewInfo = (reviewDAO.checkUsersReview(hotelId, user.getId())
+                    ? ReviewInformation.EXIST.getReviewInfo() : ReviewInformation.NOT_EXIST.getReviewInfo());
             }
         } else {
             reviewInfo = ReviewInformation.EXIST.getReviewInfo();
@@ -91,6 +92,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public boolean update(Review review) {
         try {
             reviewDAO.update(review);

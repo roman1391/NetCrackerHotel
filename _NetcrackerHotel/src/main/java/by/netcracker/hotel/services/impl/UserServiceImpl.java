@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -51,6 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public User addEnabledUser(User user) throws UsernameExistException, EmailExistException {
         if (usernameExist(user.getUsername())) {
             throw new UsernameExistException("Account with username - " + user.getUsername() + " are exist");
@@ -69,6 +71,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<User> getAll() {
         return userDAO.getAll();
     }
@@ -92,6 +95,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void fullUpdate(User user) throws UsernameExistException, EmailExistException {
         User oldUser = userDAO.getByID(user.getId());
         // if (user.getUsername() == null)
@@ -129,6 +133,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void blockUser(User user) {
         user = getUserByUsername(user.getUsername());
         user.setAuthority(ROLE.BLOCKED);
@@ -136,6 +141,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void unblockUser(User user) {
         user = getUserByUsername(user.getUsername());
         user.setAuthority(ROLE.USER);
