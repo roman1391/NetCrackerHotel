@@ -2,8 +2,11 @@
 
 <div class="row list-group-item">
     <div class="col-4">
-        <img src="<c:url value="${hotel.mainPhoto}"/>" class="rounded"
-             alt="${hotel.name}" width="200">
+        <object class="rounded" data="<c:url value="${hotel.mainPhoto}"/>" type="image/jpg"
+                height="200" width="200">
+            <img src="/resources/sorry-image-not-available.png" class="rounded"
+                 alt="${hotel.name}" height="200" width="200">
+        </object>
     </div>
     <div class="col-8">
         <h3>${hotel.name}

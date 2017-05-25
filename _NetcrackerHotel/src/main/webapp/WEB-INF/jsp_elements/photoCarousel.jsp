@@ -10,11 +10,17 @@
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div id="carousel-inner" class="carousel-inner" role="listbox" >
         <div class="carousel-item active">
-            <img class="d-block img-responsive photo"  src="${choosenHotel.mainPhoto}" alt="${choosenHotel.name}">
+            <object class="d-block img-responsive photo" data="${choosenHotel.mainPhoto}" type="image/jpg">
+                <img class="d-block img-responsive photo"
+                     src="/resources/sorry-image-not-available.png" alt="${choosenHotel.name}" height="300">
+            </object>
         </div>
         <c:forEach var="photo"  items="${choosenHotel.photos}">
             <div class="carousel-item">
-                <img class="d-block img-responsive photo" src="${photo}">
+                <object class="d-block img-responsive photo" data="<c:url value="${photo}"/>" type="image/jpg">
+                    <img class="d-block img-responsive photo"
+                         src="/resources/sorry-image-not-available.png" height="300">
+                </object>
             </div>
         </c:forEach>
     </div>
