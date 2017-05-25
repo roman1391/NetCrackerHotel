@@ -42,10 +42,10 @@
 <div id="wrapper">
     <div class="container">
         <sec:authorize access="hasRole('ADMIN')">
-            <a href="${contextPath}/admin/hotel_page/${currentReviews[0].hotelId}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to hotel page </a>
+            <a href="${contextPath}/admin/hotel_page/${choosenHotel.id}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to hotel page </a>
         </sec:authorize>
         <sec:authorize access="!hasRole('ADMIN')">
-            <a href="${contextPath}/hotel_page/${currentReviews[0].hotelId}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to hotel page </a>
+            <a href="${contextPath}/hotel_page/${choosenHotel.id}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to hotel page </a>
         </sec:authorize>
         <c:if test="${fn:length(currentReviews) eq 0}">
             <h1>There is no any review left yet.</h1>

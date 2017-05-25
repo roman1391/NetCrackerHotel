@@ -4,6 +4,14 @@ import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;
 
+/**
+ * Common logger, marks begining and ending for all involved controllers during
+ * program execution
+ * 
+ * @author Roman Rodevich
+ *
+ */
+
 @Component
 public class ApplicationLogger {
 
@@ -11,7 +19,7 @@ public class ApplicationLogger {
 
     public Object controllerLogging(ProceedingJoinPoint joinpoint) {
         long start = System.currentTimeMillis();
-        log.info("method begin: " + joinpoint.getSignature().toShortString());
+        log.info("Controller begin: " + joinpoint.getSignature().toShortString());
         Object output = null;
         try {
             output = joinpoint.proceed();
@@ -20,7 +28,7 @@ public class ApplicationLogger {
         }
 
         long time = System.currentTimeMillis() - start;
-        log.info("method end: " + joinpoint.getSignature().toShortString() + ", time=" + time + " ms");
+        log.info("Controller end: " + joinpoint.getSignature().toShortString() + ", time=" + time + " ms");
         return output;
     }
 

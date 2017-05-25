@@ -19,8 +19,11 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-	<tx:annotation-driven  transaction-manager="transactionManager" />
+
 	<aop:aspectj-autoproxy />
+	
+	<tx:annotation-driven proxy-target-class="true"
+		transaction-manager="transactionManager" />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving
 		up static resources in the ${webappRoot}/resources directory -->
@@ -51,7 +54,6 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
-
 
 	<context:component-scan base-package="by.netcracker.hotel" use-default-filters="false">
 		<context:include-filter expression="org.springframework.stereotype.Controller"
