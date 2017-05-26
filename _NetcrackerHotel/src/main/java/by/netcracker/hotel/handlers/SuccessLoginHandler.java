@@ -12,6 +12,13 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+/**
+ * Redirects to proper page after authentication, depending on users role.
+ * 
+ * @author Roman Rodevich
+ *
+ */
+
 @Component("SuccessLoginHandler")
 public class SuccessLoginHandler implements AuthenticationSuccessHandler {
 

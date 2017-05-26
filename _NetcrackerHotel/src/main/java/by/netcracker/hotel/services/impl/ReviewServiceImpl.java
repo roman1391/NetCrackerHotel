@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import by.netcracker.hotel.dao.ReviewDAO;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
-import by.netcracker.hotel.enums.ReviewInfo;
+import by.netcracker.hotel.enums.ReviewInformation;
 import by.netcracker.hotel.enums.ReviewStatus;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.UserService;
@@ -57,18 +58,18 @@ public class ReviewServiceImpl implements ReviewService {
         String reviewInfo;
         Object info = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (info instanceof String) {
-            reviewInfo = ReviewInfo.FORBIDDEN.getReviewInfo();
+            reviewInfo = ReviewInformation.FORBIDDEN.getReviewInfo();
         } else if (info instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) info;
             User user = (User) userService.getUserByUsername(userDetails.getUsername());
             if (user.getAuthority().equals(ROLE.ADMIN)) {
-                reviewInfo = ReviewInfo.MODERATE.getReviewInfo();
+                reviewInfo = ReviewInformation.MODERATE.getReviewInfo();
             } else {
-                reviewInfo = (reviewDAO.checkUsersReview(hotelId, user.getId()) ? ReviewInfo.EXIST.getReviewInfo()
-                    : ReviewInfo.NOT_EXIST.getReviewInfo());
+                reviewInfo = (reviewDAO.checkUsersReview(hotelId, user.getId())
+                    ? ReviewInformation.EXIST.getReviewInfo() : ReviewInformation.NOT_EXIST.getReviewInfo());
             }
         } else {
-            reviewInfo = ReviewInfo.EXIST.getReviewInfo();
+            reviewInfo = ReviewInformation.EXIST.getReviewInfo();
         }
         return reviewInfo;
     }
@@ -91,6 +92,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public boolean update(Review review) {
         try {
             reviewDAO.update(review);

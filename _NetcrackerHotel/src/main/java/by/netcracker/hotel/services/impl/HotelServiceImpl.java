@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -58,6 +59,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void addHotel(Hotel hotel) {
         hotel.setEnabled(true);
         hotelDAO.add(hotel);
@@ -69,16 +71,19 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void addPhoto(String photo, int hotelID) {
         hotelDAO.addPhoto(photo, hotelID);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void editHotel(Hotel hotel) {
         hotelDAO.update(hotel);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void deletePhoto(String[] photo) {
         for (int i = 1; i < photo.length; i++) {
             int n = photo[i].split("/").length - 1;
