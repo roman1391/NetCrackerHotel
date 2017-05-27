@@ -70,12 +70,6 @@
 	
 	<security:global-method-security  secured-annotations="enabled" pre-post-annotations="enabled" jsr250-annotations="enabled"/>
 	
-<!-- 	<aop:config >
-		<aop:aspect id="log" ref="applicationLogger">
-			<aop:around pointcut="execution(* by.netcracker.hotel..*.*(..))" method="controllerLogging" />
-		</aop:aspect>
-	</aop:config> -->
-	
 	<beans:bean id="UserServiceImpl" class="by.netcracker.hotel.services.impl.UserServiceImpl" />
 	<beans:bean id="HotelServiceImpl" class="by.netcracker.hotel.services.impl.HotelServiceImpl" />
 	<beans:bean id="OrderServiceImpl" class="by.netcracker.hotel.services.impl.OrderServiceImpl" />

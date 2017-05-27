@@ -41,48 +41,44 @@
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <div class="container">
-        <sec:authorize access="hasRole('ADMIN')">
-            <a href="${contextPath}/admin/hotel_page/${choosenHotel.id}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to hotel page </a>
-        </sec:authorize>
-        <sec:authorize access="!hasRole('ADMIN')">
+
             <a href="${contextPath}/hotel_page/${choosenHotel.id}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to hotel page </a>
-        </sec:authorize>
+
         <c:if test="${fn:length(currentReviews) eq 0}">
             <h1>There is no any review left yet.</h1>
         </c:if>
 
-            <c:if test="${fn:length(currentReviews) gt 0}">
-              <c:forEach var="review" items="${currentReviews}">
-                  <div class="rounded border-1">
-                      <div class="row">
-                        <div class="col-3">
-                            <ul>
-                                <li class="item">
-                                    Username: <span>${review.username }</span>
-                                </li>
-                            </ul>
-
-                        </div>
-                        <div class="col-5">
-                            <ul>
-                                <li class="item">
-                                    Date: <span>${review.date}</span>
-                                </li>
-                                <li class="item">
-                                    Rating: <span>${review.rating}</span>
-                                </li>
-                                <li class="item">
-                                    Text: <span>${review.text }</span>
-                                </li>
-                            </ul>
-                        </div>
-                      </div>
+        <c:if test="${fn:length(currentReviews) gt 0}">
+          <c:forEach var="review" items="${currentReviews}">
+              <div class="rounded border-1">
+                  <div class="row">
+                    <div class="col-3">
+                        <ul>
+                            <li class="item">
+                                Username: <span>${review.username }</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-5">
+                        <ul>
+                            <li class="item">
+                                Date: <span>${review.date}</span>
+                            </li>
+                            <li class="item">
+                                Rating: <span>${review.rating}</span>
+                            </li>
+                            <li class="item">
+                                Text: <span>${review.text }</span>
+                            </li>
+                        </ul>
+                    </div>
                   </div>
-              </c:forEach>
-            </c:if>
-        </div>
+              </div>
+            </c:forEach>
+        </c:if>
     </div>
-    <%@include file="../jsp_elements/_footer.jsp" %>
+</div>
+<%@include file="../jsp_elements/_footer.jsp" %>
 <script src="<c:url value="/resources/bootstrap-4.0.0-alpha.6-dist/js/bootstrap.js"/>"></script>
 <script src="<c:url value="/resources/js/hotel.js"/>" type="text/javascript"></script>
 </body>
