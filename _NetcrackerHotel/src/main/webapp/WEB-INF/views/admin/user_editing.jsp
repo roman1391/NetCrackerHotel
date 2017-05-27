@@ -103,11 +103,8 @@
                 <div class="btn-group">
                     <button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
                 </div>
-            </div>
-        </div>
-
-
-
+             </div>
+          </div>
        </div>
     </div>
 </div>

@@ -41,11 +41,9 @@
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <div class="container">
-
-            <a href="${contextPath}/hotel_page/${choosenHotel.id}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to hotel page </a>
-
+        <a href="${contextPath}/hotel_page/${choosenHotel.id}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to hotel page </a>
         <c:if test="${fn:length(currentReviews) eq 0}">
-            <h1>There is no any review left yet.</h1>
+            <h3>There is no any review left yet.</h3>
         </c:if>
 
         <c:if test="${fn:length(currentReviews) gt 0}">

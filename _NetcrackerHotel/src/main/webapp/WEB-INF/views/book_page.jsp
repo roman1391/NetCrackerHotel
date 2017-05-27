@@ -35,7 +35,7 @@
                     <h3>Order page</h3>
                     <c:choose>
                         <c:when test="${message eq null}">
-                            <div style="margin: 50px" class="alert alert-success">
+                            <div style="margin: 10px" class="alert alert-success">
                                 The booking was successful
                             </div>
                             Room №: ${order.roomId }<br>
@@ -43,7 +43,7 @@
                             Last Name: ${order.lastName }<br>
                             Arrival Date: ${order.arrivalDate }<br>
                             Leave Date: ${order.leaveDate }<br>
-                            Total amount: <script>calcAmount(${order.payValue}, ${order.arrivalDate.getTime()}, ${order.leaveDate.getTime()})</script><br>
+                            Total amount:  <script>calcAmount(${order.payValue}, ${order.arrivalDate.getTime()}, ${order.leaveDate.getTime()})</script><br>
                         </c:when>
                         <c:otherwise>
                             <div style="margin: 10px" class="alert alert-danger">
