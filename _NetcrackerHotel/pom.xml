@@ -325,6 +325,21 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sparkjava</groupId>
+			<artifactId>spark-core</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sparkjava</groupId>
+			<artifactId>spark-template-freemarker</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.heroku.sdk</groupId>
+			<artifactId>heroku-jdbc</artifactId>
+			<version>0.1.1</version>
+		</dependency>
 
     </dependencies>
 	<repositories>
@@ -377,6 +392,27 @@
 				<configuration>
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals><goal>copy</goal></goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.github.jsimone</groupId>
+									<artifactId>webapp-runner</artifactId>
+									<version>8.5.11.3</version>
+									<destFileName>webapp-runner.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<testResources>
