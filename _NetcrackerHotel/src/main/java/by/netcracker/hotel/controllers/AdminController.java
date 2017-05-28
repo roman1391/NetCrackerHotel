@@ -63,7 +63,7 @@ public class AdminController {
         }
         try {
             user.setAuthority(ROLE.USER);
-            User added = (User) userService.addEnabledUser(user);
+            userService.addEnabledUser(user);
         } catch (UsernameExistException e) {
             log.info("UsernameExistException in adminController while adding user", e);
             model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
@@ -78,43 +78,21 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/edit_form/{username}", method = RequestMethod.GET)
-    public String getEditForms(@Valid @PathVariable("username") String username, Model model) {
+    public String getEditForms(@PathVariable("username") String username, Model model) {
         User user = userService.getUserByUsername(username);
         model.addAttribute("user", user);
         return "admin/user_editing";
     }
 
-    @RequestMapping(value = "/block_user", method = RequestMethod.POST)
-    public String blockUser(@Valid @ModelAttribute("user") User user, Model model) {
-        userService.blockUser(user);
-        model.addAttribute("users", userService.getAll());
-        return "admin/list_of_users";
-    }
-
-    @RequestMapping(value = "/unblock_user", method = RequestMethod.POST)
-    public String unblockUser(@Valid @ModelAttribute("user") User user, Model model) {
-        userService.unblockUser(user);
-        model.addAttribute("users", userService.getAll());
-        return "admin/pagination/list_of_users";
-    }
-
-    @RequestMapping(value = "/delete_user", method = RequestMethod.POST)
-    public String deleteUser(@Valid @ModelAttribute("user") User user, Model model) {
-        userService.deleteUserByUsername(user.getUsername());
-        model.addAttribute("success", "User - " + user.getUsername() + " was successfully deleted.");
-        return "admin/list_of_users";
-    }
-
     @RequestMapping(value = "/check_review/{id}", method = RequestMethod.GET)
-    public String checkReview(@Valid @PathVariable("id") int id, Model model) {
+    public String checkReview(@PathVariable("id") int id, Model model) {
         Review review = reviewService.getByID(id);
         model.addAttribute("review", review);
         return "admin/check_review";
     }
 
     @RequestMapping(value = "/check_review/{id}", method = RequestMethod.POST)
-    public String checkedReview(@Valid @ModelAttribute("review") Review review, @PathVariable("id") int id,
-        Model model) {
+    public String checkedReview(@ModelAttribute("review") Review review, @PathVariable("id") int id, Model model) {
         reviewService.update(review);
         review = reviewService.getByID(id);
         model.addAttribute("review", review);
@@ -122,7 +100,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/order_page/{id}", method = RequestMethod.GET)
-    public String orderPage(@Valid @PathVariable("id") int id, Model model) {
+    public String orderPage(@PathVariable("id") int id, Model model) {
         Order order = orderService.getByID(id);
         model.addAttribute("order", order);
         model.addAttribute("orderr", context.getBean("order"));
@@ -130,7 +108,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/order_deleted/{id}", method = RequestMethod.POST)
-    public String deleteOrder(@Valid @PathVariable("id") int id, @ModelAttribute("order") Order order, Model model) {
+    public String deleteOrder(@PathVariable("id") int id, @ModelAttribute("order") Order order, Model model) {
         orderService.deleteByOrderId(id);
         return "admin/pagination/list_of_orders";
     }
@@ -155,7 +133,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/hotel_page/{id}", method = RequestMethod.GET)
-    public String hotelPageForAdmin(@Valid @PathVariable("id") int hotelID, Model model) {
+    public String hotelPageForAdmin(@PathVariable("id") int hotelID, Model model) {
         Hotel hotel = hotelService.getByID(hotelID);
         String reviewInfo = reviewService.checkReview(hotelID);
         model.addAttribute("reviewInfo", reviewInfo);

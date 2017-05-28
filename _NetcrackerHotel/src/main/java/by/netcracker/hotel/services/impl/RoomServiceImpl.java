@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -33,6 +34,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void add(Room room) {
         roomDAO.add(room);
     }
@@ -60,6 +62,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteRooms(List<Integer> roomsToDelete) {
         for (int id : roomsToDelete) {
             roomDAO.deleteByID(id);

@@ -14,6 +14,14 @@ import by.netcracker.hotel.entities.User;
 import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.services.UserService;
 
+/**
+ * Sets session attribute currentUser during authentication. It contains all
+ * information about current authenticated user
+ * 
+ * @author Roman Rodevich
+ *
+ */
+
 public class CheckAuthorityInterceptor extends HandlerInterceptorAdapter {
 
     private User user;

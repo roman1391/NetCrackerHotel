@@ -2,8 +2,6 @@ package by.netcracker.hotel.controllers;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +39,8 @@ public class HotelController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String hotelPage(@Valid @PathVariable("id") int hotelID,
-        @ModelAttribute("searchFilter") SearchFilter searchFilter, Model model) {
+    public String hotelPage(@PathVariable("id") int hotelID, @ModelAttribute("searchFilter") SearchFilter searchFilter,
+        Model model) {
         Hotel hotel = hotelService.getByID(hotelID);
         String reviewInfo = reviewService.checkReview(hotelID);
         model.addAttribute("reviewInfo", reviewInfo);
@@ -55,8 +53,8 @@ public class HotelController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String hotelAfterReviewPage(@Valid @PathVariable("id") int hotelID,
-        @Valid @ModelAttribute("review") Review review, Model model) {
+    public String hotelAfterReviewPage(@PathVariable("id") int hotelID, @ModelAttribute("review") Review review,
+        Model model) {
         reviewService.addReview(review);
         Hotel hotel = hotelService.getByID(hotelID);
         String reviewInfo = reviewService.checkReview(hotelID);
@@ -70,17 +68,18 @@ public class HotelController {
     }
 
     @RequestMapping(value = "/review_page", method = RequestMethod.POST)
-    public String feedbackPage(@Valid @ModelAttribute("choosenHotel") Hotel hotel,
-        @Valid @ModelAttribute("review") Review review, Model model) {
+    public String feedbackPage(@ModelAttribute("choosenHotel") Hotel hotel, @ModelAttribute("review") Review review,
+        Model model) {
         hotel = hotelService.getByID(hotel.getId());
         model.addAttribute("choosenHotel", hotel);
         return "review_page";
     }
 
     @RequestMapping(value = "/all_reviews", method = RequestMethod.POST)
-    public String seeReviews(@Valid @ModelAttribute("choosenHotel") Hotel hotel, Model model) {
+    public String seeReviews(@ModelAttribute("choosenHotel") Hotel hotel, Model model) {
         List<Review> reviews = reviewService.getApprovedByHotelId(hotel.getId());
         model.addAttribute("currentReviews", reviews);
+        model.addAttribute("choosenHotel", hotel);
         return "hotel_reviews_page";
     }
 }
