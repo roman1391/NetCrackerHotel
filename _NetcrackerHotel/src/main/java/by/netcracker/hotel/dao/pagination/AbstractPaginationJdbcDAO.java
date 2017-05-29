@@ -52,10 +52,7 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
     public String buildPageQuery(P pparam) {
         StringBuffer query = new StringBuffer();
         query.append(SqlQuery.MAKE_PAGE.getQuery()).append(buildFullQuery(pparam, mapFilters))
-            .append(" ) nn ) aaa limit ")
-            .append(pparam.getResultIndex())
-            .append(" ,")
-            .append(pageNum)
+            .append(" ) nn ) aaa limit ").append(pparam.getResultIndex()).append(" ,").append(pageNum)
             .append(" ) yyy on ooo.entity_id = yyy.entity_id order by num ");
         return query.toString();
     }

@@ -71,42 +71,26 @@
                             <form:input disabled="true" path="lastName" id="lastName" value="${user.lastName}"
                                         class="editable form-control"/>
                         </div>
-                        <c:choose>
-                            <c:when test="${currentUser.username eq user.username }">
-                                <div class="form-group">
-                                    <form:label path="authority" >Authority:</form:label>
-                                    <form:select disabled="true" path="authority" id="authority" class="form-control">
-                                        <form:option value="ADMIN" label="Admin"/>
-                                        <form:option value="USER" label="User"/>
-                                        <form:option value="BLOCKED" label="Blocked"/>
-                                    </form:select>
-                                </div>
-                                <div class="form-group">
-                                    <form:label path="enabled" >State:</form:label>
-                                    <form:select disabled="true" path="enabled" id="enabled" class="form-control" >
-                                        <form:option value="true" label="Enabled"/>
-                                        <form:option value="false" label="Deactivated"/>
-                                    </form:select>
-                                </div>
-                            </c:when>
-                            <c:when test="${currentUser.username ne user.username }">
-                                <div class="form-group">
-                                    <form:label path="authority" >Authority:</form:label>
-                                    <form:select disabled="true" path="authority" id="authority" class="editable form-control">
-                                        <form:option value="ADMIN" label="Admin"/>
-                                        <form:option value="USER" label="User"/>
-                                        <form:option value="BLOCKED" label="Blocked"/>
-                                    </form:select>
-                                </div>
-                                <div class="form-group">
-                                    <form:label path="enabled" >State:</form:label>
-                                    <form:select disabled="true" path="enabled" id="enabled" class="editable form-control">
-                                        <form:option value="true" label="Enabled"/>
-                                        <form:option value="false" label="Deactivated"/>
-                                    </form:select>
-                                </div>
-                            </c:when>
-                        </c:choose>
+                        <div class="form-group">
+                            <form:label path="authority" >Authority:</form:label>
+                            <form:select disabled="true" path="authority" id="authority" class="editable form-control">
+                                <form:option value="ADMIN" label="Admin"/>
+                                <c:if test="${currentUser.username ne user.username }">
+                                <form:option value="USER" label="User"/>
+                                <form:option value="BLOCKED" label="Blocked"/>
+                                </c:if>
+                                        
+                            </form:select>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="enabled" >State:</form:label>
+                            <form:select disabled="true" path="enabled" id="enabled" class="editable form-control" >
+                                <form:option value="true" label="Enabled"/>
+                                <c:if test="${currentUser.username ne user.username }">
+                                <form:option value="false" label="Deactivated"/>
+                                </c:if>
+                            </form:select>
+                        </div>
 
                     </div>
                     <div class="form-group">
@@ -119,11 +103,8 @@
                 <div class="btn-group">
                     <button id ="edit-btn" onclick="onEditClick()" class="btn btn-primary">Edit</button>
                 </div>
-            </div>
-        </div>
-
-
-
+             </div>
+          </div>
        </div>
     </div>
 </div>
