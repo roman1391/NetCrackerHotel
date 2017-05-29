@@ -11,12 +11,16 @@ import java.util.Map;
  */
 public class CloudinaryUtil {
     private static final int MAX_SIZE_PHOTO = 400;
-    public static String UPLOADED_FOLDER;
+    private static String uploadedFolder;
+
+    public static void setUploadedFolder(String uploadedFolder){
+        CloudinaryUtil.uploadedFolder = uploadedFolder;
+    }
 
     public static String saveAvatarToCloud(MultipartFile file) {
         if (!file.isEmpty()) {
             try {
-                File convFile = new File(UPLOADED_FOLDER + "img");
+                File convFile = new File(uploadedFolder + "img");
                 file.transferTo(convFile);
                 String nameForPhoto = CloudinaryConnector.generateNameForPhoto();
 
@@ -31,7 +35,7 @@ public class CloudinaryUtil {
     }
 
     public static void savePhotoInCloudinary(MultipartFile file, String photoName, int size) {
-        File convFile = new File(UPLOADED_FOLDER + "img");
+        File convFile = new File(uploadedFolder + "img");
         try {
             file.transferTo(convFile);
             Map uploadResult = CloudinaryConnector.getCloudinary().uploader().upload(convFile,

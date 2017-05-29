@@ -50,9 +50,13 @@
                       <table class="searchtable">
                         <tr>
                             <td style="width:80px;">Hotelname:</td>
-                            <td style="width:160px;"><form:input path="hotelname" cssStyle="width:150px;"/></td>
+                            <td style="width:160px;"><form:select path="hotelname" class="form-control" id="selectHotel" multiple="multiple" cssStyle="width:150px;">
+                                <form:options items="${hotels}"/>
+                            </form:select></td>
                             <td style="width:80px;">Username:</td>
-                            <td style="width:160px;"><form:input path="username" cssStyle="width:150px;"/></td>
+                            <td style="width:160px;"><form:select path="username" class="form-control" id="selectUser" multiple="multiple" cssStyle="width:150px;">
+                                <form:options items="${usernames}"/>
+                            </form:select></td>
                             <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button" >Search</form:button></span></td>
                             <td style="width:75px;"><span class="button"><form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
                         </tr>
@@ -74,6 +78,9 @@
     </div>
     <jsp:include page="/WEB-INF/jsp_elements/_footer.jsp"></jsp:include>
 </div>
+    <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+    <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
 </body>
 </html>
 
@@ -85,5 +92,8 @@ function clicked(e)
 
 $('#clearButton').click(function() {
     $("#selectUser").val(null).trigger("change");
+});
+$('#clearButton').click(function () {
+    $("#selectHotel").val(null).trigger("change");
 });
 </script>

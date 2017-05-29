@@ -7,7 +7,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<title>User page</title>
+<title>User editing page</title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 <link
 	href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />"
@@ -30,12 +30,12 @@
 <div id="wrapper">
     <div class="container-fluid">
         <c:if test="${message!=null}">
-            <div style="margin: 50px" class="alert alert-success" >
+            <div style="margin: 10px" class="alert alert-success" >
                     ${message}
             </div>
         </c:if>
         <c:if test="${error!=null}">
-            <div style="margin: 50px" class="alert alert-danger" >
+            <div style="margin: 10px" class="alert alert-danger" >
                     ${error}
             </div>
         </c:if>
@@ -75,11 +75,26 @@
                             <form:label path="authority" >Authority:</form:label>
                             <form:select disabled="true" path="authority" id="authority" class="editable form-control">
                                 <form:option value="ADMIN" label="Admin"/>
+                                <c:choose>
+                                <c:when test="${user.authority eq 'USER' or user.authority eq 'BLOCKED'}">
+									<form:option value="USER" label="User"/>
+                                </c:when>
+                                <c:when test="${user.authority eq 'VKONTAKTE_USER'}">
+									<form:option value="VKONTAKTE_USER" label="Vkontakte_user"/>
+                                </c:when>
+                                <c:when test="${user.authority eq 'FACEBOOK_USER'}">
+									<form:option value="FACEBOOK_USER" label="Facebook_user"/>
+                                </c:when>
+                                <c:when test="${user.authority eq 'TWITTER_USER'}">
+									<form:option value="TWITTER_USER" label="Twitter_user"/>
+                                </c:when>
+                                </c:choose>
                                 <c:if test="${currentUser.username ne user.username }">
-                                <form:option value="USER" label="User"/>
-                                <form:option value="BLOCKED" label="Blocked"/>
-                                </c:if>
-                                        
+                                	<form:option value="BLOCKED" label="Blocked"/>
+                                	<c:if test="${user.authority eq 'ADMIN'}">
+                                		<form:option value="USER" label="User"/>
+                                	</c:if>  
+                                </c:if>                
                             </form:select>
                         </div>
                         <div class="form-group">

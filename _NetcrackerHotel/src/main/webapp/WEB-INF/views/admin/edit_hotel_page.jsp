@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
-    <title>Hotel page</title>
+    <title>Hotel editing page</title>
     <link href="<c:url value="/resources/css/hotel.css" />" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFgpUSSiedFLKSDnk8J186A52ZJ2UVswk"></script>
 </head>

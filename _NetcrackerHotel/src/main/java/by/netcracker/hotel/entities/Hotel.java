@@ -122,7 +122,7 @@ public class Hotel {
 
     public void setMainPhoto(String mainPhoto) {
         this.mainPhoto = CloudinaryConnector.getCloudinary().url().format("jpg")
-            .transformation(new Transformation().width(PHOTO_WIDTH).height(PHOTO_HEIGHT).crop("fit"))
+            .transformation(new Transformation().width(PHOTO_WIDTH).height(PHOTO_HEIGHT).crop("fill"))
             .generate(mainPhoto);
     }
 

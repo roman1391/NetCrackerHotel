@@ -10,9 +10,9 @@
                 <div class="row list-group-item">
                     <div class="col-4">
                         <object class="rounded" data="<c:url value="${hotel.key.mainPhoto}"/>" type="image/jpg"
-                                height="200" width="200">
+                                height="150" width="300">
                             <img src="/resources/sorry-image-not-available.png" class="rounded"
-                                 alt="${hotel.key.name}" width="200" height="200" >
+                                 alt="${hotel.key.name}" width="300" height="200" >
                         </object>
                     </div>
                     <div class="col-8">
