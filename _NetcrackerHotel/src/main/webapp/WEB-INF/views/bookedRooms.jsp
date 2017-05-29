@@ -31,6 +31,8 @@
     <style>
         .rounded{
             background: #F7F6ED;
+            margin: 10px;
+            border-radius: 10px;
         }
         .rounded ul{
             font-size: x-large;
@@ -66,8 +68,8 @@
                             </div>
                         </c:when>
                     </c:choose>
-                    <div class="rounded">
-                        <c:forEach items="${orders}" var="order" varStatus="loop" >
+                    <c:forEach items="${orders}" var="order" varStatus="loop" >
+                         <div class="rounded">
                             <div class="row">
                                 <div class="col-3">
                                     <ul class="order">
@@ -123,9 +125,8 @@
                                     </div>
                                 </div>
                             </div>
-
+                         </div>
                         </c:forEach>
-                    </div>
                 </div>
             </div>
         </div>

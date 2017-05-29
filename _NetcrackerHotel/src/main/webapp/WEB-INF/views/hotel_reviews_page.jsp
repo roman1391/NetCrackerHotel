@@ -18,6 +18,7 @@
     }
     .rounded{
         background: #F7F6ED;
+        margin: 10px;
     }
     .rounded ul{
         font-size: x-large;

@@ -46,7 +46,8 @@
 
 	<beans:bean id="signinController"
 				class= "org.springframework.social.connect.web.ProviderSignInController" >
-		<beans:property name="applicationUrl" value="http://localhost:8080" />
+		<beans:property name="applicationUrl" value="http://localhost:8080"/>
+		<!--https://netcrackerhotel.herokuapp.com/-->
 		<beans:property name="signInUrl" value="/" />
 	</beans:bean>
 	
