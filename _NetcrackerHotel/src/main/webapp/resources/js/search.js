@@ -40,6 +40,7 @@ $(document).ready(function () {
     $("#selectUser").select2({
         placeholder: 'Username',
         minimumInputLength: 1,
+        maximumSelectionLength: 1,
         tags: true
     });
 });
@@ -48,6 +49,7 @@ $(document).ready(function () {
     $("#selectHotel").select2({
         placeholder: 'Hotel',
         minimumInputLength: 1,
+        maximumSelectionLength: 1,
         tags: true
     });
 });

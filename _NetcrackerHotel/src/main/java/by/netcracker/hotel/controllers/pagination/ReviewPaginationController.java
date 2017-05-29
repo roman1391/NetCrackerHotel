@@ -2,6 +2,8 @@ package by.netcracker.hotel.controllers.pagination;
 
 import java.util.Map;
 
+import by.netcracker.hotel.services.HotelService;
+import by.netcracker.hotel.services.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ public class ReviewPaginationController extends PaginationControllerAbstract<Rev
     private static Logger log = Logger.getLogger(ReviewPaginationController.class);
 
     private ReviewPaginationService reviewPaginationService;
+    private HotelService hotelService;
+    private UserService userService;
 
     public ReviewPaginationController() {
         setOptionWidth(750);
@@ -33,15 +37,20 @@ public class ReviewPaginationController extends PaginationControllerAbstract<Rev
     }
 
     @Autowired
-    public void setPaginationService(ReviewPaginationService reviewPaginationService) {
+    public void setPaginationService(ReviewPaginationService reviewPaginationService, HotelService hotelService,
+                                     UserService userService) {
         super.setPaginationService(reviewPaginationService);
         this.reviewPaginationService = reviewPaginationService;
+        this.hotelService = hotelService;
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/list_of_reviews", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineJsp(@ModelAttribute(PPARAM) ReviewSearchParam pparam, Model model) throws Exception {
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
+        model.addAttribute("hotels", hotelService.getHotelNames());
+        model.addAttribute("usernames", userService.getUsernames());
         return "admin/pagination/list_of_reviews";
     }
 

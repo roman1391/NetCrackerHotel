@@ -2,6 +2,8 @@ package by.netcracker.hotel.controllers.pagination;
 
 import java.util.Map;
 
+import by.netcracker.hotel.services.HotelService;
+import by.netcracker.hotel.services.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ public class OrderPaginationController extends PaginationControllerAbstract<Orde
 
     private OrderPaginationService orderPaginationService;
     private OrderService orderService;
+    private HotelService hotelService;
+    private UserService userService;
 
     public OrderPaginationController() {
         setOptionWidth(750);
@@ -35,16 +39,21 @@ public class OrderPaginationController extends PaginationControllerAbstract<Orde
     }
 
     @Autowired
-    public void setPaginationService(OrderPaginationService orderPaginationService, OrderService orderService) {
+    public void setPaginationService(OrderPaginationService orderPaginationService, OrderService orderService,
+                                     HotelService hotelService, UserService userService) {
         super.setPaginationService(orderPaginationService);
         this.orderPaginationService = orderPaginationService;
         this.orderService = orderService;
+        this.hotelService = hotelService;
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/list_of_orders", method = { RequestMethod.GET, RequestMethod.POST })
     public String defineJsp(@ModelAttribute(PPARAM) OrderSearchParam pparam, Model model) throws Exception {
         Map<String, Object> map = assignModel(pparam, null, false);
         model.addAllAttributes(map);
+        model.addAttribute("hotels", hotelService.getHotelNames());
+        model.addAttribute("usernames", userService.getUsernames());
         return "admin/pagination/list_of_orders";
     }
 
