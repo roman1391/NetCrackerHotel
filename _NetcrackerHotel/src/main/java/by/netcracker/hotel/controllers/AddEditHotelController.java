@@ -36,7 +36,7 @@ public class AddEditHotelController {
     private final HotelService hotelService;
     private final RoomService roomService;
 
-    private static String UPLOADED_FOLDER;
+    private static String uploadedFolder;
     private final ServletContext context;
     private final ReviewService reviewService;
 
@@ -46,7 +46,8 @@ public class AddEditHotelController {
         this.context = context;
         this.roomService = roomService;
         this.reviewService = reviewService;
-        UPLOADED_FOLDER = this.context.getRealPath("/resources/img/");
+        uploadedFolder = this.context.getRealPath("/resources/img/");
+        CloudinaryUtil.setUploadedFolder(uploadedFolder);
         this.hotelService = hotelService;
     }
 

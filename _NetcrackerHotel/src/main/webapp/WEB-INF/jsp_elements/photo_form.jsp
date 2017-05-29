@@ -16,7 +16,11 @@
                         <label>
                             <input type="checkbox" name="photoToDelete" value=${photo}/>
                             <a href="${photo}">
-                                <img src="${photo}" style="width:100%">
+                                <object class="rounded" data="<c:url value="${photo}"/>" type="image/jpg"
+                                        style = "width: 100%">
+                                    <img src="/resources/sorry-image-not-available.png" class="rounded"
+                                         alt="${photo}" width="200" height="100" >
+                                </object>
                             </a>
                         </label>
                     </div>

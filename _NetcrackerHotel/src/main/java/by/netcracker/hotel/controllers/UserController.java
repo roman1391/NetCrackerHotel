@@ -36,7 +36,7 @@ public class UserController {
 
     @Autowired
     public UserController(ServletContext context, ApplicationEventPublisher eventPublisher) {
-        CloudinaryUtil.UPLOADED_FOLDER = context.getRealPath("/resources/img/");
+        CloudinaryUtil.setUploadedFolder(context.getRealPath("/resources/img/"));
     }
 
     @Autowired
