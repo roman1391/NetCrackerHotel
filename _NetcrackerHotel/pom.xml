@@ -290,11 +290,11 @@
 			<version>1.9.1</version>
 		</dependency>
 		
-		<dependency>
+ 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>3.1</version>
-		</dependency>
+		</dependency> 
 
 		<!-- Pagination -->
 		<dependency>
