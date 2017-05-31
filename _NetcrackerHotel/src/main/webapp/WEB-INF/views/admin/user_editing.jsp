@@ -51,8 +51,8 @@
                 <form:form id="updateForm" action="update" method="post" modelAttribute="user"
                            enctype="multipart/form-data" >
                     <div class="d-inline-block form-group">
-                    <c:if test="${user.authority eq 'ADMIN' || user.authority eq 'USER' || user.authority eq 'BLOCKED' }">
-                        <div class="form-group">
+                    	<c:if test="${user.authority eq 'ADMIN' || user.authority eq 'USER' || user.authority eq 'BLOCKED' }">
+                    	<div class="form-group">
                             <form:label path="email" >Email:</form:label>
                             <form:input disabled="true" path="email" id="email" value="${user.email}"
                                         class="editable form-control"/>
@@ -62,7 +62,8 @@
                             <form:input disabled="true" path="username" id="username" value="${user.username}"
                                         class="editable form-control" />
                         </div>
-                        </c:if>
+                    	</c:if>
+                    	
                         <div class="form-group">
                             <form:label path="firstName" >First name:</form:label>
                             <form:input disabled="true" path="firstName" id="firstName" value="${user.firstName}"
@@ -99,6 +100,14 @@
                                 </c:if>
                             </form:select>
                         </div>
+                        <c:if test="${user.authority eq 'VKONTAKTE_USER' || user.authority eq 'FACEBOOK_USER' || user.authority eq 'TWITTER_USER' }">
+                    		<form:hidden disabled="true" path="email" id="email" value="${user.email}"
+                                        class="editable form-control"/>
+                    		<form:hidden disabled="true" path="username" id="username" value="${user.username}"
+                                        class="editable form-control" />
+                            <form:hidden disabled="true"  path="authority" id="authority" value="${user.authority}"
+                                        class="editable form-control" />                 
+                    	</c:if>
 
                     </div>
                     <div class="form-group">
