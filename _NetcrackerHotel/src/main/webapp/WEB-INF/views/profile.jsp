@@ -59,6 +59,18 @@
                                     class="editable form-control" />
                     </div>
                 </sec:authorize>
+                <sec:authorize access="!hasAnyRole('USER','ADMIN')" >
+                    <div class="form-group">
+                        <form:label path="email" >Email:</form:label>
+                        <form:input disabled="true" path="email" id="email" value="${currentUser.email}"
+                                    class=" form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <form:label path="username"  >Username:</form:label>
+                        <form:input disabled="true" path="username" id="username" value="${currentUser.username}"
+                                    class=" form-control" />
+                    </div>
+                </sec:authorize>
                 <div class="form-group">
                     <form:label path="firstName" >First name:</form:label>
                     <form:input disabled="true" path="firstName" id="firstName" value="${currentUser.firstName}"
