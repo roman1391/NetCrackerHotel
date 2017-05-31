@@ -94,6 +94,7 @@ public class UserServiceImpl implements UserService {
         return userDAO.getByID(id);
     }
 
+    // updating of users by admin
     @Override
     @PreAuthorize("hasRole('ADMIN')")
     public void fullUpdate(User user) throws UsernameExistException, EmailExistException {

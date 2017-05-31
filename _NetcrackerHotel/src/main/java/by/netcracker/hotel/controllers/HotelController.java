@@ -52,8 +52,16 @@ public class HotelController {
         return "hotel_page";
     }
 
+    @RequestMapping(value = "/review_page", method = RequestMethod.GET)
+    public String reviewForm(@ModelAttribute("choosenHotel") Hotel hotel, @ModelAttribute("review") Review review,
+        Model model) {
+        hotel = hotelService.getByID(hotel.getId());
+        model.addAttribute("choosenHotel", hotel);
+        return "review_page";
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String hotelAfterReviewPage(@PathVariable("id") int hotelID, @ModelAttribute("review") Review review,
+    public String postingReviewAndGetHotelPage(@PathVariable("id") int hotelID, @ModelAttribute("review") Review review,
         Model model) {
         reviewService.addReview(review);
         Hotel hotel = hotelService.getByID(hotelID);
@@ -65,14 +73,6 @@ public class HotelController {
         model.addAttribute("order", context.getBean("order"));
         model.addAttribute("success", "Thank you! The review will be added after approving by administrator");
         return "hotel_page";
-    }
-
-    @RequestMapping(value = "/review_page", method = RequestMethod.POST)
-    public String feedbackPage(@ModelAttribute("choosenHotel") Hotel hotel, @ModelAttribute("review") Review review,
-        Model model) {
-        hotel = hotelService.getByID(hotel.getId());
-        model.addAttribute("choosenHotel", hotel);
-        return "review_page";
     }
 
     @RequestMapping(value = "/all_reviews", method = RequestMethod.POST)

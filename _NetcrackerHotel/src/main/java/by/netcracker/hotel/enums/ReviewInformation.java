@@ -1,13 +1,13 @@
 package by.netcracker.hotel.enums;
 
 /**
- * ReviewInformation defines possible actions user can do about review.
+ * ReviewInformation defines possibility to leave review by user.
  * 
  * @author Roman Rodevich
  *
  */
 public enum ReviewInformation {
-    EXIST("exist"), NOT_EXIST("notExist"), FORBIDDEN("forbidden"), MODERATE("moderate");
+    EXIST("exist"), NOT_EXIST("notExist"), FORBIDDEN("forbidden");
 
     private String reviewInfo;
 
