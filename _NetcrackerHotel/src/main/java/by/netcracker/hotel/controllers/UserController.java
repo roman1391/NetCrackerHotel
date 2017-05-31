@@ -44,8 +44,8 @@ public class UserController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String save(@ModelAttribute("edited_user") User user, @RequestParam("file") MultipartFile file,
-                       Model model) {
-        if(!file.getOriginalFilename().isEmpty()){
+        Model model) {
+        if (!file.getOriginalFilename().isEmpty()) {
             user.setAvatar(saveAvatarToCloud(file));
         }
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -53,11 +53,11 @@ public class UserController {
             try {
                 userService.profileUpdate(user);
             } catch (UsernameExistException e) {
-                log.info("UsernameExistException in userController while updating user", e);
+                log.info("UsernameExistException in userController while updating user");
                 model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
                 return "profile";
             } catch (EmailExistException e) {
-                log.info("EmailExistException in userController while updating user", e);
+                log.info("EmailExistException in userController while updating user");
                 model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
                 return "profile";
             }

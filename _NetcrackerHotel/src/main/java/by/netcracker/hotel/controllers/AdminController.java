@@ -65,11 +65,11 @@ public class AdminController {
             user.setAuthority(ROLE.USER);
             userService.addEnabledUser(user);
         } catch (UsernameExistException e) {
-            log.info("UsernameExistException in adminController while adding user", e);
+            log.info("UsernameExistException in adminController while adding user");
             model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
             return "add_user";
         } catch (EmailExistException e) {
-            log.info("EmailExistException in adminController while adding user", e);
+            log.info("EmailExistException in adminController while adding user");
             model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
             return "add_user";
         }
@@ -118,11 +118,11 @@ public class AdminController {
         try {
             userService.fullUpdate(user);
         } catch (UsernameExistException e) {
-            log.info("UsernameExistException in adminController while saving user", e);
+            log.info("UsernameExistException in adminController while saving user");
             model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
             return "admin/user_editing";
         } catch (EmailExistException e) {
-            log.info("EmailExistException in adminController while saving user", e);
+            log.info("EmailExistException in adminController while saving user");
             model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
             return "admin/user_editing";
         } finally {

@@ -64,7 +64,7 @@ public class VerificationTokenDAOImpl extends JdbcDaoSupport implements Verifica
             return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new VerificationTokenMapper());
         } catch (EmptyResultDataAccessException e) {
-            log.warn("Exception in verificationTokenDAO while getting by id", e);
+            log.info("Exception in verificationTokenDAO while getting by id");
             return null;
         }
     }
@@ -85,7 +85,7 @@ public class VerificationTokenDAOImpl extends JdbcDaoSupport implements Verifica
                 new VerificationTokenMapper());
             return verificationToken;
         } catch (EmptyResultDataAccessException e) {
-            log.warn("EmptyResultDataAccessException in verificationTokenDAO while getting by token", e);
+            log.info("EmptyResultDataAccessException in verificationTokenDAO while getting by token");
             return null;
         }
     }
@@ -98,7 +98,7 @@ public class VerificationTokenDAOImpl extends JdbcDaoSupport implements Verifica
                 new VerificationTokenMapper());
             return verificationToken;
         } catch (EmptyResultDataAccessException e) {
-            log.warn("EmptyResultDataAccessException in verificationTokenDAO while getting by user id", e);
+            log.info("EmptyResultDataAccessException in verificationTokenDAO while getting by user id");
             return null;
         }
     }

@@ -99,7 +99,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
                 return true;
             }
         } catch (Exception e) {
-            log.warn("Exception in hotelDAO while updating", e);
+            log.info("Exception in hotelDAO while updating");
             return false;
         }
     }
@@ -111,7 +111,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
             hotel = getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new HotelMapper());
         } catch (EmptyResultDataAccessException e) {
-            log.warn("Exception in hotelDAO while getting by id", e);
+            log.info("Exception in hotelDAO while getting by id");
         }
         return hotel;
     }
@@ -151,7 +151,7 @@ public class HotelDAOImpl extends JdbcDaoSupport implements HotelDAO {
             return (Hotel) getJdbcTemplate().queryForObject(SqlQuery.GET_BY.getQuery(),
                 new Object[] { ColumnName.HOTEL_NAME, name }, new HotelMapper());
         } catch (EmptyResultDataAccessException e) {
-            log.warn("EmptyResultDataAccessException in hotelDAO while getting by name", e);
+            log.info("EmptyResultDataAccessException in hotelDAO while getting by name");
             return null;
         }
     }

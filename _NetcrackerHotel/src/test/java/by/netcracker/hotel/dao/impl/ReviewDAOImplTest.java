@@ -28,7 +28,7 @@ public class ReviewDAOImplTest {
 
     @Autowired
     private ReviewDAOImpl reviewDAO;
-    private List<Review> list;
+    private List<Review> reviewList;
     private Review testReview;
     Review retrievedReview;
     Review retrievedReview2;
@@ -52,15 +52,14 @@ public class ReviewDAOImplTest {
     // adding testReview to db and getting back to new variable
     private Review getAddedReview(Review review) {
         reviewDAO.add(review);
-        list = reviewDAO.getByHotelId(review.getHotelId());
-        Review retrievedReview = list.get(0);
-        return retrievedReview;
+        reviewList = reviewDAO.getByHotelId(review.getHotelId());
+        return reviewList.get(0);
     }
 
     @Test
     public void addTest() {
-        list = reviewDAO.getByHotelId(testReview.getHotelId());
-        assertTrue("database contains testing review", list.size() == 0);
+        reviewList = reviewDAO.getByHotelId(testReview.getHotelId());
+        assertTrue("database contains testing review", reviewList.size() == 0);
         retrievedReview = getAddedReview(testReview);
         testReview.setId(retrievedReview.getId()); // testReview doesn't
                                                    // contains id by default
@@ -78,26 +77,14 @@ public class ReviewDAOImplTest {
     }
 
     @Test
-    public void checkUsersReviewTest_Exist_Case() {
+    public void checkUsersReviewTest() {
         retrievedReview = getAddedReview(testReview);
-        boolean reviewExist = reviewDAO.checkUsersReview(testReview.getHotelId(), testReview.getUserId());
+        boolean reviewExist = false;
+        reviewExist = reviewDAO.checkUsersReview(testReview.getHotelId(), testReview.getUserId());
         assertTrue(reviewExist);
-    }
-
-    @Test
-    public void checkUsersReviewTest_NotExist_Case() {
-        retrievedReview = getAddedReview(testReview);
         reviewDAO.deleteByID(retrievedReview.getId());
-        boolean reviewExist = reviewDAO.checkUsersReview(testReview.getHotelId(), testReview.getUserId());
+        reviewExist = reviewDAO.checkUsersReview(testReview.getHotelId(), testReview.getUserId());
         assertFalse(reviewExist);
-    }
-
-    // @Test
-    public void checkUsersReviewTest_ExistInException_Case() {
-        reviewDAO.add(testReview);
-        retrievedReview = getAddedReview(testReview);
-        boolean reviewExist = reviewDAO.checkUsersReview(testReview.getHotelId(), testReview.getUserId());
-        assertTrue(reviewExist);
     }
 
     @Test
