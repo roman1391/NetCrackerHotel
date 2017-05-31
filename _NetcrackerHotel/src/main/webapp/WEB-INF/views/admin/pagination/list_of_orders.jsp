@@ -15,7 +15,7 @@
           rel="stylesheet" media="screen, projection"/>
     <link href="<c:url value= "/resources/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css" />" rel="stylesheet">
-    <link href="<c:url value="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>"
+    <link href="<c:url value="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>"
           rel="stylesheet"/>
     <link href="<c:url value="/resources/css/search.css" />" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
@@ -79,7 +79,7 @@
     <jsp:include page="/WEB-INF/jsp_elements/_footer.jsp"></jsp:include>
 </div>
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <script src="<c:url value="/resources/js/search.js"/>" type="text/javascript"></script>
 </body>
 </html>
