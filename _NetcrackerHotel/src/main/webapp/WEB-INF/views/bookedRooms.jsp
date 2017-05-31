@@ -32,7 +32,7 @@
         .rounded{
             background: #F7F6ED;
             margin: 10px;
-            border-radius: 10px;
+            border-radius: 10px ;
         }
         .rounded ul{
             font-size: x-large;

@@ -23,36 +23,64 @@
             document.write((difference * payValue) / (24 * 60 * 60 * 1000));
         }
     </script>
+    <style>
+        .order{
+            font-size: x-large;
+            color: #1d1e1f;
+            list-style: none;
+        }
+        .order span{
+            color: #2a62bc;
+        }
+    </style>
 </head>
 
 <body>
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
-    <div class="container">
-        <div class="row row-offcanvas row-offcanvas-left">
-            <div class="col-xs-12 col-sm-9">
-                <div class="jumbotron">
-                    <h3>Order page</h3>
-                    <c:choose>
-                        <c:when test="${message eq null}">
-                            <div style="margin: 10px" class="alert alert-success">
+    <div class="row">
+        <div style="margin: auto" class="col-8">
+            <h3>Order page</h3>
+            <c:choose>
+                <c:when test="${message eq null}">
+                     <div style="margin: 10px" class="alert alert-success">
                                 The booking was successful
-                            </div>
-                            Room №: ${order.roomId }<br>
-                            First Name: ${order.firstName }<br>
-                            Last Name: ${order.lastName }<br>
-                            Arrival Date: ${order.arrivalDate }<br>
-                            Leave Date: ${order.leaveDate }<br>
-                            Total amount:  <script>calcAmount(${order.payValue}, ${order.arrivalDate.getTime()}, ${order.leaveDate.getTime()})</script><br>
-                        </c:when>
-                        <c:otherwise>
-                            <div style="margin: 10px" class="alert alert-danger">
-                                This time is not available for booking
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
-            </div>
+                     </div>
+                     <div class="row">
+                          <div class="col-4">
+                              <ul class="order">
+                                  <li class="active">
+                                      Room №: <span>${order.roomId }</span>
+                                  </li>
+                                  <li class="active">
+                                      First Name:<span> ${order.firstName }</span>
+                                  </li>
+                                  <li class="active">
+                                      Last Name: <span>${order.lastName }</span>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="col-8">
+                             <ul class="order">
+                                 <li class="active">
+                                     Arrival Date: <span>${order.arrivalDate }</span>
+                                 </li>
+                                 <li class="active">
+                                     Leave Date:<span> ${order.leaveDate }</span>
+                                 </li>
+                                 <li class="active">
+                                     Total amount: <span><script>calcAmount(${order.payValue}, ${order.arrivalDate.getTime()}, ${order.leaveDate.getTime()})</script></span>
+                                 </li>
+                             </ul>
+                          </div>
+                     </div>
+                </c:when>
+                <c:otherwise>
+                    <div style="margin: 10px" class="alert alert-danger">
+                        This time is not available for booking
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
     <%@include file="../jsp_elements/_footer.jsp" %>

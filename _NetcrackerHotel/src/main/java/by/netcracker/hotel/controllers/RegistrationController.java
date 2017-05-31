@@ -55,8 +55,8 @@ public class RegistrationController {
             String appUrl = request.getContextPath();
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
         } catch (UsernameExistException e) {
-            log.info("UsernameExistException in registrationController while registration", e);
             model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
+            log.info("UsernameExistException in registrationController while registration", e);
             return "registration";
         } catch (EmailExistException e) {
             log.info("EmailExistException in registrationController while registration", e);

@@ -44,7 +44,7 @@ public class ForgotPasswordListener implements ApplicationListener<ForgotPasswor
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);
         email.setSubject(subject);
-        email.setText(message + " rn " + "http://localhost:8080" + confirmationUrl);
+        email.setText(message +"rn\t" + "http://localhost:8080" + confirmationUrl);
         mailSender.send(email);
     }
 

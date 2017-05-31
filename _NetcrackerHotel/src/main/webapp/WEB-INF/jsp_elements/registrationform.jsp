@@ -6,8 +6,8 @@
         <form:input path="firstName" type="text" class="form-control"
                     placeholder="First name" required="required"
                     data-validation="length alphanumeric"
-                    data-validation-length="6-15"
-                    data-validation-error-msg="First name has to be an alphanumeric value (6-15 chars)"
+                    data-validation-length="3-15"
+                    data-validation-error-msg="First name has to be an alphanumeric value (3-15 chars)"
         />
         <form:errors path="firstName" cssClass="ui-state-error-text"/>
     </div>
@@ -16,8 +16,8 @@
         <form:input path="lastName" type="text" class="form-control"
                     placeholder="Last name" required="required"
                     data-validation="length alphanumeric"
-                    data-validation-length="5-15"
-                    data-validation-error-msg="Last name has to be an alphanumeric value (5-15 chars)"
+                    data-validation-length="3-15"
+                    data-validation-error-msg="Last name has to be an alphanumeric value (3-15 chars)"
         />
         <form:errors path="lastName" cssClass="ui-state-error-text"/>
     </div>

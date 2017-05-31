@@ -29,7 +29,7 @@
         color: #2a62bc;
     }
 
-    a {
+    .container a {
         font-size: 15pt;
     }
 

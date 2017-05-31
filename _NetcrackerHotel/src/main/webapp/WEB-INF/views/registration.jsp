@@ -21,8 +21,10 @@
                  ${error}
             </div>
         </c:if>
-			<div class="content">
-				<%@include file="../jsp_elements/registrationform.jsp"%>
+			<div class="row">
+                <div style="margin: auto" class="col-8">
+                    <%@include file="../jsp_elements/registrationform.jsp"%>
+                </div>
 			</div>
 		<%@include file="../jsp_elements/_footer.jsp"%>
 	</div>

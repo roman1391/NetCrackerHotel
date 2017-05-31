@@ -15,8 +15,8 @@
 <%@include file="../jsp_elements/_header.jsp"%>
 <body>
 <div id="wrapper" >
-    <div class="jumbotron">
-        <div class="content">
+    <div class="row">
+        <div style="margin: auto" class="col-8">
             <c:if test="${error!=null}">
                 <div style="margin: 10px" class="alert alert-danger" >
                         ${error}
@@ -26,10 +26,7 @@
                     <div class="form-group">
                         <label for="oldPassword">Enter old password</label>
                         <input id="oldPassword" class="form-control" name="oldPassword"
-                               placeholder="Old password" type="password" required
-                               data-validation="length alphanumeric"
-                               data-validation-length="6-15"
-                               data-validation-error-msg="Password has to be an alphanumeric value (6-15 chars)">
+                               placeholder="Old password" type="password" required>
                     </div>
                     <div class="form-group">
                         <label for="newPassword">Enter new password</label>
