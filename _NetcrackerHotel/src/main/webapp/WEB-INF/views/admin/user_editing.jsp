@@ -51,6 +51,7 @@
                 <form:form id="updateForm" action="update" method="post" modelAttribute="user"
                            enctype="multipart/form-data" >
                     <div class="d-inline-block form-group">
+                    <c:if test="${user.authority eq 'ADMIN' || user.authority eq 'USER' || user.authority eq 'BLOCKED' }">
                         <div class="form-group">
                             <form:label path="email" >Email:</form:label>
                             <form:input disabled="true" path="email" id="email" value="${user.email}"
@@ -61,6 +62,7 @@
                             <form:input disabled="true" path="username" id="username" value="${user.username}"
                                         class="editable form-control" />
                         </div>
+                        </c:if>
                         <div class="form-group">
                             <form:label path="firstName" >First name:</form:label>
                             <form:input disabled="true" path="firstName" id="firstName" value="${user.firstName}"
@@ -71,24 +73,14 @@
                             <form:input disabled="true" path="lastName" id="lastName" value="${user.lastName}"
                                         class="editable form-control"/>
                         </div>
+                        <c:if test="${user.authority eq 'ADMIN' || user.authority eq 'USER' || user.authority eq 'BLOCKED' }">
                         <div class="form-group">
                             <form:label path="authority" >Authority:</form:label>
                             <form:select disabled="true" path="authority" id="authority" class="editable form-control">
                                 <form:option value="ADMIN" label="Admin"/>
-                                <c:choose>
-                                <c:when test="${user.authority eq 'USER' or user.authority eq 'BLOCKED'}">
+                                <c:if test="${user.authority eq 'USER' or user.authority eq 'BLOCKED'}">
 									<form:option value="USER" label="User"/>
-                                </c:when>
-                                <c:when test="${user.authority eq 'VKONTAKTE_USER'}">
-									<form:option value="VKONTAKTE_USER" label="Vkontakte_user"/>
-                                </c:when>
-                                <c:when test="${user.authority eq 'FACEBOOK_USER'}">
-									<form:option value="FACEBOOK_USER" label="Facebook_user"/>
-                                </c:when>
-                                <c:when test="${user.authority eq 'TWITTER_USER'}">
-									<form:option value="TWITTER_USER" label="Twitter_user"/>
-                                </c:when>
-                                </c:choose>
+                                </c:if>
                                 <c:if test="${currentUser.username ne user.username }">
                                 	<form:option value="BLOCKED" label="Blocked"/>
                                 	<c:if test="${user.authority eq 'ADMIN'}">
@@ -97,6 +89,7 @@
                                 </c:if>                
                             </form:select>
                         </div>
+                        </c:if>
                         <div class="form-group">
                             <form:label path="enabled" >State:</form:label>
                             <form:select disabled="true" path="enabled" id="enabled" class="editable form-control" >

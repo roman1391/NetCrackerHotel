@@ -25,9 +25,7 @@ public class ApplicationLogger {
         long start = System.currentTimeMillis();
         log.info("Controller begin: " + joinpoint.getSignature().toShortString());
         Object output = null;
-
         output = joinpoint.proceed();
-
         long time = System.currentTimeMillis() - start;
         log.info("Controller end: " + joinpoint.getSignature().toShortString() + ", time=" + time + " ms");
         return output;
@@ -38,9 +36,7 @@ public class ApplicationLogger {
         long start = System.currentTimeMillis();
         log.info("Service begin: " + joinpoint.getSignature().toShortString());
         Object output = null;
-
         output = joinpoint.proceed();
-
         long time = System.currentTimeMillis() - start;
         log.info("Service end: " + joinpoint.getSignature().toShortString() + ", time=" + time + " ms");
         return output;
