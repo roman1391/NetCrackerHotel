@@ -37,8 +37,8 @@
                             <form:textarea path="text" type="text" name="text"
                                            class="form-control" rows="5"
                                            data-validation="length"
-                                           data-validation-length="20-2000"
-                                           data-validation-error-msg="Review have to be length from 20 to 2000"/>
+                                           data-validation-length="10-100"
+                                           data-validation-error-msg="Review have to be alphanumeric with length from 10 to 100"/>
                             <form:input path="userId" type="hidden" name="userId" value="${currentUser.id}"></form:input>
                             <form:input path="username" type="hidden" name="username" value="${currentUser.username}"></form:input>
                             <form:input path="hotelId" type="hidden" name="hotelId" value="${choosenHotel.id}"></form:input>
