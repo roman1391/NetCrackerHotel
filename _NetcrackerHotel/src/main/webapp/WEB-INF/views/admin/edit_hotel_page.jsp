@@ -49,16 +49,13 @@
             <c:forEach items="${hotel_rooms}" var="room" varStatus="loop">
                     <ul class="order list-inline">
                         <li class="list-inline-item">
-                            Room ID: <span>${room.id}</span>
+                            Room №": <span>${room.id}</span>
                         </li>
                         <li class="list-inline-item">
                             Cost: <span>${room.cost}</span>
                         </li>
                         <li class="list-inline-item">
                             Capacity: <span>${room.capacity}</span>
-                        </li>
-                        <li class="list-inline-item">
-                            Hotel ID: <span>${room.hotelID}</span>
                         </li>
                     </ul>
                 <c:if test="${currentUser.authority.toString() ne 'GUEST' or currentUser.authority.toString() ne 'BLOCKED'}">
