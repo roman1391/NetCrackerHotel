@@ -22,7 +22,7 @@ import by.netcracker.hotel.enums.ReviewStatus;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.UserService;
 
-@Service("ReviewServiceImpl")
+@Service("reviewServiceImpl")
 @SessionScope
 public class ReviewServiceImpl implements ReviewService {
 

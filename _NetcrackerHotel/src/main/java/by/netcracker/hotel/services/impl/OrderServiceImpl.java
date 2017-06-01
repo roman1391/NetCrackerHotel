@@ -15,7 +15,7 @@ import by.netcracker.hotel.utils.SearchFilter;
 /**
  * Created by Alexander on 25.04.2017.
  */
-@Service("OrderServiceImpl")
+@Service("orderServiceImpl")
 @SessionScope
 public class OrderServiceImpl implements OrderService {
 

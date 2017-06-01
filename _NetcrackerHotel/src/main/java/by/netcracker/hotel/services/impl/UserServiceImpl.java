@@ -18,7 +18,7 @@ import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.UserService;
 
-@Service("UserServiceImpl")
+@Service("userServiceImpl")
 @SessionScope
 public class UserServiceImpl implements UserService {
 

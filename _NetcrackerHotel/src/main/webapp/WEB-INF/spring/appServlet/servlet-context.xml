@@ -21,9 +21,6 @@
 	<annotation-driven />
 
 	<aop:aspectj-autoproxy />
-	
-	<tx:annotation-driven proxy-target-class="true"
-		transaction-manager="transactionManager" />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving
 		up static resources in the ${webappRoot}/resources directory -->
@@ -71,10 +68,10 @@
 	
 	<security:global-method-security  secured-annotations="enabled" pre-post-annotations="enabled" jsr250-annotations="enabled"/>
 	
-	<beans:bean id="UserServiceImpl" class="by.netcracker.hotel.services.impl.UserServiceImpl" />
-	<beans:bean id="HotelServiceImpl" class="by.netcracker.hotel.services.impl.HotelServiceImpl" />
-	<beans:bean id="OrderServiceImpl" class="by.netcracker.hotel.services.impl.OrderServiceImpl" />
-	<beans:bean id="ReviewServiceImpl" class="by.netcracker.hotel.services.impl.ReviewServiceImpl" />
-	<beans:bean id="RoomServiceImpl" class="by.netcracker.hotel.services.impl.RoomServiceImpl" />
+	<beans:bean id="userServiceImpl" class="by.netcracker.hotel.services.impl.UserServiceImpl" />
+	<beans:bean id="hotelServiceImpl" class="by.netcracker.hotel.services.impl.HotelServiceImpl" />
+	<beans:bean id="orderServiceImpl" class="by.netcracker.hotel.services.impl.OrderServiceImpl" />
+	<beans:bean id="reviewServiceImpl" class="by.netcracker.hotel.services.impl.ReviewServiceImpl" />
+	<beans:bean id="roomServiceImpl" class="by.netcracker.hotel.services.impl.RoomServiceImpl" />
 
 </beans:beans>

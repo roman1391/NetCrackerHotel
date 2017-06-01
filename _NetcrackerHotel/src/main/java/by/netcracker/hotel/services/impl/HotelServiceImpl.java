@@ -20,7 +20,7 @@ import by.netcracker.hotel.utils.SearchFilter;
  * Created by Varvara on 4/8/2017.
  */
 
-@Service("HotelServiceImpl")
+@Service("hotelServiceImpl")
 @SessionScope
 public class HotelServiceImpl implements HotelService {
     private final HotelDAO hotelDAO;
