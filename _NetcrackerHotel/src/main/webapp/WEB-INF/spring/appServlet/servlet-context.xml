@@ -56,6 +56,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/home" />
+			<mapping path="/profile" />
 			<mapping path="/admin/list_of_users" />
 			<beans:bean class="by.netcracker.hotel.interceptors.CheckAuthorityInterceptor" />
 		</interceptor>
