@@ -51,8 +51,8 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
 
     public String buildPageQuery(P pparam) {
         StringBuffer query = new StringBuffer();
-        query.append(SqlQuery.MAKE_PAGE.getQuery()).append(buildFullQuery(pparam, mapFilters))
-            .append(" ) nn ) aaa limit ").append(pparam.getResultIndex()).append(" ,").append(pageNum)
+        query.append(SqlQuery.MAKE_PAGE.getQuery()).append(buildFullQuery(pparam)).append(" ) nn ) aaa limit ")
+            .append(pparam.getResultIndex()).append(" ,").append(pageNum)
             .append(" ) yyy on ooo.entity_id = yyy.entity_id order by num ");
         return query.toString();
     }
@@ -60,16 +60,16 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
     public String buildCountQuery(P pparam) {
         StringBuffer query = new StringBuffer();
         query.append("select count(distinct entity_id) from (");
-        query.append(buildFullQuery(pparam, mapFilters)).append(" ) ccc");
+        query.append(buildFullQuery(pparam)).append(" ) ccc");
         return query.toString();
     }
 
-    public String buildFullQuery(P pparam, Map<String, String> map) {
+    public String buildFullQuery(P pparam) {
         StringBuffer query = new StringBuffer();
         paramsToQuery.clear();
         setBoToDbMap(boToDbMap, pparam);
         setMapFilters(mapFilters, pparam);
-        // simple query
+        // simple query without sorting
         if (pparam.getSortName() == null) {
             query.append(SqlQuery.ALL_PAGINATION.getQuery()); // 1:type_id
             query.append(!hasAnyFilter(mapFilters) ? " order by entity_id " : "");
@@ -133,8 +133,6 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
         return mapFilters;
     }
 
-    public abstract void setMapFilters(Map<String, String> mapFilters, P pparam);
-
     public int getTypeId() {
         return typeId;
     }
@@ -163,6 +161,10 @@ public abstract class AbstractPaginationJdbcDAO<E, P extends BoPaginationParam> 
         this.pageNum = pageNum;
     }
 
+    // sets filters according to pparam variable
+    public abstract void setMapFilters(Map<String, String> mapFilters, P pparam);
+
+    // matches pparam possible sorting options to prepared statement parameter
     public abstract void setBoToDbMap(Map<String, String> boToDbMap, P pparam);
 
 }

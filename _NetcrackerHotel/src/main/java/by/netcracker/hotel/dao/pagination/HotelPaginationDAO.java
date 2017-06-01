@@ -40,11 +40,10 @@ public class HotelPaginationDAO extends AbstractPaginationJdbcDAO<Hotel, HotelSe
 
     @Override
     public void setBoToDbMap(Map<String, String> boToDbMap, HotelSearchParam pparam) {
-        boToDbMap.put("class", "class");
-        boToDbMap.put("city", "city");
         boToDbMap.put("name", "hotel_name");
-        boToDbMap.put("enabled", "hotel_enabled");
+        boToDbMap.put("class", "class");
         boToDbMap.put("country", "country");
+        boToDbMap.put("city", "city");
     }
 
 }
