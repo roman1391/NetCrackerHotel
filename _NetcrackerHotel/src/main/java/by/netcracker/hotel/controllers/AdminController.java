@@ -17,7 +17,6 @@ import by.netcracker.hotel.entities.Hotel;
 import by.netcracker.hotel.entities.Order;
 import by.netcracker.hotel.entities.Review;
 import by.netcracker.hotel.entities.User;
-import by.netcracker.hotel.enums.ROLE;
 import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.HotelService;
@@ -62,7 +61,6 @@ public class AdminController {
             return "admin/add_user";
         }
         try {
-            user.setAuthority(ROLE.USER);
             userService.addEnabledUser(user);
         } catch (UsernameExistException e) {
             log.info("UsernameExistException in adminController while adding user");
