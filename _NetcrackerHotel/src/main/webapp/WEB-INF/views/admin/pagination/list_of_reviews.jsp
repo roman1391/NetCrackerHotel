@@ -37,59 +37,58 @@
                     <span><a href="${contextPath}/admin/list_of_reviews/25">25</a></span>
                     <span><a href="${contextPath}/admin/list_of_reviews/50">50</a></span>
 
-                    <div style="padding-top:15px;padding-left:5px;padding-right:10px;">
-                        <c:url value="${paginationResult.pageLink}" var="pageLink"/>
-                        <form:form id="pgform" method="post" modelAttribute="pparam" action="${pageLink}">
-                            <pg:pagination pparam="${pparam}" paginationResult="${paginationResult}">
-                <jsp:attribute name="searchContent">
-                      <table class="searchtable">
-                          <tr>
-                              <td class="caption" style="width:50px;">Filter:</td>
-                              <td style="width:78px;">
-                            <form:select path="status" cssStyle="width:78px;">
-                               <form:option value="" label="-status-"/>
-                               <form:option value="pending" label="Pending"/>
-                               <form:option value="approved" label="Approved"/>
-                               <form:option value="blocked" label="Blocked"/>
-                            </form:select>
-                              </td>
-                              <td style="width:60px;">Username:</td>
-                              <td style="width:100px;"><form:select path="username" class="form-control" id="selectUser"
-                                                                    multiple="multiple" cssStyle="width:100px;">
-                                      <form:options items="${usernames}"/>
-                              </form:select>
-                              </td>
-                              <td style="width:60px;">Hotelname:</td>
-                              <td style="width:150px;"><form:select path="hotelname" class="form-control"
+                    	<div style="padding-top:15px;padding-left:5px;padding-right:10px;">
+                        	<c:url value="${paginationResult.pageLink}" var="pageLink"/>
+                        	<form:form id="pgform" method="post" modelAttribute="pparam" action="${pageLink}">
+                            	<pg:pagination pparam="${pparam}" paginationResult="${paginationResult}">
+                					<jsp:attribute name="searchContent">
+                      					<table class="searchtable">
+                          					<tr>
+                              					<td class="caption" style="width:50px;">Filter:</td>
+                              					<td style="width:78px;">
+                            					<form:select path="status" cssStyle="width:78px;">
+                               					<form:option value="" label="-status-"/>
+                               					<form:option value="pending" label="Pending"/>
+                               					<form:option value="approved" label="Approved"/>
+                               					<form:option value="blocked" label="Blocked"/>
+                            					</form:select>
+                              					</td>
+                              					<td style="width:60px;">Username:</td>
+                              					<td style="width:100px;">
+                              					<form:select path="username" class="form-control"
+                              						 id="selectUser" multiple="multiple" cssStyle="width:100px;">
+                                      				<form:options items="${usernames}"/>
+                              					</form:select>
+                              					</td>
+                              					<td style="width:60px;">Hotelname:</td>
+                              					<td style="width:150px;"><form:select path="hotelname" class="form-control"
                                                                     id="selectHotel" multiple="multiple"
                                                                     cssStyle="width:120px;">
-                                <form:options items="${hotels}"/>
-                            </form:select></td>
-                              <td style="width:65px;"><span class="button"><form:button id="searchButton"
+                                					<form:options items="${hotels}"/>
+                            					</form:select></td>
+                              					<td style="width:65px;"><span class="button"><form:button id="searchButton"
                                                                                         name="buttonAction"
                                                                                         value="searchButton"
                                                                                         class="button">Search</form:button></span>
-                              </td>
-                              <td style="width:65px;"><span class="button"><form:button id="clearButton"
+                              					</td>
+                              					<td style="width:65px;"><span class="button"><form:button id="clearButton"
                                                                                         name="buttonAction"
                                                                                         value="clearButton"
                                                                                         class="button">Clear</form:button></span>
-                              </td>
-                          </tr>
-                      </table>
-                </jsp:attribute>
+                              					</td>
+                          					</tr>
+                      					</table>
+                					</jsp:attribute>
                                 <jsp:attribute name="controlButton">
-                     <div style="padding-top:10px;">
-                         <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton"
+                     				<div style="padding-top:10px;">
+                         				<span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton"
                                                            class="button"
                                                            onclick="clicked(event)">Delete</form:button></span>
-                     </div>
-                </jsp:attribute>
-
+                     				</div>
+                				</jsp:attribute>
                             </pg:pagination>
                         </form:form>
                     </div>
-
                 </div>
             </div>
         </div>
