@@ -47,11 +47,6 @@
 		<!--https://netcrackerhotel.herokuapp.com/-->
 		<beans:property name="signInUrl" value="/" />
 	</beans:bean>
-	
-	<beans:bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<beans:property name="dataSource" ref="dataSource" />
-	</beans:bean>
 
 	<context:component-scan base-package="by.netcracker.hotel" use-default-filters="false">
 		<context:include-filter expression="org.springframework.stereotype.Controller"
