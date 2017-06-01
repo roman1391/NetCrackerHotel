@@ -59,7 +59,6 @@ public class UserServiceImpl implements UserService {
         } else if (emailExist(user.getEmail())) {
             throw new EmailExistException("Account with email - " + user.getEmail() + " are exist");
         } else {
-            user.setAuthority(ROLE.USER);
             user.setEnabled(true);
             userDAO.add(user);
             return userDAO.getByUsername(user.getUsername());
