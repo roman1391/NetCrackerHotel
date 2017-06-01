@@ -26,10 +26,12 @@
                     <%@include file="../jsp_elements/map.jsp" %>
 
 
+					<sec:authorize access="!hasRole('ADMIN')">
                     <c:if test="${success!=null}">
                         <div style="margin: 10px" class="alert alert-success">
                                 ${success}</div>
                     </c:if>
+                    </sec:authorize>
 
                     <%@include file="../jsp_elements/photoCarousel.jsp" %>
 
@@ -48,7 +50,7 @@
                                 <c:when test="${reviewInfo eq 'notExist'}">
                                     <sec:authorize access="hasAnyRole('ADMIN','USER',
             				'TWITTER_USER','VKONTAKTE_USER','FACEBOOK_USER')">
-                                        <form:form method="post" id="review" action="review_page" modelAttribute="choosenHotel">
+                                        <form:form method="get" id="review" action="review_page" modelAttribute="choosenHotel">
                                             <form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
                                             <form:button class="btn btn-primary" type="submit">Leave review</form:button>
                                         </form:form>

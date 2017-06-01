@@ -23,7 +23,7 @@
     <script src="<c:url value="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"/>" type="text/javascript"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <c:if test="${error!=null}">
-        <div style="margin: 50px" class="alert alert-danger" >
+        <div style="margin: 10px" class="alert alert-danger" >
                 ${error}
         </div>
     </c:if>

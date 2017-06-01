@@ -67,7 +67,7 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
             return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new RoomMapper());
         } catch (EmptyResultDataAccessException e) {
-            log.warn("EmptyResultDataAccessException in roomDAO while getting by id", e);
+            log.info("EmptyResultDataAccessException in roomDAO while getting by id");
             return null;
         }
     }
@@ -120,7 +120,7 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
                 param.add(dateFormat.parse(searchFilter.getStartDate()));
                 param.add(dateFormat.parse(searchFilter.getEndDate()));
             } catch (ParseException e) {
-                log.warn("ParseException in roomDAO while getting free rooms", e);
+                log.info("ParseException in roomDAO while getting free rooms", e);
             }
         }
         query.append(SqlQuery.GET_FREE_ROOMS_IN_HOTEL_END.getQuery());
@@ -138,7 +138,7 @@ public class RoomDAOImpl extends JdbcDaoSupport implements RoomDAO {
                 new RoomMapper());
             return true;
         } catch (EmptyResultDataAccessException ex) {
-            log.warn("EmptyResultDataAccessException in roomDAO while getting free rooms", ex);
+            log.info("EmptyResultDataAccessException in roomDAO while getting free rooms", ex);
             return false;
         }
     }

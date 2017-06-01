@@ -13,7 +13,7 @@
 
     <div class="container">
         <c:if test="${message!=null}" >
-            <div style="margin: 50px" class="alert alert-success" >
+            <div style="margin: 10px" class="alert alert-success" >
                     ${message}
             </div>
         </c:if>

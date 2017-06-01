@@ -21,32 +21,22 @@ public class ApplicationLogger {
     private static Logger log = Logger.getLogger(ApplicationLogger.class);
 
     @Around("execution(* by.netcracker.hotel.controllers..*.*(..))")
-    public Object controllerLogging(ProceedingJoinPoint joinpoint) {
+    public Object controllerLogging(ProceedingJoinPoint joinpoint) throws Throwable {
         long start = System.currentTimeMillis();
         log.info("Controller begin: " + joinpoint.getSignature().toShortString());
         Object output = null;
-        try {
-            output = joinpoint.proceed();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-
+        output = joinpoint.proceed();
         long time = System.currentTimeMillis() - start;
         log.info("Controller end: " + joinpoint.getSignature().toShortString() + ", time=" + time + " ms");
         return output;
     }
 
     @Around("execution(* by.netcracker.hotel.services..*.*(..))")
-    public Object serviceLogging(ProceedingJoinPoint joinpoint) {
+    public Object serviceLogging(ProceedingJoinPoint joinpoint) throws Throwable {
         long start = System.currentTimeMillis();
         log.info("Service begin: " + joinpoint.getSignature().toShortString());
         Object output = null;
-        try {
-            output = joinpoint.proceed();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-
+        output = joinpoint.proceed();
         long time = System.currentTimeMillis() - start;
         log.info("Service end: " + joinpoint.getSignature().toShortString() + ", time=" + time + " ms");
         return output;

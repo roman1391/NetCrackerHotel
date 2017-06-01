@@ -74,7 +74,7 @@ public class OrderDAOImpl extends JdbcDaoSupport implements OrderDAO {
                 return true;
             }
         } catch (Exception e) {
-            log.warn("Exception in orderDAO while updating", e);
+            log.info("Exception in orderDAO while updating");
             return false;
         }
     }
@@ -85,7 +85,7 @@ public class OrderDAOImpl extends JdbcDaoSupport implements OrderDAO {
             return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new OrderMapper());
         } catch (EmptyResultDataAccessException e) {
-            log.warn("EmptyResultDataAccessException in orderDAO while getting by id", e);
+            log.info("EmptyResultDataAccessException in orderDAO while getting by id");
             return null;
         }
     }

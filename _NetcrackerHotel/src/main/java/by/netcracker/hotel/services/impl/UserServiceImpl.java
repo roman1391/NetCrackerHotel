@@ -18,7 +18,7 @@ import by.netcracker.hotel.exceptions.EmailExistException;
 import by.netcracker.hotel.exceptions.UsernameExistException;
 import by.netcracker.hotel.services.UserService;
 
-@Service("UserServiceImpl")
+@Service("userServiceImpl")
 @SessionScope
 public class UserServiceImpl implements UserService {
 
@@ -94,6 +94,7 @@ public class UserServiceImpl implements UserService {
         return userDAO.getByID(id);
     }
 
+    // updating of users by admin
     @Override
     @PreAuthorize("hasRole('ADMIN')")
     public void fullUpdate(User user) throws UsernameExistException, EmailExistException {

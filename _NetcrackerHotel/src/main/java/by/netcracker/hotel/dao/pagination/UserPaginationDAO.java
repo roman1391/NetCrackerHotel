@@ -36,16 +36,16 @@ public class UserPaginationDAO extends AbstractPaginationJdbcDAO<User, UserSearc
 
     @Override
     public void setMapFilters(Map<String, String> mapFilters, UserSearchParam pparam) {
+        mapFilters.put("username", pparam.getUsername());
         mapFilters.put("authority", pparam.getAuthority());
         mapFilters.put("enabled", pparam.getEnabled());
-        mapFilters.put("username", pparam.getUsername());
+
     }
 
     @Override
     public void setBoToDbMap(Map<String, String> boToDbMap, UserSearchParam pparam) {
         boToDbMap.put("username", "username");
         boToDbMap.put("authority", "authority");
-        boToDbMap.put("enabled", "enabled");
         boToDbMap.put("email", "email");
     }
 

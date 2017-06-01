@@ -21,9 +21,6 @@
 	<annotation-driven />
 
 	<aop:aspectj-autoproxy />
-	
-	<tx:annotation-driven proxy-target-class="true"
-		transaction-manager="transactionManager" />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving
 		up static resources in the ${webappRoot}/resources directory -->
@@ -46,13 +43,9 @@
 
 	<beans:bean id="signinController"
 				class= "org.springframework.social.connect.web.ProviderSignInController" >
-		<beans:property name="applicationUrl" value="http://localhost:8080" />
+		<beans:property name="applicationUrl" value="http://localhost:8080"/>
+		<!--https://netcrackerhotel.herokuapp.com/-->
 		<beans:property name="signInUrl" value="/" />
-	</beans:bean>
-	
-	<beans:bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 
 	<context:component-scan base-package="by.netcracker.hotel" use-default-filters="false">
@@ -63,6 +56,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/home" />
+			<mapping path="/profile" />
 			<mapping path="/admin/list_of_users" />
 			<beans:bean class="by.netcracker.hotel.interceptors.CheckAuthorityInterceptor" />
 		</interceptor>
@@ -70,10 +64,10 @@
 	
 	<security:global-method-security  secured-annotations="enabled" pre-post-annotations="enabled" jsr250-annotations="enabled"/>
 	
-	<beans:bean id="UserServiceImpl" class="by.netcracker.hotel.services.impl.UserServiceImpl" />
-	<beans:bean id="HotelServiceImpl" class="by.netcracker.hotel.services.impl.HotelServiceImpl" />
-	<beans:bean id="OrderServiceImpl" class="by.netcracker.hotel.services.impl.OrderServiceImpl" />
-	<beans:bean id="ReviewServiceImpl" class="by.netcracker.hotel.services.impl.ReviewServiceImpl" />
-	<beans:bean id="RoomServiceImpl" class="by.netcracker.hotel.services.impl.RoomServiceImpl" />
+	<beans:bean id="userServiceImpl" class="by.netcracker.hotel.services.impl.UserServiceImpl" />
+	<beans:bean id="hotelServiceImpl" class="by.netcracker.hotel.services.impl.HotelServiceImpl" />
+	<beans:bean id="orderServiceImpl" class="by.netcracker.hotel.services.impl.OrderServiceImpl" />
+	<beans:bean id="reviewServiceImpl" class="by.netcracker.hotel.services.impl.ReviewServiceImpl" />
+	<beans:bean id="roomServiceImpl" class="by.netcracker.hotel.services.impl.RoomServiceImpl" />
 
 </beans:beans>

@@ -27,7 +27,7 @@
 
 
                     <c:if test="${success!=null}">
-                        <div style="margin: 50px" class="alert alert-success">
+                        <div style="margin: 10px" class="alert alert-success">
                                 ${success}</div>
                     </c:if>
 
@@ -35,11 +35,6 @@
 
                     Description: ${choosenHotel.description }<br>
                    
-                    <form:form method="post" id="review" action="${contextPath}/hotel_page/all_reviews" modelAttribute="choosenHotel">
-                        <form:input path="id" type="hidden" name="id" value="${hotel.id}"></form:input>
-                        <form:button type="submit">See all reviews </form:button>
-                    </form:form>
-                    
                     <table>
                         <tbody>
                         <c:forEach items="${hotel_rooms}" var="room" varStatus="loop">

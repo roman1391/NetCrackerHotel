@@ -20,26 +20,12 @@ public class ReviewServiceImplTest {
     @Mock
     ReviewDAO reviewDAO;
     private Review review = new Review();
-    private ReviewServiceImpl reviewService;
+    private ReviewServiceImpl reviewService = new ReviewServiceImpl();
 
     @Before
     public void setup() {
-        System.out.println("Setup");
         MockitoAnnotations.initMocks(this);
-        reviewService = new ReviewServiceImpl();
         reviewService.setReviewDAO(reviewDAO);
-    }
-
-    @Test
-    public void addReviewTest() {
-        reviewService.addReview(review);
-        verify(reviewDAO).add(review);
-    }
-
-    @Test
-    public void getByHotelIdTest() {
-        reviewService.getByHotelId(77);
-        verify(reviewDAO).getByHotelId(77);
     }
 
     @Test
@@ -49,8 +35,14 @@ public class ReviewServiceImplTest {
     }
 
     @Test
+    public void getByHotelIdTest() {
+        reviewService.getByHotelId(77);
+        verify(reviewDAO).getByHotelId(77);
+    }
+
+    @Test
     public void getApprovedByHotelIdTest() {
-        boolean isApproved = true;
+        boolean allApproved = true;
         List<Review> list = Arrays.asList(
             new Review(7777, 8888, 9999, "testUser", "testHotel", "text", "testStatus", "testDate", 5),
             new Review(7777, 8888, 9999, "testUser", "testHotel", "text", "approved", "testDate", 5));
@@ -58,10 +50,10 @@ public class ReviewServiceImplTest {
         List<Review> approvedReviews = reviewService.getApprovedByHotelId(77);
         for (Review review : approvedReviews) {
             if (!review.getStatus().equals("approved")) {
-                isApproved = false;
+                allApproved = false;
             }
         }
-        assertTrue(isApproved);
+        assertTrue(allApproved);
     }
 
 }

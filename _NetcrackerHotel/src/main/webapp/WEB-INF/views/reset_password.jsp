@@ -15,34 +15,34 @@
 <%@include file="../jsp_elements/_header.jsp"%>
 <body>
     <div id="wrapper" >
-        <div class="jumbotron">
-          <div class="content">
-            <c:if test="${error!=null}">
-                <div style="margin: 50px" class="alert alert-danger" >
-                        ${error}
-                </div>
-            </c:if>
-            <c:if test="${error==null}" >
-                <form action="/reset_password" method="post">
-                    <div class="form-group">
-                        <label for="password">Enter new password</label>
-                        <input id="password" class="form-control" name="password"
-                               placeholder="New password" type="password" required
-                               data-validation="length alphanumeric"
-                               data-validation-length="6-15"
-                               data-validation-error-msg="Password has to be an alphanumeric value (6-15 chars)">
+        <div class="row">
+            <div style="margin: auto" class="col-8">
+                <c:if test="${error!=null}">
+                    <div style="margin: 10px" class="alert alert-danger" >
+                            ${error}
                     </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm password</label>
-                        <input id="confirmPassword" class="form-control"
-                               placeholder="Confirm password" type="password"
-                               data-validation="confirmation"
-                               data-validation-confirm="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Confirm</button>
-                </form>
-            </c:if>
-          </div>
+                </c:if>
+                <c:if test="${error==null}" >
+                    <form action="/reset_password" method="post">
+                        <div class="form-group">
+                            <label for="password">Enter new password</label>
+                            <input id="password" class="form-control" name="password"
+                                   placeholder="New password" type="password" required
+                                   data-validation="length alphanumeric"
+                                   data-validation-length="6-15"
+                                   data-validation-error-msg="Password has to be an alphanumeric value (6-15 chars)">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm password</label>
+                            <input id="confirmPassword" class="form-control"
+                                   placeholder="Confirm password" type="password"
+                                   data-validation="confirmation"
+                                   data-validation-confirm="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    </form>
+                </c:if>
+            </div>
         </div>
     </div>
 </body>

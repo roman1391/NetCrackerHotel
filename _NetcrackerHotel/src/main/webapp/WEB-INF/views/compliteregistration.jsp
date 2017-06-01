@@ -13,7 +13,7 @@
 <body>
 <div id="wrapper">
     <div class="jumbotron">
-       <div style="margin: 50px" class="alert alert-success" >
+       <div style="margin: 10px" class="alert alert-success" >
            Thank you for registration. To active account click on the link sent to your email.
        </div>
     </div>

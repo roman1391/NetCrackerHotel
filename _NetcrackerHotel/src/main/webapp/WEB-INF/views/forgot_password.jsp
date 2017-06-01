@@ -16,30 +16,31 @@
 <%@include file="../jsp_elements/_header.jsp"%>
 <body>
     <div id="wrapper" >
-        <div class="jumbotron">
-            <c:if test="${error!=null}">
-                <div style="margin: 50px" class="alert alert-danger" >
-                        ${error}
-                </div>
-            </c:if>
-            <c:if test="${message!=null}">
-                <div style="margin: 50px" class="alert alert-success" >
-                        ${message}
-                </div>
-            </c:if>
-            <c:if test="${message==null}" >
-               <form action="/forgot_password" method="post">
-                 <div class="form-group">
-                    <div class="col-xs-4">
-                        <label for="email" >Enter email:</label>
-                        <input  id="email" name="email" class="form-control" type="email" placeholder="email"
-                               data-validation="email" required />
+        <div class="row">
+            <div style="margin: auto" class="col-8">
+                <c:if test="${error!=null}">
+                    <div style="margin: 10px" class="alert alert-danger" >
+                            ${error}
                     </div>
-                 </div>
-                <button type="submit" class="btn btn-primary">Send</button>
-               </form>
-            </c:if>
-
+                </c:if>
+                <c:if test="${message!=null}">
+                    <div style="margin: 10px" class="alert alert-success" >
+                            ${message}
+                    </div>
+                </c:if>
+                <c:if test="${message==null}" >
+                    <form action="/forgot_password" method="post">
+                        <div class="form-group">
+                            <div class="col-xs-4">
+                                <label for="email" >Enter email:</label>
+                                <input  id="email" name="email" class="form-control" type="email" placeholder="email"
+                                        data-validation="email" required />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </c:if>
+            </div>
         </div>
     </div>
 </body>

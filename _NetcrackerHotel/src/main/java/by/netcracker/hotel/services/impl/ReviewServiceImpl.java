@@ -22,7 +22,7 @@ import by.netcracker.hotel.enums.ReviewStatus;
 import by.netcracker.hotel.services.ReviewService;
 import by.netcracker.hotel.services.UserService;
 
-@Service("ReviewServiceImpl")
+@Service("reviewServiceImpl")
 @SessionScope
 public class ReviewServiceImpl implements ReviewService {
 
@@ -47,9 +47,17 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public void addReview(Review review) {
         review.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
-        review.setStatus(ReviewStatus.PENDING.getReviewInfo());
+        Object info = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) info;
+        User user = (User) userService.getUserByUsername(userDetails.getUsername());
+        if (user.getAuthority().equals(ROLE.ADMIN)) {
+            review.setStatus(ReviewStatus.APPROVED.getReviewInfo());
+        } else {
+            review.setStatus(ReviewStatus.PENDING.getReviewInfo());
+        }
         reviewDAO.add(review);
     }
 
@@ -62,12 +70,8 @@ public class ReviewServiceImpl implements ReviewService {
         } else if (info instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) info;
             User user = (User) userService.getUserByUsername(userDetails.getUsername());
-            if (user.getAuthority().equals(ROLE.ADMIN)) {
-                reviewInfo = ReviewInformation.MODERATE.getReviewInfo();
-            } else {
-                reviewInfo = (reviewDAO.checkUsersReview(hotelId, user.getId())
-                    ? ReviewInformation.EXIST.getReviewInfo() : ReviewInformation.NOT_EXIST.getReviewInfo());
-            }
+            reviewInfo = (reviewDAO.checkUsersReview(hotelId, user.getId()) ? ReviewInformation.EXIST.getReviewInfo()
+                : ReviewInformation.NOT_EXIST.getReviewInfo());
         } else {
             reviewInfo = ReviewInformation.EXIST.getReviewInfo();
         }
@@ -99,7 +103,7 @@ public class ReviewServiceImpl implements ReviewService {
             return true;
 
         } catch (Exception e) {
-            log.warn("Exception in reviewService while review updating", e);
+            log.info("Exception in reviewService while review updating");
             return false;
         }
     }

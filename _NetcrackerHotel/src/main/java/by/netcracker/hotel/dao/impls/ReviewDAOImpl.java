@@ -65,7 +65,7 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
                 return true;
             }
         } catch (Exception e) {
-            log.warn("Exception in reviewDAO while updating", e);
+            log.info("Exception in reviewDAO while updating");
             return false;
         }
     }
@@ -76,7 +76,7 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
             return getJdbcTemplate().queryForObject(SqlQuery.GET_BY_ID.getQuery(), new Object[] { id },
                 new ReviewMapper());
         } catch (EmptyResultDataAccessException e) {
-            log.warn("EmptyResultDataAccessException in reviewDAO while getting by id", e);
+            log.info("EmptyResultDataAccessException in reviewDAO while getting by id");
             return null;
         }
     }
@@ -96,7 +96,7 @@ public class ReviewDAOImpl extends JdbcDaoSupport implements ReviewDAO {
             reviewStatus = getJdbcTemplate().queryForObject(SqlQuery.CHECK_REVIEW.getQuery(), String.class,
                 new Object[] { userId, hotelId });
         } catch (Exception e) {
-            log.warn("Exception in reviewDAO while checking review for user", e);
+            log.info("Exception in reviewDAO while checking review for user");
             reviewStatus = "1";
         }
         switch (reviewStatus) {

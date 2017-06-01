@@ -193,8 +193,7 @@ public class Hotel {
         if (mainPhoto == null) {
             if (other.mainPhoto != null)
                 return false;
-        } else if (!mainPhoto.equals(other.mainPhoto))
-            return false;
+        }
         if (name == null) {
             if (other.name != null)
                 return false;

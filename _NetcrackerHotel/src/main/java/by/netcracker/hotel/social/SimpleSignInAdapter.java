@@ -58,12 +58,16 @@ public class SimpleSignInAdapter implements SignInAdapter {
             return "/?error=Failed to login by "+connection.getKey().getProviderId();
         }
         String provider = connection.getKey().getProviderId().toUpperCase();
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,null,
-                Arrays.asList(new SimpleGrantedAuthority(provider+"_USER")));
-        SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(token);
-        rememberMeServices.loginSuccess((HttpServletRequest) request.getNativeRequest(),
-                (HttpServletResponse) request.getNativeResponse(), context.getAuthentication());
+        if(user.isEnabled()) {
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, null,
+                    user.getAuthorities());
+            SecurityContext context = SecurityContextHolder.getContext();
+            context.setAuthentication(token);
+            rememberMeServices.loginSuccess((HttpServletRequest) request.getNativeRequest(),
+                    (HttpServletResponse) request.getNativeResponse(), context.getAuthentication());
+        } else{
+            return "/?error=Account is disabled";
+        }
         return extractOriginalUrl(request);
     }
 

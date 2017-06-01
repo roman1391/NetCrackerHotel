@@ -18,7 +18,7 @@ import by.netcracker.hotel.utils.SearchFilter;
  * Created by Varvara on 4/25/2017.
  */
 
-@Service("RoomServiceImpl")
+@Service("roomServiceImpl")
 @SessionScope
 public class RoomServiceImpl implements RoomService {
     private final RoomDAO roomDAO;

@@ -33,13 +33,21 @@
                 ${error}
         </div>
     </c:if>
-    <div class="content">
-        <p>Please enter additional information</p>
-        <p>Room №: ${roomId}</p>
-        <p>Username: ${currentUser.username}</p>
-        <p>Arrival date: ${searchFilter.startDate}</p>
-        <p>Leave date: ${searchFilter.endDate}</p>
-        <%@include file="../jsp_elements/addorderform.jsp"%>
+    <div class="row">
+        <div style="margin: auto" class="col-8">
+            <h1>Please enter additional information</h1>
+            <div class="row">
+                <div class="col-4">
+                    <p>Room №: ${roomId}</p>
+                    <p>Username: ${currentUser.username}</p>
+                </div>
+                <div class="col-4">
+                    <p>Arrival date: ${searchFilter.startDate}</p>
+                    <p>Leave date: ${searchFilter.endDate}</p>
+                </div>
+            </div>
+            <%@include file="../jsp_elements/addorderform.jsp"%>
+        </div>
     </div>
     <%@include file="../jsp_elements/_footer.jsp"%>
 </div>

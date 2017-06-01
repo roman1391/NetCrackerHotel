@@ -48,51 +48,52 @@
                         <c:url value="${paginationResult.pageLink}" var="pageLink"/>
                         <form:form id="pgform" method="post" modelAttribute="pparam" action="${pageLink}">
                             <pg:pagination pparam="${pparam}" paginationResult="${paginationResult}">
-                <jsp:attribute name="searchContent">
-                      <table class="searchtable">
-                          <tr>
-                              <td class="caption" style="width:50px;">Filter:</td>
-                              <td style="width:120px;">
-                            <form:select path="authority" cssStyle="width:110px;">
-                               <form:option value="" label="-authority-"/>
-                               <form:option value="ADMIN" label="ADMIN"/>
-                               <form:option value="USER" label="USER"/>
-                               <form:option value="BLOCKED" label="BLOCKED"/>
-                            </form:select>
-                              </td>
-                              <td style="width:200px;">
-                                <form:select path="enabled">
-                                   	<form:option value="" label="-state-"/>
-                               		<form:option value="1" label="Enabled"/>
-                               		<form:option value="0" label="Deactivated"/>
-                                </form:select>
-                              </td>
-                              <td style="width:80px;">Username:</td>
+                				<jsp:attribute name="searchContent">
+                      				<table class="searchtable">
+                          				<tr>
+                              				<td class="caption" style="width:50px;">Filter:</td>
+                              				<td style="width:120px;">
+                            				<form:select path="authority" cssStyle="width:110px;">
+                               					<form:option value="" label="-authority-"/>
+                               					<form:option value="ADMIN" label="ADMIN"/>
+                               					<form:option value="USER" label="USER"/>
+                               					<form:option value="BLOCKED" label="BLOCKED"/>
+                            				</form:select>
+                              				</td>
+                              				<td style="width:200px;">
+                                				<form:select path="enabled">
+                                   					<form:option value="" label="-state-"/>
+                               						<form:option value="1" label="Enabled"/>
+                               						<form:option value="0" label="Deactivated"/>
+                                				</form:select>
+                              				</td>
+                              				<td style="width:80px;">Username:</td>
 
+                              				<td style="width:160px;">
+                            				<form:select path="username" class="form-control" id="selectUser" 
+                            								multiple="multiple" cssStyle="width:150px;">
+                                				<form:options items="${usernames}"/>
+                            				</form:select></td>
 
-                              <td style="width:160px;">
-                            <form:select path="username" class="form-control" id="selectUser" multiple="multiple" cssStyle="width:150px;">
-                                <form:options items="${usernames}"/>
-                            </form:select></td>
-
-                              <td style="width:75px;"><span class="button">
-                            <form:button id="searchButton" name="buttonAction" value="searchButton" class="button"  >Search</form:button></span></td>
-                              <td style="width:75px;"><span class="button">
-                            <form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
-                          </tr>
-                      </table>
-                </jsp:attribute>
-                                <jsp:attribute name="controlButton">
-                     <div style="padding-top:10px;">
-                         <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Deactivate</form:button></span>
-                         <span ><a href="${contextPath}/admin/add_user_ref">Add new user</a></span>
-                     </div>
-                </jsp:attribute>
-
+                              				<td style="width:75px;"><span class="button">
+                            					<form:button id="searchButton" name="buttonAction" value="searchButton" 
+                            								class="button"  >Search</form:button></span></td>
+                              				<td style="width:75px;"><span class="button">
+                            					<form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
+                         				 </tr>
+                      					</table>
+                					</jsp:attribute>
+                                	<jsp:attribute name="controlButton">
+                     					<div style="padding-top:10px;">
+                         					<span class="button"><form:button id="deleteButton" name="buttonAction" 
+                         									value="deleteButton" class="button" 
+                         									onclick="clicked(event)">Deactivate</form:button></span>
+                         					<span ><a href="${contextPath}/admin/add_user_ref">Add new user</a></span>
+                     					</div>
+                					</jsp:attribute>
                             </pg:pagination>
                         </form:form>
                     </div>
-
                 </div>
             </div>
         </div>

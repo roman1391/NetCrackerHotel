@@ -37,52 +37,52 @@
                     <span ><a href="${contextPath}/admin/list_of_hotels/25">25</a></span>
                     <span ><a href="${contextPath}/admin/list_of_hotels/50">50</a></span>
 
-	<div style="padding-top:15px;padding-left:5px;padding-right:10px;">
-        <c:url value="${paginationResult.pageLink}" var="pageLink"/>
-        <form:form id="pgform" method="post" modelAttribute="pparam" action="${pageLink}">
-            <pg:pagination pparam="${pparam}" paginationResult="${paginationResult}">
-                <jsp:attribute name="searchContent">
-                      <table class="searchtable">
-                        <tr>
-                            <td class="caption" style="width:50px;">Filter:</td>
-                            <td style="width:120px;">
-                            <form:select path="typeOfService" cssStyle="width:110px;">
-                               <form:option value="" label="-class-"/>
-                               <form:option value="1" label="1 star"/>
-                               <form:option value="2" label="2 stars"/>
-                               <form:option value="3" label="3 stars"/>
-                               <form:option value="4" label="4 stars"/>
-                               <form:option value="5" label="5 stars"/>
-                            </form:select>
-                            </td>
-                            <td style="width:200px;">
-                                <form:select path="enabled">
-                                   	<form:option value="" label="-state-"/>
-                               		<form:option value="1" label="Enabled"/>
-                               		<form:option value="0" label="Deactivated"/>
-                                </form:select>
-                            </td>
-                            <td style="width:200px;"></td>
-                            <td style="width:80px;">Name:</td>
-                            <td style="width:160px;">
-                            <form:select path="name" class="form-control" id="selectHotel" multiple="multiple" cssStyle="width:150px;">
-                                <form:options items="${hotels}"/>
-                            </form:select></td>
-                            <td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button">Search</form:button></span></td>
-                            <td style="width:75px;"><span class="button"><form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
-                        </tr>
-                    </table>
-                </jsp:attribute>
-                 <jsp:attribute name="controlButton">
-                     <div style="padding-top:10px;">
-                        <span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Deactivate</form:button></span>
-                        <span ><a href="${contextPath}/admin/hotel/add">Add new hotel</a></span>
-                    </div>
-                </jsp:attribute>
+					<div style="padding-top:15px;padding-left:5px;padding-right:10px;">
+        				<c:url value="${paginationResult.pageLink}" var="pageLink"/>
+      				  <form:form id="pgform" method="post" modelAttribute="pparam" action="${pageLink}">
+          				  <pg:pagination pparam="${pparam}" paginationResult="${paginationResult}">
+              				  <jsp:attribute name="searchContent">
+               				       <table class="searchtable">
+                 				       <tr>
+                       				     <td class="caption" style="width:50px;">Filter:</td>
+                       				     <td style="width:120px;">
+                        				    <form:select path="typeOfService" cssStyle="width:110px;">
+                               				<form:option value="" label="-class-"/>
+                               				<form:option value="1" label="1 star"/>
+                               				<form:option value="2" label="2 stars"/>
+                               				<form:option value="3" label="3 stars"/>
+                               				<form:option value="4" label="4 stars"/>
+                               				<form:option value="5" label="5 stars"/>
+                            				</form:select>
+                            				</td>
+                            				<td style="width:200px;">
+                                				<form:select path="enabled">
+                                   					<form:option value="" label="-state-"/>
+                               						<form:option value="1" label="Enabled"/>
+                               						<form:option value="0" label="Deactivated"/>
+                                				</form:select>
+                            				</td>
+                            				<td style="width:200px;"></td>
+                            				<td style="width:80px;">Name:</td>
+                            				<td style="width:160px;">
+                            				<form:select path="name" class="form-control" id="selectHotel" multiple="multiple" cssStyle="width:150px;">
+                                				<form:options items="${hotels}"/>
+                            				</form:select></td>
+                            				<td style="width:75px;"><span class="button"><form:button id="searchButton" name="buttonAction" value="searchButton" class="button">Search</form:button></span></td>
+                            				<td style="width:75px;"><span class="button"><form:button id="clearButton" name="buttonAction" value="clearButton" class="button">Clear</form:button></span></td>
+                        				</tr>
+                    				</table>
+                				</jsp:attribute>
+                 				<jsp:attribute name="controlButton">
+                     				<div style="padding-top:10px;">
+                        				<span class="button"><form:button id="deleteButton" name="buttonAction" value="deleteButton" class="button" onclick="clicked(event)">Deactivate</form:button></span>
+                        				<span ><a href="${contextPath}/admin/hotel/add">Add new hotel</a></span>
+                    				</div>
+                				</jsp:attribute>
 
-            </pg:pagination>
-        </form:form>
-    </div>
+            				</pg:pagination>
+        				</form:form>
+    				 </div>
 
 					</div>
 				</div>
