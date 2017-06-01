@@ -29,21 +29,15 @@ public class ReviewServiceImplTest {
     }
 
     @Test
-    public void addReviewTest() {
-        reviewService.addReview(review);
-        verify(reviewDAO).add(review);
+    public void updateTest() {
+        reviewService.update(review);
+        verify(reviewDAO).update(review);
     }
 
     @Test
     public void getByHotelIdTest() {
         reviewService.getByHotelId(77);
         verify(reviewDAO).getByHotelId(77);
-    }
-
-    @Test
-    public void updateTest() {
-        reviewService.update(review);
-        verify(reviewDAO).update(review);
     }
 
     @Test
