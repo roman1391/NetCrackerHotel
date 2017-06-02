@@ -1,7 +1,9 @@
 package by.netcracker.hotel.controllers;
 
+import by.netcracker.hotel.entities.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class RouterController {
@@ -31,7 +35,8 @@ public class RouterController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(Model model) {
+    public String profile(Model model, HttpServletRequest request) {
+        model.addAttribute("edited_user", request.getSession().getAttribute("currentUser"));
         return "profile";
     }
 

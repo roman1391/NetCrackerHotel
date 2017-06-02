@@ -112,14 +112,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void profileUpdate(User user) throws UsernameExistException, EmailExistException {
-        if (usernameExist(user.getUsername())) {
+        User existUser = userDAO.getByID(user.getId());
+        if (!user.getUsername().equals(existUser.getUsername()) && usernameExist(user.getUsername())) {
             throw new UsernameExistException("Account with username - " + user.getUsername() + " are exist");
-        } else if (emailExist(user.getEmail())) {
+        } else if (!user.getEmail().equals(existUser.getEmail()) && emailExist(user.getEmail())) {
             throw new EmailExistException("Account with email - " + user.getEmail() + " are exist");
         } else {
             userDAO.update(user);
         }
     }
+
 
     @Override
     public boolean update(User entity) {
@@ -192,6 +194,6 @@ public class UserServiceImpl implements UserService {
 
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
-
     }
+
 }

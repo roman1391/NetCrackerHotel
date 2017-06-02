@@ -47,5 +47,4 @@ public class ForgotPasswordListener implements ApplicationListener<ForgotPasswor
         email.setText(message +"rn\t" + "http://localhost:8080" + confirmationUrl);
         mailSender.send(email);
     }
-
 }

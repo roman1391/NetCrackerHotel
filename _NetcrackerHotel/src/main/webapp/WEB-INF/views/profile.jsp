@@ -19,7 +19,7 @@
 <%
     User curUser = (User) session.getAttribute("currentUser");
 %>
-<c:set var="edited_user" scope="request" value="${currentUser}"/>
+<%--<c:set var="edited_user" scope="request" value='<%=curUser%>'/>--%>
 <%@include file="../jsp_elements/_header.jsp" %>
 <div id="wrapper">
     <div class="container-fluid">
@@ -40,7 +40,7 @@
             <div class="col-4 form-group">
                 <div class="form-group">
                     <label for="loadAvatar" >
-                        <img class="img-responsive" src="<c:url value="${currentUser.avatar}"/>">
+                        <img class="img-responsive" src="<c:url value="${edited_user.avatar}"/>">
                     </label>
                     <input disabled="true" class="editable" type="file" name="file" id="loadAvatar" onclick="onFileSelected(event)">
                     <p id="help" style="color: #5cb3fd; font-size: 11pt; display: none;">Click on image to change.</p>
@@ -50,35 +50,35 @@
                 <sec:authorize access="hasAnyRole('USER','ADMIN')" >
                     <div class="form-group">
                         <form:label path="email" >Email:</form:label>
-                        <form:input disabled="true" path="email" id="email" value="${currentUser.email}"
+                        <form:input disabled="true" path="email" id="email" value="${edited_user.email}"
                                     class="editable form-control"/>
                     </div>
                     <div class="form-group">
                         <form:label path="username"  >Username:</form:label>
-                        <form:input disabled="true" path="username" id="username" value="${currentUser.username}"
+                        <form:input disabled="true" path="username" id="username" value="${edited_user.username}"
                                     class="editable form-control" />
                     </div>
                 </sec:authorize>
                 <sec:authorize access="!hasAnyRole('USER','ADMIN')" >
                     <div class="form-group">
                         <form:label path="email" >Email:</form:label>
-                        <form:input disabled="true" path="email" id="email" value="${currentUser.email}"
+                        <form:input disabled="true" path="email" id="email" value="${edited_user.email}"
                                     class=" form-control"/>
                     </div>
                     <div class="form-group">
                         <form:label path="username"  >Username:</form:label>
-                        <form:input disabled="true" path="username" id="username" value="${currentUser.username}"
+                        <form:input disabled="true" path="username" id="username" value="${edited_user.username}"
                                     class=" form-control" />
                     </div>
                 </sec:authorize>
                 <div class="form-group">
                     <form:label path="firstName" >First name:</form:label>
-                    <form:input disabled="true" path="firstName" id="firstName" value="${currentUser.firstName}"
+                    <form:input disabled="true" path="firstName" id="firstName" value="${edited_user.firstName}"
                                 class="editable form-control"/>
                 </div>
                 <div class="form-group">
                     <form:label path="lastName" >Last name:</form:label>
-                    <form:input disabled="true" path="lastName" id="lastName" value="${currentUser.lastName}"
+                    <form:input disabled="true" path="lastName" id="lastName" value="${edited_user.lastName}"
                                 class="editable form-control"/>
                 </div>
                 <div class="form-group">

@@ -57,7 +57,6 @@ public class SimpleSignInAdapter implements SignInAdapter {
             e.printStackTrace();
             return "/?error=Failed to login by "+connection.getKey().getProviderId();
         }
-        String provider = connection.getKey().getProviderId().toUpperCase();
         if(user.isEnabled()) {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, null,
                     user.getAuthorities());

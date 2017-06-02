@@ -3,12 +3,16 @@ package by.netcracker.hotel.controllers;
 import static by.netcracker.hotel.utils.CloudinaryUtil.saveAvatarToCloud;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,6 +45,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String save(@ModelAttribute("edited_user") User user, @RequestParam("file") MultipartFile file,
@@ -49,20 +55,24 @@ public class UserController {
             user.setAvatar(saveAvatarToCloud(file));
         }
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (!userDetails.getUsername().equals(user.getUsername())) {
-            try {
+        User existUser = userService.getUserByUsername(userDetails.getUsername());
+        try {
                 userService.profileUpdate(user);
-            } catch (UsernameExistException e) {
+                model.addAttribute("message","You successfully update profile");
+        } catch (UsernameExistException e) {
                 log.info("UsernameExistException in userController while updating user");
                 model.addAttribute("error", "Account with username - " + user.getUsername() + " are exist");
                 return "profile";
-            } catch (EmailExistException e) {
+        } catch (EmailExistException e) {
                 log.info("EmailExistException in userController while updating user");
                 model.addAttribute("error", "Account with email - " + user.getEmail() + " are exist");
                 return "profile";
-            }
-        } else {
-            userService.update(user);
+        } finally {
+            model.addAttribute("edited_user",userService.getByID(user.getId()));
+            UserDetails updateUser = userDetailsService.loadUserByUsername(user.getUsername());
+            UsernamePasswordAuthenticationToken token =
+                    new UsernamePasswordAuthenticationToken(updateUser,null,updateUser.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(token);
         }
         return "profile";
     }
